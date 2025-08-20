@@ -2,8 +2,8 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Next.js App",
-  description: "A clean Next.js application",
+  title: "Green Apple",
+  description: "A clean Next.js TypeScript project",
 };
 
 export default function RootLayout({
