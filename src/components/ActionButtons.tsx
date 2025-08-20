@@ -41,7 +41,7 @@ export default function ActionButtons({
             className={`inline-flex items-center px-4 py-3 sm:py-2 hover:bg-[#e5eeed] bg-white border border-[#e5eeed] font-semibold text-xs tracking-widest shadow-sm focus:outline-none focus:border-[#e5eeed] disabled:opacity-25 transition ${button.className || ''} ${buttonClassName}`}
           >
             {button.icon}
-            <span className="h-6 text-xs text-[rgba(0,118,111,1)] items-center text-opacity-80 leading-3 text-left capitalize hidden md:flex">
+            <span className="h-6 text-xs text-[rgba(0,118,111,1)] items-center text-opacity-80 leading-3 text-left capitalize">
               {button.text}
             </span>
           </a>
@@ -62,7 +62,7 @@ export default function ActionButtons({
               className={`inline-flex items-center px-4 py-3 sm:py-2 hover:bg-[#e5eeed] bg-white border border-[#e5eeed] font-semibold text-xs tracking-widest shadow-sm focus:outline-none focus:border-[#e5eeed] disabled:opacity-25 transition ${button.className || ''} ${buttonClassName}`}
             >
               {button.icon}
-              <span className="h-6 text-xs text-[rgba(0,118,111,1)] items-center text-opacity-80 leading-3 text-left capitalize hidden md:flex">
+              <span className="h-6 text-xs text-[rgba(0,118,111,1)] items-center text-opacity-80 leading-3 text-left capitalize">
                 {button.text}
               </span>
             </a>

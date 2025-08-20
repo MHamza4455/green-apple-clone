@@ -32,7 +32,7 @@ export default function HeroOverlay({
 }: HeroOverlayProps) {
   return (
     <div className={`absolute z-10 inset-0 flex items-center text-white ${pt} container mx-auto ${className}`}>
-      <div className="space-y-4 text-left px-4 max-w-6xl container mx-auto">
+      <div className="space-y-4 text-left px-4 max-w-7xl container mx-auto">
         {/* Company Name with Icon */}
         <p className="text-md sm:text-lg font-light flex space-x-2 items-end justify-start">
           {companyIcon}

@@ -1,15 +1,17 @@
 import Header from '@/components/Header';
 import Hero from '@/components/Hero';
+import FeaturedNavigation from '@/components/FeaturedNavigation';
 
 export default function Home() {
   return (
     <div className="min-h-screen bg-white">
       <Header />
       <Hero />
+      <FeaturedNavigation />
       
       {/* Services Section */}
       <section id="services" className="py-20 bg-white">
-        <div className="max-w-6xl mx-auto px-4">
+        <div className="max-w-7xl mx-auto px-4">
           <h2 className="text-3xl font-bold text-center text-gray-800 mb-12">Our Services</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             <div className="text-center p-6">
@@ -30,7 +32,7 @@ export default function Home() {
 
       {/* Tour Packages Section */}
       <section id="tour-packages" className="py-20 bg-gray-50">
-        <div className="max-w-6xl mx-auto px-4">
+        <div className="max-w-7xl mx-auto px-4">
           <h2 className="text-3xl font-bold text-center text-gray-800 mb-12">Tour Packages</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             <div className="bg-white rounded-lg shadow-md p-6">
@@ -60,7 +62,7 @@ export default function Home() {
 
       {/* Umrah Packages Section */}
       <section id="umrah-packages" className="py-20 bg-white">
-        <div className="max-w-6xl mx-auto px-4">
+        <div className="max-w-7xl mx-auto px-4">
           <h2 className="text-3xl font-bold text-center text-gray-800 mb-12">Umrah Packages</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             <div className="bg-gray-50 rounded-lg p-6">
@@ -83,7 +85,7 @@ export default function Home() {
 
       {/* Visa Services Section */}
       <section id="visa-services" className="py-20 bg-gray-50">
-        <div className="max-w-6xl mx-auto px-4">
+        <div className="max-w-7xl mx-auto px-4">
           <h2 className="text-3xl font-bold text-center text-gray-800 mb-12">Visa Services</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             <div className="text-center p-4">
@@ -108,7 +110,7 @@ export default function Home() {
 
       {/* Reviews Section */}
       <section id="reviews" className="py-20 bg-white">
-        <div className="max-w-6xl mx-auto px-4">
+        <div className="max-w-7xl mx-auto px-4">
           <h2 className="text-3xl font-bold text-center text-gray-800 mb-12">Customer Reviews</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             <div className="bg-gray-50 rounded-lg p-6">
@@ -129,7 +131,7 @@ export default function Home() {
 
       {/* FAQs Section */}
       <section id="faqs" className="py-20 bg-gray-50">
-        <div className="max-w-6xl mx-auto px-4">
+        <div className="max-w-7xl mx-auto px-4">
           <h2 className="text-3xl font-bold text-center text-gray-800 mb-12">Frequently Asked Questions</h2>
           <div className="space-y-6">
             <div className="bg-white rounded-lg p-6">
@@ -150,7 +152,7 @@ export default function Home() {
 
       {/* Contact Section */}
       <section id="contact" className="py-20 bg-white">
-        <div className="max-w-6xl mx-auto px-4">
+        <div className="max-w-7xl mx-auto px-4">
           <h2 className="text-3xl font-bold text-center text-gray-800 mb-12">Contact Us</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             <div>
