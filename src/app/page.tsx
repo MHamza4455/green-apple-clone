@@ -1,13 +1,17 @@
 import Header from '@/components/Header';
 import Hero from '@/components/Hero';
 import FeaturedNavigation from '@/components/FeaturedNavigation';
+import FeaturedTours from '@/components/FeaturedTours';
+import UmrahPackages from '@/components/UmrahPackages';
 
 export default function Home() {
   return (
-    <div className="min-h-screen bg-white">
-      <Header />
-      <Hero />
-      <FeaturedNavigation />
+    <div className="min-h-screen">
+                    <Header />
+              <Hero />
+              <FeaturedNavigation />
+              <FeaturedTours />
+              <UmrahPackages />
       
       {/* Services Section */}
       <section id="services" className="py-20 bg-white">

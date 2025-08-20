@@ -111,7 +111,7 @@ export default function FeaturedNavigation() {
   return (
     <section className="relative" aria-labelledby="featured-navigations">
              <section className="overflow-hidden lg:overflow-visible pb-12 pt-12" aria-label="Visa and Tour Categories">
-        <div className="max-w-7xl mx-auto">
+        <div className="max-w-7xl mx-auto px-4">
                      <div className="flex space-x-4 overflow-x-auto lg:overflow-visible lg:justify-between pb-4 scrollbar-hide">
             {categories.map((category, index) => (
               <div
