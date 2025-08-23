@@ -3,15 +3,17 @@ import Hero from '@/components/Hero';
 import FeaturedNavigation from '@/components/FeaturedNavigation';
 import FeaturedTours from '@/components/FeaturedTours';
 import UmrahPackages from '@/components/UmrahPackages';
+import WhyBookWithUs from '@/components/WhyBookUs';
 
 export default function Home() {
   return (
     <div className="min-h-screen">
-                    <Header />
+              <Header />
               <Hero />
               <FeaturedNavigation />
               <FeaturedTours />
               <UmrahPackages />
+              <WhyBookWithUs />
 
       {/* Visa Services Section */}
       <section id="visa-services" className="py-20 bg-gray-50">
