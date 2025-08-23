@@ -168,7 +168,7 @@ export default function Reviews() {
   const reviewsToShow = DUMMY_REVIEWS.slice(0, visibleCount);
 
   return (
-    <section className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12" aria-labelledby="reviews-title">
+    <section className="max-w-7xl mx-auto px-4 py-12" aria-labelledby="reviews-title">
       <header className="mb-10 text-center">
         <h2
           id="reviews-title"

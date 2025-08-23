@@ -2,7 +2,7 @@ export default function WhyBookUs() {
   return (
     <section className="bg-primary relative bg-opacity-5 py-12 px-4">
       <div className="bg-design-1 bg-primary -z-1 absolute w-full h-full top-0 left-0 bg-cover"></div>
-      <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 relative">
+      <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 relative">
         {/* Left Section */}
         <div className="flex flex-col justify-between space-y-6 text-center md:text-left md:col-span-1">
           <div className="flex flex-col space-y-4 items-start text-left">
