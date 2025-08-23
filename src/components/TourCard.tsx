@@ -91,7 +91,7 @@ export default function TourCard({
               borderRadius: '30px'
             }}
           >
-            LEARN MORE
+            Inquire Now
           </button>
         </footer>
       </div>

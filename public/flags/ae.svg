@@ -1,1 +1,6 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48"><rect width="12" height="48" fill="#00732f"/><rect x="12" width="12" height="48" fill="#fff"/><rect x="24" width="12" height="48" fill="#ef2b2d"/><rect x="36" width="12" height="48" fill="#000"/></svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48">
+    <rect width="12" height="48" fill="#00732f"/>
+    <rect x="12" width="12" height="48" fill="#fff"/>
+    <rect x="24" width="12" height="48" fill="#ef2b2d"/>
+    <rect x="36" width="12" height="48" fill="#000"/>
+</svg>
