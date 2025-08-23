@@ -169,19 +169,19 @@ export default function Reviews() {
 
   return (
     <section className="max-w-7xl mx-auto px-4 py-12" aria-labelledby="reviews-title">
-      <header className="mb-10 text-center">
+      <header className="text-center">
         <h2
           id="reviews-title"
-          className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-slate-900"
+          className="text-4xl sm:text-5xl font-bold text-gray-800 mb-6"
         >
           What our travelers say
         </h2>
 
-        <p className="mt-2 text-sm text-slate-600">
-          <span className="font-semibold text-slate-900">5.0/5</span>
-          <span className="mx-2 text-slate-300">•</span>
+        <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed mb-5">
+          <span className="font-semibold text-gray-800">5.0/5</span>
+          <span className="mx-2 text-gray-300">•</span>
           <span>
-            <span className="font-semibold text-slate-900">640</span> reviews
+            <span className="font-semibold text-gray-800">640</span> reviews
           </span>
         </p>
 
@@ -189,7 +189,7 @@ export default function Reviews() {
           href="https://g.page/r/CSVOuDsOGf38EAI/review?kd"
           rel="nofollow"
           target="_blank"
-          className="mt-4 inline-flex items-center justify-center rounded-full border border-emerald-600 px-5 py-2 text-sm font-medium text-emerald-700 hover:bg-emerald-600 hover:text-white transition"
+          className="py-3 px-8 bg-accent font-light text-white rounded-full hover:opacity-80 transition duration-300 uppercase text-base"
         >
           Leave a Review
         </a>
@@ -233,7 +233,8 @@ export default function Reviews() {
         <div className="mt-10 flex justify-center" aria-live="polite">
           <button
             onClick={() => setVisibleCount((c) => c + 5)}
-            className="inline-flex items-center justify-center rounded-full bg-emerald-600 font-light px-6 py-2 text-sm font-medium text-white shadow-sm hover:bg-emerald-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-600 focus-visible:ring-offset-2 disabled:opacity-60"
+            className="py-3 px-10 font-light text-white rounded-full hover:opacity-80 transition duration-300 uppercase text-base cursor-pointer"
+            style={{ backgroundColor: 'rgba(202, 162, 110, 1)' }}
           >
             Show more reviews
           </button>
