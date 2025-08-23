@@ -6,6 +6,7 @@ import UmrahPackages from '@/components/UmrahPackages';
 import WhyBookUs from '@/components/WhyBookUs';
 import Reviews from '@/components/reviews';
 import Faqs from '@/components/Faqs';
+import VisaServices from '@/components/VisaServices';
 
 export default function Home() {
   return (
@@ -16,32 +17,7 @@ export default function Home() {
               <FeaturedTours />
               <UmrahPackages />
               <WhyBookUs />
-
-      {/* Visa Services Section */}
-      <section id="visa-services" className="py-20 bg-gray-50">
-        <div className="max-w-7xl mx-auto px-4">
-          <h2 className="text-3xl font-bold text-center text-gray-800 mb-12">Visa Services</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            <div className="text-center p-4">
-              <h3 className="text-lg font-semibold mb-2">Tourist Visa</h3>
-              <p className="text-gray-600 text-sm">Short-term travel visas</p>
-            </div>
-            <div className="text-center p-4">
-              <h3 className="text-lg font-semibold mb-2">Business Visa</h3>
-              <p className="text-gray-600 text-sm">Professional travel visas</p>
-            </div>
-            <div className="text-center p-4">
-              <h3 className="text-lg font-semibold mb-2">Student Visa</h3>
-              <p className="text-gray-600 text-sm">Educational institution visas</p>
-            </div>
-            <div className="text-center p-4">
-              <h3 className="text-lg font-semibold mb-2">Work Visa</h3>
-              <p className="text-gray-600 text-sm">Employment authorization visas</p>
-            </div>
-          </div>
-        </div>
-      </section>
-
+      <VisaServices />
       <Reviews />
       <Faqs />
 
