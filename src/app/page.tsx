@@ -3,7 +3,9 @@ import Hero from '@/components/Hero';
 import FeaturedNavigation from '@/components/FeaturedNavigation';
 import FeaturedTours from '@/components/FeaturedTours';
 import UmrahPackages from '@/components/UmrahPackages';
-import WhyBookWithUs from '@/components/WhyBookUs';
+import WhyBookUs from '@/components/WhyBookUs';
+import Reviews from '@/components/reviews';
+import Faqs from '@/components/Faqs';
 
 export default function Home() {
   return (
@@ -13,7 +15,7 @@ export default function Home() {
               <FeaturedNavigation />
               <FeaturedTours />
               <UmrahPackages />
-              <WhyBookWithUs />
+              <WhyBookUs />
 
       {/* Visa Services Section */}
       <section id="visa-services" className="py-20 bg-gray-50">
@@ -40,47 +42,8 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Reviews Section */}
-      <section id="reviews" className="py-20 bg-white">
-        <div className="max-w-7xl mx-auto px-4">
-          <h2 className="text-3xl font-bold text-center text-gray-800 mb-12">Customer Reviews</h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div className="bg-gray-50 rounded-lg p-6">
-              <p className="text-gray-600 mb-4">"Excellent service! They made my visa process so smooth."</p>
-              <p className="font-semibold">- Ahmed K.</p>
-            </div>
-            <div className="bg-gray-50 rounded-lg p-6">
-              <p className="text-gray-600 mb-4">"Amazing tour packages and great customer support."</p>
-              <p className="font-semibold">- Sarah M.</p>
-            </div>
-            <div className="bg-gray-50 rounded-lg p-6">
-              <p className="text-gray-600 mb-4">"Highly recommended for Umrah packages."</p>
-              <p className="font-semibold">- Fatima A.</p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* FAQs Section */}
-      <section id="faqs" className="py-20 bg-gray-50">
-        <div className="max-w-7xl mx-auto px-4">
-          <h2 className="text-3xl font-bold text-center text-gray-800 mb-12">Frequently Asked Questions</h2>
-          <div className="space-y-6">
-            <div className="bg-white rounded-lg p-6">
-              <h3 className="text-lg font-semibold mb-2">How long does visa processing take?</h3>
-              <p className="text-gray-600">Processing times vary by country and visa type, typically 5-15 business days.</p>
-            </div>
-            <div className="bg-white rounded-lg p-6">
-              <h3 className="text-lg font-semibold mb-2">What documents do I need for a visa?</h3>
-              <p className="text-gray-600">Requirements vary by country, but generally include passport, photos, and application forms.</p>
-            </div>
-            <div className="bg-white rounded-lg p-6">
-              <h3 className="text-lg font-semibold mb-2">Do you offer group tour discounts?</h3>
-              <p className="text-gray-600">Yes, we offer special rates for groups of 6 or more travelers.</p>
-            </div>
-          </div>
-        </div>
-      </section>
+      <Reviews />
+      <Faqs />
 
       {/* Contact Section */}
       <section id="contact" className="py-20 bg-white">
