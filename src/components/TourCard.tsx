@@ -204,7 +204,7 @@ export default function TourCard({
                     </svg>
                   </div>
                   <h4 className="text-lg font-bold text-gray-900 mb-2">Inquiry Submitted!</h4>
-                  <p className="text-gray-600 text-sm">Thank you for your interest. We'll get back to you within 24 hours.</p>
+                  <p className="text-gray-600 text-sm">Thank you for your interest. We&apos;ll get back to you within 24 hours.</p>
                 </div>
               ) : (
                 <div className="space-y-4">

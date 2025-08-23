@@ -4,7 +4,7 @@ import FeaturedNavigation from '@/components/FeaturedNavigation';
 import FeaturedTours from '@/components/FeaturedTours';
 import UmrahPackages from '@/components/UmrahPackages';
 import WhyBookUs from '@/components/WhyBookUs';
-import Reviews from '@/components/reviews';
+import Reviews from '@/components/Reviews';
 import Faqs from '@/components/Faqs';
 import VisaServices from '@/components/VisaServices';
 
