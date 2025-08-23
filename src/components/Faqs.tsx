@@ -21,7 +21,7 @@ export default function Faqs() {
 
   return (
     <section id="faqs" className="py-20 bg-gray-50">
-  <div className="max-w-2xl mx-auto px-2 sm:px-4">
+      <div className="max-w-2xl mx-auto px-2 sm:px-4">
         <h2 className="text-3xl font-bold text-center text-gray-800 mb-2">Frequently Asked Questions</h2>
         <p className="text-center text-lg text-gray-600 mb-10">TOP 10 FAQS</p>
         <div className="divide-y divide-gray-300 border-t border-b border-gray-300">
