@@ -118,7 +118,7 @@ export default function Footer() {
 
       {/* Footer Bottom Section */}
       <div className="mt-8 text-xs text-center border-t pt-4" style={{ borderColor: 'rgba(0, 87, 82, 0.2)', color: 'rgba(0, 87, 82, .9)' }}>
-        © 2012-2024 Green Apple Travel & Tourism. All rights reserved.
+        © 2025 Green Apple Travel & Tourism. All rights reserved.
       </div>
     </footer>
   );
