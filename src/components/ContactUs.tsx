@@ -41,7 +41,7 @@ export default function ContactUs() {
                 Send us a Message
               </h3>
               <p className="text-gray-600 mb-8">
-                Fill out the form below and we'll get back to you as soon as possible.
+                Fill out the form below and we&apos;ll get back to you as soon as possible.
               </p>
 
               <form className="space-y-6">

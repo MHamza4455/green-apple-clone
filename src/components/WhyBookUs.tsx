@@ -49,7 +49,7 @@ export default function WhyBookUs() {
               <img src="https://lh3.googleusercontent.com/a-/AD_cMMRFZ-o_A0ZiJcGSF9FIf2X1N5tR3zVXNTPAxmetm9TnOBQ=s120-c-rp-mo-br100" alt="Traveler 3" className="border-2 border-lightest h-12 object-cover transform -translate-x-full rounded-full w-12" />
             </div>
             <p className="text-sm text-primary text-opacity-80 font-medium" style={{ opacity: 0.9 }}>
-              Join the <span className="text-primary font-bold" style={{ opacity: 0.9 }}>78,000+</span> travelers who've let us handle their dream trips!
+              Join the <span className="text-primary font-bold" style={{ opacity: 0.9 }}>78,000+</span> travelers who&apos;ve let us handle their dream trips!
             </p>
           </div>
         </div>

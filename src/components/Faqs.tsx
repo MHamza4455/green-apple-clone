@@ -243,7 +243,7 @@ export default function Faqs() {
         {/* Contact CTA */}
         <div className="text-center mt-12">
           <p className="text-[rgba(0,87,82,1)] text-lg mb-6" style={{ opacity: 0.9 }}>
-            Still have questions? We're here to help!
+            Still have questions? We&apos;re here to help!
           </p>
           <button
             onClick={() => {
