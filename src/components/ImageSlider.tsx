@@ -23,7 +23,7 @@ export default function ImageSlider({
   autoAdvance = true,
   interval = 5000,
   showDots = true,
-  dotsColor = '#33918c',
+  dotsColor = '#008c95',
   className = ''
 }: ImageSliderProps) {
   const [currentSlide, setCurrentSlide] = useState(0);

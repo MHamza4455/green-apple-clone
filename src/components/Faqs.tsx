@@ -155,7 +155,7 @@ export default function Faqs() {
   };
 
   return (
-    <section className="relative py-12 px-4" style={{ backgroundColor: 'rgba(0, 118, 111, 0.05)' }}>
+    <section className="relative py-12 px-4" style={{ backgroundColor: 'rgba(0, 140, 149, 0.05)' }}>
       <div 
         className="absolute inset-0 w-full h-full"
         style={{
@@ -165,15 +165,15 @@ export default function Faqs() {
           WebkitMaskPosition: 'center',
           maskSize: 'cover',
           WebkitMaskSize: 'cover',
-          backgroundColor: 'rgba(0, 118, 111, 1)'
+          backgroundColor: 'rgba(0, 140, 149, 1)'
         }}
       ></div>
       <div className="max-w-7xl mx-auto relative z-10">
         <header className="text-center mb-12">
-          <h2 className="text-[rgba(0,87,82,1)] text-4xl sm:text-5xl font-bold mb-4" style={{ opacity: 0.9 }}>
+          <h2 className="text-[rgba(0,140,149,1)] text-4xl sm:text-5xl font-bold mb-4" >
             Frequently Asked Questions
           </h2>
-          <p className="text-[rgba(0,87,82,1)] text-xl max-w-3xl mx-auto" style={{ opacity: 0.9 }}>
+          <p className="text-[rgba(0,140,149,1)] text-xl max-w-3xl mx-auto" >
             Get answers to the most common questions about our services
           </p>
         </header>
@@ -186,7 +186,7 @@ export default function Faqs() {
             className="hidden md:flex absolute left-0 top-1/2 -translate-y-1/2 z-20 bg-white/90 hover:bg-white p-3 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 -ml-6 items-center justify-center"
             aria-label="Previous slide"
           >
-            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" style={{ color: 'rgba(0, 87, 82, 1)' }}>
+            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" style={{ color: 'rgba(0, 140, 149, 1)' }}>
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
             </svg>
           </button>
@@ -196,7 +196,7 @@ export default function Faqs() {
             className="hidden md:flex absolute right-0 top-1/2 -translate-y-1/2 z-20 bg-white/90 hover:bg-white p-3 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 -mr-6 items-center justify-center"
             aria-label="Next slide"
           >
-            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" style={{ color: 'rgba(0, 87, 82, 1)' }}>
+            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" style={{ color: 'rgba(0, 140, 149, 1)' }}>
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
             </svg>
               </button>
@@ -211,17 +211,17 @@ export default function Faqs() {
             {getCurrentCards().map((faq, index) => (
               <div 
                 key={index}
-                className="bg-white p-6 rounded-3xl shadow-xl hover:shadow-2xl transition-all duration-300 flex flex-col items-start border border-gray-100 hover:border-primary/20 group"
+                className="bg-white p-6 rounded-3xl shadow-lg hover:shadow-xl transition-all duration-300 flex flex-col items-start border border-gray-100 hover:border-primary/20 group"
               >
                 <div className="text-primary mb-6 bg-gradient-to-br from-gray-50 to-gray-100 p-4 rounded-2xl group-hover:from-primary/5 group-hover:to-primary/10 transition-all duration-300">
-                  <svg className="w-8 h-8" style={{ color: 'rgba(0,87,82,1)', opacity: 0.9 }} fill="currentColor" viewBox="0 0 24 24">
+                  <svg className="w-8 h-8" style={{ color: 'rgba(0,140,149,1)', opacity: 0.9 }} fill="currentColor" viewBox="0 0 24 24">
                     <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 17h-2v-2h2v2zm2.07-7.75l-.9.92C13.45 12.9 13 13.5 13 15h-2v-.5c0-1.1.45-2.1 1.17-2.83l1.24-1.26c.37-.36.59-.86.59-1.41 0-1.1-.9-2-2-2s-2 .9-2 2H8c0-2.21 1.79-4 4-4s4 1.79 4 4c0 .88-.36 1.68-.93 2.25z"/>
                   </svg>
                 </div>
-                <h3 className="text-[rgba(0,87,82,1)] text-base sm:text-lg font-bold text-left uppercase text-primary mb-3" style={{ opacity: 0.9 }}>
+                <h3 className="text-base sm:text-lg font-bold text-left uppercase mb-3" style={{ color: 'rgba(0,140,149,1)', opacity: 0.9 }}>
                   {faq.question}
                 </h3>
-                <p className="text-[rgba(0,87,82,1)] text-sm text-primary text-left text-opacity-80 leading-relaxed" style={{ opacity: 0.9 }}>
+                <p className="text-sm text-left leading-relaxed" style={{ color: 'rgba(0,140,149,1)', opacity: 0.8 }}>
                   {faq.answer}
                 </p>
             </div>
@@ -234,7 +234,7 @@ export default function Faqs() {
               className="h-full rounded-full transition-all duration-500" 
               style={{ 
                 width: `${((currentSlide + 1) / Math.ceil(faqs.length / cardsPerSlide)) * 100}%`,
-                backgroundColor: 'rgba(0, 87, 82, 1)'
+                backgroundColor: 'rgba(0, 140, 149, 1)'
               }}
             ></div>
           </div>
@@ -242,7 +242,7 @@ export default function Faqs() {
 
         {/* Contact CTA */}
         <div className="text-center mt-12">
-          <p className="text-[rgba(0,87,82,1)] text-lg mb-6" style={{ opacity: 0.9 }}>
+          <p className="text-[rgba(0,140,149,1)] text-lg mb-6" >
             Still have questions? We&apos;re here to help!
           </p>
           <button
@@ -256,7 +256,7 @@ export default function Faqs() {
               }
             }}
             className="py-3 px-10 font-light text-white rounded-full hover:opacity-80 transition duration-300 uppercase text-base cursor-pointer"
-            style={{ backgroundColor: 'rgba(202, 162, 110, 1)' }}
+            style={{ backgroundColor: 'rgba(255, 213, 90, 1)' }}
           >
             Contact Us
           </button>

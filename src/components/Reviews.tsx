@@ -189,7 +189,8 @@ export default function Reviews() {
           href="https://g.page/r/CSVOuDsOGf38EAI/review?kd"
           rel="nofollow"
           target="_blank"
-          className="py-3 px-8 bg-accent font-light text-white rounded-full hover:opacity-80 transition duration-300 uppercase text-base"
+          className="py-3 px-8 font-light text-white rounded-full hover:opacity-80 transition duration-300 uppercase text-base"
+          style={{ backgroundColor: 'rgba(255, 213, 90, 1)' }}
         >
           Leave a Review
         </a>
@@ -234,7 +235,7 @@ export default function Reviews() {
           <button
             onClick={() => setVisibleCount((c) => c + 5)}
             className="py-3 px-10 font-light text-white rounded-full hover:opacity-80 transition duration-300 uppercase text-base cursor-pointer"
-            style={{ backgroundColor: 'rgba(202, 162, 110, 1)' }}
+            style={{ backgroundColor: 'rgba(255, 213, 90, 1)' }}
           >
             Show more reviews
           </button>

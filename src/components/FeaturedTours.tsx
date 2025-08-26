@@ -132,11 +132,11 @@ export default function FeaturedTours() {
             <h1 
               id="featured-tours" 
               className="text-2xl sm:text-3xl uppercase font-bold title-font my-2"
-              style={{ color: 'rgb(0, 87, 82)' }}
+              style={{ color: 'rgba(0,140,149,1)' }}
             >
               Featured Tours
             </h1>
-            <div className="h-1 w-32 mb-4 rounded" style={{ backgroundColor: 'rgba(127,171,168,1)' }}></div>
+            <div className="h-1 w-32 mb-4 rounded" style={{ backgroundColor: 'rgba(255, 213, 90, 1)' }}></div>
           </div>
           
           {/* Navigation Arrows - Only show when scrolling is needed */}
@@ -176,7 +176,7 @@ export default function FeaturedTours() {
                  className="h-full rounded-full transition-all duration-300" 
                  style={{ 
                    width: `${scrollProgress}%`,
-                   backgroundColor: '#33918c'
+                   backgroundColor: 'rgba(255, 213, 90, 1)'
                  }}
                ></div>
              </div>

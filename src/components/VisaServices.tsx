@@ -23,11 +23,11 @@ export default function VisaServices() {
             <h1 
               id="visa-services" 
               className="text-2xl sm:text-3xl uppercase font-bold title-font my-2"
-              style={{ color: 'rgb(0, 87, 82)' }}
+              style={{ color: 'rgba(0, 140, 149, 1)' }}
             >
               Visa Services
             </h1>
-            <div className="h-1 w-32 mb-4 rounded" style={{ backgroundColor: 'rgba(127,171,168,1)' }}></div>
+            <div className="h-1 w-32 mb-4 rounded" style={{ backgroundColor: 'rgba(255, 213, 90, 1)' }}></div>
           </div>
         </header>
         
@@ -36,7 +36,8 @@ export default function VisaServices() {
             <div key={country.name} className="flex flex-col items-center group relative">
               <div className="relative mb-4">
                 <div className="absolute inset-0 bg-gradient-to-br from-primary/20 to-accent/20 rounded-full blur-xl group-hover:blur-2xl transition-all duration-500 opacity-0 group-hover:opacity-100"></div>
-                <div className="relative bg-white/80 backdrop-blur-sm p-3 rounded-2xl border border-gray-200/50 group-hover:border-primary/30 transition-all duration-300 group-hover:scale-110 group-hover:shadow-lg">
+                <div className="relative bg-white p-4 rounded-2xl border border-gray-200 hover:border-[rgba(0,140,149,1)] transition-all duration-300 group-hover:scale-110 group-hover:shadow-lg"
+                >
                   <img
                     src={`/flags/${country.code}.svg`}
                     alt={`${country.name} flag`}

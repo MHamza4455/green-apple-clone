@@ -58,7 +58,7 @@ export default function Header() {
   };
 
   return (
-    <header ref={headerRef} className="bg-white shadow-xl left-0 right-0 container fixed top-0 w-full z-50 mx-auto rounded-b-md">
+    <header ref={headerRef} className="bg-white shadow-lg left-0 right-0 container fixed top-0 w-full z-50 mx-auto rounded-b-md">
               <div className="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8 container">
         <div className="relative flex items-center justify-between h-20">
           {/* Mobile menu button */}
@@ -72,7 +72,8 @@ export default function Header() {
             >
               <span className="sr-only">Open main menu</span>
               <svg
-                className="block h-6 w-6 fill-current text-[rgba(0,118,111,1)]"
+                className="block h-6 w-6 fill-current"
+                style={{ color: 'rgba(0,140,149,1)' }}
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
                 viewBox="0 0 24 24"
@@ -136,7 +137,8 @@ export default function Header() {
                 <button
                   key={link.name}
                   onClick={() => scrollToSection(link.href)}
-                  className="inline-flex items-center px-1 pt-1 text-sm leading-5 capitalize text-[rgba(0,118,111,1)] hover:text-opacity-80 transition-colors duration-200"
+                  className="inline-flex items-center px-1 pt-1 text-sm leading-5 capitalize hover:opacity-80 transition-colors duration-200"
+                  style={{ color: 'rgba(0,140,149,1)' }}
                 >
                   {link.name}
                 </button>
@@ -162,7 +164,8 @@ export default function Header() {
                 <button
                   key={link.name}
                   onClick={() => handleMobileMenuClick(link.href)}
-                  className="block w-full text-left px-3 py-3 text-base font-medium text-[rgba(0,118,111,1)] hover:text-opacity-80 hover:bg-gray-50 rounded-md transition-colors duration-200"
+                  className="block w-full text-left px-3 py-3 text-base font-medium hover:opacity-80 hover:bg-gray-50 rounded-md transition-colors duration-200"
+                  style={{ color: 'rgba(0,140,149,1)' }}
                 >
                   {link.name}
                 </button>

@@ -136,7 +136,7 @@ export default function Hero() {
         autoAdvance={true}
         interval={5000}
         showDots={true}
-        dotsColor="#33918c"
+        dotsColor="#008c95"
       />
 
       {/* Hero Overlay */}
