@@ -35,7 +35,7 @@ export default function WhyChooseUs() {
             <div className="max-w-7xl mx-auto">
                 {/* Headline */}
                 <div className="text-center mb-16">
-                    <h2 className="text-4xl md:text-5xl font-bold text-gray-800 mb-4">
+                    <h2 className="text-4xl md:text-5xl font-bold text-gray-800 mb-4" style={{color: 'rgb(0, 140, 149)'}}>
                         Why Book With Us?
                         <span className="block w-16 h-1 bg-[rgba(0,140,149,1)] mx-auto mt-2"></span>
                     </h2>
@@ -76,14 +76,14 @@ export default function WhyChooseUs() {
                                             </svg>
                                         )}
                                     </div>
-                                    <div className="flex-1">
-                                        <h3 className="text-xl font-bold text-gray-800 mb-2">
-                                            {feature.title}
-                                        </h3>
-                                        <p className="text-gray-600 text-sm leading-relaxed">
-                                            {feature.description}
-                                        </p>
-                                    </div>
+                                                                         <div className="flex-1">
+                                         <h3 className="text-xl font-bold mb-2" style={{color: 'rgb(0, 140, 149)'}}>
+                                             {feature.title}
+                                         </h3>
+                                         <p className="text-sm leading-relaxed" style={{color: 'rgb(0, 140, 149)', opacity: 0.8}}>
+                                             {feature.description}
+                                         </p>
+                                     </div>
                                 </div>
                             </div>
                         ))}
