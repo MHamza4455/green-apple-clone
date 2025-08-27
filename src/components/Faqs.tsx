@@ -1,265 +1,216 @@
 'use client';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
+
+interface FAQ {
+  id: number;
+  question: string;
+  answer: string;
+  category: 'visa' | 'tours' | 'umrah' | 'general';
+}
 
 export default function Faqs() {
-  const [currentSlide, setCurrentSlide] = useState(0);
-  const [isAutoPlaying, setIsAutoPlaying] = useState(true);
-  const [cardsPerSlide, setCardsPerSlide] = useState(3);
-  const [touchStart, setTouchStart] = useState(0);
-  const [touchEnd, setTouchEnd] = useState(0);
+  const [openFaqs, setOpenFaqs] = useState<Set<number>>(new Set([0]));
+  const [activeCategory, setActiveCategory] = useState<'all' | 'visa' | 'tours' | 'umrah' | 'general'>('all');
 
-  const faqs = [
+  const faqs: FAQ[] = [
     {
+      id: 1,
       question: 'What types of visa services do you offer?',
-      answer: 'We offer a wide range of visa services including tourist and business visas for various countries.',
+      answer: 'We offer a comprehensive range of visa services including tourist visas, business visas, student visas, and work visas for various countries worldwide. Our services cover visa application assistance, document preparation, and follow-up support.',
+      category: 'visa'
     },
     {
+      id: 2,
       question: 'How long does the visa application process take?',
-      answer: 'The processing time for visa applications varies depending on the country and type of visa. However, we work diligently to ensure that your application is processed as quickly as possible.',
+      answer: 'Processing times vary by country and visa type. Tourist visas typically take 5-15 business days, while business and work visas may take 2-8 weeks. We provide estimated timelines during consultation and keep you updated throughout the process.',
+      category: 'visa'
     },
     {
-      question: 'Do I need to make an appointment for visa services?',
-      answer: 'No, you do not need to make an appointment. You can visit us during our business hours and our team will be happy to assist you.',
-    },
-    {
+      id: 3,
       question: 'What documents are required for visa applications?',
-      answer: 'Required documents typically include valid passport, recent photos, application forms, travel itinerary, and financial statements. Specific requirements vary by country.',
+      answer: 'Required documents typically include a valid passport (with at least 6 months validity), recent passport-sized photos, completed application forms, travel itinerary, financial statements, employment letter, and accommodation details. Specific requirements vary by destination country.',
+      category: 'visa'
     },
     {
+      id: 4,
       question: 'Do you offer group tour packages?',
-      answer: 'Yes! We offer special group tour packages with discounted rates for groups of 6 or more travelers. Contact us for custom group arrangements.',
+      answer: 'Yes! We offer special group tour packages with discounted rates for groups of 6 or more travelers. Our group packages include custom itineraries, dedicated tour guides, and exclusive group experiences. Contact us for personalized group arrangements.',
+      category: 'tours'
     },
     {
+      id: 5,
       question: 'What is included in your tour packages?',
-      answer: 'Our tour packages include accommodation, daily breakfast, airport transfers, guided tours, entrance fees, and transportation between destinations.',
+      answer: 'Our comprehensive tour packages include premium accommodation, daily breakfast and selected meals, airport transfers, professional guided tours, entrance fees to attractions, comfortable transportation between destinations, and 24/7 travel support.',
+      category: 'tours'
     },
     {
-      question: 'Can you arrange Umrah packages?',
-      answer: 'Yes, we specialize in Umrah packages throughout the year, including peak seasons. We work with trusted partners in Saudi Arabia.',
-    },
-    {
-      question: 'Do you provide travel insurance?',
-      answer: 'Yes, we offer comprehensive travel insurance covering medical emergencies, trip cancellation, lost luggage, and flight delays.',
-    },
-    {
-      question: 'How far in advance should I book?',
-      answer: 'We recommend booking at least 2-3 months in advance for international tours and 4-6 weeks for visa services.',
-    },
-    {
-      question: 'What payment methods do you accept?',
-      answer: 'We accept bank transfers, credit/debit cards, and cash payments. We also offer flexible payment plans for larger packages.',
-    },
-    {
+      id: 6,
       question: 'Can you customize tour itineraries?',
-      answer: 'Absolutely! We specialize in creating personalized travel experiences based on your interests, budget, and travel style.',
+      answer: 'Absolutely! We specialize in creating personalized travel experiences tailored to your interests, budget, and travel style. Whether you prefer luxury, adventure, cultural immersion, or family-friendly activities, we design custom itineraries just for you.',
+      category: 'tours'
     },
     {
-      question: 'What happens if my visa is rejected?',
-      answer: 'In case of visa rejection, we provide detailed feedback and guide you through the reapplication process with alternative solutions.',
+      id: 7,
+      question: 'Can you arrange Umrah packages?',
+      answer: 'Yes, we specialize in Umrah packages throughout the year, including peak seasons like Ramadan. We work with trusted partners in Saudi Arabia to provide authentic experiences, comfortable accommodations near the Haram, and knowledgeable guides.',
+      category: 'umrah'
     },
     {
-      question: 'Do you offer airport pickup services?',
-      answer: 'Yes, we provide airport pickup and drop-off services for all our tour packages to ensure a hassle-free travel experience.',
+      id: 8,
+      question: 'What is included in Umrah packages?',
+      answer: 'Our Umrah packages include visa processing, round-trip flights, hotel accommodation near the Haram, airport transfers, guidance throughout the pilgrimage, and optional add-ons like Ziyarah tours to historical Islamic sites.',
+      category: 'umrah'
     },
     {
-      question: 'Can you arrange special dietary requirements?',
-      answer: 'Absolutely! We can accommodate special dietary requirements including halal, vegetarian, and other specific needs.',
+      id: 9,
+      question: 'Do you provide travel insurance?',
+      answer: 'Yes, we offer comprehensive travel insurance covering medical emergencies, trip cancellation, lost luggage, flight delays, and emergency evacuation. Our insurance plans are designed to give you peace of mind during your travels.',
+      category: 'general'
     },
     {
-      question: 'What languages do your guides speak?',
-      answer: 'Our guides speak multiple languages including English, Arabic, and other local languages depending on the destination.',
-    },
-    {
-      question: 'Do you offer 24/7 customer support?',
-      answer: 'Yes, we provide 24/7 customer support to assist you with any questions or emergencies during your trip.',
-    },
+      id: 10,
+      question: 'How far in advance should I book?',
+      answer: 'We recommend booking at least 2-3 months in advance for international tours, 4-6 weeks for visa services, and 6-12 months for Umrah packages during peak seasons. Early booking ensures better rates and availability.',
+      category: 'general'
+    }
   ];
 
-  // Auto-play functionality
-  useEffect(() => {
-    if (!isAutoPlaying) return;
-    
-    const interval = setInterval(() => {
-      const totalSlides = Math.ceil(faqs.length / cardsPerSlide);
-      setCurrentSlide((prev) => (prev + 1) % totalSlides);
-    }, 5000);
+  const categories = [
+    { id: 'all', name: 'All Questions', count: faqs.length },
+    { id: 'visa', name: 'Visa Services', count: faqs.filter(f => f.category === 'visa').length },
+    { id: 'tours', name: 'Tour Packages', count: faqs.filter(f => f.category === 'tours').length },
+    { id: 'umrah', name: 'Umrah Services', count: faqs.filter(f => f.category === 'umrah').length },
+    { id: 'general', name: 'General Info', count: faqs.filter(f => f.category === 'general').length }
+  ];
 
-    return () => clearInterval(interval);
-  }, [isAutoPlaying, cardsPerSlide, faqs.length]);
+  const filteredFaqs = activeCategory === 'all' 
+    ? faqs 
+    : faqs.filter(faq => faq.category === activeCategory);
 
-  // Update cards per slide on window resize
-  useEffect(() => {
-    const updateCardsPerSlide = () => {
-      const newCardsPerSlide = window.innerWidth < 768 ? 1 : 3;
-      setCardsPerSlide(newCardsPerSlide);
-      if (newCardsPerSlide !== cardsPerSlide) {
-        setCurrentSlide(0); // Reset to first slide when changing layout
-      }
-    };
-
-    // Set initial value
-    updateCardsPerSlide();
-
-    window.addEventListener('resize', updateCardsPerSlide);
-    return () => window.removeEventListener('resize', updateCardsPerSlide);
-  }, [cardsPerSlide]);
-
-  const goToSlide = (slideIndex: number) => {
-    setCurrentSlide(slideIndex);
-    setIsAutoPlaying(false);
-  };
-
-  const nextSlide = () => {
-    const totalSlides = Math.ceil(faqs.length / cardsPerSlide);
-    setCurrentSlide((prev) => (prev + 1) % totalSlides);
-    setIsAutoPlaying(false);
-  };
-
-  const prevSlide = () => {
-    const totalSlides = Math.ceil(faqs.length / cardsPerSlide);
-    setCurrentSlide((prev) => (prev - 1 + totalSlides) % totalSlides);
-    setIsAutoPlaying(false);
-  };
-
-  const getCurrentCards = () => {
-    const startIndex = currentSlide * cardsPerSlide;
-    return faqs.slice(startIndex, startIndex + cardsPerSlide);
-  };
-
-  // Touch handlers for mobile swipe
-  const handleTouchStart = (e: React.TouchEvent) => {
-    setTouchStart(e.targetTouches[0].clientX);
-  };
-
-  const handleTouchMove = (e: React.TouchEvent) => {
-    setTouchEnd(e.targetTouches[0].clientX);
-  };
-
-  const handleTouchEnd = () => {
-    if (!touchStart || !touchEnd) return;
-    
-    const distance = touchStart - touchEnd;
-    const isLeftSwipe = distance > 50;
-    const isRightSwipe = distance < -50;
-
-    if (isLeftSwipe) {
-      nextSlide();
+  const toggleFaq = (faqId: number) => {
+    const newOpenFaqs = new Set(openFaqs);
+    if (newOpenFaqs.has(faqId)) {
+      newOpenFaqs.delete(faqId);
+    } else {
+      newOpenFaqs.add(faqId);
     }
-    if (isRightSwipe) {
-      prevSlide();
-    }
+    setOpenFaqs(newOpenFaqs);
+  };
 
-    // Reset values
-    setTouchStart(0);
-    setTouchEnd(0);
+  const toggleAllFaqs = () => {
+    if (openFaqs.size === filteredFaqs.length) {
+      setOpenFaqs(new Set());
+    } else {
+      setOpenFaqs(new Set(filteredFaqs.map(f => f.id)));
+    }
   };
 
   return (
-    <section className="relative py-12 px-4" style={{ backgroundColor: 'rgba(0, 140, 149, 0.05)' }}>
-      <div 
-        className="absolute inset-0 w-full h-full"
-        style={{
-          maskImage: 'url(/images/whyUs/bgdesign1_ynysgv.png)',
-          WebkitMaskImage: 'url(/images/whyUs/bgdesign1_ynysgv.png)',
-          maskPosition: 'center',
-          WebkitMaskPosition: 'center',
-          maskSize: 'cover',
-          WebkitMaskSize: 'cover',
-          backgroundColor: 'rgba(0, 140, 149, 1)'
-        }}
-      ></div>
-      <div className="max-w-7xl mx-auto relative z-10">
+    <section className="relative py-16 px-4">
+      <div className="max-w-6xl mx-auto">
+        {/* Header */}
         <header className="text-center mb-12">
-          <h2 className="text-[rgba(0,140,149,1)] text-4xl sm:text-5xl font-bold mb-4" >
+          
+          <h2 className="text-4xl md:text-5xl font-bold mb-4" style={{ color: 'rgba(0, 140, 149, 1)' }}>
             Frequently Asked Questions
           </h2>
-          <p className="text-[rgba(0,140,149,1)] text-xl max-w-3xl mx-auto" >
-            Get answers to the most common questions about our services
-          </p>
         </header>
 
-        {/* FAQs Slider */}
-        <div className="relative">
-          {/* Navigation Arrows */}
-          <button
-            onClick={prevSlide}
-            className="hidden md:flex absolute left-0 top-1/2 -translate-y-1/2 z-20 bg-white/90 hover:bg-white p-3 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 -ml-6 items-center justify-center"
-            aria-label="Previous slide"
-          >
-            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" style={{ color: 'rgba(0, 140, 149, 1)' }}>
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-            </svg>
-          </button>
-
-              <button
-            onClick={nextSlide}
-            className="hidden md:flex absolute right-0 top-1/2 -translate-y-1/2 z-20 bg-white/90 hover:bg-white p-3 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 -mr-6 items-center justify-center"
-            aria-label="Next slide"
-          >
-            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" style={{ color: 'rgba(0, 140, 149, 1)' }}>
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-            </svg>
-              </button>
-
-          {/* Cards Container */}
-          <div 
-            className="grid grid-cols-1 md:grid-cols-3 gap-8 px-0 md:px-8"
-            onTouchStart={handleTouchStart}
-            onTouchMove={handleTouchMove}
-            onTouchEnd={handleTouchEnd}
-          >
-            {getCurrentCards().map((faq, index) => (
-              <div 
-                key={index}
-                className="bg-white p-6 rounded-3xl shadow-lg hover:shadow-xl transition-all duration-300 flex flex-col items-start border border-gray-100 hover:border-primary/20 group"
-              >
-                <div className="text-primary mb-6 bg-gradient-to-br from-gray-50 to-gray-100 p-4 rounded-2xl group-hover:from-primary/5 group-hover:to-primary/10 transition-all duration-300">
-                  <svg className="w-8 h-8" style={{ color: 'rgba(0,140,149,1)', opacity: 0.9 }} fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 17h-2v-2h2v2zm2.07-7.75l-.9.92C13.45 12.9 13 13.5 13 15h-2v-.5c0-1.1.45-2.1 1.17-2.83l1.24-1.26c.37-.36.59-.86.59-1.41 0-1.1-.9-2-2-2s-2 .9-2 2H8c0-2.21 1.79-4 4-4s4 1.79 4 4c0 .88-.36 1.68-.93 2.25z"/>
-                  </svg>
-                </div>
-                <h3 className="text-base sm:text-lg font-bold text-left uppercase mb-3" style={{ color: 'rgba(0,140,149,1)', opacity: 0.9 }}>
-                  {faq.question}
-                </h3>
-                <p className="text-sm text-left leading-relaxed" style={{ color: 'rgba(0,140,149,1)', opacity: 0.8 }}>
-                  {faq.answer}
-                </p>
-            </div>
+        {/* Category Filter */}
+        <div className="flex flex-wrap justify-center gap-3 mb-8">
+          {categories.map((category) => (
+            <button
+              key={category.id}
+              onClick={() => setActiveCategory(category.id as any)}
+              className={`px-6 py-3 rounded-full font-medium transition-all duration-200 ${
+                activeCategory === category.id
+                  ? 'text-white shadow-lg'
+                  : 'bg-white hover:bg-gray-50 border border-gray-200'
+              }`}
+              style={{
+                backgroundColor: activeCategory === category.id ? 'rgba(0, 140, 149, 1)' : 'transparent',
+                color: activeCategory === category.id ? 'white' : 'rgba(0, 140, 149, 1)'
+              }}
+            >
+              {category.name}
+                             <span className={`ml-2 px-2 py-1 rounded-full text-xs font-medium ${
+                 activeCategory === category.id
+                   ? 'text-white'
+                   : 'text-white'
+               }`}
+               style={{
+                 backgroundColor: activeCategory === category.id ? 'rgba(255, 255, 255, 0.9)' : 'rgba(0, 140, 149, 0.2)',
+                 color: activeCategory === category.id ? 'rgba(0, 140, 149, 1)' : 'rgba(0, 140, 149, 1)'
+               }}>
+                 {category.count}
+               </span>
+            </button>
           ))}
         </div>
 
-          {/* Progress Bar */}
-          <div className="w-full bg-gray-200 rounded-full mt-8 overflow-hidden" style={{ height: '4px' }}>
-            <div 
-              className="h-full rounded-full transition-all duration-500" 
-              style={{ 
-                width: `${((currentSlide + 1) / Math.ceil(faqs.length / cardsPerSlide)) * 100}%`,
-                backgroundColor: 'rgba(0, 140, 149, 1)'
-              }}
-            ></div>
-          </div>
+        {/* Toggle All Button */}
+        <div className="text-center mb-6">
+          <button
+            onClick={toggleAllFaqs}
+            className="font-medium text-sm underline hover:opacity-80 transition-opacity duration-200"
+            style={{ color: 'rgba(0, 140, 149, 1)' }}
+          >
+            {openFaqs.size === filteredFaqs.length ? 'Collapse All' : 'Expand All'}
+          </button>
         </div>
 
-        {/* Contact CTA */}
-        <div className="text-center mt-12">
-          <p className="text-[rgba(0,140,149,1)] text-lg mb-6" >
-            Still have questions? We&apos;re here to help!
-          </p>
-          <button
-            onClick={() => {
-              const contactSection = document.getElementById('contact');
-              if (contactSection) {
-                contactSection.scrollIntoView({
-                  behavior: 'smooth',
-                  block: 'start'
-                });
-              }
-            }}
-            className="py-3 px-10 font-light text-white rounded-full hover:opacity-80 transition duration-300 uppercase text-base cursor-pointer"
-            style={{ backgroundColor: 'rgba(255, 213, 90, 1)' }}
-          >
-            Contact Us
-          </button>
+        {/* FAQs Accordion */}
+        <div className="space-y-4 mb-12">
+          {filteredFaqs.map((faq) => (
+            <div
+              key={faq.id}
+              className="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden hover:shadow-md transition-all duration-200"
+            >
+              <button
+                onClick={() => toggleFaq(faq.id)}
+                className="w-full px-6 py-5 text-left flex items-center justify-between hover:bg-gray-50 transition-colors duration-200"
+                aria-expanded={openFaqs.has(faq.id)}
+                aria-controls={`faq-answer-${faq.id}`}
+              >
+                <h3 className="text-lg font-semibold pr-4" style={{ color: 'rgba(0, 140, 149, 1)' }}>
+                  {faq.question}
+                </h3>
+                <div className="flex items-center gap-3">
+                  <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium text-white"
+                    style={{ backgroundColor: 'rgba(0, 140, 149, 0.8)' }}>
+                    {faq.category.charAt(0).toUpperCase() + faq.category.slice(1)}
+                  </span>
+                  <svg
+                    className={`w-5 h-5 transition-transform duration-200 ${
+                      openFaqs.has(faq.id) ? 'rotate-180' : ''
+                    }`}
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                    style={{ color: 'rgba(0, 140, 149, 1)' }}
+                  >
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                  </svg>
+                </div>
+              </button>
+              
+              <div
+                id={`faq-answer-${faq.id}`}
+                className={`overflow-hidden transition-all duration-300 ease-in-out ${
+                  openFaqs.has(faq.id) ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'
+                }`}
+                aria-hidden={!openFaqs.has(faq.id)}
+              >
+                <div className="px-6 pb-5">
+                  <div className="pt-2 border-t border-gray-100">
+                    <p className="leading-relaxed" style={{ color: 'rgba(0, 140, 149, 1)', opacity: 0.8 }}>
+                      {faq.answer}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          ))}
         </div>
       </div>
     </section>

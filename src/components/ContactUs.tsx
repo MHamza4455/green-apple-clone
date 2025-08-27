@@ -2,7 +2,7 @@
 
 export default function ContactUs() {
   return (
-    <section id="contact" className="relative py-20 bg-gradient-to-br from-gray-50 to-white overflow-hidden">
+    <section id="contact" className="relative py-20 overflow-hidden" style={{ backgroundColor: 'rgba(0, 140, 149, 0.05)' }}>
       {/* Background Pattern */}
       <div className="absolute inset-0 opacity-5">
         <div className="absolute inset-0" style={{
