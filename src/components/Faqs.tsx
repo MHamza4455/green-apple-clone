@@ -121,7 +121,7 @@ export default function Faqs() {
           {categories.map((category) => (
             <button
               key={category.id}
-              onClick={() => setActiveCategory(category.id as any)}
+              onClick={() => setActiveCategory(category.id as typeof activeCategory)}
               className={`px-6 py-3 rounded-full font-medium transition-all duration-200 ${
                 activeCategory === category.id
                   ? 'text-white shadow-lg'
