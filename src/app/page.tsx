@@ -9,6 +9,7 @@ import Faqs from '@/components/Faqs';
 import VisaServices from '@/components/VisaServices';
 import ContactUs from '@/components/ContactUs';
 import Footer from '@/components/Footer';
+import WhyChooseUs from '@/components/WhyChooseUs';
 
 export default function Home() {
   return (
@@ -18,7 +19,8 @@ export default function Home() {
       <FeaturedNavigation />
       <FeaturedTours />
       <UmrahPackages />
-      <WhyBookUs />
+      {/* <WhyBookUs /> */}
+      <WhyChooseUs />
       <VisaServices />
       <Reviews />
       <Faqs />
