@@ -105,7 +105,7 @@ export default function Faq() {
           <h2 className="text-4xl md:text-5xl font-bold mb-4" style={{ color: 'rgba(0, 140, 149, 1)' }}>
           Frequently Asked Questions.
           </h2>
-                     <p className="text-lg max-w-2xl mx-auto" style={{ color: 'rgba(0, 140, 149, 1)' }}>
+            <p className="text-lg max-w-2xl mx-auto" style={{ color: 'rgba(0, 140, 149, 1)' }}>
              Can&apos;t find an answer? Call us at (855) 692-5326 or email contact@myclean.com!
            </p>
         </header>
