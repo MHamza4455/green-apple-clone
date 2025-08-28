@@ -10,6 +10,7 @@ import VisaServices from '@/components/VisaServices';
 import ContactUs from '@/components/ContactUs';
 import Footer from '@/components/Footer';
 import WhyChooseUs from '@/components/WhyChooseUs';
+import Faq from '@/components/Faq';
 
 export default function Home() {
   return (
@@ -23,7 +24,8 @@ export default function Home() {
       <WhyChooseUs />
       <VisaServices />
       <Reviews />
-      <Faqs />
+      {/* <Faqs /> */}
+      <Faq />
       <ContactUs />
       <Footer />
     </div>
