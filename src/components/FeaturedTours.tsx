@@ -10,7 +10,7 @@ const featuredTours = [
     description: 'Explore the stunning landscapes and cultural gems of Almaty, Kazakhstan, with this 5-day tour package. Highlights include visits to the Park of 28 Panfilov Guardsmen, Ascension Cathedral, Koktobe Hill, Shymbulak Mountain Resort, Big Almaty Lake, and Alma Arasan Gorge. Enjoy comfortable accommodations at Saraishyq Hotel and daily buffet breakfast.',
     duration: '5 days / 4 nights',
     price: 'AED 3999',
-    image: '/images/HolidayPackages/holiday_package1.jpg',
+    image: '/images/HolidayPackages/holiday_package1.webp',
     imageAlt: '5-Day Almaty Itinerary – Kazakhstan'
   },
   {
@@ -19,7 +19,7 @@ const featuredTours = [
     description: 'Explore the beauty of Armenia with this 4-day tour package. Highlights include a city tour of Yerevan, visits to Lake Sevan, Tsaghkadzor, Dilijan, Garni Temple, and Geghard Monastery. Enjoy comfortable accommodations at Hotel Dynasty 4★ and daily buffet breakfast.',
     duration: '4 days / 3 nights',
     price: 'AED 3990',
-    image: '/images/HolidayPackages/holiday_package2.jpg',
+    image: '/images/HolidayPackages/holiday_package2.webp',
     imageAlt: '4-Day Armenia Itinerary – Yerevan'
   },
   {
@@ -28,7 +28,7 @@ const featuredTours = [
     description: 'A 5-day tour package from UAE to Salalah, Oman, featuring city tours, nature excursions, and cultural site visits. Includes accommodation at Al Jabal Hotel, luxury bus transportation, and full board meals as per the itinerary.',
     duration: '5 days / 4 nights',
     price: 'AED 0',
-    image: '/images/HolidayPackages/holiday_package3.jpg',
+    image: '/images/HolidayPackages/holiday_package3.webp',
     imageAlt: '5-Day Salalah Tour – Oman'
   },
   {
@@ -37,7 +37,7 @@ const featuredTours = [
     description: 'Discover the hidden gem of the Caucasus with this comprehensive 6-day tour. Experience the historic charm of Tbilisi, explore ancient cave cities, visit stunning mountain monasteries, and taste authentic Georgian cuisine. Includes luxury hotel stays and expert local guides.',
     duration: '6 days / 5 nights',
     price: 'AED 4599',
-    image: '/images/HolidayPackages/holiday_package4.jpg',
+    image: '/images/HolidayPackages/holiday_package4.webp',
     imageAlt: '6-Day Georgia Adventure – Tbilisi & Beyond'
   },
   {
@@ -46,7 +46,7 @@ const featuredTours = [
     description: 'Journey to the land of fire with this 4-day Azerbaijan tour. Explore the modern skyline of Baku, visit the ancient mud volcanoes of Gobustan, discover the medieval Old City, and experience the unique blend of East and West cultures.',
     duration: '4 days / 3 nights',
     price: 'AED 3499',
-    image: '/images/HolidayPackages/holiday_package5.jpg',
+    image: '/images/HolidayPackages/holiday_package5.webp',
     imageAlt: '4-Day Azerbaijan Discovery – Baku & Gobustan'
   },
   {
@@ -55,7 +55,7 @@ const featuredTours = [
     description: 'Immerse yourself in the nomadic culture of Kyrgyzstan with this 7-day adventure. Stay in traditional yurts, ride horses across the stunning Tian Shan mountains, visit crystal-clear alpine lakes, and experience authentic nomadic hospitality in the heart of Central Asia.',
     duration: '7 days / 6 nights',
     price: 'AED 5299',
-    image: '/images/HolidayPackages/holiday_package6.jpg',
+    image: '/images/HolidayPackages/holiday_package6.webp',
     imageAlt: '7-Day Kyrgyzstan Nomadic Experience'
   }
 ];
