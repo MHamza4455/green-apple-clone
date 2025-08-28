@@ -77,6 +77,8 @@ export default function ImageSlider({
               className="object-cover"
               priority={index === 0}
             />
+            {/* Dark Overlay for Better Text Readability */}
+            <div className="absolute inset-0 bg-black/30" />
           </div>
         ))}
       </div>

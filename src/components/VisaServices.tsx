@@ -16,7 +16,7 @@ const COUNTRIES = [
 
 export default function VisaServices() {
   return (
-    <section id="visa-services" className="py-20 bg-gray-50">
+    <section id="visa-services" className="py-20">
       <div className="max-w-7xl mx-auto px-4">
         <header className="w-full mb-6 lg:mb-0">
           <div>

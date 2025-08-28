@@ -106,7 +106,7 @@ export default function Faqs() {
   };
 
   return (
-    <section className="relative py-16 px-4">
+    <section id="faqs" className="relative py-16 px-4">
       <div className="max-w-6xl mx-auto">
         {/* Header */}
         <header className="text-center mb-12">

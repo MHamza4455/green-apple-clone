@@ -31,7 +31,7 @@ export default function WhyChooseUs() {
     ];
 
     return (
-        <section className="w-full bg-gray-50 py-16 px-4">
+        <section id="why-choose-us" className="w-full py-16 px-4" style={{ backgroundColor: 'rgba(0, 140, 149, 0.05)' }}>
             <div className="max-w-7xl mx-auto">
                 {/* Headline */}
                 <div className="text-center mb-16">

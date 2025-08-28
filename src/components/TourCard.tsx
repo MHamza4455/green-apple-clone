@@ -104,7 +104,7 @@ export default function TourCard({
           width: '100%',
           maxWidth: '402px',
           marginRight: '15px',
-          boxShadow: '-4px 9px 25px -6px rgba(0, 0, 0, .1)'
+          boxShadow: '0 10px 15px -3px var(--tw-shadow-color, rgb(0 0 0 / 0.1)), 0 4px 6px -4px var(--tw-shadow-color, rgb(0 0 0 / 0.1))'
         }}
         role="group"
         aria-label={title}

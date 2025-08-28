@@ -129,7 +129,7 @@ export default function Hero() {
   ];
 
   return (
-    <section id="hero" className="relative h-96 overflow-hidden bg-gray-100">
+    <section id="hero" className="relative h-[65vh] overflow-hidden bg-gray-100">
       {/* Image Slider */}
       <ImageSlider 
         slides={slides}
@@ -147,23 +147,6 @@ export default function Hero() {
         subtitle="Your trusted partner for visas and tours from the UAE to the world."
         actionButtons={actionButtons}
       />
-
-      {/* White gradient overlay at bottom */}
-      <style jsx>{`
-        #hero::before {
-          background: linear-gradient(180deg, transparent, #fff) no-repeat bottom;
-          background-size: 100% 50%;
-          bottom: 0;
-          content: "";
-          display: flex;
-          height: 60%;
-          position: absolute;
-          transform: translateY(5px);
-          width: 100%;
-          z-index: 5;
-          pointer-events: none;
-        }
-      `}</style>
     </section>
   );
 }

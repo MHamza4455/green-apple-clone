@@ -208,7 +208,7 @@ export default function Reviews() {
       });
 
   return (
-    <section className="relative py-16 px-4" style={{ backgroundColor: 'rgba(0, 140, 149, 0.05)' }}>
+    <section id="reviews" className="relative py-16 px-4" style={{ backgroundColor: 'rgba(0, 140, 149, 0.05)' }}>
       <div className="max-w-6xl mx-auto">
         {/* Header */}
         <header className="text-center mb-12">

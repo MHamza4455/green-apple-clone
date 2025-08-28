@@ -8,9 +8,9 @@ export default function Header() {
   const headerRef = useRef<HTMLElement>(null);
 
   const navLinks = [
-    { name: 'Services', href: '#services' },
-    { name: 'Tour Packages', href: '#tour-packages' },
+    { name: 'Featured Tours', href: '#featured-tours' },
     { name: 'Umrah Packages', href: '#umrah-packages' },
+    { name: 'Why Choose Us', href: '#why-choose-us' },
     { name: 'Visa Services', href: '#visa-services' },
     { name: 'Reviews', href: '#reviews' },
     { name: 'FAQs', href: '#faqs' },
