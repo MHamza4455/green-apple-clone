@@ -31,7 +31,7 @@ const HeroSlider = () => {
             title: 'Visa Services for Every Journey',
             description: 'Hassle-free tourist, business, and Schengen visa assistance with expert guidance.',
             buttonText: 'Start your visa',
-            thumbTitle: 'Visa services',
+            thumbTitle: 'Visa',
             href: '#visa-services'
         },
         {
@@ -40,7 +40,7 @@ const HeroSlider = () => {
             title: 'Umrah & Hajj Packages 2025',
             description: 'Flexible itineraries, quality hotels, and seamless ground support for your pilgrimage.',
             buttonText: 'Explore Umrah',
-            thumbTitle: 'Umrah packages',
+            thumbTitle: 'Hajj & Umrah',
             href: '#umrah-packages'
         },
         {
@@ -49,7 +49,7 @@ const HeroSlider = () => {
             title: 'Tailor‑Made Holiday Packages',
             description: 'Curated getaways with flights, hotels, and transfers at the best prices.',
             buttonText: 'Browse holidays',
-            thumbTitle: 'Holiday deals',
+            thumbTitle: 'Holidays',
             href: '#featured-tours'
         },
         {
