@@ -113,15 +113,14 @@ export default function FeaturedNavigation() {
                     className="flex flex-col items-center"
                   >
                     <figure className="relative w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 lg:w-28 lg:h-28 flex-shrink-0 transform transition duration-500 hover:scale-105 cursor-pointer border-4 border-[#008c95] p-1.5">
-                      <div className="w-full h-full p-1">
+                      <div className="w-full h-full">
                         <div className="w-full h-full bg-[#008c95] flex items-center justify-center">
                           {renderIcon(category)}
                         </div>
                       </div>
                     </figure>
                     <figcaption 
-                      className="text-center leading-4 capitalize text-sm md:text-base lg:text-lg font-light mt-3 max-w-24 md:max-w-28 lg:max-w-32" 
-                      style={{ color: 'rgba(0,140,149,1)' }}
+                      className="text-center leading-4 capitalize text-sm md:text-base lg:text-lg font-light mt-3 max-w-24 md:max-w-28 lg:max-w-32 text-[#008c95]"
                     >
                       {category.name}
                     </figcaption>
@@ -142,8 +141,7 @@ export default function FeaturedNavigation() {
                       </div>
                     </figure>
                     <figcaption 
-                      className="leading-4 capitalize text-sm md:text-base lg:text-lg font-light mt-3 max-w-24 md:max-w-28 lg:max-w-32" 
-                      style={{ color: 'rgba(0,140,149,1)' }}
+                      className="leading-4 capitalize text-sm md:text-base lg:text-lg font-light mt-3 max-w-24 md:max-w-28 lg:max-w-32 text-[#008c95]"
                     >
                       {category.name}
                     </figcaption>
