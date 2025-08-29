@@ -1,7 +1,5 @@
 'use client';
 
-import Image from 'next/image';
-
 interface CategoryItem {
   id: string;
   name: string;
@@ -10,72 +8,15 @@ interface CategoryItem {
   href?: string;
   target?: string;
   rel?: string;
-  badge?: {
-    text: string;
-    color: 'red' | 'accent';
-  };
   isButton?: boolean;
 }
 
 const categories: CategoryItem[] = [
   {
-    id: 'e-sim',
-    name: 'E-Sim',
-    image: '/images/categories/e-sim.jpg',
-    alt: 'E-Sim',
-    href: 'https://greenapple.zetexa.com/',
-    target: '_blank',
-    rel: 'noreferrer',
-    badge: {
-      text: 'New',
-      color: 'red'
-    }
-  },
-  {
-    id: 'documentation',
-    name: 'documentation',
-    image: '/images/categories/documentation_envgij.jpg',
-    alt: 'documentation',
-    isButton: true,
-    badge: {
-      text: 'PRO Service',
-      color: 'accent'
-    }
-  },
-  {
     id: 'dubai-activities',
     name: 'Dubai Activities',
     image: '/images/categories/activity_ulhgmv.jpg',
     alt: 'Dubai Activities',
-    isButton: true,
-    badge: {
-      text: 'New',
-      color: 'red'
-    }
-  },
-  {
-    id: 'russia-embassies',
-    name: 'Russia Embassies',
-    image: '/images/categories/embassy_ssntnk.jpg',
-    alt: 'Russia Embassies',
-    isButton: true,
-    badge: {
-      text: 'VIP Service',
-      color: 'accent'
-    }
-  },
-  {
-    id: 'schengen',
-    name: 'schengen',
-    image: '/images/categories/schengen_zovvid.jpg',
-    alt: 'schengen',
-    isButton: true
-  },
-  {
-    id: 'updates',
-    name: 'updates',
-    image: '/images/categories/facts_g3rx0t.jpg',
-    alt: 'updates',
     isButton: true
   },
   {
@@ -95,6 +36,51 @@ const categories: CategoryItem[] = [
 ];
 
 export default function FeaturedNavigation() {
+  const renderIcon = (category: CategoryItem) => {
+    const commonProps = {
+      xmlns: 'http://www.w3.org/2000/svg',
+      viewBox: '0 0 24 24',
+      fill: 'none',
+      stroke: 'currentColor',
+      className: 'w-12 h-12 md:w-14 md:h-14 text-white'
+    } as const;
+
+    switch (category.id) {
+      case 'dubai-activities':
+        // Sparkle/star icon
+        return (
+          <svg {...commonProps} strokeWidth="1.5">
+            <path d="M12 3l2.1 4.26L18.9 8.4l-3.9 3.8.92 5.36L12 15.9l-3.92 1.96.92-5.36L5.1 8.4l4.8-1.14L12 3z" fill="currentColor" />
+          </svg>
+        );
+      case 'visa-services':
+        // Passport icon
+        return (
+          <svg {...commonProps} strokeWidth="1.5">
+            <rect x="5" y="3" width="14" height="18" rx="2" stroke="currentColor" />
+            <circle cx="12" cy="10" r="3" stroke="currentColor" />
+            <path d="M9 16h6" stroke="currentColor" />
+          </svg>
+        );
+      case 'tour-packages':
+        // Suitcase icon
+        return (
+          <svg {...commonProps} strokeWidth="1.5">
+            <rect x="4" y="7" width="16" height="12" rx="2" stroke="currentColor" />
+            <path d="M12 7V5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2" stroke="currentColor" />
+            <path d="M12 11v6" stroke="currentColor" />
+          </svg>
+        );
+      default:
+        // Generic circle icon
+        return (
+          <svg {...commonProps} strokeWidth="1.5">
+            <circle cx="12" cy="12" r="5" stroke="currentColor" />
+          </svg>
+        );
+    }
+  };
+
   const handleCategoryClick = (category: CategoryItem) => {
     if (category.href && category.href.startsWith('#')) {
       // Smooth scroll to section
@@ -110,81 +96,56 @@ export default function FeaturedNavigation() {
 
   return (
     <section className="relative" aria-labelledby="featured-navigations">
-             <section className="overflow-hidden lg:overflow-visible pb-12 pt-12" aria-label="Visa and Tour Categories">
+      <section className="overflow-hidden lg:overflow-visible pb-12 pt-12" aria-label="Visa and Tour Categories">
         <div className="max-w-7xl mx-auto px-4">
-                     <div className="flex space-x-4 overflow-x-auto lg:overflow-visible lg:justify-between pb-4 scrollbar-hide">
+          <div className="flex space-x-6 md:space-x-8 lg:space-x-12 justify-center">
             {categories.map((category, index) => (
               <div
                 key={category.id}
-                                 className="flex flex-col items-center text-center group flex-shrink-0"
+                className="flex flex-col items-center text-center group flex-shrink-0"
                 role="group"
                 aria-label={`${index + 1} / ${categories.length}`}
               >
-                                 {category.isButton ? (
-                   <div className="relative">
-                     {category.badge && (
-                                               <span 
-                          className={`absolute font-light px-1 right-0 rounded-br-md rounded-tl-md text-white text-xxs sm:text-xs top-0 z-10 ${
-                            category.badge.color === 'red' ? 'bg-red-500' : 'bg-[#caa26e]'
-                          }`}
-                        >
-                          {category.badge.text === 'PRO Service' ? 'PRO' : 
-                           category.badge.text === 'VIP Service' ? 'VIP' : 
-                           category.badge.text}
-                        </span>
-                     )}
-                     <button
-                       type="button"
-                       onClick={() => handleCategoryClick(category)}
-                       className="flex flex-col items-center"
-                     >
-                    <figure className="relative w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 lg:w-27 lg:h-27 flex-shrink-0 rounded-full overflow-hidden transform transition duration-500 hover:scale-105 cursor-pointer">
-                      <Image
-                        src={category.image}
-                        alt={category.alt}
-                        width={108}
-                        height={108}
-                        className="w-full h-full object-cover rounded-full"
-                      />
+                {category.isButton ? (
+                  <button
+                    type="button"
+                    onClick={() => handleCategoryClick(category)}
+                    className="flex flex-col items-center"
+                  >
+                    <figure className="relative w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 lg:w-28 lg:h-28 flex-shrink-0 transform transition duration-500 hover:scale-105 cursor-pointer border-4 border-[#008c95] p-1.5">
+                      <div className="w-full h-full">
+                        <div className="w-full h-full bg-[#008c95] flex items-center justify-center">
+                          {renderIcon(category)}
+                        </div>
+                      </div>
                     </figure>
-                                         <figcaption className="text-center text-[rgba(0,118,111,1)] leading-3 capitalize text-xs md:text-sm w-16 sm:w-20 md:w-24 font-light mt-2">
-                       {category.name}
-                     </figcaption>
-                     </button>
-                   </div>
-                                 ) : (
-                   <div className="relative">
-                     {category.badge && (
-                                               <span 
-                          className={`absolute font-light px-1 right-0 rounded-br-md rounded-tl-md text-white text-xxs sm:text-xs top-0 z-10 ${
-                            category.badge.color === 'red' ? 'bg-red-500' : 'bg-[#33918c]'
-                          }`}
-                        >
-                          {category.badge.text === 'PRO Service' ? 'PRO' : 
-                           category.badge.text === 'VIP Service' ? 'VIP' : 
-                           category.badge.text}
-                        </span>
-                     )}
-                     <a
-                       href={category.href}
-                       target={category.target}
-                       rel={category.rel}
-                       className="flex flex-col items-center text-center group"
-                     >
-                    <figure className="relative w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 lg:w-27 lg:h-27 flex-shrink-0 rounded-full overflow-hidden transform transition duration-500 hover:scale-105">
-                      <Image
-                        src={category.image}
-                        alt={category.alt}
-                        width={108}
-                        height={108}
-                        className="w-full h-full object-cover rounded-full"
-                      />
+                    <figcaption 
+                      className="text-center leading-4 capitalize text-sm md:text-base lg:text-lg font-light mt-3 max-w-24 md:max-w-28 lg:max-w-32 text-[#008c95]"
+                    >
+                      {category.name}
+                    </figcaption>
+                  </button>
+                ) : (
+                  <a
+                    href={category.href}
+                    target={category.target}
+                    rel={category.rel}
+                    className="flex flex-col items-center text-center group"
+                    onClick={() => handleCategoryClick(category)}
+                  >
+                    <figure className="relative w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 lg:w-28 lg:h-28 flex-shrink-0 transform transition duration-500 hover:scale-105 border-4 border-[#008c95] p-1.5">
+                      <div className="w-full h-full">
+                        <div className="w-full h-full bg-[#008c95] flex items-center justify-center">
+                          {renderIcon(category)}
+                        </div>
+                      </div>
                     </figure>
-                                         <figcaption className="leading-3 text-[rgba(0,118,111,1)] capitalize text-xs md:text-sm w-16 sm:w-20 md:w-24 font-light mt-2">
-                       {category.name}
-                     </figcaption>
-                     </a>
-                   </div>
+                    <figcaption 
+                      className="leading-4 capitalize text-sm md:text-base lg:text-lg font-light mt-3 max-w-24 md:max-w-28 lg:max-w-32 text-[#008c95]"
+                    >
+                      {category.name}
+                    </figcaption>
+                  </a>
                 )}
               </div>
             ))}

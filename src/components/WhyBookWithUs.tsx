@@ -83,7 +83,7 @@ type FeatureCardProps = {
 
 function FeatureCard({ icon, title, description }: FeatureCardProps) {
 	return (
-		<div className="rounded-2xl bg-white p-6 shadow-md ring-1 ring-black/5 transition hover:shadow-lg">
+		<div className="rounded-2xl bg-white p-6 shadow-lg ring-1 ring-black/5 transition hover:shadow-xl">
 			<div className="mb-4">{icon}</div>
 			<h3 className="text-xl font-bold text-teal-900">{title}</h3>
 			<p className="mt-2 text-teal-900/80">{description}</p>

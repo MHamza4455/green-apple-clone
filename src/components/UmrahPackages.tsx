@@ -10,7 +10,7 @@ const umrahPackages = [
     description: 'Experience the spiritual journey of Umrah with our comprehensive 15-day package. Includes visa processing, round-trip flights, hotel accommodation in Makkah and Madinah, transportation, and guided tours to holy sites. Perfect for first-time Umrah travelers.',
     duration: '15 days / 14 nights',
     price: 'AED 8999',
-    image: 'https://res.cloudinary.com/greenappletravel-ae/image/upload/c_scale,w_400,q_auto:eco,f_auto/v1753855595/n8n_posting/grd8sr7nnulrz9nspvys.jpg',
+    image: '/images/UmrahPackages/umrah_package1.webp',
     imageAlt: 'Basic Umrah Package – 15 Days'
   },
   {
@@ -19,7 +19,7 @@ const umrahPackages = [
     description: 'Luxury Umrah experience with extended stay in the holy cities. Features 5-star hotel accommodations, VIP visa processing, premium transportation, guided spiritual tours, and additional visits to historical Islamic sites. Includes all meals and special arrangements.',
     duration: '21 days / 20 nights',
     price: 'AED 12999',
-    image: 'https://res.cloudinary.com/greenappletravel-ae/image/upload/c_scale,w_400,q_auto:eco,f_auto/v1753784784/n8n_posting/nmrlmnnxmsmuoipvh49c.jpg',
+    image: '/images/UmrahPackages/umrah_package2.webp',
     imageAlt: 'Premium Umrah Package – 21 Days'
   },
   {
@@ -28,7 +28,7 @@ const umrahPackages = [
     description: 'Special family-oriented Umrah package designed for families with children. Includes family-friendly accommodations, educational tours for children, special family prayer arrangements, and guided visits to family-friendly areas in Makkah and Madinah.',
     duration: '18 days / 17 nights',
     price: 'AED 10999',
-    image: 'https://res.cloudinary.com/greenappletravel-ae/image/upload/c_scale,w_400,q_auto:eco,f_auto/v1753773675/n8n_posting/eryso0bejapwzljioodz.jpg',
+    image: '/images/UmrahPackages/umrah_package3.webp',
     imageAlt: 'Family Umrah Package – 18 Days'
   },
   {
@@ -37,7 +37,7 @@ const umrahPackages = [
     description: 'Experience the blessed month of Ramadan in the holy cities. Extended package covering the entire month with special Ramadan arrangements, Taraweeh prayers, Iftar and Suhoor arrangements, and spiritual guidance throughout the holy month.',
     duration: '25 days / 24 nights',
     price: 'AED 15999',
-    image: 'https://res.cloudinary.com/greenappletravel-ae/image/upload/c_scale,w_400,q_auto:eco,f_auto/v1753773675/n8n_posting/eryso0bejapwzljioodz.jpg',
+    image: '/images/UmrahPackages/umrah_package4.webp',
     imageAlt: 'Ramadan Umrah Package – 25 Days'
   },
   {
@@ -46,7 +46,7 @@ const umrahPackages = [
     description: 'Quick Umrah journey for those with limited time. Efficient 10-day package with streamlined visa processing, direct flights, centrally located hotels, and focused spiritual activities. Perfect for busy professionals and short-term travelers.',
     duration: '10 days / 9 nights',
     price: 'AED 6999',
-    image: 'https://res.cloudinary.com/greenappletravel-ae/image/upload/c_scale,w_400,q_auto:eco,f_auto/v1753784784/n8n_posting/nmrlmnnxmsmuoipvh49c.jpg',
+    image: '/images/UmrahPackages/umrah_package5.webp',
     imageAlt: 'Express Umrah Package – 10 Days'
   },
   {
@@ -55,7 +55,7 @@ const umrahPackages = [
     description: 'Ultimate luxury Umrah experience with extended stay and premium services. Features exclusive 5-star accommodations, private transportation, personal spiritual guide, VIP access to holy sites, and luxury amenities throughout the journey.',
     duration: '30 days / 29 nights',
     price: 'AED 19999',
-    image: 'https://res.cloudinary.com/greenappletravel-ae/image/upload/c_scale,w_400,q_auto:eco,f_auto/v1753855595/n8n_posting/grd8sr7nnulrz9nspvys.jpg',
+    image: '/images/UmrahPackages/umrah_package6.webp',
     imageAlt: 'Luxury Umrah Package – 30 Days'
   }
 ];
@@ -132,11 +132,11 @@ export default function UmrahPackages() {
             <h1 
               id="umrah-packages" 
               className="text-2xl sm:text-3xl uppercase font-bold title-font my-2"
-              style={{ color: 'rgb(0, 87, 82)' }}
+              style={{ color: 'rgba(0,140,149,1)' }}
             >
               Umrah Packages
             </h1>
-            <div className="h-1 w-32 mb-4 rounded" style={{ backgroundColor: 'rgba(127,171,168,1)' }}></div>
+            <div className="h-1 w-32 mb-4 rounded" style={{ backgroundColor: 'rgba(255, 213, 90, 1)' }}></div>
           </div>
           
           {/* Navigation Arrows - Only show when scrolling is needed */}
@@ -176,7 +176,7 @@ export default function UmrahPackages() {
                 className="h-full rounded-full transition-all duration-300" 
                 style={{ 
                   width: `${scrollProgress}%`,
-                  backgroundColor: '#33918c'
+                  backgroundColor: 'rgba(255, 213, 90, 1)'
                 }}
               ></div>
             </div>

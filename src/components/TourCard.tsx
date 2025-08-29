@@ -104,13 +104,13 @@ export default function TourCard({
           width: '100%',
           maxWidth: '402px',
           marginRight: '15px',
-          boxShadow: '-4px 9px 25px -6px rgba(0, 0, 0, .1)'
+          boxShadow: '0 10px 15px -3px var(--tw-shadow-color, rgb(0 0 0 / 0.1)), 0 4px 6px -4px var(--tw-shadow-color, rgb(0 0 0 / 0.1))'
         }}
         role="group"
         aria-label={title}
       >
         {/* Duration Badge */}
-        <div className="absolute z-10 text-white top-3 left-3 px-2 py-1 rounded-md text-xs tracking-wider font-light" style={{ backgroundColor: 'rgba(0, 118, 111, 1)' }}>
+        <div className="absolute z-10 text-white top-3 left-3 px-2 py-1 rounded-md text-xs tracking-wider font-light" style={{ backgroundColor: 'rgba(0, 140, 149, 1)' }}>
           {duration}
         </div>
 
@@ -132,24 +132,24 @@ export default function TourCard({
         {/* Tour Details */}
         <div className="p-4 flex flex-col justify-between flex-grow">
           <header className="flex-grow text-left">
-            <h2 className="text-sm sm:text-lg font-bold mb-2 nowraptitle" style={{ color: 'rgba(0,118,111,1)' }}>
+            <h2 className="text-sm sm:text-lg font-bold mb-2 nowraptitle" style={{ color: 'rgba(0,140,149,1)' }}>
               {title}
             </h2>
-            <p className="text-sm mb-4 line-clamp-3" style={{ color: 'rgba(0,118,111,1)' }}>
+            <p className="text-sm mb-4 line-clamp-3" style={{ color: 'rgba(0,140,149,1)' }}>
               {description}
             </p>
           </header>
 
           {/* Price and Button */}
           <footer className="flex flex-col sm:flex-row items-start sm:items-center justify-between mt-auto w-full gap-3">
-            <p className="font-normal text-sm" style={{ color: 'rgba(0,118,111,1)' }}>
-              from <span className="font-bold text-lg" style={{ color: 'rgba(0,118,111,1)' }}>{price}</span>
+            <p className="font-normal text-sm" style={{ color: 'rgba(0,140,149,1)' }}>
+              from <span className="font-bold text-lg" style={{ color: 'rgba(0,140,149,1)' }}>{price}</span>
             </p>
             <button
               onClick={handleInquireNow}
               className="hover:bg-gray-500 transition-all duration-300 transform hover:scale-105 w-full sm:w-auto"
               style={{ 
-                backgroundColor: 'rgba(202,162,110,1)',
+                backgroundColor: 'rgba(255, 213, 90, 1)',
                 color: 'white',
                 padding: '9px 18px',
                 borderRadius: '30px'
@@ -168,7 +168,7 @@ export default function TourCard({
           onClick={closeModal}
         >
           <div 
-            className="bg-white rounded-2xl shadow-2xl w-full max-w-lg max-h-[85vh] overflow-y-auto transform transition-all duration-300 scale-100"
+            className="bg-white rounded-2xl shadow-lg w-full max-w-lg max-h-[85vh] overflow-y-auto transform transition-all duration-300 scale-100"
             onClick={(e) => e.stopPropagation()}
             style={{
               background: 'linear-gradient(135deg, #ffffff 0%, #f8fffe 100%)',
@@ -179,11 +179,11 @@ export default function TourCard({
             <div className="sticky top-0 bg-white bg-opacity-95 backdrop-blur-md border-b border-gray-100 p-4 rounded-t-2xl">
               <div className="flex items-center justify-between">
                 <div>
-                  <h3 className="text-xl font-bold mb-1" style={{ color: 'rgba(0,118,111,1)' }}>
+                  <h3 className="text-xl font-bold mb-1" style={{ color: 'rgba(0,140,149,1)' }}>
                     Inquire About This Tour
                   </h3>
-                  <p className="text-gray-600 font-medium text-sm">{title}</p>
-                  <p className="text-xs text-gray-500">{duration} • {price}</p>
+                  <p className="font-medium text-sm" style={{ color: 'rgba(0,140,149,1)' }}>{title}</p>
+                  <p className="text-xs" style={{ color: 'rgba(0,140,149,1)' }}>{duration} • {price}</p>
                 </div>
                 <button
                   onClick={closeModal}
@@ -198,8 +198,8 @@ export default function TourCard({
             <div className="p-4">
               {submitStatus === 'success' ? (
                 <div className="text-center py-6">
-                  <div className="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-3">
-                    <svg className="w-6 h-6 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <div className="w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-3" style={{ backgroundColor: 'rgba(0, 140, 149, 0.1)' }}>
+                    <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" style={{ color: 'rgba(0, 140, 149, 1)' }}>
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                     </svg>
                   </div>
@@ -301,7 +301,7 @@ export default function TourCard({
                       disabled={isSubmitting}
                       className="flex-1 py-2.5 px-4 text-white rounded-lg transition-all duration-200 font-medium transform hover:scale-105 disabled:hover:scale-100 disabled:opacity-70 text-sm"
                       style={{
-                        backgroundColor: isSubmitting ? 'rgba(202,162,110,0.7)' : 'rgba(202,162,110,1)'
+                        backgroundColor: isSubmitting ? 'rgba(255, 213, 90, 0.7)' : 'rgba(255, 213, 90, 1)'
                       }}
                     >
                       {isSubmitting ? (
@@ -324,7 +324,7 @@ export default function TourCard({
                     </div>
                   )}
 
-                  <p className="text-xs text-gray-500 text-center">
+                  <p className="text-xs text-center" style={{ color: 'rgba(0,140,149,1)' }}>
                     * Required fields. Your information will be kept confidential.
                   </p>
                 </div>
