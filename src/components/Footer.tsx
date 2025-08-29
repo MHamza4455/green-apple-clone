@@ -59,12 +59,9 @@ export default function Footer() {
         <nav aria-labelledby="quick-links" className="space-y-2">
           <h3 id="quick-links" className="font-semibold" style={{ color: 'rgba(0, 140, 149, .9)' }}>Quick Links</h3>
           <ul className="space-y-1 text-sm font-light">
-            <li><a href="https://greenappletravel.ae" className="hover:opacity-75 transition-opacity duration-300" style={{ color: 'rgba(0, 140, 149, 0.8)' }}>Home</a></li>
-            <li><a href="https://greenappletravel.ae/contact-us" className="hover:opacity-75 transition-opacity duration-300" style={{ color: 'rgba(0, 140, 149, 0.8)' }}>Contact Us</a></li>
-            <li><a href="https://greenappletravel.ae/about-us" className="hover:opacity-75 transition-opacity duration-300" style={{ color: 'rgba(0, 140, 149, 0.8)' }}>About Us</a></li>
-            <li><a href="https://greenappletravel.ae/privacy-policy" className="hover:opacity-75 transition-opacity duration-300" style={{ color: 'rgba(0, 140, 149, 0.8)' }}>Privacy Policy</a></li>
-            <li><a href="https://greenappletravel.ae/terms-of-service" className="hover:opacity-75 transition-opacity duration-300" style={{ color: 'rgba(0, 140, 149, 0.8)' }}>Terms & Conditions</a></li>
-            <li><a href="https://greenappletravel.ae/refpolicy" className="hover:opacity-75 transition-opacity duration-300" style={{ color: 'rgba(0, 140, 149, 0.8)' }}>Refund Policy</a></li>
+            <li><a href="#" className="hover:opacity-75 transition-opacity duration-300" style={{ color: 'rgba(0, 140, 149, 0.8)' }}>Home</a></li>
+            <li><a href="#contact" className="hover:opacity-75 transition-opacity duration-300" style={{ color: 'rgba(0, 140, 149, 0.8)' }}>Contact Us</a></li>
+            <li><a href="#why-choose-us" className="hover:opacity-75 transition-opacity duration-300" style={{ color: 'rgba(0, 140, 149, 0.8)' }}>Why Us</a></li>
           </ul>
         </nav>
 
@@ -109,9 +106,9 @@ export default function Footer() {
           
           <h3 id="services" className="font-semibold" style={{ color: 'rgba(0, 140, 149, .9)' }}>Services</h3>
           <ul className="space-y-1 text-sm font-light">
-            <li><a href="https://greenappletravel.ae/visaservices" className="hover:opacity-75 transition-opacity duration-300" style={{ color: 'rgba(0, 140, 149, 0.8)' }}>Visa Applications</a></li>
-            <li><a href="https://greenappletravel.ae/tour-packages" className="hover:opacity-75 transition-opacity duration-300" style={{ color: 'rgba(0, 140, 149, 0.8)' }}>Tour Packages</a></li>
-            <li><a href="https://greenappletravel.ae/track-application" className="hover:opacity-75 transition-opacity duration-300" style={{ color: 'rgba(0, 140, 149, 0.8)' }}>Track Application</a></li>
+            <li><a href="#visa-services" className="hover:opacity-75 transition-opacity duration-300" style={{ color: 'rgba(0, 140, 149, 0.8)' }}>Visa Applications</a></li>
+            <li><a href="#featured-tours" className="hover:opacity-75 transition-opacity duration-300" style={{ color: 'rgba(0, 140, 149, 0.8)' }}>Tour Packages</a></li>
+            <li><a href="#umrah-packages" className="hover:opacity-75 transition-opacity duration-300" style={{ color: 'rgba(0, 140, 149, 0.8)' }}>Umrah Packages</a></li>
           </ul>
         </nav>
       </div>

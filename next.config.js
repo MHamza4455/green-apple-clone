@@ -8,6 +8,12 @@ const nextConfig = {
         port: '',
         pathname: '/greenappletravel-ae/image/upload/**',
       },
+      {
+        protocol: 'https',
+        hostname: 'images.pexels.com',
+        port: '',
+        pathname: '/**',
+      },
     ],
   },
 };
