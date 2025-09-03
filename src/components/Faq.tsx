@@ -98,7 +98,7 @@ export default function Faq() {
   };
 
   return (
-    <section className="relative py-16 px-4">
+    <section className="relative py-16 px-4" id='faq'>
       <div className="max-w-7xl mx-auto">
         {/* Header */}
         <header className="text-center mb-12">

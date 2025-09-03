@@ -224,18 +224,19 @@ export default function Reviews() {
             </span>
           </p>
 
-          <a
-            href="https://g.page/r/CSVOuDsOGf38EAI/review?kd"
-            rel="nofollow"
-            target="_blank"
-            className="inline-flex items-center gap-2 py-3 px-8 font-semibold rounded-full hover:opacity-90 transition-all duration-200 shadow-lg hover:shadow-xl"
-            style={{ backgroundColor: 'rgba(255, 213, 90, 1)', color: 'rgba(0, 140, 149, 1)' }}
-          >
-            <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
-              <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-            </svg>
-            Leave a Review
-          </a>
+         <a
+          href="https://g.page/r/CSVOuDsOGf38EAI/review?kd"
+          rel="nofollow"
+          target="_blank"
+          className="inline-flex items-center gap-2 py-3 px-8 font-semibold rounded-full hover:opacity-90 transition-all duration-200 shadow-lg hover:shadow-xl"
+          style={{ backgroundColor: 'rgba(255, 213, 90, 1)', color: 'rgba(0, 140, 149, 1)' }}
+        >
+          {/* Pencil/Edit Icon */}
+          <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+            <path d="M17.414 2.586a2 2 0 00-2.828 0l-9.192 9.192a2 2 0 00-.497.879l-1.414 5.657a1 1 0 001.213 1.213l5.657-1.414a2 2 0 00.879-.497l9.192-9.192a2 2 0 000-2.828l-3.02-3.02zm-2.828 1.414l3.02 3.02-9.192 9.192-3.02-3.02 9.192-9.192z"/>
+          </svg>
+          Leave a Review
+        </a>
         </header>
 
         {/* Reviews Cards */}

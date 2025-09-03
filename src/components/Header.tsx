@@ -13,7 +13,7 @@ export default function Header() {
     { name: 'Why Choose Us', href: '#why-choose-us' },
     { name: 'Visa Services', href: '#visa-services' },
     { name: 'Reviews', href: '#reviews' },
-    { name: 'FAQs', href: '#faqs' },
+    { name: 'FAQs', href: '#faq' },
     { name: 'Contact', href: '#contact' },
   ];
 
