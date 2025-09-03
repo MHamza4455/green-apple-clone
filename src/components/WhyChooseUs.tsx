@@ -98,7 +98,7 @@ export default function WhyChooseUs() {
                         {/* Main Image */}
                         <div className="relative">
                             <Image 
-                                src="/images/whyUs/why3.webp" 
+                                src="/about.jpg" 
                                 alt="Why Choose Us - Professional Service"
                                 width={600}
                                 height={100}
