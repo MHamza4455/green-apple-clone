@@ -68,27 +68,41 @@ export default function TourCard({
     }
     
     setIsSubmitting(true);
+    setSubmitStatus('idle');
     
-    // Simulate API call
     try {
-      await new Promise(resolve => setTimeout(resolve, 2000));
-      setSubmitStatus('success');
-      
-      // You can add your actual API call here
-      console.log('Form Data:', formData);
-      
-      setTimeout(() => {
-        closeModal();
-        setFormData({
-          name: '',
-          email: '',
-          phone: '',
-          message: '',
-          travelDate: '',
-          travelers: '1'
-        });
-      }, 2000);
+      const response = await fetch('/api/tour-inquiry', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          ...formData,
+          tourTitle: title,
+          tourDuration: duration,
+          tourPrice: price
+        }),
+      });
+
+      if (response.ok) {
+        setSubmitStatus('success');
+        
+        setTimeout(() => {
+          closeModal();
+          setFormData({
+            name: '',
+            email: '',
+            phone: '',
+            message: '',
+            travelDate: '',
+            travelers: '1'
+          });
+        }, 2000);
+      } else {
+        setSubmitStatus('error');
+      }
     } catch (error) {
+      console.error('Error submitting tour inquiry:', error);
       setSubmitStatus('error');
     } finally {
       setIsSubmitting(false);
