@@ -101,7 +101,7 @@ export default function ContactUs() {
                 {/* Success/Error Messages */}
                 {submitStatus === 'success' && (
                   <div className="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded-xl">
-                    Thank you! Your message has been sent successfully. We'll get back to you soon.
+                    Thank you! Your message has been sent successfully. We&aposll get back to you soon.
                   </div>
                 )}
                 {submitStatus === 'error' && (
