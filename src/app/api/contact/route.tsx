@@ -1,3 +1,4 @@
+// @ts-expect-error - nodemailer is not typed
 import nodemailer from "nodemailer";
 
 export async function POST(req: Request) {
