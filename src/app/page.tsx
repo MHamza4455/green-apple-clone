@@ -20,11 +20,11 @@ export default function Home() {
       <HeroSlider />
       {/* <Hero /> */}
       <FeaturedNavigation />
+      <VisaServices />
       <FeaturedTours />
       <UmrahPackages />
       {/* <WhyBookUs /> */}
       <WhyChooseUs />
-      <VisaServices />
       <Reviews />
       {/* <Faqs /> */}
       <Faq />
