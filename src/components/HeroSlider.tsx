@@ -28,39 +28,33 @@ const HeroSlider = () => {
         {
             id: 1,
             image: '/images/hero/heroOne.jpg',
-            title: 'Visa Services for Every Journey',
-            description: 'Hassle-free tourist, business, and Schengen visa assistance with expert guidance.',
-            buttonText: 'Start your visa',
-            thumbTitle: 'Visa',
-            href: '#visa-services'
+            title: 'Escape to Armenia',
+            subtitle: '3 Nights / 4 Days · Quad Sharing · AED 1,250',
+            description: '4★ Hotel · Breakfast · Transfers · Explore Yerevan, Lake Sevan, Pearl of Armenia',
+            buttonText: 'Book Now',
+            thumbTitle: 'Armenia',
+            href: '#armenia-package'
         },
         {
             id: 2,
             image: '/images/hero/heroTwo.jpg',
-            title: 'Umrah & Hajj Packages 2025',
-            description: 'Flexible itineraries, quality hotels, and seamless ground support for your pilgrimage.',
-            buttonText: 'Explore Umrah',
-            thumbTitle: 'Hajj & Umrah',
-            href: '#umrah-packages'
+            title: 'Discover Istanbul',
+            subtitle: '3 Nights / 4 Days · Quad Sharing · AED 1,450',
+            description: '4★ Hotel · Breakfast · Transfers · Visit Blue Mosque, Hagia Sophia, Topkapi Palace, Grand Bazaar',
+            buttonText: 'Book Now',
+            thumbTitle: 'Istanbul',
+            href: '#istanbul-package'
         },
         {
             id: 3,
             image: '/images/hero/heroThree.jpg',
-            title: 'Tailor‑Made Holiday Packages',
-            description: 'Curated getaways with flights, hotels, and transfers at the best prices.',
-            buttonText: 'Browse holidays',
-            thumbTitle: 'Holidays',
-            href: '#featured-tours'
-        },
-        {
-            id: 4,
-            image: '/images/hero/heroFour.jpg',
-            title: 'City Tours & Experiences',
-            description: 'From desert safaris to city tours, book unforgettable activities with instant confirmation.',
-            buttonText: 'Book a tour',
-            thumbTitle: 'Tours & activities',
-            href: '#contact'
-        },
+            title: 'Russian Adventure',
+            subtitle: '4 Nights / 5 Days · Quad Sharing · AED 1,999',
+            description: '4★ Hotel · Breakfast · Transfers · Explore Moscow, Red Square, Pushkin Museum',
+            buttonText: 'Book Now',
+            thumbTitle: 'Russia',
+            href: '#russia-package'
+        }
     ];
 
     // Start progress bar animation
@@ -208,7 +202,7 @@ const HeroSlider = () => {
                                                     visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: "easeOut" } }
                                                 }}
                                                 transition={{ delay: 0.2 }}
-                                                className="text-lg mb-8"
+                                                className="text-lg mb-4"
                                             >
                                                 {slide.thumbTitle.toUpperCase()}
                                             </motion.p>
@@ -220,10 +214,23 @@ const HeroSlider = () => {
                                                     hidden: { opacity: 0, y: 30 },
                                                     visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: "easeOut" } }
                                                 }}
-                                                className="text-4xl md:text-5xl font-bold mb-6"
+                                                className="text-4xl md:text-5xl font-bold mb-4"
                                             >
                                                 {slide.title}
                                             </motion.h2>
+                                            <motion.p
+                                                key={`subtitle-${slide.id}`}
+                                                initial="hidden"
+                                                animate="visible"
+                                                variants={{
+                                                    hidden: { opacity: 0, y: 30 },
+                                                    visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: "easeOut" } }
+                                                }}
+                                                transition={{ delay: 0.3 }}
+                                                className="text-xl text-gray-200 mb-6"
+                                            >
+                                                {slide.subtitle}
+                                            </motion.p>
                                             <motion.a
                                                 key={`btn-${slide.id}`}
                                                 initial="hidden"

@@ -8,12 +8,9 @@ interface VisaDetails {
   name: string;
   code: string;
   description: string;
-  requirements: string[];
-  processingTime: string;
-  validity: string;
   price: string;
-  documents: string[];
-  features: string[];
+  documentsRequired: string[];
+  documentsProvided: string[];
 }
 
 interface VisaDetailsPopupProps {
@@ -65,71 +62,36 @@ export default function VisaDetailsPopup({ isOpen, onClose, country, visaDetails
                 </p>
               </div>
 
-              {/* Key Features */}
-              <div>
-                <h3 className="text-lg font-semibold mb-3" style={{ color: 'rgba(0, 140, 149, 1)' }}>
-                  Key Features
-                </h3>
-                <ul className="grid grid-cols-1 md:grid-cols-2 gap-2">
-                  {visaDetails.features.map((feature, index) => (
-                    <li key={index} className="flex items-center gap-2">
-                      <div className="w-2 h-2 rounded-full" style={{ backgroundColor: 'rgba(255, 213, 90, 1)' }}></div>
-                      <span className="text-gray-700">{feature}</span>
-                    </li>
-                  ))}
-                </ul>
+              {/* Price Information */}
+              <div className="bg-gray-50 p-4 rounded-lg">
+                <h4 className="font-semibold mb-2" style={{ color: 'rgba(0, 140, 149, 1)' }}>
+                  Service Price
+                </h4>
+                <p className="text-gray-700 font-semibold text-xl">{visaDetails.price}</p>
               </div>
 
-              {/* Visa Information Grid */}
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div className="bg-gray-50 p-4 rounded-lg">
-                  <h4 className="font-semibold mb-2" style={{ color: 'rgba(0, 140, 149, 1)' }}>
-                    Processing Time
-                  </h4>
-                  <p className="text-gray-700">{visaDetails.processingTime}</p>
-                </div>
-                <div className="bg-gray-50 p-4 rounded-lg">
-                  <h4 className="font-semibold mb-2" style={{ color: 'rgba(0, 140, 149, 1)' }}>
-                    Visa Validity
-                  </h4>
-                  <p className="text-gray-700">{visaDetails.validity}</p>
-                </div>
-                <div className="bg-gray-50 p-4 rounded-lg">
-                  <h4 className="font-semibold mb-2" style={{ color: 'rgba(0, 140, 149, 1)' }}>
-                    Starting Price
-                  </h4>
-                  <p className="text-gray-700 font-semibold">{visaDetails.price}</p>
-                </div>
-                <div className="bg-gray-50 p-4 rounded-lg">
-                  <h4 className="font-semibold mb-2" style={{ color: 'rgba(0, 140, 149, 1)' }}>
-                    Visa Type
-                  </h4>
-                  <p className="text-gray-700">Tourist, Business, Student</p>
-                </div>
-              </div>
-
-              {/* Requirements */}
+              {/* Documents Required */}
               <div>
                 <h3 className="text-lg font-semibold mb-3" style={{ color: 'rgba(0, 140, 149, 1)' }}>
-                  General Requirements
+                  Documents Required From You
                 </h3>
                 <ul className="space-y-2">
-                  {visaDetails.requirements.map((requirement, index) => (
+                  {visaDetails.documentsRequired.map((document, index) => (
                     <li key={index} className="flex items-start gap-2">
                       <div className="w-2 h-2 rounded-full mt-2 flex-shrink-0" style={{ backgroundColor: 'rgba(255, 213, 90, 1)' }}></div>
-                      <span className="text-gray-700">{requirement}</span>
+                      <span className="text-gray-700">{document}</span>
                     </li>
                   ))}
                 </ul>
               </div>
 
-              {/* Required Documents */}
+              {/* Documents We Provide */}
               <div>
                 <h3 className="text-lg font-semibold mb-3" style={{ color: 'rgba(0, 140, 149, 1)' }}>
-                  Required Documents
+                  Documents We Provide
                 </h3>
                 <ul className="space-y-2">
-                  {visaDetails.documents.map((document, index) => (
+                  {visaDetails.documentsProvided.map((document, index) => (
                     <li key={index} className="flex items-start gap-2">
                       <div className="w-2 h-2 rounded-full mt-2 flex-shrink-0" style={{ backgroundColor: 'rgba(255, 213, 90, 1)' }}></div>
                       <span className="text-gray-700">{document}</span>
