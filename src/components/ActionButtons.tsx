@@ -38,10 +38,15 @@ export default function ActionButtons({
             rel={button.rel || ''}
             aria-label={button.ariaLabel}
             title={button.title}
-            className={`inline-flex items-center px-4 py-3 sm:py-2 hover:bg-[#e5eeed] bg-white border border-[#e5eeed] font-semibold text-xs tracking-widest shadow-sm focus:outline-none focus:border-[#e5eeed] disabled:opacity-25 transition ${button.className || ''} ${buttonClassName}`}
+            className={`inline-flex items-center px-4 py-3 sm:py-2 hover:opacity-90 font-semibold text-xs tracking-widest shadow-sm focus:outline-none disabled:opacity-25 transition ${button.className || ''} ${buttonClassName}`}
+            style={{
+              backgroundColor: '#FF4E00',
+              color: 'white',
+              border: 'none'
+            }}
           >
             {button.icon}
-            <span className="h-6 text-xs text-[rgba(0,140,149,1)] items-center text-opacity-80 leading-3 text-left capitalize">
+            <span className="h-6 text-xs text-white items-center leading-3 text-left capitalize">
               {button.text}
             </span>
           </a>
@@ -59,7 +64,12 @@ export default function ActionButtons({
               rel={button.rel || ''}
               aria-label={button.ariaLabel}
               title={button.title}
-              className={`inline-flex items-center px-4 py-3 sm:py-2 hover:bg-[#e5eeed] bg-white border border-[#e5eeed] font-semibold text-xs tracking-widest shadow-sm focus:outline-none focus:border-[#e5eeed] disabled:opacity-25 transition ${button.className || ''} ${buttonClassName}`}
+              className={`inline-flex items-center px-4 py-3 sm:py-2 hover:opacity-90 font-semibold text-xs tracking-widest shadow-sm focus:outline-none disabled:opacity-25 transition ${button.className || ''} ${buttonClassName}`}
+            style={{
+              backgroundColor: '#FF4E00',
+              color: 'white',
+              border: 'none'
+            }}
             >
               {button.icon}
               <span className="h-6 text-xs text-[rgba(0,140,149,1)] items-center text-opacity-80 leading-3 text-left capitalize">

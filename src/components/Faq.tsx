@@ -52,14 +52,14 @@ export default function Faq() {
   };
 
   return (
-    <section className="relative py-16 px-4" id='faq'>
+    <section className="relative py-16 px-4 bg-white" id='faq'>
       <div className="max-w-7xl mx-auto">
         {/* Header */}
         <header className="text-center mb-12">
-          <h2 className="text-4xl md:text-5xl font-bold mb-4" style={{ color: 'rgba(0, 140, 149, 1)' }}>
+          <h2 className="text-4xl md:text-5xl font-bold mb-4" style={{ color: '#FF4E00' }}>
           Frequently Asked Questions.
           </h2>
-            <p className="text-lg max-w-2xl mx-auto" style={{ color: 'rgba(0, 140, 149, 1)' }}>
+            <p className="text-lg max-w-2xl mx-auto" style={{ color: 'black' }}>
              Can&apos;t find an answer? Call us at (855) 692-5326 or email contact@myclean.com!
            </p>
         </header>
@@ -76,20 +76,20 @@ export default function Faq() {
                   >
                     <button
                       onClick={() => toggleFaq(faq.id)}
-                      className="w-full text-left flex items-center justify-between py-2 hover:opacity-80 transition-opacity duration-200"
+                      className="w-full text-left flex items-center justify-between py-2"
                       aria-expanded={openFaq === faq.id}
                       aria-controls={`faq-answer-${faq.id}`}
                     >
-                      <h3 className="text-lg font-semibold pr-4" style={{ color: 'rgba(0, 140, 149, 1)' }}>
+                      <h3 className="text-lg font-semibold pr-4" style={{ color: '#FF4E00' }}>
                         {faq.question}
                       </h3>
-                        <span className="w-6 h-6 rounded-full border-2 border-gray-300 flex items-center justify-center transition-all duration-200 hover:border-gray-400" style={{ borderColor: 'rgba(0, 140, 149, 0.3)' }}>
+                        <span className="w-6 h-6 rounded-full border-2 flex items-center justify-center transition-all duration-200" style={{ borderColor: '#30D5C8' }}>
                          {openFaq === faq.id ? (
-                           <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" style={{ color: 'rgba(0, 140, 149, 1)' }}>
+                           <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" style={{ color: '#30D5C8' }}>
                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20 12H4" />
                            </svg>
                          ) : (
-                           <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" style={{ color: 'rgba(0, 140, 149, 1)' }}>
+                           <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" style={{ color: '#30D5C8' }}>
                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
                            </svg>
                          )}
@@ -104,7 +104,7 @@ export default function Faq() {
                       aria-hidden={openFaq !== faq.id}
                     >
                       <div className="pt-2">
-                                                 <p className="leading-relaxed" style={{ color: 'rgba(0, 140, 149, 1)' }}>
+                                                 <p className="leading-relaxed" style={{ color: 'black' }}>
                            {faq.answer}
                          </p>
                       </div>

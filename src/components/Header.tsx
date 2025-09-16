@@ -8,14 +8,17 @@ export default function Header() {
   const headerRef = useRef<HTMLElement>(null);
 
   const navLinks = [
-    { name: 'Featured Tours', href: '#featured-tours' },
-    { name: 'Umrah Packages', href: '#umrah-packages' },
-    { name: 'Why Choose Us', href: '#why-choose-us' },
+    { name: 'Home', href: '#top' },
     { name: 'Visa Services', href: '#visa-services' },
-    { name: 'Reviews', href: '#reviews' },
-    { name: 'FAQs', href: '#faq' },
+    { name: 'Featured Tours', href: '#featured-tours' },
+    { name: 'Tour Packages', href: '#umrah-packages' },
     { name: 'Contact', href: '#contact' },
   ];
+
+  // Handle Book Now button click
+  const handleBookNow = () => {
+    scrollToSection('#contact');
+  };
 
   // Close mobile menu when clicking outside
   useEffect(() => {
@@ -42,12 +45,20 @@ export default function Header() {
 
   // Smooth scroll to section
   const scrollToSection = (sectionId: string) => {
-    const element = document.querySelector(sectionId);
-    if (element) {
-      element.scrollIntoView({ 
-        behavior: 'smooth',
-        block: 'start'
+    if (sectionId === '#top') {
+      // Scroll to top of page
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
       });
+    } else {
+      const element = document.querySelector(sectionId);
+      if (element) {
+        element.scrollIntoView({ 
+          behavior: 'smooth',
+          block: 'start'
+        });
+      }
     }
     setIsMenuOpen(false);
   };
@@ -58,7 +69,7 @@ export default function Header() {
   };
 
   return (
-    <header ref={headerRef} className="bg-white shadow-lg left-0 right-0 container fixed top-0 w-full z-50 mx-auto rounded-b-md">
+    <header ref={headerRef} className="shadow-lg left-0 right-0 container fixed top-0 w-full z-50 mx-auto rounded-b-md" style={{ backgroundColor: '#30D5C8' }}>
               <div className="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8 container">
         <div className="relative flex items-center justify-between h-20">
           {/* Mobile menu button */}
@@ -73,7 +84,7 @@ export default function Header() {
               <span className="sr-only">Open main menu</span>
               <svg
                 className="block h-6 w-6 fill-current"
-                style={{ color: 'rgba(0,140,149,1)' }}
+                style={{ color: 'white' }}
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
                 viewBox="0 0 24 24"
@@ -132,17 +143,31 @@ export default function Header() {
 
           {/* Desktop Navigation */}
           <div className="absolute inset-y-0 right-0 flex items-center pr-2 lg:static lg:inset-auto lg:ml-6 lg:pr-0">
-            <div className="hidden lg:flex space-x-4">
+            <div className="hidden lg:flex items-center space-x-4">
               {navLinks.map((link) => (
                 <button
                   key={link.name}
                   onClick={() => scrollToSection(link.href)}
-                  className="inline-flex items-center px-1 pt-1 text-sm leading-5 capitalize hover:opacity-80 transition-colors duration-200"
-                  style={{ color: 'rgba(0,140,149,1)' }}
+                  className="inline-flex items-center px-1 pt-1 text-sm leading-5 capitalize hover:underline transition-colors duration-200"
+                  style={{ color: 'white', textDecorationColor: '#FF4E00' }}
                 >
                   {link.name}
                 </button>
               ))}
+              {/* Book Now Button - Header style */}
+              <button
+                onClick={handleBookNow}
+                className="hover:opacity-90 transition-all duration-200 transform hover:scale-105 font-medium"
+                style={{ 
+                  backgroundColor: 'rgba(255, 213, 90, 1)',
+                  color: 'white',
+                  padding: '10px 20px',
+                  borderRadius: '6px',
+                  fontSize: '14px'
+                }}
+              >
+                Book Now
+              </button>
             </div>
           </div>
         </div>
@@ -159,17 +184,33 @@ export default function Header() {
           />
           {/* Mobile Menu */}
           <div className="lg:hidden relative z-50">
-            <div className="px-2 pt-2 pb-3 space-y-1 bg-white border-t border-gray-200 shadow-lg rounded-b-md">
+            <div className="px-2 pt-2 pb-3 space-y-1 border-t border-gray-200 shadow-lg rounded-b-md" style={{ backgroundColor: '#30D5C8' }}>
               {navLinks.map((link) => (
                 <button
                   key={link.name}
                   onClick={() => handleMobileMenuClick(link.href)}
-                  className="block w-full text-left px-3 py-3 text-base font-medium hover:opacity-80 hover:bg-gray-50 rounded-md transition-colors duration-200"
-                  style={{ color: 'rgba(0,140,149,1)' }}
+                  className="block w-full text-left px-3 py-3 text-base font-medium hover:underline rounded-md transition-colors duration-200"
+                  style={{ color: 'white', textDecorationColor: '#FF4E00' }}
                 >
                   {link.name}
                 </button>
               ))}
+              {/* Mobile Book Now Button - Header style */}
+              <div className="px-3 py-2">
+                <button
+                  onClick={() => handleMobileMenuClick('#contact')}
+                  className="w-full hover:opacity-90 transition-all duration-200 transform hover:scale-105 font-medium"
+                  style={{ 
+                    backgroundColor: 'rgba(255, 213, 90, 1)',
+                    color: 'white',
+                    padding: '12px 20px',
+                    borderRadius: '6px',
+                    fontSize: '16px'
+                  }}
+                >
+                  Book Now
+                </button>
+              </div>
             </div>
           </div>
         </>

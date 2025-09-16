@@ -52,10 +52,11 @@ function StarRating({ rating }: { rating: number }) {
       {[...Array(5)].map((_, i) => (
         <svg
           key={i}
-          className={`h-5 w-5 ${i < rating ? 'text-white' : 'text-white text-opacity-40'}`}
+          className={`h-5 w-5 ${i < rating ? '' : 'opacity-40'}`}
           viewBox="0 0 20 20"
           fill="currentColor"
           aria-hidden="true"
+          style={{ color: i < rating ? '#FF4E00' : '#FF4E00' }}
         >
           <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
         </svg>
@@ -89,15 +90,15 @@ export default function Reviews() {
       });
 
   return (
-    <section id="reviews" className="relative py-16 px-4" style={{ backgroundColor: 'rgba(0, 140, 149, 0.05)' }}>
+    <section id="reviews" className="relative py-16 px-4 bg-white">
       <div className="max-w-6xl mx-auto">
         {/* Header */}
         <header className="text-center mb-12">
-          <h2 className="text-4xl md:text-5xl font-bold mb-4" style={{ color: 'rgba(0, 140, 149, 1)' }}>
+          <h2 className="text-4xl md:text-5xl font-bold mb-4" style={{ color: 'black' }}>
             What our travelers say
           </h2>
           
-          <p className="text-xl max-w-3xl mx-auto mb-6" style={{ color: 'rgba(0, 140, 149, 1)', opacity: 0.8 }}>
+          <p className="text-xl max-w-3xl mx-auto mb-6" style={{ color: 'black', opacity: 0.8 }}>
             <span className="font-semibold">5.0/5</span>
             <span className="mx-2" style={{ opacity: 0.5 }}>•</span>
             <span>
@@ -110,7 +111,7 @@ export default function Reviews() {
           rel="nofollow"
           target="_blank"
           className="inline-flex items-center gap-2 py-3 px-8 font-semibold rounded-full hover:opacity-90 transition-all duration-200 shadow-lg hover:shadow-xl"
-          style={{ backgroundColor: 'rgba(255, 213, 90, 1)', color: 'rgba(0, 140, 149, 1)' }}
+          style={{ backgroundColor: '#FF4E00', color: 'white' }}
         >
           {/* Pencil/Edit Icon */}
           <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
@@ -125,27 +126,26 @@ export default function Reviews() {
           {filteredReviews.map((review, idx) => (
                          <div
                key={idx}
-               className="p-8 transition-all duration-300 hover:scale-105"
-               style={{ backgroundColor: 'rgba(0, 140, 149, 1)' }}
+               className="p-8 transition-all duration-300 hover:scale-105 bg-white border-2 border-gray-200 rounded-lg shadow-lg"
              >
-               <article className="h-full flex flex-col text-white text-center" itemScope itemType="https://schema.org/Review">
+               <article className="h-full flex flex-col text-center" itemScope itemType="https://schema.org/Review">
                  {/* Quotation Mark */}
                  <div className="mb-6 flex justify-center">
-                   <svg className="w-10 h-10 text-white opacity-80" fill="currentColor" viewBox="0 0 24 24">
+                   <svg className="w-10 h-10 opacity-80" fill="currentColor" viewBox="0 0 24 24" style={{ color: '#FF4E00' }}>
                      <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/>
                    </svg>
                  </div>
 
                  {/* Review Text */}
                  <div className="flex-1 mb-8">
-                   <p className="text-base leading-relaxed text-white text-center">
+                   <p className="text-base leading-relaxed text-center" style={{ color: 'black' }}>
                      {review.body}
                    </p>
                  </div>
 
                  {/* Customer Name */}
                  <div className="mb-4">
-                   <p className="text-lg font-semibold text-white text-center">
+                   <p className="text-lg font-semibold text-center" style={{ color: 'black' }}>
                      {review.name}
                    </p>
                  </div>
@@ -157,7 +157,7 @@ export default function Reviews() {
 
                  {/* Service Badge */}
                  <div className="mt-auto flex justify-center">
-                   <span className="inline-flex items-center px-3 py-1 text-sm font-medium text-white">
+                   <span className="inline-flex items-center px-3 py-1 text-sm font-medium" style={{ color: 'black', backgroundColor: '#f0f0f0' }}>
                      {review.service}
                    </span>
                  </div>
@@ -178,7 +178,7 @@ export default function Reviews() {
                  }
                }}
               className="py-3 px-10 font-semibold rounded-full hover:opacity-90 transition-all duration-200 shadow-lg hover:shadow-xl"
-              style={{ backgroundColor: 'rgba(255, 213, 90, 1)', color: 'rgba(0, 140, 149, 1)' }}
+              style={{ backgroundColor: '#FF4E00', color: 'white' }}
             >
               Show More Reviews
             </button>
@@ -193,7 +193,7 @@ export default function Reviews() {
               target="_blank"
               rel="noopener noreferrer"
               className="inline-block py-3 px-10 font-semibold rounded-full hover:opacity-90 transition-all duration-200 shadow-lg hover:shadow-xl"
-              style={{ backgroundColor: 'rgba(255, 213, 90, 1)', color: 'rgba(0, 140, 149, 1)' }}
+              style={{ backgroundColor: '#FF4E00', color: 'white' }}
             >
               More Reviews
             </a>

@@ -100,17 +100,17 @@ export default function FeaturedTours() {
   return (
     <section className="relative text-gray-900" aria-labelledby="featured-tours">
       {/* Featured Tours */}
-      <div className="max-w-7xl mx-auto pb-12 px-4">
+      <div className="max-w-7xl mx-auto py-12 px-4">
         <header className="w-full mb-6 lg:mb-0 flex items-center justify-between">
           <div>
             <h1 
               id="featured-tours" 
               className="text-2xl sm:text-3xl uppercase font-bold title-font my-2"
-              style={{ color: 'rgba(0,140,149,1)' }}
+              style={{ color: '#30D5C8' }}
             >
               Featured Tours
             </h1>
-            <div className="h-1 w-32 mb-4 rounded" style={{ backgroundColor: 'rgba(255, 213, 90, 1)' }}></div>
+            <div className="h-1 w-32 mb-4 rounded" style={{ backgroundColor: '#FF4E00' }}></div>
           </div>
           
           {/* Navigation Arrows - Only show when scrolling is needed */}
@@ -150,7 +150,7 @@ export default function FeaturedTours() {
                  className="h-full rounded-full transition-all duration-300" 
                  style={{ 
                    width: `${scrollProgress}%`,
-                   backgroundColor: 'rgba(255, 213, 90, 1)'
+                   backgroundColor: '#FF4E00'
                  }}
                ></div>
              </div>

@@ -150,7 +150,40 @@ const HeroSlider = () => {
 
     return (
         <>
-            <div className="relative h-screen w-full overflow-hidden">
+            <div 
+                className="relative h-screen w-full overflow-hidden"
+                style={{
+                    background: 'linear-gradient(135deg, #30D5C8 0%, #40E0D0 100%)'
+                }}
+            >
+                {/* Cosmic Orange Overlay Accents */}
+                <div className="absolute inset-0 z-5">
+                    {/* Top right accent */}
+                    <div 
+                        className="absolute top-0 right-0 w-32 h-32 opacity-20"
+                        style={{
+                            background: 'radial-gradient(circle, #FF4E00 0%, transparent 70%)',
+                            transform: 'translate(50%, -50%)'
+                        }}
+                    />
+                    {/* Bottom left accent */}
+                    <div 
+                        className="absolute bottom-0 left-0 w-24 h-24 opacity-15"
+                        style={{
+                            background: 'radial-gradient(circle, #FF4E00 0%, transparent 70%)',
+                            transform: 'translate(-50%, 50%)'
+                        }}
+                    />
+                    {/* Center accent */}
+                    <div 
+                        className="absolute top-1/2 right-1/4 w-16 h-16 opacity-10"
+                        style={{
+                            background: 'radial-gradient(circle, #FF4E00 0%, transparent 70%)',
+                            transform: 'translate(50%, -50%)'
+                        }}
+                    />
+                </div>
+
                 {/* <AnnouncementBar /> */}
                 {/* Main Swiper */}
                 <Swiper
@@ -203,6 +236,7 @@ const HeroSlider = () => {
                                                 }}
                                                 transition={{ delay: 0.2 }}
                                                 className="text-lg mb-4"
+                                                style={{ color: '#FF4E00' }}
                                             >
                                                 {slide.thumbTitle.toUpperCase()}
                                             </motion.p>
@@ -215,6 +249,7 @@ const HeroSlider = () => {
                                                     visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: "easeOut" } }
                                                 }}
                                                 className="text-4xl md:text-5xl font-bold mb-4"
+                                                style={{ color: '#FF4E00' }}
                                             >
                                                 {slide.title}
                                             </motion.h2>
@@ -227,9 +262,24 @@ const HeroSlider = () => {
                                                     visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: "easeOut" } }
                                                 }}
                                                 transition={{ delay: 0.3 }}
-                                                className="text-xl text-gray-200 mb-6"
+                                                className="text-xl mb-4"
+                                                style={{ color: 'white' }}
                                             >
                                                 {slide.subtitle}
+                                            </motion.p>
+                                            <motion.p
+                                                key={`description-${slide.id}`}
+                                                initial="hidden"
+                                                animate="visible"
+                                                variants={{
+                                                    hidden: { opacity: 0, y: 30 },
+                                                    visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: "easeOut" } }
+                                                }}
+                                                transition={{ delay: 0.4 }}
+                                                className="text-lg mb-6"
+                                                style={{ color: 'white' }}
+                                            >
+                                                {slide.description}
                                             </motion.p>
                                             <motion.a
                                                 key={`btn-${slide.id}`}
@@ -239,11 +289,17 @@ const HeroSlider = () => {
                                                     hidden: { opacity: 0, y: 30 },
                                                     visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: "easeOut" } }
                                                 }}
-                                                transition={{ delay: 0.4 }}
+                                                transition={{ delay: 0.5 }}
                                                 href={slide.href || '#'}
                                                 className="group inline-flex items-center gap-3 px-2 py-3 text-white font-medium rounded-full"
                                             >
-                                                <span className="border border-white/30 rounded-full px-6 py-3 group-hover:bg-white/10 transition-all duration-300">
+                                                <span 
+                                                    className="rounded-full px-6 py-3 group-hover:opacity-90 transition-all duration-300"
+                                                    style={{
+                                                        backgroundColor: '#FF4E00',
+                                                        color: 'white'
+                                                    }}
+                                                >
                                                     {slide.buttonText}
                                                 </span>
                                                 <motion.div
@@ -342,7 +398,7 @@ const HeroSlider = () => {
                                             <motion.div
                                                 className="absolute top-0 left-0 h-full rounded-full"
                                                 style={{
-                                                    background: "linear-gradient(90deg, #2563eb 0%, #38bdf8 50%, #fbbf24 100%)"
+                                                    background: "linear-gradient(90deg, #30D5C8 0%, #40E0D0 50%, #FF4E00 100%)"
                                                 }}
                                                 initial={{ width: 0 }}
                                                 animate={{ width: `${progress}%` }}

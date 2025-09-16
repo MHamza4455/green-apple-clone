@@ -156,18 +156,18 @@ export default function VisaServices() {
   };
 
   return (
-    <section id="visa-services" className="py-20">
+    <section id="visa-services" className="py-20" style={{ backgroundColor: '#30D5C8' }}>
       <div className="max-w-7xl mx-auto px-4">
         <header className="w-full mb-6 lg:mb-0">
           <div>
             <h1 
               id="visa-services" 
               className="text-2xl sm:text-3xl uppercase font-bold title-font my-2"
-              style={{ color: 'rgba(0, 140, 149, 1)' }}
+              style={{ color: 'white' }}
             >
               Visa Services
             </h1>
-            <div className="h-1 w-32 mb-4 rounded" style={{ backgroundColor: 'rgba(255, 213, 90, 1)' }}></div>
+            <div className="h-1 w-32 mb-4 rounded" style={{ backgroundColor: '#FF4E00' }}></div>
           </div>
         </header>
         
@@ -187,22 +187,30 @@ export default function VisaServices() {
                 </div>
                 <div className="absolute -top-2 -right-2 w-4 h-4 bg-accent rounded-full opacity-0 group-hover:opacity-100 transition-all duration-300 transform scale-0 group-hover:scale-100"></div>
               </div>
-              <span className="text-sm font-semibold text-gray-800 text-center group-hover:text-primary transition-all duration-300 transform group-hover:translate-y-[-2px] mb-3">
+              <span className="text-sm font-semibold text-center group-hover:text-white transition-all duration-300 transform group-hover:translate-y-[-2px] mb-3" style={{ color: 'white' }}>
                 {country.name}
               </span>
+              
+              {/* Price Highlight */}
+              <div className="mb-3">
+                <span className="text-lg font-bold" style={{ color: '#FF4E00' }}>
+                  {country.price}
+                </span>
+              </div>
               
               {/* Action Buttons */}
               <div className="flex flex-col gap-2 w-full px-2 mt-auto">
                 <button
                   onClick={() => handleLearnMore(country.name)}
-                  className="w-full px-3 py-2 text-xs font-medium text-[rgba(0,140,149,1)] border border-[rgba(0,140,149,1)] rounded-md hover:bg-[rgba(0,140,149,1)] hover:text-white transition-all duration-300"
+                  className="w-full px-3 py-2 text-xs font-medium border border-white rounded-md transition-all duration-300 hover:bg-[#FF4E00] hover:border-[#FF4E00]"
+                  style={{ color: 'white' }}
                 >
                   Learn More
                 </button>
                 <button
                   onClick={() => handleInquireNow(country.name)}
-                  className="w-full px-3 py-2 text-xs font-medium text-white rounded-md transition-all duration-300 hover:opacity-90"
-                  style={{ backgroundColor: 'rgba(0, 140, 149, 1)' }}
+                  className="w-full px-3 py-2 text-xs font-medium border border-white rounded-md transition-all duration-300 hover:bg-[#FF4E00] hover:border-[#FF4E00]"
+                  style={{ color: 'white' }}
                 >
                   Inquire Now
                 </button>
