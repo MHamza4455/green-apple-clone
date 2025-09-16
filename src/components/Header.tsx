@@ -111,7 +111,7 @@ export default function Header() {
                 {/* Mobile Logo */}
                 <Image
                   src="/images/mobile-logo.avif"
-                  alt="Green Apple Travel Logo"
+                  alt="Radiant Way Travel Logo"
                   width={180}
                   height={48}
                   className="h-10 w-auto block lg:hidden"
@@ -120,7 +120,7 @@ export default function Header() {
                 {/* Desktop Logo */}
                 <Image
                   src="/images/logo.webp"
-                  alt="Green Apple Travel Logo"
+                  alt="Radiant Way Travel Logo"
                   width={180}
                   height={48}
                   className="h-10 w-auto hidden lg:block"

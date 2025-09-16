@@ -8,7 +8,7 @@ export default function Footer() {
         <div className="space-y-4">
           <img 
             src="https://res.cloudinary.com/greenappletravel-ae/image/upload/f_auto,q_auto:good,c_scale,w_320/v1697694572/gattlogo_l50kfv.jpg" 
-            alt="Green Apple Logo" 
+            alt="Radiant Way Travel Logo" 
             className="w-24 h-auto"
           />
           
@@ -74,7 +74,7 @@ export default function Footer() {
             <h4 id="main-office" className="font-medium" style={{ color: 'rgba(0, 140, 149, .9)' }}>Main Office</h4>
             <address className="not-italic">
               <p className="text-sm font-light" style={{ color: 'rgba(0, 140, 149, 0.8)' }}>
-                Phone: <a href="tel:+97143705995" className="hover:opacity-75 transition-opacity duration-300">+971 4 370 5995</a>
+                Phone: <a href="tel:+97143705995" className="hover:opacity-75 transition-opacity duration-300">+971 54 786 1293</a>
               </p>
               <p className="text-sm font-light" style={{ color: 'rgba(0, 140, 149, 0.8)' }}>
                 Address: Office 408, Nasser Lootah Building, Consulate Area – Dubai, UAE
@@ -115,7 +115,7 @@ export default function Footer() {
 
       {/* Footer Bottom Section */}
       <div className="mt-8 text-xs text-center border-t pt-4" style={{ borderColor: 'rgba(0, 140, 149, 0.2)', color: 'rgba(0, 140, 149, .9)' }}>
-        © 2025 Green Apple Travel & Tourism. All rights reserved.
+        © 2025 Radiant Way Travel All rights reserved.
       </div>
     </footer>
   );

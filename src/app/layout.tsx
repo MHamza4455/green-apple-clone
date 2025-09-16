@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Green Apple",
+  title: "Radiant Way Travel",
   description: "A clean Next.js TypeScript project",
 };
 

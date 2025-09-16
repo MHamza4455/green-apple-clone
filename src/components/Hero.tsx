@@ -141,7 +141,7 @@ export default function Hero() {
 
       {/* Hero Overlay */}
       <HeroOverlay
-        companyName="Green Apple Travel & Tourism"
+        companyName="Radiant Way Travel"
         companyIcon={companyIcon}
         heading="Worldwide Visa & Tours: Your Global Journey Starts Here"
         subtitle="Your trusted partner for visas and tours from the UAE to the world."
