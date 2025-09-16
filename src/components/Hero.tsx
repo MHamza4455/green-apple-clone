@@ -129,7 +129,13 @@ export default function Hero() {
   ];
 
   return (
-    <section id="hero" className="relative h-[65vh] overflow-hidden bg-gray-100">
+    <section 
+      id="hero" 
+      className="relative h-[65vh] overflow-hidden"
+      style={{
+        background: 'linear-gradient(135deg, #30D5C8 0%, #40E0D0 100%)'
+      }}
+    >
       {/* Image Slider */}
       <ImageSlider 
         slides={slides}
@@ -139,9 +145,37 @@ export default function Hero() {
         dotsColor="#008c95"
       />
 
+      {/* Cosmic Orange Overlay Accents */}
+      <div className="absolute inset-0 z-5">
+        {/* Top right accent */}
+        <div 
+          className="absolute top-0 right-0 w-32 h-32 opacity-20"
+          style={{
+            background: 'radial-gradient(circle, #FF4E00 0%, transparent 70%)',
+            transform: 'translate(50%, -50%)'
+          }}
+        />
+        {/* Bottom left accent */}
+        <div 
+          className="absolute bottom-0 left-0 w-24 h-24 opacity-15"
+          style={{
+            background: 'radial-gradient(circle, #FF4E00 0%, transparent 70%)',
+            transform: 'translate(-50%, 50%)'
+          }}
+        />
+        {/* Center accent */}
+        <div 
+          className="absolute top-1/2 right-1/4 w-16 h-16 opacity-10"
+          style={{
+            background: 'radial-gradient(circle, #FF4E00 0%, transparent 70%)',
+            transform: 'translate(50%, -50%)'
+          }}
+        />
+      </div>
+
       {/* Hero Overlay */}
       <HeroOverlay
-        companyName="Green Apple Travel & Tourism"
+        companyName="Radiant Way Travel"
         companyIcon={companyIcon}
         heading="Worldwide Visa & Tours: Your Global Journey Starts Here"
         subtitle="Your trusted partner for visas and tours from the UAE to the world."

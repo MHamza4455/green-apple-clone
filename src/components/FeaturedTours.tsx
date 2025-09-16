@@ -5,60 +5,34 @@ import TourCard from './TourCard';
 
 const featuredTours = [
   {
-    id: 'kazakhstan',
-    title: '5-Day Almaty Itinerary – Kazakhstan',
-    description: 'Explore the stunning landscapes and cultural gems of Almaty, Kazakhstan, with this 5-day tour package. Highlights include visits to the Park of 28 Panfilov Guardsmen, Ascension Cathedral, Koktobe Hill, Shymbulak Mountain Resort, Big Almaty Lake, and Alma Arasan Gorge. Enjoy comfortable accommodations at Saraishyq Hotel and daily buffet breakfast.',
-    duration: '5 days / 4 nights',
-    price: 'AED 3999',
-    image: '/images/HolidayPackages/holiday_package1.webp',
-    imageAlt: '5-Day Almaty Itinerary – Kazakhstan'
-  },
-  {
-    id: 'armenia',
-    title: '4-Day Armenia Itinerary – Yerevan',
-    description: 'Explore the beauty of Armenia with this 4-day tour package. Highlights include a city tour of Yerevan, visits to Lake Sevan, Tsaghkadzor, Dilijan, Garni Temple, and Geghard Monastery. Enjoy comfortable accommodations at Hotel Dynasty 4★ and daily buffet breakfast.',
+    id: 'azerbaijan',
+    title: 'Azerbaijan, Baku Tour (3 Nights / 4 Days)',
+    description: 'Enjoy a 3-night, 4-day Baku tour featuring a 4★ hotel stay, included transfers, daily breakfast, and day trips to Niazmi Street and Flame Towers.',
     duration: '4 days / 3 nights',
-    price: 'AED 3990',
-    image: '/images/HolidayPackages/holiday_package2.webp',
-    imageAlt: '4-Day Armenia Itinerary – Yerevan'
-  },
-  {
-    id: 'oman',
-    title: '5-Day Salalah Tour – Oman',
-    description: 'A 5-day tour package from UAE to Salalah, Oman, featuring city tours, nature excursions, and cultural site visits. Includes accommodation at Al Jabal Hotel, luxury bus transportation, and full board meals as per the itinerary.',
-    duration: '5 days / 4 nights',
-    price: 'AED 0',
-    image: '/images/HolidayPackages/holiday_package3.webp',
-    imageAlt: '5-Day Salalah Tour – Oman'
+    price: 'AED 1199',
+    image: '/images/HolidayPackages/holiday_package1.webp',
+    imageAlt: 'Azerbaijan, Baku Tour (3 Nights / 4 Days)'
   },
   {
     id: 'georgia',
-    title: '6-Day Georgia Adventure – Tbilisi & Beyond',
-    description: 'Discover the hidden gem of the Caucasus with this comprehensive 6-day tour. Experience the historic charm of Tbilisi, explore ancient cave cities, visit stunning mountain monasteries, and taste authentic Georgian cuisine. Includes luxury hotel stays and expert local guides.',
-    duration: '6 days / 5 nights',
-    price: 'AED 4599',
-    image: '/images/HolidayPackages/holiday_package4.webp',
-    imageAlt: '6-Day Georgia Adventure – Tbilisi & Beyond'
+    title: 'Georgia Tour (2 Nights / 3 Days)',
+    description: 'Discover the beauty of Georgia with this 2-night, 3-day tour. Includes a 4★ hotel stay, transfers, daily breakfast, and day trips to Tbilisi, Narikala Fortress, and Bridge of Peace.',
+    duration: '3 days / 2 nights',
+    price: 'AED 1499',
+    image: '/images/HolidayPackages/holiday_package2.webp',
+    imageAlt: 'Georgia Tour (2 Nights / 3 Days)'
   },
   {
-    id: 'azerbaijan',
-    title: '4-Day Azerbaijan Discovery – Baku & Gobustan',
-    description: 'Journey to the land of fire with this 4-day Azerbaijan tour. Explore the modern skyline of Baku, visit the ancient mud volcanoes of Gobustan, discover the medieval Old City, and experience the unique blend of East and West cultures.',
-    duration: '4 days / 3 nights',
-    price: 'AED 3499',
-    image: '/images/HolidayPackages/holiday_package5.webp',
-    imageAlt: '4-Day Azerbaijan Discovery – Baku & Gobustan'
-  },
-  {
-    id: 'kyrgyzstan',
-    title: '7-Day Kyrgyzstan Nomadic Experience',
-    description: 'Immerse yourself in the nomadic culture of Kyrgyzstan with this 7-day adventure. Stay in traditional yurts, ride horses across the stunning Tian Shan mountains, visit crystal-clear alpine lakes, and experience authentic nomadic hospitality in the heart of Central Asia.',
-    duration: '7 days / 6 nights',
-    price: 'AED 5299',
-    image: '/images/HolidayPackages/holiday_package6.webp',
-    imageAlt: '7-Day Kyrgyzstan Nomadic Experience'
+    id: 'russia',
+    title: 'Russia Tour (4 Nights / 5 Days)',
+    description: 'Experience the rich culture of Russia with this 4-night, 5-day tour. Includes a 4★ hotel stay, transfers, daily breakfast, and day trips to Moscow, Red Square, and Pushkin Museum.',
+    duration: '5 days / 4 nights',
+    price: 'AED 1999',
+    image: '/images/HolidayPackages/holiday_package3.webp',
+    imageAlt: 'Russia Tour (4 Nights / 5 Days)'
   }
 ];
+
 
 export default function FeaturedTours() {
   const scrollContainerRef = useRef<HTMLDivElement>(null);
@@ -126,17 +100,17 @@ export default function FeaturedTours() {
   return (
     <section className="relative text-gray-900" aria-labelledby="featured-tours">
       {/* Featured Tours */}
-      <div className="max-w-7xl mx-auto pb-12 px-4">
+      <div className="max-w-7xl mx-auto py-12 px-4">
         <header className="w-full mb-6 lg:mb-0 flex items-center justify-between">
           <div>
             <h1 
               id="featured-tours" 
               className="text-2xl sm:text-3xl uppercase font-bold title-font my-2"
-              style={{ color: 'rgba(0,140,149,1)' }}
+              style={{ color: '#30D5C8' }}
             >
               Featured Tours
             </h1>
-            <div className="h-1 w-32 mb-4 rounded" style={{ backgroundColor: 'rgba(255, 213, 90, 1)' }}></div>
+            <div className="h-1 w-32 mb-4 rounded" style={{ backgroundColor: '#FF4E00' }}></div>
           </div>
           
           {/* Navigation Arrows - Only show when scrolling is needed */}
@@ -176,7 +150,7 @@ export default function FeaturedTours() {
                  className="h-full rounded-full transition-all duration-300" 
                  style={{ 
                    width: `${scrollProgress}%`,
-                   backgroundColor: 'rgba(255, 213, 90, 1)'
+                   backgroundColor: '#FF4E00'
                  }}
                ></div>
              </div>
