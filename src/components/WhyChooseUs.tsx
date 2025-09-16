@@ -5,30 +5,30 @@ import Image from 'next/image';
 export default function WhyChooseUs() {
     const features = [
         {
-            title: "12+ Years of Expertise",
-            description: "Trust your travel plans to a team with over a decade of experience in the industry.",
-            bgColor: "bg-blue-100",
-            iconBgColor: "bg-gradient-to-br from-gray-50 to-gray-100"
+          title: "UAE-based, global reach",
+          description: "Headquartered in the UAE, we proudly serve travelers from around the world with trusted expertise.",
+          bgColor: "bg-blue-100",
+          iconBgColor: "bg-gradient-to-br from-gray-50 to-gray-100"
         },
         {
-            title: "Seamless Visa Services",
-            description: "Enjoy hassle-free travel with our dedicated visa assistance.",
-            bgColor: "bg-purple-100",
-            iconBgColor: "bg-gradient-to-br from-gray-50 to-gray-100"
+          title: "Tailored packages",
+          description: "We craft personalized travel packages designed to suit your preferences, budget, and schedule.",
+          bgColor: "bg-purple-100",
+          iconBgColor: "bg-gradient-to-br from-gray-50 to-gray-100"
         },
         {
-            title: "Tailored Packages for Every Traveler",
-            description: "Discover tours designed to meet diverse interests.",
-            bgColor: "bg-red-100",
-            iconBgColor: "bg-gradient-to-br from-gray-50 to-gray-100"
+          title: "Affordable quad-sharing",
+          description: "Save more by choosing our cost-effective quad-sharing accommodation options on group tours.",
+          bgColor: "bg-red-100",
+          iconBgColor: "bg-gradient-to-br from-gray-50 to-gray-100"
         },
         {
-            title: "24/7 Customer Support",
-            description: "Travel with peace of mind knowing our dedicated team is here for you.",
-            bgColor: "bg-green-100",
-            iconBgColor: "bg-gradient-to-br from-gray-50 to-gray-100"
+          title: "Visa support (USA, UK, Schengen, etc.) 24/7 assistance",
+          description: "Get round-the-clock visa guidance and travel support for top destinations like the USA, UK, and Schengen countries.",
+          bgColor: "bg-green-100",
+          iconBgColor: "bg-gradient-to-br from-gray-50 to-gray-100"
         }
-    ];
+      ];
 
     return (
         <section id="why-choose-us" className="w-full py-16 px-4" style={{ backgroundColor: 'rgba(0, 140, 149, 0.05)' }}>
@@ -36,9 +36,10 @@ export default function WhyChooseUs() {
                 {/* Headline */}
                 <div className="text-center mb-16">
                     <h2 className="text-4xl md:text-5xl font-bold text-gray-800 mb-4" style={{color: 'rgb(0, 140, 149)'}}>
-                        Why Book With Us?
+                        Why Radiant Way Travel?
                         <span className="block w-16 h-1 bg-[rgba(0,140,149,1)] mx-auto mt-2"></span>
                     </h2>
+                    <p className="text-xl text-gray-800" style={{color: 'rgb(0, 140, 149)'}}>Effortless Journeys. Lasting Memories.</p>
                 </div>
 
                 {/* Two Column Layout */}

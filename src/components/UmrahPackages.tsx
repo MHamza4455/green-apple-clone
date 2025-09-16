@@ -3,60 +3,87 @@
 import { useRef, useState, useEffect } from 'react';
 import TourCard from './TourCard';
 
-const umrahPackages = [
+const tourPackages = [
   {
-    id: 'umrah-basic',
-    title: 'Basic Umrah Package – 15 Days',
-    description: 'Experience the spiritual journey of Umrah with our comprehensive 15-day package. Includes visa processing, round-trip flights, hotel accommodation in Makkah and Madinah, transportation, and guided tours to holy sites. Perfect for first-time Umrah travelers.',
-    duration: '15 days / 14 nights',
-    price: 'AED 8999',
+    id: 'maldives',
+    title: 'Maldives Tour – 4 Nights / 5 Days',
+    description: 'Relax in paradise with a 4★ hotel stay, transfers, breakfast, and day trips to Vaadhoo Island, Alimatha Island, Addu Atoll, Banana Reef, and Mirihi Island.',
+    duration: '5 days / 4 nights',
+    price: 'AED 2199',
     image: '/images/UmrahPackages/umrah_package1.webp',
-    imageAlt: 'Basic Umrah Package – 15 Days'
+    imageAlt: 'Maldives Tour – 4 Nights / 5 Days'
   },
   {
-    id: 'umrah-premium',
-    title: 'Premium Umrah Package – 21 Days',
-    description: 'Luxury Umrah experience with extended stay in the holy cities. Features 5-star hotel accommodations, VIP visa processing, premium transportation, guided spiritual tours, and additional visits to historical Islamic sites. Includes all meals and special arrangements.',
-    duration: '21 days / 20 nights',
-    price: 'AED 12999',
+    id: 'las-vegas',
+    title: 'Las Vegas Tour – 5 Nights / 6 Days',
+    description: 'Experience the excitement of Las Vegas with a 4★ hotel stay, transfers, breakfast, and day trips to the Fountains of Bellagio, Sphere, Fremont Street, and AREA15.',
+    duration: '6 days / 5 nights',
+    price: 'AED 3999',
     image: '/images/UmrahPackages/umrah_package2.webp',
-    imageAlt: 'Premium Umrah Package – 21 Days'
+    imageAlt: 'Las Vegas Tour – 5 Nights / 6 Days'
   },
   {
-    id: 'umrah-family',
-    title: 'Family Umrah Package – 18 Days',
-    description: 'Special family-oriented Umrah package designed for families with children. Includes family-friendly accommodations, educational tours for children, special family prayer arrangements, and guided visits to family-friendly areas in Makkah and Madinah.',
-    duration: '18 days / 17 nights',
-    price: 'AED 10999',
+    id: 'greece',
+    title: 'Greece Tour – 3 Nights / 4 Days',
+    description: 'Explore Greece with a 4★ hotel stay, transfers, breakfast, and day trips to Athens, the Acropolis, Parthenon, and Paros.',
+    duration: '4 days / 3 nights',
+    price: 'AED 2199',
     image: '/images/UmrahPackages/umrah_package3.webp',
-    imageAlt: 'Family Umrah Package – 18 Days'
+    imageAlt: 'Greece Tour – 3 Nights / 4 Days'
   },
   {
-    id: 'umrah-ramadan',
-    title: 'Ramadan Umrah Package – 25 Days',
-    description: 'Experience the blessed month of Ramadan in the holy cities. Extended package covering the entire month with special Ramadan arrangements, Taraweeh prayers, Iftar and Suhoor arrangements, and spiritual guidance throughout the holy month.',
-    duration: '25 days / 24 nights',
-    price: 'AED 15999',
+    id: 'thailand',
+    title: 'Thailand Tour – 2 Nights / 3 Days',
+    description: 'Enjoy a quick Thailand getaway with a 4★ hotel stay, transfers, breakfast, and day trips to Bangkok, the Grand Palace, Wat Arun, and the Chao Phraya River.',
+    duration: '3 days / 2 nights',
+    price: 'AED 1299',
     image: '/images/UmrahPackages/umrah_package4.webp',
-    imageAlt: 'Ramadan Umrah Package – 25 Days'
+    imageAlt: 'Thailand Tour – 2 Nights / 3 Days'
   },
   {
-    id: 'umrah-express',
-    title: 'Express Umrah Package – 10 Days',
-    description: 'Quick Umrah journey for those with limited time. Efficient 10-day package with streamlined visa processing, direct flights, centrally located hotels, and focused spiritual activities. Perfect for busy professionals and short-term travelers.',
-    duration: '10 days / 9 nights',
-    price: 'AED 6999',
+    id: 'turkey-istanbul',
+    title: 'Turkey, Istanbul – 3 Nights / 4 Days',
+    description: 'Visit Istanbul with a 4★ hotel stay, transfers, breakfast, and day trips to the Blue Mosque, Hagia Sophia, Topkapi Palace, and the Grand Bazaar.',
+    duration: '4 days / 3 nights',
+    price: 'AED 1450',
     image: '/images/UmrahPackages/umrah_package5.webp',
-    imageAlt: 'Express Umrah Package – 10 Days'
+    imageAlt: 'Turkey, Istanbul – 3 Nights / 4 Days'
   },
   {
-    id: 'umrah-luxury',
-    title: 'Luxury Umrah Package – 30 Days',
-    description: 'Ultimate luxury Umrah experience with extended stay and premium services. Features exclusive 5-star accommodations, private transportation, personal spiritual guide, VIP access to holy sites, and luxury amenities throughout the journey.',
-    duration: '30 days / 29 nights',
-    price: 'AED 19999',
+    id: 'egypt',
+    title: 'Egypt Tour – 3 Nights / 4 Days',
+    description: 'Experience Egypt’s wonders with a 4★ hotel stay, transfers, breakfast, and day trips to Cairo, the Egyptian Museum, Hanging Church, Museum of Islamic Art, and Pyramids of Giza.',
+    duration: '4 days / 3 nights',
+    price: 'AED 1699',
     image: '/images/UmrahPackages/umrah_package6.webp',
-    imageAlt: 'Luxury Umrah Package – 30 Days'
+    imageAlt: 'Egypt Tour – 3 Nights / 4 Days'
+  },
+  {
+    id: 'russia',
+    title: 'Russia Tour – 4 Nights / 5 Days',
+    description: 'Explore the rich culture of Russia with a 4★ hotel stay, transfers, breakfast, and day trips to Moscow, Red Square, and the Pushkin Museum.',
+    duration: '5 days / 4 nights',
+    price: 'AED 1999',
+    image: '/images/HolidayPackages/holiday_package4.webp',
+    imageAlt: 'Russia Tour – 4 Nights / 5 Days'
+  },
+  {
+    id: 'georgia',
+    title: 'Georgia Tour – 2 Nights / 3 Days',
+    description: 'Discover the beauty of Georgia with a 4★ hotel stay, transfers, breakfast, and guided day trips to Tbilisi, Narikala Fortress, and the Bridge of Peace.',
+    duration: '3 days / 2 nights',
+    price: 'AED 1499',
+    image: '/images/HolidayPackages/holiday_package5.webp',
+    imageAlt: 'Georgia Tour – 2 Nights / 3 Days'
+  },
+  {
+    id: 'azerbaijan-baku',
+    title: 'Azerbaijan, Baku Tour – 3 Nights / 4 Days',
+    description: 'Enjoy a memorable trip to Baku with a 4★ hotel stay, transfers, breakfast, and exciting day trips to Niazmi Street and Flame Towers.',
+    duration: '4 days / 3 nights',
+    price: 'AED 1199',
+    image: '/images/HolidayPackages/holiday_package6.webp',
+    imageAlt: 'Azerbaijan, Baku Tour – 3 Nights / 4 Days'
   }
 ];
 
@@ -75,7 +102,7 @@ export default function UmrahPackages() {
   };
 
   const slidesPerView = getSlidesPerView();
-  const totalSlides = Math.ceil(umrahPackages.length / slidesPerView);
+  const totalSlides = Math.ceil(tourPackages.length / slidesPerView);
    
   // Check if all tours are visible (no scrolling needed)
   const allToursVisible = totalSlides <= 1;
@@ -134,7 +161,7 @@ export default function UmrahPackages() {
               className="text-2xl sm:text-3xl uppercase font-bold title-font my-2"
               style={{ color: 'rgba(0,140,149,1)' }}
             >
-              Umrah Packages
+              All Packages
             </h1>
             <div className="h-1 w-32 mb-4 rounded" style={{ backgroundColor: 'rgba(255, 213, 90, 1)' }}></div>
           </div>
@@ -183,7 +210,7 @@ export default function UmrahPackages() {
           )}
           
           <div ref={scrollContainerRef} className="flex overflow-x-auto pb-4 scrollbar-hide">
-            {umrahPackages.map((umrahPackage) => (
+            {tourPackages.map((umrahPackage) => (
               <TourCard
                 key={umrahPackage.id}
                 {...umrahPackage}
