@@ -77,7 +77,7 @@ export default function VisaInquiryPopup({ isOpen, onClose, country }: VisaInqui
       <div className="bg-white rounded-lg max-w-md w-full max-h-[90vh] overflow-y-auto">
         <div className="p-6">
           <div className="flex justify-between items-center mb-4">
-            <h2 className="text-xl font-bold" style={{ color: 'rgba(0, 140, 149, 1)' }}>
+            <h2 className="text-xl font-bold" style={{ color: '#FF4E00' }}>
               Visa Inquiry - {country}
             </h2>
             <button
@@ -207,7 +207,7 @@ export default function VisaInquiryPopup({ isOpen, onClose, country }: VisaInqui
                 type="submit"
                 disabled={isSubmitting}
                 className="flex-1 px-4 py-2 text-white rounded-md transition-colors disabled:opacity-50"
-                style={{ backgroundColor: 'rgba(0, 140, 149, 1)' }}
+                style={{ backgroundColor: '#FF4E00' }}
               >
                 {isSubmitting ? 'Submitting...' : 'Submit Inquiry'}
               </button>

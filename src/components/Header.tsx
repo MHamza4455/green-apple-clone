@@ -69,7 +69,7 @@ export default function Header() {
   };
 
   return (
-    <header ref={headerRef} className="shadow-lg left-0 right-0 container fixed top-0 w-full z-50 mx-auto rounded-b-md" style={{ backgroundColor: '#30D5C8' }}>
+    <header ref={headerRef} className="shadow-lg left-0 right-0 container fixed top-0 w-full z-50 mx-auto rounded-b-md" style={{ backgroundColor: 'white' }}>
               <div className="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8 container">
         <div className="relative flex items-center justify-between h-20">
           {/* Mobile menu button */}
@@ -84,7 +84,7 @@ export default function Header() {
               <span className="sr-only">Open main menu</span>
               <svg
                 className="block h-6 w-6 fill-current"
-                style={{ color: 'white' }}
+                style={{ color: '#FF4E00' }}
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
                 viewBox="0 0 24 24"
@@ -121,7 +121,7 @@ export default function Header() {
               >
                 {/* Mobile Logo */}
                 <Image
-                  src="/images/mobile-logo.avif"
+                  src="/logo.png"
                   alt="Radiant Way Travel Logo"
                   width={180}
                   height={48}
@@ -130,7 +130,7 @@ export default function Header() {
                 />
                 {/* Desktop Logo */}
                 <Image
-                  src="/images/logo.webp"
+                  src="/logo.png"
                   alt="Radiant Way Travel Logo"
                   width={180}
                   height={48}
@@ -149,7 +149,7 @@ export default function Header() {
                   key={link.name}
                   onClick={() => scrollToSection(link.href)}
                   className="inline-flex items-center px-1 pt-1 text-sm leading-5 capitalize hover:underline transition-colors duration-200"
-                  style={{ color: 'white', textDecorationColor: '#FF4E00' }}
+                  style={{ color: 'black', textDecorationColor: '#FF4E00' }}
                 >
                   {link.name}
                 </button>
@@ -159,7 +159,7 @@ export default function Header() {
                 onClick={handleBookNow}
                 className="hover:opacity-90 transition-all duration-200 transform hover:scale-105 font-medium"
                 style={{ 
-                  backgroundColor: 'rgba(255, 213, 90, 1)',
+                  backgroundColor: '#FF4E00',
                   color: 'white',
                   padding: '10px 20px',
                   borderRadius: '6px',
@@ -184,13 +184,13 @@ export default function Header() {
           />
           {/* Mobile Menu */}
           <div className="lg:hidden relative z-50">
-            <div className="px-2 pt-2 pb-3 space-y-1 border-t border-gray-200 shadow-lg rounded-b-md" style={{ backgroundColor: '#30D5C8' }}>
+            <div className="px-2 pt-2 pb-3 space-y-1 border-t border-gray-200 shadow-lg rounded-b-md" style={{ backgroundColor: 'white' }}>
               {navLinks.map((link) => (
                 <button
                   key={link.name}
                   onClick={() => handleMobileMenuClick(link.href)}
                   className="block w-full text-left px-3 py-3 text-base font-medium hover:underline rounded-md transition-colors duration-200"
-                  style={{ color: 'white', textDecorationColor: '#FF4E00' }}
+                  style={{ color: 'black', textDecorationColor: '#FF4E00' }}
                 >
                   {link.name}
                 </button>
@@ -201,7 +201,7 @@ export default function Header() {
                   onClick={() => handleMobileMenuClick('#contact')}
                   className="w-full hover:opacity-90 transition-all duration-200 transform hover:scale-105 font-medium"
                   style={{ 
-                    backgroundColor: 'rgba(255, 213, 90, 1)',
+                    backgroundColor: '#FF4E00',
                     color: 'white',
                     padding: '12px 20px',
                     borderRadius: '6px',

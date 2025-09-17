@@ -97,7 +97,7 @@ export default function Hero() {
       className: "rounded-bl-md"
     },
     {
-      href: "tel:+97143333221",
+      href: "tel:+97154786129",
       icon: (
         <svg viewBox="0 0 256 256" className="h-4 w-4 sm:h-6 sm:w-6 mr-2 fill-current" xmlns="http://www.w3.org/2000/svg">
           <path d="M159.4,40A80.1,80.1,0,0,1,216,96.6" fill="none" stroke="#005752" strokeLinecap="round" strokeLinejoin="round" strokeWidth="8"></path>
@@ -107,7 +107,7 @@ export default function Hero() {
       ),
       text: "Call",
       ariaLabel: "Call our branch office",
-      title: "Call +97143333221",
+      title: "Call +97154786129",
       rel: "noopener noreferrer"
     },
     {

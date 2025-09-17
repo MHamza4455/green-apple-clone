@@ -159,11 +159,11 @@ export default function UmrahPackages() {
             <h1 
               id="umrah-packages" 
               className="text-2xl sm:text-3xl uppercase font-bold title-font my-2"
-              style={{ color: 'rgba(0,140,149,1)' }}
+              style={{ color: '#FF4E00' }}
             >
               All Packages
             </h1>
-            <div className="h-1 w-32 mb-4 rounded" style={{ backgroundColor: 'rgba(255, 213, 90, 1)' }}></div>
+            <div className="h-1 w-32 mb-4 rounded" style={{ backgroundColor: '#FF4E00' }}></div>
           </div>
           
           {/* Navigation Arrows - Only show when scrolling is needed */}
@@ -203,7 +203,7 @@ export default function UmrahPackages() {
                 className="h-full rounded-full transition-all duration-300" 
                 style={{ 
                   width: `${scrollProgress}%`,
-                  backgroundColor: 'rgba(255, 213, 90, 1)'
+                  backgroundColor: '#FF4E00'
                 }}
               ></div>
             </div>

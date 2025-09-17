@@ -66,21 +66,21 @@ export default function ContactUs() {
       <div className="max-w-7xl mx-auto px-4 relative z-10">
         {/* Header */}
         <div className="text-center mb-16">
-          <h2 className="text-4xl sm:text-5xl font-bold mb-6" style={{ color: 'rgba(0, 140, 149, 1)' }}>
+          <h2 className="text-4xl sm:text-5xl font-bold mb-6" style={{ color: '#FF4E00' }}>
             Get In Touch
           </h2>
-          <div className="h-1 w-32 mx-auto mt-6 rounded" style={{ backgroundColor: 'rgba(255, 213, 90, 1)' }}></div>
+          <div className="h-1 w-32 mx-auto mt-6 rounded" style={{ backgroundColor: '#FF4E00' }}></div>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
           {/* Disclaimer */}
           <div className="lg:col-span-1 space-y-8">
             <div>
-              <h3 className="text-2xl font-bold mb-6" style={{ color: 'rgba(0, 140, 149, 1)' }}>
+              <h3 className="text-2xl font-bold mb-6" style={{ color: 'black' }}>
                 Disclaimer
               </h3>
               <div className="bg-gradient-to-br from-gray-50 to-gray-100 p-6 rounded-2xl border border-gray-200">
-                <p className="text-gray-700 leading-relaxed text-sm">
+                <p className="text-black leading-relaxed text-sm">
                   All visas are issued at the sole discretion of their respective Governments, and we can not guarantee any visa issuance. We do not have any affiliation with any government agency. All visas can be applied personally by using their respective Government websites or by visiting their Embassy or Consulate for which you will not be charged for service fee.
                 </p>
               </div>
@@ -90,10 +90,10 @@ export default function ContactUs() {
           {/* Contact Form */}
           <div className="lg:col-span-2">
             <div className="bg-white rounded-3xl shadow-lg p-8 border border-gray-100">
-              <h3 className="text-2xl font-bold mb-6" style={{ color: 'rgba(0, 140, 149, 1)' }}>
+              <h3 className="text-2xl font-bold mb-6" style={{ color: 'black' }}>
                 Send us a Message
               </h3>
-              <p className="text-gray-600 mb-8">
+              <p className="text-black mb-8">
                 Fill out the form below and we&apos;ll get back to you as soon as possible.
               </p>
 
@@ -195,9 +195,9 @@ export default function ContactUs() {
                       ? 'opacity-50 cursor-not-allowed' 
                       : 'hover:shadow-xl hover:scale-[1.02]'
                   }`}
-                  style={{ backgroundColor: 'rgba(255, 213, 90, 1)' }}
-                  onMouseEnter={(e) => !isSubmitting && (e.currentTarget.style.backgroundColor = 'rgba(255, 213, 90, 0.8)')}
-                  onMouseLeave={(e) => !isSubmitting && (e.currentTarget.style.backgroundColor = 'rgba(255, 213, 90, 1)')}
+                  style={{ backgroundColor: '#FF4E00' }}
+                  onMouseEnter={(e) => !isSubmitting && (e.currentTarget.style.backgroundColor = '#FF4E00')}
+                  onMouseLeave={(e) => !isSubmitting && (e.currentTarget.style.backgroundColor = '#FF4E00')}
                 >
                   {isSubmitting ? 'Sending...' : 'Send Message'}
                 </button>

@@ -156,14 +156,14 @@ export default function VisaServices() {
   };
 
   return (
-    <section id="visa-services" className="py-20" style={{ backgroundColor: '#30D5C8' }}>
+    <section id="visa-services" className="py-20" style={{ backgroundColor: 'rgba(0, 140, 149, 0.05)' }}>
       <div className="max-w-7xl mx-auto px-4">
         <header className="w-full mb-6 lg:mb-0">
           <div>
             <h1 
               id="visa-services" 
               className="text-2xl sm:text-3xl uppercase font-bold title-font my-2"
-              style={{ color: 'white' }}
+              style={{ color: '#FF4E00' }}
             >
               Visa Services
             </h1>
@@ -176,7 +176,7 @@ export default function VisaServices() {
             <div key={country.name} className="flex flex-col items-center group relative h-full">
               <div className="relative mb-4 flex items-center justify-center">
                 <div className="absolute inset-0 bg-gradient-to-br from-primary/20 to-accent/20 rounded-2xl blur-xl group-hover:blur-2xl transition-all duration-500 opacity-0 group-hover:opacity-100"></div>
-                <div className="relative flex items-center justify-center w-24 h-24 bg-white rounded-2xl border border-gray-200 hover:border-[rgba(0,140,149,1)] transition-all duration-300 group-hover:scale-110 group-hover:shadow-lg">
+                <div className="relative flex items-center justify-center w-24 h-24 bg-orange-50 rounded-2xl border border-gray-200 hover:border-[rgba(0,140,149,1)] transition-all duration-300 group-hover:scale-110 group-hover:shadow-lg">
                   <Image
                     src={`/flags/${country.code}.svg`}
                     alt={`${country.name} flag`}
@@ -202,15 +202,20 @@ export default function VisaServices() {
               <div className="flex flex-col gap-2 w-full px-2 mt-auto">
                 <button
                   onClick={() => handleLearnMore(country.name)}
-                  className="w-full px-3 py-2 text-xs font-medium border border-white rounded-md transition-all duration-300 hover:bg-[#FF4E00] hover:border-[#FF4E00]"
-                  style={{ color: 'white' }}
+                  className="w-full px-3 py-2 text-xs font-medium border border-[#FF4E00] rounded-md 
+                            bg-white text-[#FF4E00] 
+                            transition-all duration-300 
+                            hover:bg-[#FF4E00] hover:text-white"
                 >
                   Learn More
                 </button>
+
                 <button
                   onClick={() => handleInquireNow(country.name)}
-                  className="w-full px-3 py-2 text-xs font-medium border border-white rounded-md transition-all duration-300 hover:bg-[#FF4E00] hover:border-[#FF4E00]"
-                  style={{ color: 'white' }}
+                  className="w-full px-3 py-2 text-xs font-medium border border-[#FF4E00] rounded-md 
+                            bg-[#FF4E00] text-white 
+                            transition-all duration-300 
+                            hover:bg-white hover:text-[#FF4E00]"
                 >
                   Inquire Now
                 </button>
