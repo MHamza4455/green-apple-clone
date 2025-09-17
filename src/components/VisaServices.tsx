@@ -176,18 +176,18 @@ export default function VisaServices() {
             <div key={country.name} className="flex flex-col items-center group relative h-full">
               <div className="relative mb-4 flex items-center justify-center">
                 <div className="absolute inset-0 bg-gradient-to-br from-primary/20 to-accent/20 rounded-2xl blur-xl group-hover:blur-2xl transition-all duration-500 opacity-0 group-hover:opacity-100"></div>
-                <div className="relative flex items-center justify-center w-24 h-24 bg-orange-50 rounded-2xl border border-gray-200 hover:border-[rgba(0,140,149,1)] transition-all duration-300 group-hover:scale-110 group-hover:shadow-lg">
+                <div className="relative flex items-center justify-center  transition-all duration-300 group-hover:scale-110 ">
                   <Image
                     src={`/flags/${country.code}.svg`}
                     alt={`${country.name} flag`}
-                    width={56}
-                    height={36}
+                    width={60}
+                    height={40}
                     className="object-contain"
                   />
                 </div>
                 <div className="absolute -top-2 -right-2 w-4 h-4 bg-accent rounded-full opacity-0 group-hover:opacity-100 transition-all duration-300 transform scale-0 group-hover:scale-100"></div>
               </div>
-              <span className="text-sm font-semibold text-center group-hover:text-white transition-all duration-300 transform group-hover:translate-y-[-2px] mb-3" style={{ color: 'white' }}>
+              <span className="text-sm font-semibold text-center group-hover:text-white transition-all duration-300 transform group-hover:translate-y-[-2px] mb-3" style={{ color: 'black' }}>
                 {country.name}
               </span>
               
