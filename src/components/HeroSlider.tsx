@@ -169,7 +169,7 @@ const HeroSlider = () => {
                 }}
             >
                 {/* Cosmic Orange Overlay Accents */}
-                <div className="absolute inset-0 z-5">
+                <div className="absolute inset-0 z-0">
                     {/* Top right accent */}
                     <div 
                         className="absolute top-0 right-0 w-32 h-32 opacity-20"
