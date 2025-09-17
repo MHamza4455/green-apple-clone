@@ -148,6 +148,18 @@ const HeroSlider = () => {
         }
     };
 
+    // Handle Book Now button click - scroll to contact section
+    const handleBookNowClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+        e.preventDefault();
+        const targetElement = document.getElementById('contact');
+        if (targetElement) {
+            targetElement.scrollIntoView({ 
+                behavior: 'smooth',
+                block: 'start'
+            });
+        }
+    };
+
     return (
         <>
             <div 
@@ -219,7 +231,7 @@ const HeroSlider = () => {
                             </div>
                             {/* Content */}
                             <div
-                                className="absolute bottom-[25%] left-[10%] z-10 max-w-4xl text-white"
+                                className="absolute bottom-[25%] left-[10%] z-50 max-w-4xl text-white"
                                 onMouseEnter={handleContentHover}
                                 onMouseLeave={handleContentLeave}
                             >
@@ -291,7 +303,8 @@ const HeroSlider = () => {
                                                 }}
                                                 transition={{ delay: 0.5 }}
                                                 href={slide.href || '#'}
-                                                className="group inline-flex items-center gap-3 px-2 py-3 text-white font-medium rounded-full"
+                                                onClick={handleBookNowClick}
+                                                className="group inline-flex items-center gap-3 px-2 py-3 text-white font-medium rounded-full cursor-pointer"
                                             >
                                                 <span 
                                                     className="rounded-full px-6 py-3 group-hover:opacity-90 transition-all duration-300"
