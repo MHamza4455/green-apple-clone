@@ -90,11 +90,11 @@ export default function Reviews() {
       });
 
   return (
-    <section id="reviews" className="relative py-16 px-4 bg-white">
+    <section id="reviews" className="relative py-16 px-4" style={{ backgroundColor: 'rgba(0, 140, 149, 0.05)' }}>
       <div className="max-w-6xl mx-auto">
         {/* Header */}
         <header className="text-center mb-12">
-          <h2 className="text-4xl md:text-5xl font-bold mb-4" style={{ color: 'black' }}>
+          <h2 className="text-4xl md:text-5xl font-bold mb-4" style={{ color: '#FF4E00' }}>
             What our travelers say
           </h2>
           

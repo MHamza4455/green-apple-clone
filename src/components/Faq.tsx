@@ -80,16 +80,16 @@ export default function Faq() {
                       aria-expanded={openFaq === faq.id}
                       aria-controls={`faq-answer-${faq.id}`}
                     >
-                      <h3 className="text-lg font-semibold pr-4" style={{ color: '#FF4E00' }}>
+                      <h3 className="text-lg font-semibold pr-4" style={{ color: 'black' }}>
                         {faq.question}
                       </h3>
-                        <span className="w-6 h-6 rounded-full border-2 flex items-center justify-center transition-all duration-200" style={{ borderColor: '#30D5C8' }}>
+                        <span className="w-6 h-6 rounded-full border-2 flex items-center justify-center transition-all duration-200" style={{ borderColor: 'black' }}>
                          {openFaq === faq.id ? (
-                           <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" style={{ color: '#30D5C8' }}>
+                           <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" style={{ color: 'black' }}>
                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20 12H4" />
                            </svg>
                          ) : (
-                           <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" style={{ color: '#30D5C8' }}>
+                           <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" style={{ color: 'black' }}>
                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
                            </svg>
                          )}

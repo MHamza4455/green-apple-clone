@@ -129,14 +129,13 @@ export default function TourCard({
           width: '100%',
           maxWidth: '402px',
           marginRight: '15px',
-          boxShadow: '0 10px 15px -3px var(--tw-shadow-color, rgb(0 0 0 / 0.1)), 0 4px 6px -4px var(--tw-shadow-color, rgb(0 0 0 / 0.1))',
-          border: '2px solid #30D5C8'
+          boxShadow: '0 10px 15px -3px var(--tw-shadow-color, rgb(0 0 0 / 0.1)), 0 4px 6px -4px var(--tw-shadow-color, rgb(0 0 0 / 0.1))'
         }}
         role="group"
         aria-label={title}
       >
         {/* Duration Badge */}
-        <div className="absolute z-10 text-white top-3 left-3 px-2 py-1 rounded-md text-xs tracking-wider font-light" style={{ backgroundColor: '#00CED1' }}>
+        <div className="absolute z-10 text-white top-3 left-3 px-2 py-1 rounded-md text-xs tracking-wider font-light" style={{ backgroundColor: '#FF4E00' }}>
           {duration}
         </div>
 
@@ -158,10 +157,10 @@ export default function TourCard({
         {/* Tour Details */}
         <div className="p-4 flex flex-col justify-between flex-grow">
           <header className="flex-grow text-left">
-            <h2 className="text-sm sm:text-lg font-bold mb-2 nowraptitle" style={{ color: '#30D5C8' }}>
+            <h2 className="text-sm sm:text-lg font-bold mb-2 nowraptitle" style={{ color: 'black' }}>
               {title}
             </h2>
-            <p className="text-sm mb-4 line-clamp-3" style={{ color: '#30D5C8' }}>
+            <p className="text-sm mb-4 line-clamp-3" style={{ color: 'black' }}>
               {description}
             </p>
           </header>
@@ -175,7 +174,7 @@ export default function TourCard({
               onClick={handleInquireNow}
               className="hover:bg-gray-500 transition-all duration-300 transform hover:scale-105 w-full sm:w-auto"
               style={{ 
-                backgroundColor: 'rgba(255, 213, 90, 1)',
+                backgroundColor: '#FF4E00',
                 color: 'white',
                 padding: '9px 18px',
                 borderRadius: '30px'
@@ -205,11 +204,11 @@ export default function TourCard({
             <div className="sticky top-0 bg-white bg-opacity-95 backdrop-blur-md border-b border-gray-100 p-4 rounded-t-2xl">
               <div className="flex items-center justify-between">
                 <div>
-                  <h3 className="text-xl font-bold mb-1" style={{ color: 'rgba(0,140,149,1)' }}>
+                  <h3 className="text-xl font-bold mb-1" style={{ color: 'black' }}>
                     Inquire About This Tour
                   </h3>
-                  <p className="font-medium text-sm" style={{ color: 'rgba(0,140,149,1)' }}>{title}</p>
-                  <p className="text-xs" style={{ color: 'rgba(0,140,149,1)' }}>{duration} • {price}</p>
+                  <p className="font-medium text-sm" style={{ color: 'black' }}>{title}</p>
+                  <p className="text-xs" style={{ color: 'black' }}>{duration} • {price}</p>
                 </div>
                 <button
                   onClick={closeModal}
@@ -225,7 +224,7 @@ export default function TourCard({
               {submitStatus === 'success' ? (
                 <div className="text-center py-6">
                   <div className="w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-3" style={{ backgroundColor: 'rgba(0, 140, 149, 0.1)' }}>
-                    <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" style={{ color: 'rgba(0, 140, 149, 1)' }}>
+                    <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" style={{ color: 'black' }}>
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                     </svg>
                   </div>
@@ -236,54 +235,54 @@ export default function TourCard({
                 <div className="space-y-4">
                   {/* What's Included Section */}
                   <div>
-                    <h4 className="text-lg font-semibold mb-3" style={{ color: '#FF4E00' }}>
+                    <h4 className="text-lg font-semibold mb-3" style={{ color: 'black' }}>
                       What&apos;s Included
                     </h4>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                       <div className="flex items-center space-x-2">
-                        <svg className="w-5 h-5 flex-shrink-0" style={{ color: '#30D5C8' }} fill="currentColor" viewBox="0 0 20 20">
+                        <svg className="w-5 h-5 flex-shrink-0" style={{ color: 'black' }} fill="currentColor" viewBox="0 0 20 20">
                           <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                         </svg>
                         <span className="text-sm" style={{ color: 'black' }}>4★ Hotel Accommodation</span>
                       </div>
                       <div className="flex items-center space-x-2">
-                        <svg className="w-5 h-5 flex-shrink-0" style={{ color: '#30D5C8' }} fill="currentColor" viewBox="0 0 20 20">
+                        <svg className="w-5 h-5 flex-shrink-0" style={{ color: 'black' }} fill="currentColor" viewBox="0 0 20 20">
                           <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                         </svg>
                         <span className="text-sm" style={{ color: 'black' }}>Daily Breakfast</span>
                       </div>
                       <div className="flex items-center space-x-2">
-                        <svg className="w-5 h-5 flex-shrink-0" style={{ color: '#30D5C8' }} fill="currentColor" viewBox="0 0 20 20">
+                        <svg className="w-5 h-5 flex-shrink-0" style={{ color: 'black' }} fill="currentColor" viewBox="0 0 20 20">
                           <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                         </svg>
                         <span className="text-sm" style={{ color: 'black' }}>Airport Transfers</span>
                       </div>
                       <div className="flex items-center space-x-2">
-                        <svg className="w-5 h-5 flex-shrink-0" style={{ color: '#30D5C8' }} fill="currentColor" viewBox="0 0 20 20">
+                        <svg className="w-5 h-5 flex-shrink-0" style={{ color: 'black' }} fill="currentColor" viewBox="0 0 20 20">
                           <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                         </svg>
                         <span className="text-sm" style={{ color: 'black' }}>Professional Guided Tours</span>
                       </div>
                       <div className="flex items-center space-x-2">
-                        <svg className="w-5 h-5 flex-shrink-0" style={{ color: '#30D5C8' }} fill="currentColor" viewBox="0 0 20 20">
+                        <svg className="w-5 h-5 flex-shrink-0" style={{ color: 'black' }} fill="currentColor" viewBox="0 0 20 20">
                           <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                         </svg>
                         <span className="text-sm" style={{ color: 'black' }}>Entrance Fees to Attractions</span>
                       </div>
                       <div className="flex items-center space-x-2">
-                        <svg className="w-5 h-5 flex-shrink-0" style={{ color: '#30D5C8' }} fill="currentColor" viewBox="0 0 20 20">
+                        <svg className="w-5 h-5 flex-shrink-0" style={{ color: 'black' }} fill="currentColor" viewBox="0 0 20 20">
                           <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                         </svg>
                         <span className="text-sm" style={{ color: 'black' }}>Comfortable Transportation</span>
                       </div>
                       <div className="flex items-center space-x-2">
-                        <svg className="w-5 h-5 flex-shrink-0" style={{ color: '#30D5C8' }} fill="currentColor" viewBox="0 0 20 20">
+                        <svg className="w-5 h-5 flex-shrink-0" style={{ color: 'black' }} fill="currentColor" viewBox="0 0 20 20">
                           <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                         </svg>
                         <span className="text-sm" style={{ color: 'black' }}>24/7 Travel Support</span>
                       </div>
                       <div className="flex items-center space-x-2">
-                        <svg className="w-5 h-5 flex-shrink-0" style={{ color: '#30D5C8' }} fill="currentColor" viewBox="0 0 20 20">
+                        <svg className="w-5 h-5 flex-shrink-0" style={{ color: 'black' }} fill="currentColor" viewBox="0 0 20 20">
                           <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                         </svg>
                         <span className="text-sm" style={{ color: 'black' }}>Return Flights</span>
@@ -383,7 +382,7 @@ export default function TourCard({
                       disabled={isSubmitting}
                       className="flex-1 py-2.5 px-4 text-white rounded-lg transition-all duration-200 font-medium transform hover:scale-105 disabled:hover:scale-100 disabled:opacity-70 text-sm"
                       style={{
-                        backgroundColor: isSubmitting ? 'rgba(255, 213, 90, 0.7)' : 'rgba(255, 213, 90, 1)'
+                        backgroundColor: isSubmitting ? 'rgba(255, 213, 90, 0.7)' : '#FF4E00'
                       }}
                     >
                       {isSubmitting ? (
@@ -406,7 +405,7 @@ export default function TourCard({
                     </div>
                   )}
 
-                  <p className="text-xs text-center" style={{ color: 'rgba(0,140,149,1)' }}>
+                  <p className="text-xs text-center" style={{ color: '#FF4E00' }}>
                     * Required fields. Your information will be kept confidential.
                   </p>
                 </div>

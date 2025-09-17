@@ -11,6 +11,9 @@ interface VisaDetails {
   price: string;
   documentsRequired: string[];
   documentsProvided: string[];
+  processingTime?: string;
+  validity?: string;
+  features?: string[];
 }
 
 interface VisaDetailsPopupProps {
@@ -39,7 +42,7 @@ export default function VisaDetailsPopup({ isOpen, onClose, country, visaDetails
                   height={28}
                   className="rounded"
                 />
-                <h2 className="text-2xl font-bold" style={{ color: 'rgba(0, 140, 149, 1)' }}>
+                <h2 className="text-2xl font-bold" style={{ color: '#FF4E00' }}>
                   {country} Visa Services
                 </h2>
               </div>
@@ -54,51 +57,74 @@ export default function VisaDetailsPopup({ isOpen, onClose, country, visaDetails
             <div className="space-y-6">
               {/* Description */}
               <div>
-                <h3 className="text-lg font-semibold mb-2" style={{ color: 'rgba(0, 140, 149, 1)' }}>
+                <h3 className="text-lg font-semibold mb-2" style={{ color: '#FF4E00' }}>
                   About {country} Visa
                 </h3>
-                <p className="text-gray-700 leading-relaxed">
+                <p className="text-black leading-relaxed">
                   {visaDetails.description}
                 </p>
               </div>
 
               {/* Price Information */}
               <div className="bg-gray-50 p-4 rounded-lg">
-                <h4 className="font-semibold mb-2" style={{ color: 'rgba(0, 140, 149, 1)' }}>
+                <h4 className="font-semibold mb-2" style={{ color: '#FF4E00' }}>
                   Service Price
                 </h4>
-                <p className="text-gray-700 font-semibold text-xl">{visaDetails.price}</p>
+                <p className="text-black font-semibold text-xl">{visaDetails.price}</p>
+                {visaDetails.processingTime && (
+                  <p className="text-black text-sm mt-1">Processing Time: {visaDetails.processingTime}</p>
+                )}
+                {visaDetails.validity && (
+                  <p className="text-black text-sm mt-1">Validity: {visaDetails.validity}</p>
+                )}
               </div>
 
               {/* Documents Required */}
               <div>
-                <h3 className="text-lg font-semibold mb-3" style={{ color: 'rgba(0, 140, 149, 1)' }}>
-                  Documents Required From You
+                <h3 className="text-lg font-semibold mb-3" style={{ color: '#FF4E00' }}>
+                  Documents Required
                 </h3>
                 <ul className="space-y-2">
-                  {visaDetails.documentsRequired.map((document, index) => (
+                  {visaDetails.documentsRequired.map((requirement, index) => (
                     <li key={index} className="flex items-start gap-2">
                       <div className="w-2 h-2 rounded-full mt-2 flex-shrink-0" style={{ backgroundColor: 'rgba(255, 213, 90, 1)' }}></div>
-                      <span className="text-gray-700">{document}</span>
+                      <span className="text-black">{requirement}</span>
                     </li>
                   ))}
                 </ul>
               </div>
 
-              {/* Documents We Provide */}
+              {/* Documents Provided */}
               <div>
-                <h3 className="text-lg font-semibold mb-3" style={{ color: 'rgba(0, 140, 149, 1)' }}>
-                  Documents We Provide
+                <h3 className="text-lg font-semibold mb-3" style={{ color: '#FF4E00' }}>
+                  Documents Provided
                 </h3>
                 <ul className="space-y-2">
                   {visaDetails.documentsProvided.map((document, index) => (
                     <li key={index} className="flex items-start gap-2">
                       <div className="w-2 h-2 rounded-full mt-2 flex-shrink-0" style={{ backgroundColor: 'rgba(255, 213, 90, 1)' }}></div>
-                      <span className="text-gray-700">{document}</span>
+                      <span className="text-black">{document}</span>
                     </li>
                   ))}
                 </ul>
               </div>
+
+              {/* Features */}
+              {visaDetails.features && visaDetails.features.length > 0 && (
+                <div>
+                  <h3 className="text-lg font-semibold mb-3" style={{ color: '#FF4E00' }}>
+                    Features
+                  </h3>
+                  <ul className="space-y-2">
+                    {visaDetails.features.map((feature, index) => (
+                      <li key={index} className="flex items-start gap-2">
+                        <div className="w-2 h-2 rounded-full mt-2 flex-shrink-0" style={{ backgroundColor: 'rgba(255, 213, 90, 1)' }}></div>
+                        <span className="text-black">{feature}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )}
 
               {/* Action Buttons */}
               <div className="flex gap-3 pt-4 border-t">
@@ -111,7 +137,7 @@ export default function VisaDetailsPopup({ isOpen, onClose, country, visaDetails
                 <button
                   onClick={() => setShowInquiryForm(true)}
                   className="flex-1 px-6 py-3 text-white rounded-md transition-colors font-medium"
-                  style={{ backgroundColor: 'rgba(0, 140, 149, 1)' }}
+                  style={{ backgroundColor: '#FF4E00' }}
                 >
                   Inquire Now
                 </button>

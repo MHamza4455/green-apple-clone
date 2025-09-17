@@ -106,7 +106,7 @@ export default function FeaturedTours() {
             <h1 
               id="featured-tours" 
               className="text-2xl sm:text-3xl uppercase font-bold title-font my-2"
-              style={{ color: '#30D5C8' }}
+              style={{ color: '#FF4E00' }}
             >
               Featured Tours
             </h1>
@@ -141,7 +141,7 @@ export default function FeaturedTours() {
         {/* Tour Listings */}
         <section 
           className="tourlatest overflow-hidden col-span-12 relative" 
-          aria-label="Tour Listings"
+          aria-label="Tour Listags"
         >
                      {/* Progress Bar - Only show when scrolling is needed */}
            {!allToursVisible && (

@@ -45,13 +45,13 @@ export default function Marquee() {
     ];
 
     return (
-        <div className="relative w-full overflow-hidden bg-white marquee-pause marquee-32">
+        <div className="relative w-full overflow-hidden bg-[#FF4E00] marquee-pause marquee-32">
             <div className="marquee-loop flex items-center whitespace-nowrap gap-12 py-5 font-semibold w-max">
                 {[...items, ...items].map((item, idx) => (
                     <div key={`${item.text}-${idx}`} className="flex items-center gap-3 px-4">
                         <div 
                             className="flex items-center justify-center"
-                            style={{ color: '#30D5C8' }}
+                            style={{ color: 'white' }}
                         >
                             {item.icon}
                         </div>
