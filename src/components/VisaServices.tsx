@@ -2,7 +2,6 @@
 'use client';
 
 import { useState } from 'react';
-import Image from 'next/image';
 import VisaDetailsPopup from './VisaDetailsPopup';
 import VisaInquiryPopup from './VisaInquiryPopup';
 
@@ -177,13 +176,10 @@ export default function VisaServices() {
               <div className="relative mb-4 flex items-center justify-center">
                 <div className="absolute inset-0 bg-gradient-to-br from-primary/20 to-accent/20 rounded-2xl blur-xl group-hover:blur-2xl transition-all duration-500 opacity-0 group-hover:opacity-100"></div>
                 <div className="relative flex items-center justify-center  transition-all duration-300 group-hover:scale-110 ">
-                  <Image
-                    src={`/flags/${country.code}.svg`}
-                    alt={`${country.name} flag`}
-                    width={60}
-                    height={40}
-                    className="object-contain"
-                  />
+                  <span 
+                    className={`fi fi-${country.code} text-5xl`}
+                    title={`${country.name} flag`}
+                  ></span>
                 </div>
                 <div className="absolute -top-2 -right-2 w-4 h-4 bg-accent rounded-full opacity-0 group-hover:opacity-100 transition-all duration-300 transform scale-0 group-hover:scale-100"></div>
               </div>

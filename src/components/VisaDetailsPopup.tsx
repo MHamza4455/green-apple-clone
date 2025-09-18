@@ -1,7 +1,6 @@
 'use client';
 
 import { useState } from 'react';
-import Image from 'next/image';
 import VisaInquiryPopup from './VisaInquiryPopup';
 
 interface VisaDetails {
@@ -35,13 +34,10 @@ export default function VisaDetailsPopup({ isOpen, onClose, country, visaDetails
           <div className="p-6">
             <div className="flex justify-between items-center mb-6">
               <div className="flex items-center gap-4">
-                <Image
-                  src={`/flags/${visaDetails.code}.svg`}
-                  alt={`${country} flag`}
-                  width={40}
-                  height={28}
-                  className="rounded"
-                />
+                <span 
+                  className={`fi fi-${visaDetails.code} text-5xl`}
+                  title={`${country} flag`}
+                ></span>
                 <h2 className="text-2xl font-bold" style={{ color: '#FF4E00' }}>
                   {country} Visa Services
                 </h2>
