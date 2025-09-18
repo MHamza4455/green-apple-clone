@@ -2,23 +2,30 @@
 
 ## Environment Variables
 
-Create a `.env.local` file in your project root with the following variables:
+The application uses SQLite database by default. No additional environment setup is required for development.
+
+For production, you can create a `.env.local` file with:
 
 ```env
 # NextAuth Configuration
 NEXTAUTH_URL=http://localhost:3000
 NEXTAUTH_SECRET=your-secret-key-here-change-this-in-production
 
-# Database (for future use with Prisma)
+# Database (optional - defaults to SQLite)
 # DATABASE_URL="your-database-url-here"
+
+# Admin Password (optional - defaults to SecureAdmin123!)
+# ADMIN_PASSWORD=your-secure-password
 ```
 
-## Demo Credentials
+## Initial Admin Credentials
 
-For testing purposes, you can use these demo credentials:
+After running the seed script, you can use these credentials:
 
-- **Email**: admin@example.com
-- **Password**: admin123
+- **Email**: admin@greenapple.com
+- **Password**: SecureAdmin123!
+
+**⚠️ Important**: Change the default password after first login!
 
 ## Features Implemented
 
@@ -28,8 +35,8 @@ For testing purposes, you can use these demo credentials:
 - Role-based access control (admin role required)
 
 ### 2. Authentication Pages
-- **Login Page**: `/auth/login` - Sign in with email and password
-- **Register Page**: `/auth/register` - Create new admin accounts
+- **Login Page**: `/auth/login` - Sign in with email and password (admin access only)
+- **User Management**: `/admin/users` - Create and manage users (admin only)
 
 ### 3. Protected Admin Routes
 - All `/admin/*` routes are protected
@@ -54,12 +61,13 @@ For testing purposes, you can use these demo credentials:
    - Go to `http://localhost:3000/admin`
    - You'll be redirected to the login page
 
-3. **Login with demo credentials**:
-   - Email: admin@example.com
-   - Password: admin123
+3. **Login with admin credentials**:
+   - Email: admin@greenapple.com
+   - Password: SecureAdmin123!
 
 4. **Access admin features**:
    - Dashboard
+   - User Management (create new users)
    - Visa Services management
    - Tour Packages management
 
@@ -72,11 +80,23 @@ For testing purposes, you can use these demo credentials:
 - Role-based access control
 - Secure logout with session cleanup
 
+## Admin User Management
+
+### Creating New Users
+1. Login as admin
+2. Go to `/admin/users`
+3. Click "Create New User"
+4. Fill in user details and select role (user/admin)
+5. Click "Create User"
+
+### User Roles
+- **Admin**: Full access to all features including user management
+- **User**: Limited access (can be extended based on requirements)
+
 ## Future Enhancements
 
-- Database integration (Prisma/PostgreSQL)
-- User registration API
 - Password reset functionality
 - Multi-factor authentication
-- User management system
+- User profile management
 - Activity logging
+- Role-based permissions system

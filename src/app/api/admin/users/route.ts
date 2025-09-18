@@ -67,7 +67,45 @@ export async function POST(request: NextRequest) {
     );
 
   } catch (error) {
-    console.error('Registration error:', error);
+    console.error('User creation error:', error);
+    return NextResponse.json(
+      { error: 'Internal server error' },
+      { status: 500 }
+    );
+  }
+}
+
+export async function GET(request: NextRequest) {
+  try {
+    // Check if user is authenticated and has admin role
+    const session = await getServerSession(authOptions);
+    
+    if (!session || session.user.role !== 'admin') {
+      return NextResponse.json(
+        { error: 'Unauthorized. Admin access required.' },
+        { status: 401 }
+      );
+    }
+
+    // Get all users
+    const users = await prisma.user.findMany({
+      select: {
+        id: true,
+        email: true,
+        name: true,
+        role: true,
+        createdAt: true,
+        updatedAt: true,
+      },
+      orderBy: {
+        createdAt: 'desc'
+      }
+    });
+
+    return NextResponse.json({ users });
+
+  } catch (error) {
+    console.error('Users fetch error:', error);
     return NextResponse.json(
       { error: 'Internal server error' },
       { status: 500 }

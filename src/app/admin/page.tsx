@@ -129,6 +129,18 @@ export default function AdminHome() {
                 <div className="text-sm text-gray-600">Check inquiries</div>
               </div>
             </button>
+
+            <a href="/admin/users" className="group flex items-center gap-4 p-4 rounded-xl bg-gradient-to-r from-orange-50 to-red-50 hover:from-orange-100 hover:to-red-100 border border-orange-200/50 transition-all duration-200 hover:shadow-md">
+              <div className="p-2 rounded-lg bg-orange-500 text-white">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" className="h-5 w-5">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197m13.5-9a2.5 2.5 0 11-5 0 2.5 2.5 0 015 0z" />
+                </svg>
+              </div>
+              <div className="text-left">
+                <div className="font-medium text-gray-900">Manage Users</div>
+                <div className="text-sm text-gray-600">Create and manage users</div>
+              </div>
+            </a>
           </div>
         </div>
       </div>

@@ -117,20 +117,10 @@ export default function LoginPage() {
             </button>
           </form>
 
-          {/* Demo Credentials */}
-          <div className="mt-6 p-4 rounded-xl bg-blue-50 border border-blue-200">
-            <h3 className="text-sm font-medium text-blue-900 mb-2">Demo Credentials:</h3>
-            <p className="text-xs text-blue-700">Email: admin@example.com</p>
-            <p className="text-xs text-blue-700">Password: admin123</p>
-          </div>
-
           {/* Footer */}
           <div className="mt-8 text-center">
             <p className="text-sm text-gray-600">
-              Don't have an account?{" "}
-              <Link href="/auth/register" className="text-emerald-600 hover:text-emerald-700 font-medium">
-                Register here
-              </Link>
+              Admin access only. Contact system administrator for account creation.
             </p>
           </div>
         </div>
