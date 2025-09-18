@@ -4,7 +4,6 @@ import { useState } from "react";
 import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
-import bcrypt from "bcryptjs";
 
 export default function RegisterPage() {
   const [formData, setFormData] = useState({
@@ -43,22 +42,27 @@ export default function RegisterPage() {
     }
 
     try {
-      // Hash the password
-      const hashedPassword = await bcrypt.hash(formData.password, 12);
-
-      // In a real application, you would send this to your API to create the user
-      // For demo purposes, we'll just show a success message
-      console.log("User registration data:", {
-        name: formData.name,
-        email: formData.email,
-        password: hashedPassword,
-        role: "admin"
+      // Call the registration API
+      const response = await fetch('/api/auth/register', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          name: formData.name,
+          email: formData.email,
+          password: formData.password,
+        }),
       });
 
-      // Simulate API call
-      await new Promise(resolve => setTimeout(resolve, 1000));
+      const data = await response.json();
 
-      // For demo purposes, we'll automatically sign in the user
+      if (!response.ok) {
+        setError(data.error || 'Registration failed');
+        return;
+      }
+
+      // Registration successful, now sign in the user
       const result = await signIn("credentials", {
         email: formData.email,
         password: formData.password,
@@ -71,6 +75,7 @@ export default function RegisterPage() {
         router.push("/admin");
       }
     } catch (error) {
+      console.error('Registration error:', error);
       setError("An error occurred during registration. Please try again.");
     } finally {
       setLoading(false);

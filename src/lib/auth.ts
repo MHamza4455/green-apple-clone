@@ -1,19 +1,11 @@
 import { NextAuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
+import { PrismaAdapter } from "@auth/prisma-adapter";
+import { prisma } from "./prisma";
 import bcrypt from "bcryptjs";
 
-// Mock user database - In production, replace with actual database
-const users = [
-  {
-    id: "1",
-    email: "admin@example.com",
-    password: "$2b$12$nGt.mNL32E6vVncNt0zo4eB2Pzv7TFQQWIRBF/sNKyZLganiUrVsG", // password: admin123
-    name: "Admin User",
-    role: "admin"
-  }
-];
-
 export const authOptions: NextAuthOptions = {
+  adapter: PrismaAdapter(prisma),
   providers: [
     CredentialsProvider({
       name: "credentials",
@@ -26,7 +18,10 @@ export const authOptions: NextAuthOptions = {
           return null;
         }
 
-        const user = users.find((u) => u.email === credentials.email);
+        const user = await prisma.user.findUnique({
+          where: { email: credentials.email }
+        });
+
         if (!user) {
           return null;
         }
