@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import { LayoutProvider } from "./LayoutProvider";
 
 export const metadata: Metadata = {
   title: "Radiant Way Travel",
@@ -14,7 +15,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className="antialiased" suppressHydrationWarning={true}>
-        {children}
+        <LayoutProvider>
+          {children}
+        </LayoutProvider>
       </body>
     </html>
   );
