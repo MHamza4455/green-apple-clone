@@ -6,7 +6,7 @@ interface StandardLayoutProps {
 
 export const StandardLayout: React.FC<StandardLayoutProps> = ({ children }) => {
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-white">
       {children}
     </div>
   );
