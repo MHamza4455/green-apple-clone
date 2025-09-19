@@ -1,97 +1,19 @@
 'use client';
 
 import { useState } from 'react';
+import { useRouter } from 'next/navigation';
 import { FiEdit, FiTrash2, FiPlus, FiSearch } from 'react-icons/fi';
 import { MdVisibility } from 'react-icons/md';
 import Image from 'next/image';
-
-interface TourPackage {
-  id: number;
-  title: string;
-  description: string;
-  duration: string;
-  price: string;
-  image: string;
-  category: 'featured' | 'all';
-  status: 'active' | 'inactive';
-  createdAt: string;
-}
-
-// Mock data - in real app, this would come from API/database
-const mockTourPackages: TourPackage[] = [
-  {
-    id: 1,
-    title: 'Azerbaijan, Baku Tour (3 Nights / 4 Days)',
-    description: 'Enjoy a 3-night, 4-day Baku tour featuring a 4★ hotel stay, included transfers, daily breakfast, and day trips to Niazmi Street and Flame Towers.',
-    duration: '4 days / 3 nights',
-    price: 'AED 1199',
-    image: '/images/HolidayPackages/holiday_package1.webp',
-    category: 'featured',
-    status: 'active',
-    createdAt: '2024-01-15'
-  },
-  {
-    id: 2,
-    title: 'Turkey, Istanbul Tour (4 Nights / 5 Days)',
-    description: 'Explore the historic city of Istanbul with visits to Hagia Sophia, Blue Mosque, and Grand Bazaar.',
-    duration: '5 days / 4 nights',
-    price: 'AED 1599',
-    image: '/images/HolidayPackages/holiday_package2.webp',
-    category: 'featured',
-    status: 'active',
-    createdAt: '2024-01-10'
-  },
-  {
-    id: 3,
-    title: 'Georgia, Tbilisi Tour (3 Nights / 4 Days)',
-    description: 'Discover the charm of Tbilisi with visits to Old Town, Narikala Fortress, and sulfur baths.',
-    duration: '4 days / 3 nights',
-    price: 'AED 1299',
-    image: '/images/HolidayPackages/holiday_package3.webp',
-    category: 'all',
-    status: 'active',
-    createdAt: '2024-01-08'
-  },
-  {
-    id: 4,
-    title: 'Armenia, Yerevan Tour (4 Nights / 5 Days)',
-    description: 'Experience the rich history and culture of Armenia with visits to ancient monasteries and museums.',
-    duration: '5 days / 4 nights',
-    price: 'AED 1399',
-    image: '/images/HolidayPackages/holiday_package4.webp',
-    category: 'all',
-    status: 'active',
-    createdAt: '2024-01-05'
-  },
-  {
-    id: 5,
-    title: 'Kazakhstan, Almaty Tour (3 Nights / 4 Days)',
-    description: 'Explore the beautiful city of Almaty with its stunning mountain views and modern architecture.',
-    duration: '4 days / 3 nights',
-    price: 'AED 1099',
-    image: '/images/HolidayPackages/holiday_package5.webp',
-    category: 'featured',
-    status: 'active',
-    createdAt: '2024-01-03'
-  },
-  {
-    id: 6,
-    title: 'Uzbekistan, Tashkent Tour (4 Nights / 5 Days)',
-    description: 'Discover the Silk Road heritage in Tashkent with visits to historic sites and bazaars.',
-    duration: '5 days / 4 nights',
-    price: 'AED 1199',
-    image: '/images/HolidayPackages/holiday_package6.webp',
-    category: 'all',
-    status: 'inactive',
-    createdAt: '2024-01-01'
-  }
-];
+import { TourPackage, TourPackageFilter, TourPackageStatusFilter } from '@/types/tourPackage';
+import { useTourPackages } from '@/hooks/useTourPackages';
 
 export default function AdminTourPackages() {
-  const [tourPackages, setTourPackages] = useState<TourPackage[]>(mockTourPackages);
+  const router = useRouter();
+  const { tourPackages, deleteTourPackage, toggleTourPackageStatus } = useTourPackages();
   const [searchTerm, setSearchTerm] = useState('');
-  const [filterCategory, setFilterCategory] = useState<'all' | 'featured' | 'not-featured'>('all');
-  const [filterStatus, setFilterStatus] = useState<'all' | 'active' | 'inactive'>('all');
+  const [filterCategory, setFilterCategory] = useState<TourPackageFilter>('all');
+  const [filterStatus, setFilterStatus] = useState<TourPackageStatusFilter>('all');
 
   // Filter packages based on search and filters
   const filteredPackages = tourPackages.filter(pkg => {
@@ -105,24 +27,33 @@ export default function AdminTourPackages() {
     return matchesSearch && matchesCategory && matchesStatus;
   });
 
+  // Action handlers
   const handleDelete = (id: number) => {
     if (confirm('Are you sure you want to delete this tour package?')) {
-      setTourPackages(tourPackages.filter(pkg => pkg.id !== id));
+      deleteTourPackage(id);
     }
   };
 
   const handleStatusToggle = (id: number) => {
-    setTourPackages(tourPackages.map(pkg => 
-      pkg.id === id 
-        ? { ...pkg, status: pkg.status === 'active' ? 'inactive' : 'active' }
-        : pkg
-    ));
+    toggleTourPackageStatus(id);
   };
 
-  return (
-    <div className="p-6">
+  const handleViewDetails = (pkg: TourPackage) => {
+    router.push(`/admin/tour-packages/${pkg.id}`);
+  };
+
+  const handleEditPackage = (pkg: TourPackage) => {
+    router.push(`/admin/tour-packages/${pkg.id}/edit`);
+  };
+
+  const handleCreatePackage = () => {
+    router.push('/admin/tour-packages/create');
+  };
+
+    return (
+      <div className="p-6">
       {/* Header */}
-      <div className="mb-8">
+        <div className="mb-8">
         <h1 className="text-3xl font-bold text-gray-900 mb-2">Tour Packages Management</h1>
         <p className="text-gray-600">Manage your tour packages and Umrah packages</p>
       </div>
@@ -187,7 +118,7 @@ export default function AdminTourPackages() {
 
           {/* Add Button */}
           <button
-            onClick={() => alert('Add Package functionality will be implemented')}
+            onClick={handleCreatePackage}
             className="flex items-center gap-2 px-4 py-2 bg-orange-500 text-white rounded-lg hover:bg-orange-600 transition-colors duration-200"
           >
             <FiPlus className="w-4 h-4" />
@@ -282,12 +213,14 @@ export default function AdminTourPackages() {
                   <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
                     <div className="flex items-center gap-2">
                       <button
+                        onClick={() => handleViewDetails(pkg)}
                         className="text-blue-600 hover:text-blue-900 p-1 rounded hover:bg-blue-50 transition-colors duration-200"
                         title="View Details"
                       >
                         <MdVisibility className="w-4 h-4" />
                       </button>
                       <button
+                        onClick={() => handleEditPackage(pkg)}
                         className="text-orange-600 hover:text-orange-900 p-1 rounded hover:bg-orange-50 transition-colors duration-200"
                         title="Edit Package"
                       >
@@ -335,7 +268,8 @@ export default function AdminTourPackages() {
           </button>
         </div>
       </div>
-    </div>
-  );
-}
+
+      </div>
+    );
+  }
   

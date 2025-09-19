@@ -1,0 +1,88 @@
+import { TourPackage } from '@/types/tourPackage';
+
+export const mockTourPackages: TourPackage[] = [
+  {
+    id: 1,
+    title: 'Azerbaijan, Baku Tour (3 Nights / 4 Days)',
+    description: 'Enjoy a 3-night, 4-day Baku tour featuring a 4★ hotel stay, included transfers, daily breakfast, and day trips to Niazmi Street and Flame Towers.',
+    duration: '4 days / 3 nights',
+    price: 'AED 1199',
+    image: '/images/HolidayPackages/holiday_package1.webp',
+    imageAlt: 'Azerbaijan, Baku Tour (3 Nights / 4 Days)',
+    included: ['Breakfast', 'Lunch', 'Hotel accommodation', 'Airport transfers'],
+    notIncluded: ['Train tickets', 'Personal expenses', 'Travel insurance'],
+    category: 'featured',
+    status: 'active',
+    createdAt: '2024-01-15'
+  },
+  {
+    id: 2,
+    title: 'Turkey, Istanbul Tour (4 Nights / 5 Days)',
+    description: 'Explore the historic city of Istanbul with visits to Hagia Sophia, Blue Mosque, and Grand Bazaar.',
+    duration: '5 days / 4 nights',
+    price: 'AED 1599',
+    image: '/images/HolidayPackages/holiday_package2.webp',
+    imageAlt: 'Turkey, Istanbul Tour (4 Nights / 5 Days)',
+    included: ['Breakfast', 'Hotel accommodation', 'City tours'],
+    notIncluded: ['Lunch', 'Dinner', 'Personal expenses'],
+    category: 'featured',
+    status: 'active',
+    createdAt: '2024-01-10'
+  },
+  {
+    id: 3,
+    title: 'Georgia, Tbilisi Tour (3 Nights / 4 Days)',
+    description: 'Discover the charm of Tbilisi with visits to Old Town, Narikala Fortress, and sulfur baths.',
+    duration: '4 days / 3 nights',
+    price: 'AED 1299',
+    image: '/images/HolidayPackages/holiday_package3.webp',
+    imageAlt: 'Georgia, Tbilisi Tour (3 Nights / 4 Days)',
+    included: ['Breakfast', 'Hotel accommodation'],
+    notIncluded: ['Lunch', 'Dinner', 'Airport transfers'],
+    category: 'all',
+    status: 'active',
+    createdAt: '2024-01-08'
+  },
+  {
+    id: 4,
+    title: 'Armenia, Yerevan Tour (4 Nights / 5 Days)',
+    description: 'Experience the rich history and culture of Armenia with visits to ancient monasteries and museums.',
+    duration: '5 days / 4 nights',
+    price: 'AED 1399',
+    image: '/images/HolidayPackages/holiday_package4.webp',
+    imageAlt: 'Armenia, Yerevan Tour (4 Nights / 5 Days)',
+    included: ['Breakfast', 'Hotel accommodation', 'Museum tickets'],
+    notIncluded: ['Lunch', 'Dinner', 'Personal expenses'],
+    category: 'all',
+    status: 'active',
+    createdAt: '2024-01-05'
+  },
+  {
+    id: 5,
+    title: 'Kazakhstan, Almaty Tour (3 Nights / 4 Days)',
+    description: 'Explore the beautiful city of Almaty with its stunning mountain views and modern architecture.',
+    duration: '4 days / 3 nights',
+    price: 'AED 1099',
+    image: '/images/HolidayPackages/holiday_package5.webp',
+    imageAlt: 'Kazakhstan, Almaty Tour (3 Nights / 4 Days)',
+    included: ['Breakfast', 'Hotel accommodation', 'City tours'],
+    notIncluded: ['Lunch', 'Dinner', 'Personal expenses'],
+    category: 'featured',
+    status: 'active',
+    createdAt: '2024-01-03'
+  },
+  {
+    id: 6,
+    title: 'Uzbekistan, Tashkent Tour (4 Nights / 5 Days)',
+    description: 'Discover the Silk Road heritage in Tashkent with visits to historic sites and bazaars.',
+    duration: '5 days / 4 nights',
+    price: 'AED 1199',
+    image: '/images/HolidayPackages/holiday_package6.webp',
+    imageAlt: 'Uzbekistan, Tashkent Tour (4 Nights / 5 Days)',
+    included: ['Breakfast', 'Hotel accommodation'],
+    notIncluded: ['Lunch', 'Dinner', 'Personal expenses'],
+    category: 'all',
+    status: 'inactive',
+    createdAt: '2024-01-01'
+  }
+];
