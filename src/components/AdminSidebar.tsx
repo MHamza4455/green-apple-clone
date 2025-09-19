@@ -5,6 +5,7 @@ import { MdDashboard } from "react-icons/md";
 import React from "react";
 import { RiBook2Line } from "react-icons/ri";
 import { SiBloglovin } from "react-icons/si";
+import { FiMessageSquare } from "react-icons/fi";
 
 const AdminSidebar: React.FC = () => {
   return (
@@ -54,7 +55,7 @@ const AdminSidebar: React.FC = () => {
                 href="/admin/inquiries"
                 className="flex items-center rounded-lg p-2 text-base font-normal hover:bg-orange-50 hover:text-orange-600 transition-colors duration-200 "
               >
-                <RiBook2Line className="h-6 w-6 flex-shrink-0 text-orange-500 transition duration-75 group-hover:text-orange-600 "></RiBook2Line>
+                <FiMessageSquare className="h-6 w-6 flex-shrink-0 text-orange-500 transition duration-75 group-hover:text-orange-600 "></FiMessageSquare>
                 <span className="ml-3 flex-1 whitespace-nowrap font-semibold">
                   Inquiries
                 </span>
