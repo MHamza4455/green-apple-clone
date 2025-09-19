@@ -29,23 +29,12 @@ const AdminSidebar: React.FC = () => {
             </li>
             <li>
               <Link
-                href="/admin/tours"
+                href="/admin/tour-packages"
                 className="flex items-center rounded-lg p-2 text-base font-normal hover:bg-orange-50 hover:text-orange-600 transition-colors duration-200 "
               >
                 <ImUsers className="h-6 w-6 flex-shrink-0 text-orange-500 transition duration-75 group-hover:text-orange-600 "></ImUsers>
                 <span className="ml-3 flex-1 whitespace-nowrap font-semibold">
-                  Tours
-                </span>
-              </Link>
-            </li>
-            <li>
-              <Link
-                href="/admin/umrah-packages"
-                className="flex items-center rounded-lg p-2 text-base font-normal hover:bg-orange-50 hover:text-orange-600 transition-colors duration-200 "
-              >
-                <SiBloglovin className="h-6 w-6 flex-shrink-0 text-orange-500 transition duration-75 group-hover:text-orange-600 "></SiBloglovin>
-                <span className="ml-3 flex-1 whitespace-nowrap font-semibold">
-                  Umrah Packages
+                  Tour Packages
                 </span>
               </Link>
             </li>
