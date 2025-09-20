@@ -13,11 +13,14 @@ import { MdDashboard } from "react-icons/md";
 import { RiBook2Line } from "react-icons/ri";
 import { SiBloglovin } from "react-icons/si";
 import { usePathname } from "next/navigation";
+import { signOut, useSession } from "next-auth/react";
+import { UserRole } from "@prisma/client";
 
 export const AdminHeader: React.FC = () => {
   const [showMobileMenu, setShowMobileMenu] = useState(false);
   const [showProfileMenu, setShowProfileMenu] = useState(false);
   const pathname = usePathname();
+  const { data: session } = useSession();
   
   useEffect(() => {
     if (setShowMobileMenu) setShowMobileMenu(false);
@@ -75,8 +78,7 @@ export const AdminHeader: React.FC = () => {
                     <li className="flex h-14 items-center justify-center border-b">
                       <button
                         onClick={() => {
-                          // Add logout functionality here
-                          console.log('Logout clicked');
+                          signOut({ callbackUrl: '/' });
                         }}
                         className="hover:text-orange-500 transition-colors duration-200"
                       >

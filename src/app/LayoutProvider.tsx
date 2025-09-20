@@ -2,6 +2,7 @@
 
 import { usePathname } from 'next/navigation';
 import { ReactNode } from 'react';
+import { SessionProvider } from 'next-auth/react';
 import { AdminLayout } from './adminLayout';
 import { UserLayout } from '@/components/UserLayout';
 import { StandardLayout } from '@/components/StandardLayout';
@@ -18,8 +19,10 @@ export const LayoutProvider: React.FC<LayoutProviderProps> = ({ children }) => {
     : (page: ReactNode) => <UserLayout>{page}</UserLayout>;
 
   return (
-    <StandardLayout>
-      {getLayout(children)}
-    </StandardLayout>
+    <SessionProvider>
+      <StandardLayout>
+        {getLayout(children)}
+      </StandardLayout>
+    </SessionProvider>
   );
 };

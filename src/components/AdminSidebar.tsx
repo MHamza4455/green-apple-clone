@@ -6,8 +6,13 @@ import React from "react";
 import { RiBook2Line } from "react-icons/ri";
 import { SiBloglovin } from "react-icons/si";
 import { FiMessageSquare } from "react-icons/fi";
+import { useSession } from "next-auth/react";
+import { UserRole } from "@prisma/client";
+import { FaUsers } from "react-icons/fa";
 
 const AdminSidebar: React.FC = () => {
+  const { data: session } = useSession();
+  
   return (
     <>
       <aside
@@ -72,6 +77,19 @@ const AdminSidebar: React.FC = () => {
                 </span>
               </Link>
             </li>
+            {session?.user?.role === UserRole.SUPER_ADMIN && (
+              <li>
+                <Link
+                  href="/admin/users"
+                  className="flex items-center rounded-lg p-2 text-base font-normal hover:bg-orange-50 hover:text-orange-600 transition-colors duration-200 "
+                >
+                  <FaUsers className="h-6 w-6 flex-shrink-0 text-orange-500 transition duration-75 group-hover:text-orange-600 "></FaUsers>
+                  <span className="ml-3 flex-1 whitespace-nowrap font-semibold">
+                    User Management
+                  </span>
+                </Link>
+              </li>
+            )}
           </ul>
         </div>
       </aside>
