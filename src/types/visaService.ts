@@ -1,13 +1,14 @@
 export interface VisaService {
-  id: number;
+  id: string;
   name: string;
   code: string;
   price: string;
   description: string;
   documentsRequired: string[];
   documentsProvided: string[];
-  status: 'active' | 'inactive';
+  status: string;
   createdAt: string;
+  updatedAt: string;
 }
 
 export interface VisaServiceFormData {
@@ -17,7 +18,7 @@ export interface VisaServiceFormData {
   description: string;
   documentsRequired: string[];
   documentsProvided: string[];
-  status: 'active' | 'inactive';
+  status: string;
 }
 
 export type VisaServiceStatusFilter = 'all' | 'active' | 'inactive';

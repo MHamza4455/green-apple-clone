@@ -9,6 +9,7 @@ import { useVisaServices } from '@/hooks/useVisaServices';
 export default function CreateVisaServicePage() {
   const router = useRouter();
   const { addVisaService } = useVisaServices();
+  const [isSubmitting, setIsSubmitting] = useState(false);
   
   const [formData, setFormData] = useState<VisaServiceFormData>({
     name: '',
@@ -48,22 +49,29 @@ export default function CreateVisaServicePage() {
     }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setIsSubmitting(true);
     
-    // Filter out empty strings from arrays
-    const newService = {
-      name: formData.name,
-      code: formData.code,
-      price: formData.price,
-      description: formData.description,
-      documentsRequired: formData.documentsRequired.filter(item => item.trim() !== ''),
-      documentsProvided: formData.documentsProvided.filter(item => item.trim() !== ''),
-      status: formData.status
-    };
+    try {
+      // Filter out empty strings from arrays
+      const newService = {
+        name: formData.name,
+        code: formData.code,
+        price: formData.price,
+        description: formData.description,
+        documentsRequired: formData.documentsRequired.filter(item => item.trim() !== ''),
+        documentsProvided: formData.documentsProvided.filter(item => item.trim() !== ''),
+        status: formData.status
+      };
 
-    addVisaService(newService);
-    router.push('/admin/visa-services');
+      await addVisaService(newService);
+      router.push('/admin/visa-services');
+    } catch (error) {
+      alert('Failed to create visa service. Please try again.');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -246,9 +254,10 @@ export default function CreateVisaServicePage() {
             </button>
             <button
               type="submit"
-              className="px-6 py-2 bg-orange-500 text-white rounded-lg hover:bg-orange-600 transition-colors duration-200"
+              disabled={isSubmitting}
+              className="px-6 py-2 bg-orange-500 text-white rounded-lg hover:bg-orange-600 transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
             >
-              Create Service
+              {isSubmitting ? 'Creating...' : 'Create Service'}
             </button>
           </div>
         </form>

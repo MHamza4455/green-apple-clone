@@ -9,14 +9,24 @@ import { useVisaServices } from '@/hooks/useVisaServices';
 export default function VisaServiceDetailsPage() {
   const router = useRouter();
   const params = useParams();
-  const { visaServices } = useVisaServices();
+  const { visaServices, loading } = useVisaServices();
   const [visaService, setVisaService] = useState<VisaService | null>(null);
 
   useEffect(() => {
-    const id = parseInt(params.id as string);
+    const id = params.id as string;
     const service = visaServices.find(s => s.id === id);
     setVisaService(service || null);
   }, [params.id, visaServices]);
+
+  if (loading) {
+    return (
+      <div className="p-6">
+        <div className="flex items-center justify-center h-64">
+          <div className="text-lg text-gray-600">Loading...</div>
+        </div>
+      </div>
+    );
+  }
 
   if (!visaService) {
     return (

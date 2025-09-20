@@ -9,8 +9,9 @@ import { useVisaServices } from '@/hooks/useVisaServices';
 export default function EditVisaServicePage() {
   const router = useRouter();
   const params = useParams();
-  const { visaServices, updateVisaService } = useVisaServices();
+  const { visaServices, updateVisaService, loading } = useVisaServices();
   const [visaService, setVisaService] = useState<VisaService | null>(null);
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [formData, setFormData] = useState<VisaServiceFormData>({
     name: '',
     code: '',
@@ -22,7 +23,7 @@ export default function EditVisaServicePage() {
   });
 
   useEffect(() => {
-    const id = parseInt(params.id as string);
+    const id = params.id as string;
     const service = visaServices.find(s => s.id === id);
     if (service) {
       setVisaService(service);
@@ -66,25 +67,43 @@ export default function EditVisaServicePage() {
     }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
     if (!visaService) return;
 
-    // Filter out empty strings from arrays
-    const updatedService = {
-      name: formData.name,
-      code: formData.code,
-      price: formData.price,
-      description: formData.description,
-      documentsRequired: formData.documentsRequired.filter(item => item.trim() !== ''),
-      documentsProvided: formData.documentsProvided.filter(item => item.trim() !== ''),
-      status: formData.status
-    };
+    setIsSubmitting(true);
 
-    updateVisaService(visaService.id, updatedService);
-    router.push(`/admin/visa-services/${visaService.id}`);
+    try {
+      // Filter out empty strings from arrays
+      const updatedService = {
+        name: formData.name,
+        code: formData.code,
+        price: formData.price,
+        description: formData.description,
+        documentsRequired: formData.documentsRequired.filter(item => item.trim() !== ''),
+        documentsProvided: formData.documentsProvided.filter(item => item.trim() !== ''),
+        status: formData.status
+      };
+
+      await updateVisaService(visaService.id, updatedService);
+      router.push(`/admin/visa-services/${visaService.id}`);
+    } catch (error) {
+      alert('Failed to update visa service. Please try again.');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
+
+  if (loading) {
+    return (
+      <div className="p-6">
+        <div className="flex items-center justify-center h-64">
+          <div className="text-lg text-gray-600">Loading...</div>
+        </div>
+      </div>
+    );
+  }
 
   if (!visaService) {
     return (
@@ -283,9 +302,10 @@ export default function EditVisaServicePage() {
             </button>
             <button
               type="submit"
-              className="px-6 py-2 bg-orange-500 text-white rounded-lg hover:bg-orange-600 transition-colors duration-200"
+              disabled={isSubmitting}
+              className="px-6 py-2 bg-orange-500 text-white rounded-lg hover:bg-orange-600 transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
             >
-              Update Service
+              {isSubmitting ? 'Updating...' : 'Update Service'}
             </button>
           </div>
         </form>

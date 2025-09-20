@@ -9,7 +9,7 @@ import { useVisaServices } from '@/hooks/useVisaServices';
 
 export default function AdminVisaServices() {
   const router = useRouter();
-  const { visaServices, deleteVisaService, toggleVisaServiceStatus } = useVisaServices();
+  const { visaServices, deleteVisaService, toggleVisaServiceStatus, loading, error } = useVisaServices();
   const [searchTerm, setSearchTerm] = useState('');
   const [filterStatus, setFilterStatus] = useState<VisaServiceStatusFilter>('all');
 
@@ -24,14 +24,22 @@ export default function AdminVisaServices() {
   });
 
   // Action handlers
-  const handleDelete = (id: number) => {
+  const handleDelete = async (id: string) => {
     if (confirm('Are you sure you want to delete this visa service?')) {
-      deleteVisaService(id);
+      try {
+        await deleteVisaService(id);
+      } catch (error) {
+        alert('Failed to delete visa service. Please try again.');
+      }
     }
   };
 
-  const handleStatusToggle = (id: number) => {
-    toggleVisaServiceStatus(id);
+  const handleStatusToggle = async (id: string) => {
+    try {
+      await toggleVisaServiceStatus(id);
+    } catch (error) {
+      alert('Failed to update visa service status. Please try again.');
+    }
   };
 
   const handleViewDetails = (service: VisaService) => {
@@ -58,19 +66,43 @@ export default function AdminVisaServices() {
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
         <div className="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
           <h3 className="text-lg font-semibold text-gray-700 mb-2">Total Services</h3>
-          <p className="text-3xl font-bold" style={{ color: '#FF4E00' }}>{visaServices.length}</p>
+          {loading ? (
+            <div className="animate-pulse">
+              <div className="h-8 bg-gray-200 rounded w-16"></div>
+            </div>
+          ) : error ? (
+            <p className="text-3xl font-bold text-gray-400">-</p>
+          ) : (
+            <p className="text-3xl font-bold" style={{ color: '#FF4E00' }}>{visaServices.length}</p>
+          )}
         </div>
         <div className="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
           <h3 className="text-lg font-semibold text-gray-700 mb-2">Active Services</h3>
-          <p className="text-3xl font-bold" style={{ color: '#FF4E00' }}>
-            {visaServices.filter(service => service.status === 'active').length}
-          </p>
+          {loading ? (
+            <div className="animate-pulse">
+              <div className="h-8 bg-gray-200 rounded w-16"></div>
+            </div>
+          ) : error ? (
+            <p className="text-3xl font-bold text-gray-400">-</p>
+          ) : (
+            <p className="text-3xl font-bold" style={{ color: '#FF4E00' }}>
+              {visaServices.filter(service => service.status === 'active').length}
+            </p>
+          )}
         </div>
         <div className="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
           <h3 className="text-lg font-semibold text-gray-700 mb-2">Inactive Services</h3>
-          <p className="text-3xl font-bold" style={{ color: '#FF4E00' }}>
-            {visaServices.filter(service => service.status === 'inactive').length}
-          </p>
+          {loading ? (
+            <div className="animate-pulse">
+              <div className="h-8 bg-gray-200 rounded w-16"></div>
+            </div>
+          ) : error ? (
+            <p className="text-3xl font-bold text-gray-400">-</p>
+          ) : (
+            <p className="text-3xl font-bold" style={{ color: '#FF4E00' }}>
+              {visaServices.filter(service => service.status === 'inactive').length}
+            </p>
+          )}
         </div>
       </div>
 

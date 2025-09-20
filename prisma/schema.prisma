@@ -60,6 +60,19 @@ model VerificationToken {
   @@unique([identifier, token])
 }
 
+model VisaService {
+  id                  String   @id @default(cuid())
+  name                String
+  code                String   @unique
+  price               String
+  description         String
+  documentsRequired   String[]
+  documentsProvided   String[]
+  status              String   @default("active")
+  createdAt           DateTime @default(now())
+  updatedAt           DateTime @updatedAt
+}
+
 enum UserRole {
   SUPER_ADMIN
   ADMIN
