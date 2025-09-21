@@ -2,41 +2,37 @@
 
 import { useRef, useState, useEffect } from 'react';
 import TourCard from './TourCard';
-
-const featuredTours = [
-  {
-    id: 'azerbaijan',
-    title: 'Azerbaijan, Baku Tour (3 Nights / 4 Days)',
-    description: 'Enjoy a 3-night, 4-day Baku tour featuring a 4★ hotel stay, included transfers, daily breakfast, and day trips to Niazmi Street and Flame Towers.',
-    duration: '4 days / 3 nights',
-    price: 'AED 1199',
-    image: '/images/HolidayPackages/holiday_package1.webp',
-    imageAlt: 'Azerbaijan, Baku Tour (3 Nights / 4 Days)'
-  },
-  {
-    id: 'georgia',
-    title: 'Georgia Tour (2 Nights / 3 Days)',
-    description: 'Discover the beauty of Georgia with this 2-night, 3-day tour. Includes a 4★ hotel stay, transfers, daily breakfast, and day trips to Tbilisi, Narikala Fortress, and Bridge of Peace.',
-    duration: '3 days / 2 nights',
-    price: 'AED 1499',
-    image: '/images/HolidayPackages/holiday_package2.webp',
-    imageAlt: 'Georgia Tour (2 Nights / 3 Days)'
-  },
-  {
-    id: 'russia',
-    title: 'Russia Tour (4 Nights / 5 Days)',
-    description: 'Experience the rich culture of Russia with this 4-night, 5-day tour. Includes a 4★ hotel stay, transfers, daily breakfast, and day trips to Moscow, Red Square, and Pushkin Museum.',
-    duration: '5 days / 4 nights',
-    price: 'AED 1999',
-    image: '/images/HolidayPackages/holiday_package3.webp',
-    imageAlt: 'Russia Tour (4 Nights / 5 Days)'
-  }
-];
-
+import { TourPackage } from '@/types/tourPackage';
 
 export default function FeaturedTours() {
+  const [featuredTours, setFeaturedTours] = useState<TourPackage[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
   const scrollContainerRef = useRef<HTMLDivElement>(null);
   const [scrollProgress, setScrollProgress] = useState(0);
+  
+  // Fetch featured tours from API
+  useEffect(() => {
+    const fetchFeaturedTours = async () => {
+      try {
+        setLoading(true);
+        const response = await fetch('/api/tour-packages?featured=true&status=active');
+        if (!response.ok) {
+          throw new Error('Failed to fetch featured tours');
+        }
+        const data = await response.json();
+        setFeaturedTours(data);
+        setError(null);
+      } catch (err) {
+        console.error('Error fetching featured tours:', err);
+        setError(err instanceof Error ? err.message : 'Failed to load featured tours');
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchFeaturedTours();
+  }, []);
   
   // Calculate how many slides we have based on screen size
   const getSlidesPerView = () => {
@@ -157,12 +153,48 @@ export default function FeaturedTours() {
            )}
           
           <div ref={scrollContainerRef} className="flex overflow-x-auto pb-4 scrollbar-hide">
-            {featuredTours.map((tour) => (
-              <TourCard
-                key={tour.id}
-                {...tour}
-              />
-            ))}
+            {loading ? (
+              // Loading skeleton cards
+              Array.from({ length: 3 }).map((_, index) => (
+                <div key={index} className="flex-shrink-0 w-80 mx-2">
+                  <div className="animate-pulse">
+                    <div className="bg-gray-200 h-48 rounded-lg mb-4"></div>
+                    <div className="h-4 bg-gray-200 rounded w-3/4 mb-2"></div>
+                    <div className="h-3 bg-gray-200 rounded w-1/2 mb-4"></div>
+                    <div className="h-8 bg-gray-200 rounded w-full"></div>
+                  </div>
+                </div>
+              ))
+            ) : error ? (
+              // Error state
+              <div className="w-full text-center py-12">
+                <div className="text-gray-500 text-lg">Failed to load featured tours</div>
+                <div className="text-gray-400 text-sm mt-2">{error}</div>
+              </div>
+            ) : featuredTours.length === 0 ? (
+              // No featured tours
+              <div className="w-full text-center py-12">
+                <div className="text-gray-500 text-lg">No featured tours available</div>
+                <div className="text-gray-400 text-sm mt-2">Check back later for featured tour packages</div>
+              </div>
+            ) : (
+              // Featured tours
+              featuredTours.map((tour) => (
+                <TourCard
+                  key={tour.id}
+                  id={tour.id}
+                  title={tour.title}
+                  description={tour.description}
+                  duration={tour.duration}
+                  price={tour.price}
+                  image={tour.image}
+                  imageAlt={tour.imageAlt}
+                  includedItems={tour.includedItems}
+                  highlights={tour.highlights}
+                  itinerary={tour.itinerary}
+                />
+              ))
+            )}
           </div>
         </section>
       </div>

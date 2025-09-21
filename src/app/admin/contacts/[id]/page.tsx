@@ -9,11 +9,11 @@ import { useContactMessages } from '@/hooks/useContactMessages';
 export default function ContactMessageDetailsPage() {
   const router = useRouter();
   const params = useParams();
-  const { contactMessages } = useContactMessages();
+  const { contactMessages, loading } = useContactMessages();
   const [contactMessage, setContactMessage] = useState<ContactMessage | null>(null);
 
   useEffect(() => {
-    const id = parseInt(params.id as string);
+    const id = params.id as string;
     const message = contactMessages.find(m => m.id === id);
     setContactMessage(message || null);
   }, [params.id, contactMessages]);
@@ -37,7 +37,7 @@ export default function ContactMessageDetailsPage() {
 
   const getStatusColor = (status: string) => {
     switch (status) {
-      case 'new': return 'bg-blue-100 text-blue-800';
+      case 'unread': return 'bg-blue-100 text-blue-800';
       case 'read': return 'bg-yellow-100 text-yellow-800';
       case 'replied': return 'bg-green-100 text-green-800';
       case 'archived': return 'bg-gray-100 text-gray-800';
@@ -71,7 +71,9 @@ export default function ContactMessageDetailsPage() {
         <div className="lg:col-span-2 space-y-6">
           {/* Message Information */}
           <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
-            <h2 className="text-2xl font-bold text-gray-900 mb-4">{contactMessage.subject}</h2>
+            <h2 className="text-2xl font-bold text-gray-900 mb-4">
+              {contactMessage.serviceInterest || 'General Inquiry'}
+            </h2>
             
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
               <div>
@@ -81,7 +83,7 @@ export default function ContactMessageDetailsPage() {
                     <FiUser className="w-5 h-5 text-gray-400" />
                     <div>
                       <span className="font-medium text-gray-700">Name:</span>
-                      <span className="ml-2 text-gray-600">{contactMessage.name}</span>
+                      <span className="ml-2 text-gray-600">{contactMessage.fullName}</span>
                     </div>
                   </div>
                   <div className="flex items-center gap-3">

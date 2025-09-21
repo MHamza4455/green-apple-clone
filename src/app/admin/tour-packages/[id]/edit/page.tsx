@@ -5,6 +5,7 @@ import { useRouter, useParams } from 'next/navigation';
 import { FiPlus, FiTrash2, FiArrowLeft } from 'react-icons/fi';
 import { TourPackage, TourPackageFormData } from '@/types/tourPackage';
 import { useTourPackages } from '@/hooks/useTourPackages';
+import ImageUpload from '@/components/ImageUpload';
 
 export default function EditTourPackagePage() {
   const router = useRouter();
@@ -18,14 +19,16 @@ export default function EditTourPackagePage() {
     price: '',
     image: '',
     imageAlt: '',
-    included: [''],
-    notIncluded: [''],
     category: 'all',
-    status: 'active'
+    status: 'active',
+    featured: false,
+    includedItems: [''],
+    highlights: [''],
+    itinerary: ['']
   });
 
   useEffect(() => {
-    const id = parseInt(params.id as string);
+    const id = params.id as string;
     const pkg = tourPackages.find(p => p.id === id);
     if (pkg) {
       setTourPackage(pkg);
@@ -36,10 +39,12 @@ export default function EditTourPackagePage() {
         price: pkg.price,
         image: pkg.image,
         imageAlt: pkg.imageAlt,
-        included: pkg.included.length > 0 ? pkg.included : [''],
-        notIncluded: pkg.notIncluded.length > 0 ? pkg.notIncluded : [''],
         category: pkg.category,
-        status: pkg.status
+        status: pkg.status,
+        featured: pkg.featured,
+        includedItems: pkg.includedItems.length > 0 ? pkg.includedItems : [''],
+        highlights: pkg.highlights.length > 0 ? pkg.highlights : [''],
+        itinerary: pkg.itinerary.length > 0 ? pkg.itinerary : ['']
       });
     }
   }, [params.id, tourPackages]);
@@ -51,28 +56,28 @@ export default function EditTourPackagePage() {
     }));
   };
 
-  const handleArrayChange = (field: 'included' | 'notIncluded', index: number, value: string) => {
+  const handleArrayChange = (field: 'includedItems' | 'highlights' | 'itinerary', index: number, value: string) => {
     setFormData(prev => ({
       ...prev,
       [field]: prev[field].map((item, i) => i === index ? value : item)
     }));
   };
 
-  const addArrayItem = (field: 'included' | 'notIncluded') => {
+  const addArrayItem = (field: 'includedItems' | 'highlights' | 'itinerary') => {
     setFormData(prev => ({
       ...prev,
       [field]: [...prev[field], '']
     }));
   };
 
-  const removeArrayItem = (field: 'included' | 'notIncluded', index: number) => {
+  const removeArrayItem = (field: 'includedItems' | 'highlights' | 'itinerary', index: number) => {
     setFormData(prev => ({
       ...prev,
       [field]: prev[field].filter((_, i) => i !== index)
     }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
     if (!tourPackage) return;
@@ -85,14 +90,20 @@ export default function EditTourPackagePage() {
       price: formData.price,
       image: formData.image,
       imageAlt: formData.imageAlt,
-      included: formData.included.filter(item => item.trim() !== ''),
-      notIncluded: formData.notIncluded.filter(item => item.trim() !== ''),
       category: formData.category,
-      status: formData.status
+      status: formData.status,
+      featured: formData.featured,
+      includedItems: formData.includedItems.filter(item => item.trim() !== ''),
+      highlights: formData.highlights.filter(item => item.trim() !== ''),
+      itinerary: formData.itinerary.filter(item => item.trim() !== '')
     };
 
-    updateTourPackage(tourPackage.id, updatedPackage);
-    router.push(`/admin/tour-packages/${tourPackage.id}`);
+    try {
+      await updateTourPackage(tourPackage.id, updatedPackage);
+      router.push(`/admin/tour-packages/${tourPackage.id}`);
+    } catch (error) {
+      console.error('Error updating tour package:', error);
+    }
   };
 
   if (!tourPackage) {
@@ -177,35 +188,17 @@ export default function EditTourPackagePage() {
             />
           </div>
 
-          {/* Image Information */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
-                Image URL *
-              </label>
-              <input
-                type="url"
-                required
-                value={formData.image}
-                onChange={(e) => handleInputChange('image', e.target.value)}
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent"
-                placeholder="/images/HolidayPackages/package1.webp"
-              />
-            </div>
-
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
-                Image Alt Text *
-              </label>
-              <input
-                type="text"
-                required
-                value={formData.imageAlt}
-                onChange={(e) => handleInputChange('imageAlt', e.target.value)}
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent"
-                placeholder="Alt text for the image"
-              />
-            </div>
+          {/* Image Upload */}
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-2">
+              Package Image *
+            </label>
+            <ImageUpload
+              value={formData.image}
+              onChange={(url) => handleInputChange('image', url)}
+              alt={formData.imageAlt}
+              onAltChange={(alt) => handleInputChange('imageAlt', alt)}
+            />
           </div>
 
           {/* Price and Category */}
@@ -230,11 +223,12 @@ export default function EditTourPackagePage() {
               </label>
               <select
                 value={formData.category}
-                onChange={(e) => handleInputChange('category', e.target.value as 'featured' | 'all')}
+                onChange={(e) => handleInputChange('category', e.target.value)}
                 className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent"
               >
                 <option value="all">All Tours</option>
-                <option value="featured">Featured Tours</option>
+                <option value="umrah">Umrah</option>
+                <option value="holiday">Holiday</option>
               </select>
             </div>
 
@@ -244,7 +238,7 @@ export default function EditTourPackagePage() {
               </label>
               <select
                 value={formData.status}
-                onChange={(e) => handleInputChange('status', e.target.value as 'active' | 'inactive')}
+                onChange={(e) => handleInputChange('status', e.target.value)}
                 className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent"
               >
                 <option value="active">Active</option>
@@ -253,25 +247,38 @@ export default function EditTourPackagePage() {
             </div>
           </div>
 
+          {/* Featured Checkbox */}
+          <div>
+            <label className="flex items-center gap-2">
+              <input
+                type="checkbox"
+                checked={formData.featured}
+                onChange={(e) => setFormData(prev => ({ ...prev, featured: e.target.checked }))}
+                className="w-4 h-4 text-orange-600 border-gray-300 rounded focus:ring-orange-500"
+              />
+              <span className="text-sm font-medium text-gray-700">Featured Package</span>
+            </label>
+          </div>
+
           {/* Included Items */}
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-2">
               Included Items
             </label>
             <div className="space-y-2">
-              {formData.included.map((item, index) => (
+              {formData.includedItems.map((item, index) => (
                 <div key={index} className="flex gap-2">
                   <input
                     type="text"
                     value={item}
-                    onChange={(e) => handleArrayChange('included', index, e.target.value)}
+                    onChange={(e) => handleArrayChange('includedItems', index, e.target.value)}
                     className="flex-1 px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent"
-                    placeholder="e.g., Breakfast, Hotel accommodation"
+                    placeholder="e.g., Return flights, Hotel accommodation"
                   />
-                  {formData.included.length > 1 && (
+                  {formData.includedItems.length > 1 && (
                     <button
                       type="button"
-                      onClick={() => removeArrayItem('included', index)}
+                      onClick={() => removeArrayItem('includedItems', index)}
                       className="px-3 py-2 text-red-600 hover:bg-red-50 rounded-lg transition-colors duration-200"
                     >
                       <FiTrash2 className="w-4 h-4" />
@@ -281,7 +288,7 @@ export default function EditTourPackagePage() {
               ))}
               <button
                 type="button"
-                onClick={() => addArrayItem('included')}
+                onClick={() => addArrayItem('includedItems')}
                 className="flex items-center gap-2 px-3 py-2 text-orange-600 hover:bg-orange-50 rounded-lg transition-colors duration-200"
               >
                 <FiPlus className="w-4 h-4" />
@@ -290,25 +297,25 @@ export default function EditTourPackagePage() {
             </div>
           </div>
 
-          {/* Not Included Items */}
+          {/* Highlights */}
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-2">
-              Not Included Items
+              Highlights
             </label>
             <div className="space-y-2">
-              {formData.notIncluded.map((item, index) => (
+              {formData.highlights.map((item, index) => (
                 <div key={index} className="flex gap-2">
                   <input
                     type="text"
                     value={item}
-                    onChange={(e) => handleArrayChange('notIncluded', index, e.target.value)}
+                    onChange={(e) => handleArrayChange('highlights', index, e.target.value)}
                     className="flex-1 px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent"
-                    placeholder="e.g., Train tickets, Personal expenses"
+                    placeholder="e.g., Visit the Holy Kaaba, Perform Tawaf and Sa'i"
                   />
-                  {formData.notIncluded.length > 1 && (
+                  {formData.highlights.length > 1 && (
                     <button
                       type="button"
-                      onClick={() => removeArrayItem('notIncluded', index)}
+                      onClick={() => removeArrayItem('highlights', index)}
                       className="px-3 py-2 text-red-600 hover:bg-red-50 rounded-lg transition-colors duration-200"
                     >
                       <FiTrash2 className="w-4 h-4" />
@@ -318,11 +325,48 @@ export default function EditTourPackagePage() {
               ))}
               <button
                 type="button"
-                onClick={() => addArrayItem('notIncluded')}
+                onClick={() => addArrayItem('highlights')}
                 className="flex items-center gap-2 px-3 py-2 text-orange-600 hover:bg-orange-50 rounded-lg transition-colors duration-200"
               >
                 <FiPlus className="w-4 h-4" />
-                Add Not Included Item
+                Add Highlight
+              </button>
+            </div>
+          </div>
+
+          {/* Itinerary */}
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-2">
+              Itinerary
+            </label>
+            <div className="space-y-2">
+              {formData.itinerary.map((item, index) => (
+                <div key={index} className="flex gap-2">
+                  <input
+                    type="text"
+                    value={item}
+                    onChange={(e) => handleArrayChange('itinerary', index, e.target.value)}
+                    className="flex-1 px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent"
+                    placeholder="e.g., Day 1: Arrival and check-in"
+                  />
+                  {formData.itinerary.length > 1 && (
+                    <button
+                      type="button"
+                      onClick={() => removeArrayItem('itinerary', index)}
+                      className="px-3 py-2 text-red-600 hover:bg-red-50 rounded-lg transition-colors duration-200"
+                    >
+                      <FiTrash2 className="w-4 h-4" />
+                    </button>
+                  )}
+                </div>
+              ))}
+              <button
+                type="button"
+                onClick={() => addArrayItem('itinerary')}
+                className="flex items-center gap-2 px-3 py-2 text-orange-600 hover:bg-orange-50 rounded-lg transition-colors duration-200"
+              >
+                <FiPlus className="w-4 h-4" />
+                Add Itinerary Item
               </button>
             </div>
           </div>

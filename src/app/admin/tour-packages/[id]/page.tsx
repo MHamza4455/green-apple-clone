@@ -14,7 +14,7 @@ export default function TourPackageDetailsPage() {
   const [tourPackage, setTourPackage] = useState<TourPackage | null>(null);
 
   useEffect(() => {
-    const id = parseInt(params.id as string);
+    const id = params.id as string;
     const pkg = tourPackages.find(p => p.id === id);
     setTourPackage(pkg || null);
   }, [params.id, tourPackages]);
@@ -140,7 +140,7 @@ export default function TourPackageDetailsPage() {
           <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
             <h3 className="text-lg font-semibold text-gray-900 mb-4">What's Included</h3>
             <div className="space-y-2">
-              {tourPackage.included.map((item, index) => (
+              {tourPackage.includedItems.map((item, index) => (
                 <div key={index} className="flex items-center gap-2">
                   <div className="w-2 h-2 bg-green-500 rounded-full"></div>
                   <span className="text-gray-700">{item}</span>
@@ -149,13 +149,26 @@ export default function TourPackageDetailsPage() {
             </div>
           </div>
 
-          {/* Not Included Items */}
+          {/* Highlights */}
           <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
-            <h3 className="text-lg font-semibold text-gray-900 mb-4">What's Not Included</h3>
+            <h3 className="text-lg font-semibold text-gray-900 mb-4">Highlights</h3>
             <div className="space-y-2">
-              {tourPackage.notIncluded.map((item, index) => (
+              {tourPackage.highlights.map((item, index) => (
                 <div key={index} className="flex items-center gap-2">
-                  <div className="w-2 h-2 bg-red-500 rounded-full"></div>
+                  <div className="w-2 h-2 bg-orange-500 rounded-full"></div>
+                  <span className="text-gray-700">{item}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Itinerary */}
+          <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+            <h3 className="text-lg font-semibold text-gray-900 mb-4">Itinerary</h3>
+            <div className="space-y-2">
+              {tourPackage.itinerary.map((item, index) => (
+                <div key={index} className="flex items-center gap-2">
+                  <div className="w-2 h-2 bg-blue-500 rounded-full"></div>
                   <span className="text-gray-700">{item}</span>
                 </div>
               ))}

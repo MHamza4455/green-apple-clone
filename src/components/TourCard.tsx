@@ -12,6 +12,9 @@ interface TourCardProps {
   price: string;
   image: string;
   imageAlt: string;
+  includedItems?: string[];
+  highlights?: string[];
+  itinerary?: string[];
 }
 
 interface InquiryFormData {
@@ -30,7 +33,10 @@ export default function TourCard({
   duration,
   price,
   image,
-  imageAlt
+  imageAlt,
+  includedItems = [],
+  highlights = [],
+  itinerary = []
 }: TourCardProps) {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [formData, setFormData] = useState<InquiryFormData>({
@@ -229,66 +235,28 @@ export default function TourCard({
                     </svg>
                   </div>
                   <h4 className="text-lg font-bold text-gray-900 mb-2">Inquiry Submitted!</h4>
-                  <p className="text-gray-600 text-sm">Thank you for your interest. We&apos;ll get back to you within 24 hours.</p>
+                  <p className="text-gray-600 text-sm">Thank you for your interest. We will get back to you within 24 hours.</p>
                 </div>
               ) : (
                 <div className="space-y-4">
                   {/* What's Included Section */}
-                  <div>
-                    <h4 className="text-lg font-semibold mb-3" style={{ color: 'black' }}>
-                      What&apos;s Included
-                    </h4>
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-                      <div className="flex items-center space-x-2">
-                        <svg className="w-5 h-5 flex-shrink-0" style={{ color: 'black' }} fill="currentColor" viewBox="0 0 20 20">
-                          <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                        </svg>
-                        <span className="text-sm" style={{ color: 'black' }}>4★ Hotel Accommodation</span>
-                      </div>
-                      <div className="flex items-center space-x-2">
-                        <svg className="w-5 h-5 flex-shrink-0" style={{ color: 'black' }} fill="currentColor" viewBox="0 0 20 20">
-                          <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                        </svg>
-                        <span className="text-sm" style={{ color: 'black' }}>Daily Breakfast</span>
-                      </div>
-                      <div className="flex items-center space-x-2">
-                        <svg className="w-5 h-5 flex-shrink-0" style={{ color: 'black' }} fill="currentColor" viewBox="0 0 20 20">
-                          <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                        </svg>
-                        <span className="text-sm" style={{ color: 'black' }}>Airport Transfers</span>
-                      </div>
-                      <div className="flex items-center space-x-2">
-                        <svg className="w-5 h-5 flex-shrink-0" style={{ color: 'black' }} fill="currentColor" viewBox="0 0 20 20">
-                          <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                        </svg>
-                        <span className="text-sm" style={{ color: 'black' }}>Professional Guided Tours</span>
-                      </div>
-                      <div className="flex items-center space-x-2">
-                        <svg className="w-5 h-5 flex-shrink-0" style={{ color: 'black' }} fill="currentColor" viewBox="0 0 20 20">
-                          <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                        </svg>
-                        <span className="text-sm" style={{ color: 'black' }}>Entrance Fees to Attractions</span>
-                      </div>
-                      <div className="flex items-center space-x-2">
-                        <svg className="w-5 h-5 flex-shrink-0" style={{ color: 'black' }} fill="currentColor" viewBox="0 0 20 20">
-                          <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                        </svg>
-                        <span className="text-sm" style={{ color: 'black' }}>Comfortable Transportation</span>
-                      </div>
-                      <div className="flex items-center space-x-2">
-                        <svg className="w-5 h-5 flex-shrink-0" style={{ color: 'black' }} fill="currentColor" viewBox="0 0 20 20">
-                          <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                        </svg>
-                        <span className="text-sm" style={{ color: 'black' }}>24/7 Travel Support</span>
-                      </div>
-                      <div className="flex items-center space-x-2">
-                        <svg className="w-5 h-5 flex-shrink-0" style={{ color: 'black' }} fill="currentColor" viewBox="0 0 20 20">
-                          <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                        </svg>
-                        <span className="text-sm" style={{ color: 'black' }}>Return Flights</span>
+                  {includedItems.length > 0 && (
+                    <div>
+                      <h4 className="text-lg font-semibold mb-3" style={{ color: 'black' }}>
+                        What&apos;s Included
+                      </h4>
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                        {includedItems.map((item, index) => (
+                          <div key={index} className="flex items-center space-x-2">
+                            <svg className="w-5 h-5 flex-shrink-0" style={{ color: 'black' }} fill="currentColor" viewBox="0 0 20 20">
+                              <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                            </svg>
+                            <span className="text-sm" style={{ color: 'black' }}>{item}</span>
+                          </div>
+                        ))}
                       </div>
                     </div>
-                  </div>
+                  )}
                   {/* Personal Information */}
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div className="relative">

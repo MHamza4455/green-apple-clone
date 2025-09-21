@@ -94,14 +94,14 @@ export default function ContactUs() {
                 Send us a Message
               </h3>
               <p className="text-black mb-8">
-                Fill out the form below and we&apos;ll get back to you as soon as possible.
+                Fill out the form below and we will get back to you as soon as possible.
               </p>
 
               <form onSubmit={handleSubmit} className="space-y-6">
                 {/* Success/Error Messages */}
                 {submitStatus === 'success' && (
                   <div className="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded-xl">
-                    Thank you! Your message has been sent successfully. We&aposll get back to you soon.
+                    Thank you! Your message has been sent successfully. We will get back to you soon.
                   </div>
                 )}
                 {submitStatus === 'error' && (

@@ -2,94 +2,37 @@
 
 import { useRef, useState, useEffect } from 'react';
 import TourCard from './TourCard';
-
-const tourPackages = [
-  {
-    id: 'maldives',
-    title: 'Maldives Tour – 4 Nights / 5 Days',
-    description: 'Relax in paradise with a 4★ hotel stay, transfers, breakfast, and day trips to Vaadhoo Island, Alimatha Island, Addu Atoll, Banana Reef, and Mirihi Island.',
-    duration: '5 days / 4 nights',
-    price: 'AED 2199',
-    image: '/images/UmrahPackages/umrah_package1.webp',
-    imageAlt: 'Maldives Tour – 4 Nights / 5 Days'
-  },
-  {
-    id: 'las-vegas',
-    title: 'Las Vegas Tour – 5 Nights / 6 Days',
-    description: 'Experience the excitement of Las Vegas with a 4★ hotel stay, transfers, breakfast, and day trips to the Fountains of Bellagio, Sphere, Fremont Street, and AREA15.',
-    duration: '6 days / 5 nights',
-    price: 'AED 3999',
-    image: '/images/UmrahPackages/umrah_package2.webp',
-    imageAlt: 'Las Vegas Tour – 5 Nights / 6 Days'
-  },
-  {
-    id: 'greece',
-    title: 'Greece Tour – 3 Nights / 4 Days',
-    description: 'Explore Greece with a 4★ hotel stay, transfers, breakfast, and day trips to Athens, the Acropolis, Parthenon, and Paros.',
-    duration: '4 days / 3 nights',
-    price: 'AED 2199',
-    image: '/images/UmrahPackages/umrah_package3.webp',
-    imageAlt: 'Greece Tour – 3 Nights / 4 Days'
-  },
-  {
-    id: 'thailand',
-    title: 'Thailand Tour – 2 Nights / 3 Days',
-    description: 'Enjoy a quick Thailand getaway with a 4★ hotel stay, transfers, breakfast, and day trips to Bangkok, the Grand Palace, Wat Arun, and the Chao Phraya River.',
-    duration: '3 days / 2 nights',
-    price: 'AED 1299',
-    image: '/images/UmrahPackages/umrah_package4.webp',
-    imageAlt: 'Thailand Tour – 2 Nights / 3 Days'
-  },
-  {
-    id: 'turkey-istanbul',
-    title: 'Turkey, Istanbul – 3 Nights / 4 Days',
-    description: 'Visit Istanbul with a 4★ hotel stay, transfers, breakfast, and day trips to the Blue Mosque, Hagia Sophia, Topkapi Palace, and the Grand Bazaar.',
-    duration: '4 days / 3 nights',
-    price: 'AED 1450',
-    image: '/images/UmrahPackages/umrah_package5.webp',
-    imageAlt: 'Turkey, Istanbul – 3 Nights / 4 Days'
-  },
-  {
-    id: 'egypt',
-    title: 'Egypt Tour – 3 Nights / 4 Days',
-    description: 'Experience Egypt’s wonders with a 4★ hotel stay, transfers, breakfast, and day trips to Cairo, the Egyptian Museum, Hanging Church, Museum of Islamic Art, and Pyramids of Giza.',
-    duration: '4 days / 3 nights',
-    price: 'AED 1699',
-    image: '/images/UmrahPackages/umrah_package6.webp',
-    imageAlt: 'Egypt Tour – 3 Nights / 4 Days'
-  },
-  {
-    id: 'russia',
-    title: 'Russia Tour – 4 Nights / 5 Days',
-    description: 'Explore the rich culture of Russia with a 4★ hotel stay, transfers, breakfast, and day trips to Moscow, Red Square, and the Pushkin Museum.',
-    duration: '5 days / 4 nights',
-    price: 'AED 1999',
-    image: '/images/HolidayPackages/holiday_package4.webp',
-    imageAlt: 'Russia Tour – 4 Nights / 5 Days'
-  },
-  {
-    id: 'georgia',
-    title: 'Georgia Tour – 2 Nights / 3 Days',
-    description: 'Discover the beauty of Georgia with a 4★ hotel stay, transfers, breakfast, and guided day trips to Tbilisi, Narikala Fortress, and the Bridge of Peace.',
-    duration: '3 days / 2 nights',
-    price: 'AED 1499',
-    image: '/images/HolidayPackages/holiday_package5.webp',
-    imageAlt: 'Georgia Tour – 2 Nights / 3 Days'
-  },
-  {
-    id: 'azerbaijan-baku',
-    title: 'Azerbaijan, Baku Tour – 3 Nights / 4 Days',
-    description: 'Enjoy a memorable trip to Baku with a 4★ hotel stay, transfers, breakfast, and exciting day trips to Niazmi Street and Flame Towers.',
-    duration: '4 days / 3 nights',
-    price: 'AED 1199',
-    image: '/images/HolidayPackages/holiday_package6.webp',
-    imageAlt: 'Azerbaijan, Baku Tour – 3 Nights / 4 Days'
-  }
-];
+import { TourPackage } from '@/types/tourPackage';
 
 export default function UmrahPackages() {
+  const [tourPackages, setTourPackages] = useState<TourPackage[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
   const scrollContainerRef = useRef<HTMLDivElement>(null);
   const [scrollProgress, setScrollProgress] = useState(0);
+  
+  // Fetch all tour packages from API
+  useEffect(() => {
+    const fetchTourPackages = async () => {
+      try {
+        setLoading(true);
+        const response = await fetch('/api/tour-packages?status=active');
+        if (!response.ok) {
+          throw new Error('Failed to fetch tour packages');
+        }
+        const data = await response.json();
+        setTourPackages(data);
+        setError(null);
+      } catch (err) {
+        console.error('Error fetching tour packages:', err);
+        setError(err instanceof Error ? err.message : 'Failed to load tour packages');
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchTourPackages();
+  }, []);
    
   // Calculate how many slides we have based on screen size
   const getSlidesPerView = () => {
@@ -210,12 +153,48 @@ export default function UmrahPackages() {
           )}
           
           <div ref={scrollContainerRef} className="flex overflow-x-auto pb-4 scrollbar-hide">
-            {tourPackages.map((umrahPackage) => (
-              <TourCard
-                key={umrahPackage.id}
-                {...umrahPackage}
-              />
-            ))}
+            {loading ? (
+              // Loading skeleton cards
+              Array.from({ length: 3 }).map((_, index) => (
+                <div key={index} className="flex-shrink-0 w-80 mx-2">
+                  <div className="animate-pulse">
+                    <div className="bg-gray-200 h-48 rounded-lg mb-4"></div>
+                    <div className="h-4 bg-gray-200 rounded w-3/4 mb-2"></div>
+                    <div className="h-3 bg-gray-200 rounded w-1/2 mb-4"></div>
+                    <div className="h-8 bg-gray-200 rounded w-full"></div>
+                  </div>
+                </div>
+              ))
+            ) : error ? (
+              // Error state
+              <div className="w-full text-center py-12">
+                <div className="text-gray-500 text-lg">Failed to load tour packages</div>
+                <div className="text-gray-400 text-sm mt-2">{error}</div>
+              </div>
+            ) : tourPackages.length === 0 ? (
+              // No packages
+              <div className="w-full text-center py-12">
+                <div className="text-gray-500 text-lg">No tour packages available</div>
+                <div className="text-gray-400 text-sm mt-2">Check back later for tour packages</div>
+              </div>
+            ) : (
+              // Tour packages
+              tourPackages.map((umrahPackage) => (
+                <TourCard
+                  key={umrahPackage.id}
+                  id={umrahPackage.id}
+                  title={umrahPackage.title}
+                  description={umrahPackage.description}
+                  duration={umrahPackage.duration}
+                  price={umrahPackage.price}
+                  image={umrahPackage.image}
+                  imageAlt={umrahPackage.imageAlt}
+                  includedItems={umrahPackage.includedItems}
+                  highlights={umrahPackage.highlights}
+                  itinerary={umrahPackage.itinerary}
+                />
+              ))
+            )}
           </div>
         </section>
       </div>

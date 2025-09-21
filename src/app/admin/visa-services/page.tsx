@@ -28,7 +28,8 @@ export default function AdminVisaServices() {
     if (confirm('Are you sure you want to delete this visa service?')) {
       try {
         await deleteVisaService(id);
-      } catch (error) {
+      } catch (err) {
+        console.error('Delete error:', err);
         alert('Failed to delete visa service. Please try again.');
       }
     }
@@ -37,7 +38,8 @@ export default function AdminVisaServices() {
   const handleStatusToggle = async (id: string) => {
     try {
       await toggleVisaServiceStatus(id);
-    } catch (error) {
+    } catch (err) {
+      console.error('Status toggle error:', err);
       alert('Failed to update visa service status. Please try again.');
     }
   };
@@ -172,86 +174,156 @@ export default function AdminVisaServices() {
               </tr>
             </thead>
             <tbody className="bg-white divide-y divide-gray-200">
-              {filteredServices.map((service) => (
-                <tr key={service.id} className="hover:bg-gray-50 transition-colors duration-200">
-                  <td className="px-6 py-4 whitespace-nowrap">
-                    <div>
-                      <div className="text-sm font-medium text-gray-900">
-                        {service.name}
+              {loading ? (
+                // Loading skeleton rows
+                Array.from({ length: 3 }).map((_, index) => (
+                  <tr key={index} className="animate-pulse">
+                    <td className="px-6 py-4 whitespace-nowrap">
+                      <div className="space-y-2">
+                        <div className="h-4 bg-gray-200 rounded w-32"></div>
+                        <div className="h-3 bg-gray-200 rounded w-48"></div>
                       </div>
-                      <div className="text-sm text-gray-500 max-w-xs truncate">
-                        {service.description}
+                    </td>
+                    <td className="px-6 py-4 whitespace-nowrap">
+                      <div className="h-6 bg-gray-200 rounded-full w-12"></div>
+                    </td>
+                    <td className="px-6 py-4 whitespace-nowrap">
+                      <div className="h-4 bg-gray-200 rounded w-20"></div>
+                    </td>
+                    <td className="px-6 py-4 whitespace-nowrap">
+                      <div className="h-6 bg-gray-200 rounded-full w-16"></div>
+                    </td>
+                    <td className="px-6 py-4 whitespace-nowrap">
+                      <div className="h-4 bg-gray-200 rounded w-24"></div>
+                    </td>
+                    <td className="px-6 py-4 whitespace-nowrap">
+                      <div className="flex items-center gap-2">
+                        <div className="h-6 w-6 bg-gray-200 rounded"></div>
+                        <div className="h-6 w-6 bg-gray-200 rounded"></div>
+                        <div className="h-6 w-6 bg-gray-200 rounded"></div>
                       </div>
-                    </div>
-                  </td>
-                  <td className="px-6 py-4 whitespace-nowrap">
-                    <span className="inline-flex px-2 py-1 text-xs font-semibold rounded-full bg-blue-100 text-blue-800">
-                      {service.code.toUpperCase()}
-                    </span>
-                  </td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm font-semibold text-gray-900">
-                    {service.price}
-                  </td>
-                  <td className="px-6 py-4 whitespace-nowrap">
-                    <button
-                      onClick={() => handleStatusToggle(service.id)}
-                      className={`inline-flex px-2 py-1 text-xs font-semibold rounded-full cursor-pointer transition-colors duration-200 ${
-                        service.status === 'active'
-                          ? 'bg-green-100 text-green-800 hover:bg-green-200'
-                          : 'bg-red-100 text-red-800 hover:bg-red-200'
-                      }`}
-                    >
-                      {service.status === 'active' ? 'Active' : 'Inactive'}
-                    </button>
-                  </td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                    {new Date(service.createdAt).toLocaleDateString()}
-                  </td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
-                    <div className="flex items-center gap-2">
+                    </td>
+                  </tr>
+                ))
+              ) : error ? (
+                // Error state
+                <tr>
+                  <td colSpan={6} className="px-6 py-12 text-center">
+                    <div className="bg-red-50 border border-red-200 rounded-lg p-4 mx-auto max-w-md">
+                      <div className="text-red-800 font-medium">Failed to load visa services</div>
+                      <div className="text-red-600 text-sm mt-1">{error}</div>
                       <button
-                        onClick={() => handleViewDetails(service)}
-                        className="text-blue-600 hover:text-blue-900 p-1 rounded hover:bg-blue-50 transition-colors duration-200"
-                        title="View Details"
+                        onClick={() => window.location.reload()}
+                        className="mt-3 px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors duration-200 text-sm"
                       >
-                        <MdVisibility className="w-4 h-4" />
-                      </button>
-                      <button
-                        onClick={() => handleEditService(service)}
-                        className="text-orange-600 hover:text-orange-900 p-1 rounded hover:bg-orange-50 transition-colors duration-200"
-                        title="Edit Service"
-                      >
-                        <FiEdit className="w-4 h-4" />
-                      </button>
-                      <button
-                        onClick={() => handleDelete(service.id)}
-                        className="text-red-600 hover:text-red-900 p-1 rounded hover:bg-red-50 transition-colors duration-200"
-                        title="Delete Service"
-                      >
-                        <FiTrash2 className="w-4 h-4" />
+                        Try Again
                       </button>
                     </div>
                   </td>
                 </tr>
-              ))}
+              ) : filteredServices.length === 0 ? (
+                // No data state
+                <tr>
+                  <td colSpan={6} className="px-6 py-12 text-center">
+                    <div className="text-gray-500 text-lg">No visa services found</div>
+                    <div className="text-gray-400 text-sm mt-2">
+                      {searchTerm || filterStatus !== 'all' 
+                        ? 'Try adjusting your search or filter criteria'
+                        : 'Create your first visa service to get started'
+                      }
+                    </div>
+                    {!searchTerm && filterStatus === 'all' && (
+                      <button
+                        onClick={handleCreateService}
+                        className="mt-4 px-4 py-2 bg-orange-500 text-white rounded-lg hover:bg-orange-600 transition-colors duration-200"
+                      >
+                        Create First Service
+                      </button>
+                    )}
+                  </td>
+                </tr>
+              ) : (
+                // Data rows
+                filteredServices.map((service) => (
+                  <tr key={service.id} className="hover:bg-gray-50 transition-colors duration-200">
+                    <td className="px-6 py-4 whitespace-nowrap">
+                      <div>
+                        <div className="text-sm font-medium text-gray-900">
+                          {service.name}
+                        </div>
+                        <div className="text-sm text-gray-500 max-w-xs truncate">
+                          {service.description}
+                        </div>
+                      </div>
+                    </td>
+                    <td className="px-6 py-4 whitespace-nowrap">
+                      <span className="inline-flex px-2 py-1 text-xs font-semibold rounded-full bg-blue-100 text-blue-800">
+                        {service.code.toUpperCase()}
+                      </span>
+                    </td>
+                    <td className="px-6 py-4 whitespace-nowrap text-sm font-semibold text-gray-900">
+                      {service.price}
+                    </td>
+                    <td className="px-6 py-4 whitespace-nowrap">
+                      <button
+                        onClick={() => handleStatusToggle(service.id)}
+                        className={`inline-flex px-2 py-1 text-xs font-semibold rounded-full cursor-pointer transition-colors duration-200 ${
+                          service.status === 'active'
+                            ? 'bg-green-100 text-green-800 hover:bg-green-200'
+                            : 'bg-red-100 text-red-800 hover:bg-red-200'
+                        }`}
+                      >
+                        {service.status === 'active' ? 'Active' : 'Inactive'}
+                      </button>
+                    </td>
+                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                      {new Date(service.createdAt).toLocaleDateString()}
+                    </td>
+                    <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                      <div className="flex items-center gap-2">
+                        <button
+                          onClick={() => handleViewDetails(service)}
+                          className="text-blue-600 hover:text-blue-900 p-1 rounded hover:bg-blue-50 transition-colors duration-200"
+                          title="View Details"
+                        >
+                          <MdVisibility className="w-4 h-4" />
+                        </button>
+                        <button
+                          onClick={() => handleEditService(service)}
+                          className="text-orange-600 hover:text-orange-900 p-1 rounded hover:bg-orange-50 transition-colors duration-200"
+                          title="Edit Service"
+                        >
+                          <FiEdit className="w-4 h-4" />
+                        </button>
+                        <button
+                          onClick={() => handleDelete(service.id)}
+                          className="text-red-600 hover:text-red-900 p-1 rounded hover:bg-red-50 transition-colors duration-200"
+                          title="Delete Service"
+                        >
+                          <FiTrash2 className="w-4 h-4" />
+                        </button>
+                      </div>
+                    </td>
+                  </tr>
+                ))
+              )}
             </tbody>
           </table>
         </div>
-
-        {filteredServices.length === 0 && (
-          <div className="text-center py-12">
-            <div className="text-gray-500 text-lg">No visa services found</div>
-            <div className="text-gray-400 text-sm mt-2">
-              Try adjusting your search or filter criteria
-            </div>
-          </div>
-        )}
       </div>
 
       {/* Pagination */}
       <div className="mt-6 flex items-center justify-between">
         <div className="text-sm text-gray-700">
-          Showing {filteredServices.length} of {visaServices.length} services
+          {loading ? (
+            <div className="animate-pulse">
+              <div className="h-4 bg-gray-200 rounded w-48"></div>
+            </div>
+          ) : error ? (
+            <span className="text-gray-500">Unable to load service count</span>
+          ) : (
+            `Showing ${filteredServices.length} of ${visaServices.length} services`
+          )}
         </div>
         <div className="flex gap-2">
           <button className="px-3 py-1 border border-gray-300 rounded text-sm hover:bg-gray-50">

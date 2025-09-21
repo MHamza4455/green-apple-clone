@@ -1,14 +1,22 @@
 export interface ContactMessage {
-  id: number;
-  name: string;
+  id: string;
+  fullName: string;
   email: string;
   phone?: string;
-  subject: string;
+  serviceInterest?: string;
   message: string;
-  status: 'new' | 'read' | 'replied' | 'archived';
+  status: string;
   createdAt: string;
   updatedAt: string;
 }
 
-export type ContactMessageStatus = 'new' | 'read' | 'replied' | 'archived';
+export interface ContactMessageFormData {
+  fullName: string;
+  email: string;
+  phone: string;
+  serviceInterest: string;
+  message: string;
+}
+
+export type ContactMessageStatus = 'unread' | 'read' | 'replied' | 'archived';
 export type ContactMessageStatusFilter = 'all' | ContactMessageStatus;

@@ -90,7 +90,7 @@ export default function VisaInquiryPopup({ isOpen, onClose, country }: VisaInqui
 
           {submitStatus === 'success' && (
             <div className="mb-4 p-4 bg-green-100 border border-green-400 text-green-700 rounded">
-              Thank you! Your visa inquiry has been submitted successfully. We&apos;ll get back to you soon.
+              Thank you! Your visa inquiry has been submitted successfully. We will get back to you soon.
             </div>
           )}
 
