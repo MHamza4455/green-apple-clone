@@ -1,31 +1,35 @@
-export type InquiryType = 'visa' | 'tour';
+export type InquiryType = 'VISA' | 'TOUR';
 
 export interface BaseInquiry {
-  id: number;
+  id: string;
   type: InquiryType;
   name: string;
   email: string;
   phone?: string;
   message?: string;
-  status: 'new' | 'in_progress' | 'completed' | 'cancelled';
+  travelDate?: string;
+  status: 'NEW' | 'IN_PROGRESS' | 'COMPLETED' | 'CANCELLED';
+  metadata: any; // JSON field containing type-specific data
   createdAt: string;
   updatedAt: string;
 }
 
 export interface VisaInquiry extends BaseInquiry {
-  type: 'visa';
-  country: string;
-  visaType?: string;
-  travelDate?: string;
+  type: 'VISA';
+  metadata: {
+    country: string;
+    visaType?: string;
+  };
 }
 
 export interface TourInquiry extends BaseInquiry {
-  type: 'tour';
-  tourTitle: string;
-  tourDuration?: string;
-  tourPrice?: string;
-  travelDate?: string;
-  travelers?: number;
+  type: 'TOUR';
+  metadata: {
+    tourTitle: string;
+    tourDuration?: string;
+    tourPrice?: string;
+    travelers?: number;
+  };
 }
 
 export type Inquiry = VisaInquiry | TourInquiry;
@@ -47,5 +51,5 @@ export interface InquiryFormData {
   travelDate?: string;
 }
 
-export type InquiryStatus = 'new' | 'in_progress' | 'completed' | 'cancelled';
+export type InquiryStatus = 'NEW' | 'IN_PROGRESS' | 'COMPLETED' | 'CANCELLED';
 export type InquiryStatusFilter = 'all' | InquiryStatus;

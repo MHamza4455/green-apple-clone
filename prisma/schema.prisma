@@ -103,6 +103,32 @@ model TourPackage {
   updatedAt           DateTime @updatedAt
 }
 
+model Inquiry {
+  id          String      @id @default(cuid())
+  type        InquiryType
+  name        String
+  email       String
+  phone       String?
+  message     String?
+  travelDate  DateTime?
+  status      InquiryStatus @default(NEW)
+  metadata    Json        // Store type-specific data (country, visaType, tourTitle, etc.)
+  createdAt   DateTime    @default(now())
+  updatedAt   DateTime    @updatedAt
+}
+
+enum InquiryType {
+  VISA
+  TOUR
+}
+
+enum InquiryStatus {
+  NEW
+  IN_PROGRESS
+  COMPLETED
+  CANCELLED
+}
+
 enum UserRole {
   SUPER_ADMIN
   ADMIN

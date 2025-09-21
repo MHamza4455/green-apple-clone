@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import VisaInquiryPopup from './VisaInquiryPopup';
+import InquiryForm from './InquiryForm';
 
 interface VisaDetails {
   name: string;
@@ -143,9 +143,10 @@ export default function VisaDetailsPopup({ isOpen, onClose, country, visaDetails
         </div>
       </div>
 
-      <VisaInquiryPopup
+      <InquiryForm
         isOpen={showInquiryForm}
         onClose={() => setShowInquiryForm(false)}
+        inquiryType="visa"
         country={country}
       />
     </>

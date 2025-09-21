@@ -3,7 +3,7 @@
 
 import { useState, useEffect, useRef } from 'react';
 import VisaDetailsPopup from './VisaDetailsPopup';
-import VisaInquiryPopup from './VisaInquiryPopup';
+import InquiryForm from './InquiryForm';
 import { VisaService } from '@/types/visaService';
 
 export default function VisaServices() {
@@ -227,12 +227,13 @@ export default function VisaServices() {
             visaDetails={getCountryDetails(selectedCountry)!}
           />
           
-          <VisaInquiryPopup
+          <InquiryForm
             isOpen={showInquiryPopup}
             onClose={() => {
               setShowInquiryPopup(false);
               setSelectedCountry(null);
             }}
+            inquiryType="visa"
             country={selectedCountry}
           />
         </>

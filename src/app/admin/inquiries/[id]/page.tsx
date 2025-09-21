@@ -13,7 +13,7 @@ export default function InquiryDetailsPage() {
   const [inquiry, setInquiry] = useState<Inquiry | null>(null);
 
   useEffect(() => {
-    const id = parseInt(params.id as string);
+    const id = params.id as string;
     const foundInquiry = inquiries.find(i => i.id === id);
     setInquiry(foundInquiry || null);
   }, [params.id, inquiries]);
@@ -37,16 +37,16 @@ export default function InquiryDetailsPage() {
 
   const getStatusColor = (status: string) => {
     switch (status) {
-      case 'new': return 'bg-blue-100 text-blue-800';
-      case 'in_progress': return 'bg-yellow-100 text-yellow-800';
-      case 'completed': return 'bg-green-100 text-green-800';
-      case 'cancelled': return 'bg-red-100 text-red-800';
+      case 'NEW': return 'bg-blue-100 text-blue-800';
+      case 'IN_PROGRESS': return 'bg-yellow-100 text-yellow-800';
+      case 'COMPLETED': return 'bg-green-100 text-green-800';
+      case 'CANCELLED': return 'bg-red-100 text-red-800';
       default: return 'bg-gray-100 text-gray-800';
     }
   };
 
   const getTypeColor = (type: string) => {
-    return type === 'visa' ? 'bg-purple-100 text-purple-800' : 'bg-orange-100 text-orange-800';
+    return type === 'VISA' ? 'bg-purple-100 text-purple-800' : 'bg-orange-100 text-orange-800';
   };
 
   return (
@@ -63,10 +63,10 @@ export default function InquiryDetailsPage() {
           </button>
           <div className="flex gap-2">
             <span className={`inline-flex px-3 py-1 text-sm font-semibold rounded-full ${getTypeColor(inquiry.type)}`}>
-              {inquiry.type === 'visa' ? 'Visa Inquiry' : 'Tour Inquiry'}
+              {inquiry.type === 'VISA' ? 'Visa Inquiry' : 'Tour Inquiry'}
             </span>
             <span className={`inline-flex px-3 py-1 text-sm font-semibold rounded-full ${getStatusColor(inquiry.status)}`}>
-              {inquiry.status.replace('_', ' ').toUpperCase()}
+              {inquiry.status.replace('_', ' ')}
             </span>
           </div>
         </div>
@@ -111,13 +111,13 @@ export default function InquiryDetailsPage() {
                   <div className="flex justify-between">
                     <span className="font-medium text-gray-700">Type:</span>
                     <span className={`px-2 py-1 text-xs font-semibold rounded-full ${getTypeColor(inquiry.type)}`}>
-                      {inquiry.type === 'visa' ? 'Visa' : 'Tour'}
+                      {inquiry.type === 'VISA' ? 'Visa' : 'Tour'}
                     </span>
                   </div>
                   <div className="flex justify-between">
                     <span className="font-medium text-gray-700">Status:</span>
                     <span className={`px-2 py-1 text-xs font-semibold rounded-full ${getStatusColor(inquiry.status)}`}>
-                      {inquiry.status.replace('_', ' ').toUpperCase()}
+                      {inquiry.status.replace('_', ' ')}
                     </span>
                   </div>
                   <div className="flex justify-between">
@@ -140,19 +140,19 @@ export default function InquiryDetailsPage() {
           {/* Service Details */}
           <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
             <h2 className="text-2xl font-bold text-gray-900 mb-4">
-              {inquiry.type === 'visa' ? 'Visa Service Details' : 'Tour Package Details'}
+              {inquiry.type === 'VISA' ? 'Visa Service Details' : 'Tour Package Details'}
             </h2>
             
             <div className="space-y-4">
-              {inquiry.type === 'visa' ? (
+              {inquiry.type === 'VISA' ? (
                 <>
                   <div className="flex justify-between">
                     <span className="font-medium text-gray-700">Country:</span>
-                    <span className="text-gray-600">{inquiry.country}</span>
+                    <span className="text-gray-600">{inquiry.metadata?.country}</span>
                   </div>
                   <div className="flex justify-between">
                     <span className="font-medium text-gray-700">Visa Type:</span>
-                    <span className="text-gray-600">{inquiry.visaType || 'Not specified'}</span>
+                    <span className="text-gray-600">{inquiry.metadata?.visaType || 'Not specified'}</span>
                   </div>
                   <div className="flex justify-between">
                     <span className="font-medium text-gray-700">Travel Date:</span>
@@ -165,19 +165,19 @@ export default function InquiryDetailsPage() {
                 <>
                   <div className="flex justify-between">
                     <span className="font-medium text-gray-700">Tour Title:</span>
-                    <span className="text-gray-600">{inquiry.tourTitle}</span>
+                    <span className="text-gray-600">{inquiry.metadata?.tourTitle}</span>
                   </div>
                   <div className="flex justify-between">
                     <span className="font-medium text-gray-700">Duration:</span>
-                    <span className="text-gray-600">{inquiry.tourDuration || 'Not specified'}</span>
+                    <span className="text-gray-600">{inquiry.metadata?.tourDuration || 'Not specified'}</span>
                   </div>
                   <div className="flex justify-between">
                     <span className="font-medium text-gray-700">Price:</span>
-                    <span className="text-gray-600">{inquiry.tourPrice || 'Not specified'}</span>
+                    <span className="text-gray-600">{inquiry.metadata?.tourPrice || 'Not specified'}</span>
                   </div>
                   <div className="flex justify-between">
                     <span className="font-medium text-gray-700">Travelers:</span>
-                    <span className="text-gray-600">{inquiry.travelers || 'Not specified'}</span>
+                    <span className="text-gray-600">{inquiry.metadata?.travelers || 'Not specified'}</span>
                   </div>
                   <div className="flex justify-between">
                     <span className="font-medium text-gray-700">Travel Date:</span>
@@ -233,12 +233,12 @@ export default function InquiryDetailsPage() {
                   </div>
                 </div>
               </div>
-              {inquiry.status !== 'new' && (
+              {inquiry.status !== 'NEW' && (
                 <div className="flex items-center gap-3">
                   <div className="w-3 h-3 bg-yellow-500 rounded-full"></div>
                   <div>
                     <div className="text-sm font-medium text-gray-900">
-                      {inquiry.status.replace('_', ' ').toUpperCase()}
+                      {inquiry.status.replace('_', ' ')}
                     </div>
                     <div className="text-xs text-gray-500">
                       {new Date(inquiry.updatedAt).toLocaleDateString()}

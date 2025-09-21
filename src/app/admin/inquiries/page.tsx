@@ -8,7 +8,7 @@ import { useInquiries } from '@/hooks/useInquiries';
 
 export default function AdminInquiries() {
   const router = useRouter();
-  const { inquiries, updateInquiryStatus, deleteInquiry } = useInquiries();
+  const { inquiries, loading, error, updateInquiryStatus, deleteInquiry, refreshInquiries } = useInquiries();
   const [searchTerm, setSearchTerm] = useState('');
   const [filterType, setFilterType] = useState<InquiryType | 'all'>('all');
   const [filterStatus, setFilterStatus] = useState<InquiryStatusFilter>('all');
@@ -17,8 +17,8 @@ export default function AdminInquiries() {
   const filteredInquiries = inquiries.filter(inquiry => {
     const matchesSearch = inquiry.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
                          inquiry.email.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                         (inquiry.type === 'visa' ? inquiry.country?.toLowerCase().includes(searchTerm.toLowerCase()) : 
-                          inquiry.tourTitle?.toLowerCase().includes(searchTerm.toLowerCase()));
+                         (inquiry.type === 'VISA' ? inquiry.metadata?.country?.toLowerCase().includes(searchTerm.toLowerCase()) : 
+                          inquiry.metadata?.tourTitle?.toLowerCase().includes(searchTerm.toLowerCase()));
     const matchesType = filterType === 'all' || inquiry.type === filterType;
     const matchesStatus = filterStatus === 'all' || inquiry.status === filterStatus;
     
@@ -26,14 +26,14 @@ export default function AdminInquiries() {
   });
 
   // Action handlers
-  const handleDelete = (id: number) => {
+  const handleDelete = (id: string) => {
     if (confirm('Are you sure you want to delete this inquiry?')) {
       deleteInquiry(id);
     }
   };
 
-  const handleStatusChange = (id: number, newStatus: string) => {
-    updateInquiryStatus(id, newStatus as 'new' | 'in_progress' | 'completed' | 'cancelled');
+  const handleStatusChange = (id: string, newStatus: string) => {
+    updateInquiryStatus(id, newStatus as 'NEW' | 'IN_PROGRESS' | 'COMPLETED' | 'CANCELLED');
   };
 
   const handleViewDetails = (inquiry: Inquiry) => {
@@ -42,16 +42,16 @@ export default function AdminInquiries() {
 
   const getStatusColor = (status: string) => {
     switch (status) {
-      case 'new': return 'bg-blue-100 text-blue-800';
-      case 'in_progress': return 'bg-yellow-100 text-yellow-800';
-      case 'completed': return 'bg-green-100 text-green-800';
-      case 'cancelled': return 'bg-red-100 text-red-800';
+      case 'NEW': return 'bg-blue-100 text-blue-800';
+      case 'IN_PROGRESS': return 'bg-yellow-100 text-yellow-800';
+      case 'COMPLETED': return 'bg-green-100 text-green-800';
+      case 'CANCELLED': return 'bg-red-100 text-red-800';
       default: return 'bg-gray-100 text-gray-800';
     }
   };
 
   const getTypeColor = (type: string) => {
-    return type === 'visa' ? 'bg-purple-100 text-purple-800' : 'bg-orange-100 text-orange-800';
+    return type === 'VISA' ? 'bg-purple-100 text-purple-800' : 'bg-orange-100 text-orange-800';
   };
 
   return (
@@ -71,19 +71,19 @@ export default function AdminInquiries() {
         <div className="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
           <h3 className="text-lg font-semibold text-gray-700 mb-2">New Inquiries</h3>
           <p className="text-3xl font-bold" style={{ color: '#FF4E00' }}>
-            {inquiries.filter(inquiry => inquiry.status === 'new').length}
+            {inquiries.filter(inquiry => inquiry.status === 'NEW').length}
           </p>
         </div>
         <div className="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
           <h3 className="text-lg font-semibold text-gray-700 mb-2">Visa Inquiries</h3>
           <p className="text-3xl font-bold" style={{ color: '#FF4E00' }}>
-            {inquiries.filter(inquiry => inquiry.type === 'visa').length}
+            {inquiries.filter(inquiry => inquiry.type === 'VISA').length}
           </p>
         </div>
         <div className="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
           <h3 className="text-lg font-semibold text-gray-700 mb-2">Tour Inquiries</h3>
           <p className="text-3xl font-bold" style={{ color: '#FF4E00' }}>
-            {inquiries.filter(inquiry => inquiry.type === 'tour').length}
+            {inquiries.filter(inquiry => inquiry.type === 'TOUR').length}
           </p>
         </div>
       </div>
@@ -111,8 +111,8 @@ export default function AdminInquiries() {
               className="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent"
             >
               <option value="all">All Types</option>
-              <option value="visa">Visa Inquiries</option>
-              <option value="tour">Tour Inquiries</option>
+              <option value="VISA">Visa Inquiries</option>
+              <option value="TOUR">Tour Inquiries</option>
             </select>
 
             <select
@@ -121,18 +121,50 @@ export default function AdminInquiries() {
               className="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent"
             >
               <option value="all">All Status</option>
-              <option value="new">New</option>
-              <option value="in_progress">In Progress</option>
-              <option value="completed">Completed</option>
-              <option value="cancelled">Cancelled</option>
+              <option value="NEW">New</option>
+              <option value="IN_PROGRESS">In Progress</option>
+              <option value="COMPLETED">Completed</option>
+              <option value="CANCELLED">Cancelled</option>
             </select>
           </div>
         </div>
       </div>
 
+      {/* Loading State */}
+      {loading && (
+        <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-8 text-center">
+          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-orange-500 mx-auto mb-4"></div>
+          <p className="text-gray-600">Loading inquiries...</p>
+        </div>
+      )}
+
+      {/* Error State */}
+      {error && (
+        <div className="bg-red-50 border border-red-200 rounded-lg p-6 mb-6">
+          <div className="flex items-center">
+            <div className="text-red-600 mr-3">
+              <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clipRule="evenodd" />
+              </svg>
+            </div>
+            <div>
+              <h3 className="text-sm font-medium text-red-800">Error loading inquiries</h3>
+              <p className="text-sm text-red-700 mt-1">{error}</p>
+              <button
+                onClick={refreshInquiries}
+                className="mt-2 text-sm text-red-600 hover:text-red-800 underline"
+              >
+                Try again
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
       {/* Inquiries Table */}
-      <div className="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
-        <div className="overflow-x-auto">
+      {!loading && !error && (
+        <div className="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
+          <div className="overflow-x-auto">
           <table className="w-full">
             <thead className="bg-gray-50">
               <tr>
@@ -176,16 +208,16 @@ export default function AdminInquiries() {
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap">
                     <span className={`inline-flex px-2 py-1 text-xs font-semibold rounded-full ${getTypeColor(inquiry.type)}`}>
-                      {inquiry.type === 'visa' ? 'Visa' : 'Tour'}
+                      {inquiry.type === 'VISA' ? 'Visa' : 'Tour'}
                     </span>
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap">
                     <div className="text-sm text-gray-900 max-w-xs truncate">
-                      {inquiry.type === 'visa' ? inquiry.country : inquiry.tourTitle}
+                      {inquiry.type === 'VISA' ? inquiry.metadata?.country : inquiry.metadata?.tourTitle}
                     </div>
-                    {inquiry.type === 'tour' && inquiry.travelers && (
+                    {inquiry.type === 'TOUR' && inquiry.metadata?.travelers && (
                       <div className="text-sm text-gray-500">
-                        {inquiry.travelers} travelers
+                        {inquiry.metadata.travelers} travelers
                       </div>
                     )}
                   </td>
@@ -195,10 +227,10 @@ export default function AdminInquiries() {
                       onChange={(e) => handleStatusChange(inquiry.id, e.target.value)}
                       className={`text-xs font-semibold rounded-full px-2 py-1 border-0 cursor-pointer ${getStatusColor(inquiry.status)}`}
                     >
-                      <option value="new">New</option>
-                      <option value="in_progress">In Progress</option>
-                      <option value="completed">Completed</option>
-                      <option value="cancelled">Cancelled</option>
+                      <option value="NEW">New</option>
+                      <option value="IN_PROGRESS">In Progress</option>
+                      <option value="COMPLETED">Completed</option>
+                      <option value="CANCELLED">Cancelled</option>
                     </select>
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
@@ -228,33 +260,36 @@ export default function AdminInquiries() {
           </table>
         </div>
 
-        {filteredInquiries.length === 0 && (
-          <div className="text-center py-12">
-            <div className="text-gray-500 text-lg">No inquiries found</div>
-            <div className="text-gray-400 text-sm mt-2">
-              Try adjusting your search or filter criteria
+          {filteredInquiries.length === 0 && (
+            <div className="text-center py-12">
+              <div className="text-gray-500 text-lg">No inquiries found</div>
+              <div className="text-gray-400 text-sm mt-2">
+                Try adjusting your search or filter criteria
+              </div>
             </div>
-          </div>
-        )}
-      </div>
+          )}
+        </div>
+      )}
 
       {/* Pagination */}
-      <div className="mt-6 flex items-center justify-between">
-        <div className="text-sm text-gray-700">
-          Showing {filteredInquiries.length} of {inquiries.length} inquiries
+      {!loading && !error && (
+        <div className="mt-6 flex items-center justify-between">
+          <div className="text-sm text-gray-700">
+            Showing {filteredInquiries.length} of {inquiries.length} inquiries
+          </div>
+          <div className="flex gap-2">
+            <button className="px-3 py-1 border border-gray-300 rounded text-sm hover:bg-gray-50">
+              Previous
+            </button>
+            <button className="px-3 py-1 bg-orange-500 text-white rounded text-sm">
+              1
+            </button>
+            <button className="px-3 py-1 border border-gray-300 rounded text-sm hover:bg-gray-50">
+              Next
+            </button>
+          </div>
         </div>
-        <div className="flex gap-2">
-          <button className="px-3 py-1 border border-gray-300 rounded text-sm hover:bg-gray-50">
-            Previous
-          </button>
-          <button className="px-3 py-1 bg-orange-500 text-white rounded text-sm">
-            1
-          </button>
-          <button className="px-3 py-1 border border-gray-300 rounded text-sm hover:bg-gray-50">
-            Next
-          </button>
-        </div>
-      </div>
+      )}
     </div>
   );
 }
