@@ -1,12 +1,12 @@
 "use client";
 
 import { useState, useRef } from "react";
-import { FiUpload, FiX, FiImage } from "react-icons/fi";
+import { FiX, FiImage } from "react-icons/fi";
 import Image from "next/image";
 
 interface ImageUploadProps {
   value: string;
-  onChange: (url: string) => void;
+  onChange: (base64: string) => void;
   alt: string;
   onAltChange: (alt: string) => void;
   className?: string;
@@ -19,40 +19,56 @@ export default function ImageUpload({
   onAltChange,
   className = "",
 }: ImageUploadProps) {
-  const [isUploading, setIsUploading] = useState(false);
+  const [isProcessing, setIsProcessing] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   const handleFileSelect = async (file: File) => {
-    setIsUploading(true);
+    setIsProcessing(true);
     setError(null);
 
     try {
-      const formData = new FormData();
-      formData.append("file", file);
-
-      const response = await fetch("/api/upload", {
-        method: "POST",
-        body: formData,
-      });
-
-      if (!response.ok) {
-        const errorData = await response.json();
-        throw new Error(errorData.error || "Upload failed");
+      // Validate file type
+      const allowedTypes = [
+        "image/jpeg",
+        "image/jpg",
+        "image/png",
+        "image/webp",
+      ];
+      if (!allowedTypes.includes(file.type)) {
+        throw new Error(
+          "Invalid file type. Only JPEG, PNG, and WebP images are allowed.",
+        );
       }
 
-      const data = await response.json();
-      onChange(data.url);
-
-      // Auto-generate alt text from filename if not provided
-      if (!alt) {
-        const fileName = file.name.split(".")[0];
-        onAltChange(fileName.replace(/[-_]/g, " "));
+      // Validate file size (5MB limit)
+      const maxSize = 5 * 1024 * 1024; // 5MB
+      if (file.size > maxSize) {
+        throw new Error("File too large. Maximum size is 5MB.");
       }
+
+      // Convert file to base64
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        const base64String = e.target?.result as string;
+        onChange(base64String);
+
+        // Auto-generate alt text from filename if not provided
+        if (!alt) {
+          const fileName = file.name.split(".")[0];
+          onAltChange(fileName.replace(/[-_]/g, " "));
+        }
+        setIsProcessing(false);
+      };
+
+      reader.onerror = () => {
+        throw new Error("Failed to read file");
+      };
+
+      reader.readAsDataURL(file);
     } catch (err) {
-      setError(err instanceof Error ? err.message : "Upload failed");
-    } finally {
-      setIsUploading(false);
+      setError(err instanceof Error ? err.message : "Failed to process file");
+      setIsProcessing(false);
     }
   };
 
@@ -93,7 +109,7 @@ export default function ImageUpload({
               ? "border-gray-300"
               : "border-gray-400 hover:border-orange-500 hover:bg-orange-50"
           }
-          ${isUploading ? "pointer-events-none opacity-50" : "cursor-pointer"}
+          ${isProcessing ? "pointer-events-none opacity-50" : "cursor-pointer"}
         `}
         onClick={() => !value && fileInputRef.current?.click()}
       >
@@ -103,7 +119,7 @@ export default function ImageUpload({
           accept="image/*"
           onChange={handleFileChange}
           className="hidden"
-          disabled={isUploading}
+          disabled={isProcessing}
         />
 
         {value ? (
@@ -129,7 +145,7 @@ export default function ImageUpload({
                 type="button"
                 onClick={() => fileInputRef.current?.click()}
                 className="text-orange-600 hover:text-orange-700 underline"
-                disabled={isUploading}
+                disabled={isProcessing}
               >
                 Replace image
               </button>
@@ -138,7 +154,7 @@ export default function ImageUpload({
         ) : (
           <div className="space-y-4">
             <div className="mx-auto w-12 h-12 text-gray-400">
-              {isUploading ? (
+              {isProcessing ? (
                 <div className="w-12 h-12 border-4 border-orange-500 border-t-transparent rounded-full animate-spin"></div>
               ) : (
                 <FiImage className="w-12 h-12" />
@@ -146,7 +162,7 @@ export default function ImageUpload({
             </div>
             <div>
               <p className="text-lg font-medium text-gray-900">
-                {isUploading ? "Uploading..." : "Upload an image"}
+                {isProcessing ? "Processing..." : "Upload an image"}
               </p>
               <p className="text-sm text-gray-500 mt-1">
                 Drag and drop or click to browse

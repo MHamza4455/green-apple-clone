@@ -6,7 +6,7 @@ generator client {
 }
 
 datasource db {
-  provider = "postgresql"
+  provider = "mysql"
   url      = env("DATABASE_URL")
 }
 
@@ -66,8 +66,8 @@ model VisaService {
   code              String   @unique
   price             String
   description       String
-  documentsRequired String[]
-  documentsProvided String[]
+  documentsRequired Json
+  documentsProvided Json
   status            String   @default("active")
   createdAt         DateTime @default(now())
   updatedAt         DateTime @updatedAt
@@ -91,14 +91,14 @@ model TourPackage {
   description   String
   duration      String
   price         String
-  image         String
+  image         String   @db.LongText // Changed to LongText to store base64 image data
   imageAlt      String
   category      String   @default("all")
   status        String   @default("active")
   featured      Boolean  @default(false)
-  includedItems String[]
-  highlights    String[]
-  itinerary     String[]
+  includedItems Json
+  highlights    Json
+  itinerary     Json
   createdAt     DateTime @default(now())
   updatedAt     DateTime @updatedAt
 }
