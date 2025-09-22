@@ -13,14 +13,12 @@ import { MdDashboard } from "react-icons/md";
 import { RiBook2Line } from "react-icons/ri";
 import { SiBloglovin } from "react-icons/si";
 import { usePathname } from "next/navigation";
-import { signOut, useSession } from "next-auth/react";
-import { UserRole } from "@prisma/client";
+import { signOut } from "next-auth/react";
 
 export const AdminHeader: React.FC = () => {
   const [showMobileMenu, setShowMobileMenu] = useState(false);
   const [showProfileMenu, setShowProfileMenu] = useState(false);
   const pathname = usePathname();
-  const { data: session } = useSession();
 
   useEffect(() => {
     if (setShowMobileMenu) setShowMobileMenu(false);

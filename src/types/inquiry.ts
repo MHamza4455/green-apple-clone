@@ -9,7 +9,7 @@ export interface BaseInquiry {
   message?: string;
   travelDate?: string;
   status: "NEW" | "IN_PROGRESS" | "COMPLETED" | "CANCELLED";
-  metadata: any; // JSON field containing type-specific data
+  metadata: Record<string, unknown>;
   createdAt: string;
   updatedAt: string;
 }

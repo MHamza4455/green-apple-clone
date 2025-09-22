@@ -48,7 +48,7 @@ export async function PUT(
     }
 
     // Update the contact message
-    const updateData: any = {};
+    const updateData: Record<string, unknown> = {};
     if (status !== undefined) updateData.status = status;
     if (fullName !== undefined) updateData.fullName = fullName;
     if (email !== undefined) updateData.email = email;

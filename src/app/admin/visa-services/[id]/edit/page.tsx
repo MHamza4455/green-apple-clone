@@ -108,7 +108,7 @@ export default function EditVisaServicePage() {
 
       await updateVisaService(visaService.id, updatedService);
       router.push(`/admin/visa-services/${visaService.id}`);
-    } catch (error) {
+    } catch {
       alert("Failed to update visa service. Please try again.");
     } finally {
       setIsSubmitting(false);
@@ -133,7 +133,7 @@ export default function EditVisaServicePage() {
             Service Not Found
           </h1>
           <p className="text-gray-600 mb-6">
-            The visa service you're trying to edit doesn't exist.
+            The visa service you&apos;re trying to edit doesn&apos;t exist.
           </p>
           <button
             onClick={() => router.push("/admin/visa-services")}

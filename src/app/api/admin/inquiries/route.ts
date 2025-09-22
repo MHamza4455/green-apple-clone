@@ -7,7 +7,7 @@ export async function GET(req: NextRequest) {
     const type = searchParams.get("type");
     const status = searchParams.get("status");
 
-    const where: any = {};
+    const where = {} as Record<string, unknown>;
     if (type && type !== "all") where.type = type;
     if (status && status !== "all") where.status = status;
 

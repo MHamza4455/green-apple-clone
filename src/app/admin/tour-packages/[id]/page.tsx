@@ -27,7 +27,7 @@ export default function TourPackageDetailsPage() {
             Package Not Found
           </h1>
           <p className="text-gray-600 mb-6">
-            The tour package you're looking for doesn't exist.
+            The tour package you&apos;re looking for doesn&apos;t exist.
           </p>
           <button
             onClick={() => router.push("/admin/tour-packages")}
@@ -167,7 +167,7 @@ export default function TourPackageDetailsPage() {
           {/* Included Items */}
           <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
             <h3 className="text-lg font-semibold text-gray-900 mb-4">
-              What's Included
+              What&apos;s Included
             </h3>
             <div className="space-y-2">
               {tourPackage.includedItems.map((item, index) => (

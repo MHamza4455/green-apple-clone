@@ -1,6 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
-// @ts-expect-error - nodemailer is not typed
 import nodemailer from "nodemailer";
 
 export async function POST(req: NextRequest) {
@@ -83,8 +82,12 @@ export async function POST(req: NextRequest) {
               <div style="background: #f8fffe; padding: 16px; border-radius: 8px; margin-bottom: 20px; border-left: 4px solid #008c95;">
                 <h3 style="color: #008c95; margin: 0 0 8px 0; font-size: 18px;">Visa Details</h3>
                 <p style="margin: 4px 0; color: #333;"><strong>Country:</strong> ${country}</p>
-                <p style="margin: 4px 0; color: #333;"><strong>Visa Type:</strong> ${visaType || "Not specified"}</p>
-                <p style="margin: 4px 0; color: #333;"><strong>Travel Date:</strong> ${travelDate || "Not specified"}</p>
+                <p style="margin: 4px 0; color: #333;"><strong>Visa Type:</strong> ${
+                  visaType || "Not specified"
+                }</p>
+                <p style="margin: 4px 0; color: #333;"><strong>Travel Date:</strong> ${
+                  travelDate || "Not specified"
+                }</p>
               </div>
 
               <!-- Customer Information -->
@@ -99,11 +102,17 @@ export async function POST(req: NextRequest) {
                 </tr>
                 <tr>
                   <td style="padding: 8px 0; font-weight: bold; color: #333;">Phone:</td>
-                  <td style="padding: 8px 0; color: #555;">${phone || "Not provided"}</td>
+                  <td style="padding: 8px 0; color: #555;">${
+                    phone || "Not provided"
+                  }</td>
                 </tr>
                 <tr>
                   <td style="padding: 8px 0; font-weight: bold; color: #333; vertical-align: top;">Message:</td>
-                  <td style="padding: 8px 0; color: #555;">${message ? message.replace(/\n/g, "<br>") : "No additional message"}</td>
+                  <td style="padding: 8px 0; color: #555;">${
+                    message
+                      ? message.replace(/\n/g, "<br>")
+                      : "No additional message"
+                  }</td>
                 </tr>
               </table>
               
@@ -142,11 +151,15 @@ export async function POST(req: NextRequest) {
                 </tr>
                 <tr>
                   <td style="padding: 8px 0; font-weight: bold; color: #333;">Phone:</td>
-                  <td style="padding: 8px 0; color: #555;">${phone || "Not provided"}</td>
+                  <td style="padding: 8px 0; color: #555;">${
+                    phone || "Not provided"
+                  }</td>
                 </tr>
                 <tr>
                   <td style="padding: 8px 0; font-weight: bold; color: #333;">Travel Date:</td>
-                  <td style="padding: 8px 0; color: #555;">${travelDate || "Not specified"}</td>
+                  <td style="padding: 8px 0; color: #555;">${
+                    travelDate || "Not specified"
+                  }</td>
                 </tr>
                 <tr>
                   <td style="padding: 8px 0; font-weight: bold; color: #333;">Number of Travelers:</td>
@@ -154,7 +167,11 @@ export async function POST(req: NextRequest) {
                 </tr>
                 <tr>
                   <td style="padding: 8px 0; font-weight: bold; color: #333; vertical-align: top;">Message:</td>
-                  <td style="padding: 8px 0; color: #555;">${message ? message.replace(/\n/g, "<br>") : "No additional message"}</td>
+                  <td style="padding: 8px 0; color: #555;">${
+                    message
+                      ? message.replace(/\n/g, "<br>")
+                      : "No additional message"
+                  }</td>
                 </tr>
               </table>
               
@@ -193,7 +210,7 @@ export async function GET(req: NextRequest) {
     const type = searchParams.get("type");
     const status = searchParams.get("status");
 
-    const where: any = {};
+    const where: Record<string, unknown> = {};
     if (type) where.type = type;
     if (status) where.status = status;
 

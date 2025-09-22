@@ -4,6 +4,7 @@ import { PrismaAdapter } from "@auth/prisma-adapter";
 import { prisma } from "./prisma";
 import bcrypt from "bcryptjs";
 import { UserRole } from "@prisma/client";
+import { Adapter } from "next-auth/adapters";
 
 // Debug environment variables
 console.log(
@@ -13,7 +14,7 @@ console.log(
 console.log("NEXTAUTH_URL:", process.env.NEXTAUTH_URL);
 
 export const authOptions: NextAuthOptions = {
-  adapter: PrismaAdapter(prisma) as any,
+  adapter: PrismaAdapter(prisma) as Adapter,
   secret: process.env.NEXTAUTH_SECRET,
   providers: [
     CredentialsProvider({

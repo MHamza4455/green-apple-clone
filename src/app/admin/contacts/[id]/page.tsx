@@ -16,7 +16,7 @@ import { useContactMessages } from "@/hooks/useContactMessages";
 export default function ContactMessageDetailsPage() {
   const router = useRouter();
   const params = useParams();
-  const { contactMessages, loading } = useContactMessages();
+  const { contactMessages } = useContactMessages();
   const [contactMessage, setContactMessage] = useState<ContactMessage | null>(
     null,
   );
@@ -35,7 +35,7 @@ export default function ContactMessageDetailsPage() {
             Message Not Found
           </h1>
           <p className="text-gray-600 mb-6">
-            The contact message you're looking for doesn't exist.
+            The contact message you&apos;re looking for doesn&apos;t exist.
           </p>
           <button
             onClick={() => router.push("/admin/contacts")}
@@ -76,7 +76,9 @@ export default function ContactMessageDetailsPage() {
             Back
           </button>
           <span
-            className={`inline-flex px-3 py-1 text-sm font-semibold rounded-full ${getStatusColor(contactMessage.status)}`}
+            className={`inline-flex px-3 py-1 text-sm font-semibold rounded-full ${getStatusColor(
+              contactMessage.status,
+            )}`}
           >
             {contactMessage.status.replace("_", " ").toUpperCase()}
           </span>

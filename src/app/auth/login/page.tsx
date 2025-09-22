@@ -41,7 +41,7 @@ export default function LoginPage() {
           }
         }
       }
-    } catch (error) {
+    } catch {
       setError("An error occurred. Please try again.");
     } finally {
       setLoading(false);

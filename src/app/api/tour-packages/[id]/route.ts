@@ -61,7 +61,7 @@ export async function PUT(
     }
 
     // Update the tour package
-    const updateData: any = {};
+    const updateData: Record<string, unknown> = {};
     if (title !== undefined) updateData.title = title;
     if (description !== undefined) updateData.description = description;
     if (duration !== undefined) updateData.duration = duration;

@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { useRouter, useParams } from "next/navigation";
-import { FiArrowLeft, FiEdit } from "react-icons/fi";
+import { FiArrowLeft } from "react-icons/fi";
 import { Inquiry } from "@/types/inquiry";
 import { useInquiries } from "@/hooks/useInquiries";
 
@@ -26,7 +26,7 @@ export default function InquiryDetailsPage() {
             Inquiry Not Found
           </h1>
           <p className="text-gray-600 mb-6">
-            The inquiry you're looking for doesn't exist.
+            The inquiry you&apos;re looking for doesn&apos;t exist.
           </p>
           <button
             onClick={() => router.push("/admin/inquiries")}
@@ -74,12 +74,16 @@ export default function InquiryDetailsPage() {
           </button>
           <div className="flex gap-2">
             <span
-              className={`inline-flex px-3 py-1 text-sm font-semibold rounded-full ${getTypeColor(inquiry.type)}`}
+              className={`inline-flex px-3 py-1 text-sm font-semibold rounded-full ${getTypeColor(
+                inquiry.type,
+              )}`}
             >
               {inquiry.type === "VISA" ? "Visa Inquiry" : "Tour Inquiry"}
             </span>
             <span
-              className={`inline-flex px-3 py-1 text-sm font-semibold rounded-full ${getStatusColor(inquiry.status)}`}
+              className={`inline-flex px-3 py-1 text-sm font-semibold rounded-full ${getStatusColor(
+                inquiry.status,
+              )}`}
             >
               {inquiry.status.replace("_", " ")}
             </span>
@@ -138,7 +142,9 @@ export default function InquiryDetailsPage() {
                   <div className="flex justify-between">
                     <span className="font-medium text-gray-700">Type:</span>
                     <span
-                      className={`px-2 py-1 text-xs font-semibold rounded-full ${getTypeColor(inquiry.type)}`}
+                      className={`px-2 py-1 text-xs font-semibold rounded-full ${getTypeColor(
+                        inquiry.type,
+                      )}`}
                     >
                       {inquiry.type === "VISA" ? "Visa" : "Tour"}
                     </span>
@@ -146,7 +152,9 @@ export default function InquiryDetailsPage() {
                   <div className="flex justify-between">
                     <span className="font-medium text-gray-700">Status:</span>
                     <span
-                      className={`px-2 py-1 text-xs font-semibold rounded-full ${getStatusColor(inquiry.status)}`}
+                      className={`px-2 py-1 text-xs font-semibold rounded-full ${getStatusColor(
+                        inquiry.status,
+                      )}`}
                     >
                       {inquiry.status.replace("_", " ")}
                     </span>

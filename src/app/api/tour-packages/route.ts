@@ -9,7 +9,7 @@ export async function GET(request: NextRequest) {
     const featured = searchParams.get("featured");
     const search = searchParams.get("search");
 
-    let whereClause: any = {};
+    const whereClause: Record<string, unknown> = {};
 
     // Filter by category if provided
     if (category && category !== "all") {

@@ -128,7 +128,7 @@ export default function EditTourPackagePage() {
             Package Not Found
           </h1>
           <p className="text-gray-600 mb-6">
-            The tour package you're trying to edit doesn't exist.
+            The tour package you&apos;re trying to edit doesn&apos;t exist.
           </p>
           <button
             onClick={() => router.push("/admin/tour-packages")}

@@ -81,7 +81,7 @@ export default function CreateVisaServicePage() {
 
       await addVisaService(newService);
       router.push("/admin/visa-services");
-    } catch (error) {
+    } catch {
       alert("Failed to create visa service. Please try again.");
     } finally {
       setIsSubmitting(false);
