@@ -1,94 +1,98 @@
-'use client'
+"use client";
 
-import { useState, useEffect } from 'react'
-import { useSession } from 'next-auth/react'
-import { useRouter } from 'next/navigation'
-import { UserRole } from '@prisma/client'
+import { useState, useEffect } from "react";
+import { useSession } from "next-auth/react";
+import { useRouter } from "next/navigation";
+import { UserRole } from "@prisma/client";
 
 interface User {
-  id: string
-  name: string
-  email: string
-  role: UserRole
-  createdAt: string
-  updatedAt: string
+  id: string;
+  name: string;
+  email: string;
+  role: UserRole;
+  createdAt: string;
+  updatedAt: string;
 }
 
 export default function UsersPage() {
-  const { data: session, status } = useSession()
-  const router = useRouter()
-  const [users, setUsers] = useState<User[]>([])
-  const [loading, setLoading] = useState(true)
-  const [showCreateForm, setShowCreateForm] = useState(false)
+  const { data: session, status } = useSession();
+  const router = useRouter();
+  const [users, setUsers] = useState<User[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [showCreateForm, setShowCreateForm] = useState(false);
   const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    password: '',
-    role: UserRole.USER
-  })
-  const [submitting, setSubmitting] = useState(false)
+    name: "",
+    email: "",
+    password: "",
+    role: UserRole.USER,
+  });
+  const [submitting, setSubmitting] = useState(false);
 
   useEffect(() => {
-    if (status === 'loading') return
-    
+    if (status === "loading") return;
+
     if (!session || session.user.role !== UserRole.SUPER_ADMIN) {
-      router.push('/auth/login')
-      return
+      router.push("/auth/login");
+      return;
     }
 
-    fetchUsers()
-  }, [session, status, router])
+    fetchUsers();
+  }, [session, status, router]);
 
   const fetchUsers = async () => {
     try {
-      const response = await fetch('/api/admin/users')
+      const response = await fetch("/api/admin/users");
       if (response.ok) {
-        const data = await response.json()
-        setUsers(data.users)
+        const data = await response.json();
+        setUsers(data.users);
       }
     } catch (error) {
-      console.error('Error fetching users:', error)
+      console.error("Error fetching users:", error);
     } finally {
-      setLoading(false)
+      setLoading(false);
     }
-  }
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
-    setSubmitting(true)
+    e.preventDefault();
+    setSubmitting(true);
 
     try {
-      const response = await fetch('/api/admin/create-user', {
-        method: 'POST',
+      const response = await fetch("/api/admin/create-user", {
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         body: JSON.stringify(formData),
-      })
+      });
 
       if (response.ok) {
-        setFormData({ name: '', email: '', password: '', role: UserRole.USER })
-        setShowCreateForm(false)
-        fetchUsers()
-        alert('User created successfully!')
+        setFormData({ name: "", email: "", password: "", role: UserRole.USER });
+        setShowCreateForm(false);
+        fetchUsers();
+        alert("User created successfully!");
       } else {
-        const error = await response.json()
-        alert(error.error || 'Failed to create user')
+        const error = await response.json();
+        alert(error.error || "Failed to create user");
       }
     } catch (error) {
-      console.error('Error creating user:', error)
-      alert('Failed to create user')
+      console.error("Error creating user:", error);
+      alert("Failed to create user");
     } finally {
-      setSubmitting(false)
+      setSubmitting(false);
     }
-  }
+  };
 
-  if (status === 'loading' || loading) {
-    return <div className="flex justify-center items-center min-h-screen">Loading...</div>
+  if (status === "loading" || loading) {
+    return (
+      <div className="flex justify-center items-center min-h-screen">
+        Loading...
+      </div>
+    );
   }
 
   if (!session || session.user.role !== UserRole.SUPER_ADMIN) {
-    return null
+    return null;
   }
 
   return (
@@ -99,7 +103,7 @@ export default function UsersPage() {
           onClick={() => setShowCreateForm(!showCreateForm)}
           className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
         >
-          {showCreateForm ? 'Cancel' : 'Create New User'}
+          {showCreateForm ? "Cancel" : "Create New User"}
         </button>
       </div>
 
@@ -112,7 +116,9 @@ export default function UsersPage() {
               <input
                 type="text"
                 value={formData.name}
-                onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                onChange={(e) =>
+                  setFormData({ ...formData, name: e.target.value })
+                }
                 className="w-full p-2 border rounded"
                 required
               />
@@ -122,7 +128,9 @@ export default function UsersPage() {
               <input
                 type="email"
                 value={formData.email}
-                onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                onChange={(e) =>
+                  setFormData({ ...formData, email: e.target.value })
+                }
                 className="w-full p-2 border rounded"
                 required
               />
@@ -132,7 +140,9 @@ export default function UsersPage() {
               <input
                 type="password"
                 value={formData.password}
-                onChange={(e) => setFormData({ ...formData, password: e.target.value })}
+                onChange={(e) =>
+                  setFormData({ ...formData, password: e.target.value })
+                }
                 className="w-full p-2 border rounded"
                 required
               />
@@ -141,7 +151,9 @@ export default function UsersPage() {
               <label className="block text-sm font-medium mb-1">Role</label>
               <select
                 value={formData.role}
-                onChange={(e) => setFormData({ ...formData, role: e.target.value as UserRole })}
+                onChange={(e) =>
+                  setFormData({ ...formData, role: e.target.value as UserRole })
+                }
                 className="w-full p-2 border rounded"
               >
                 <option value={UserRole.USER}>User</option>
@@ -154,7 +166,7 @@ export default function UsersPage() {
               disabled={submitting}
               className="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700 disabled:opacity-50"
             >
-              {submitting ? 'Creating...' : 'Create User'}
+              {submitting ? "Creating..." : "Create User"}
             </button>
           </form>
         </div>
@@ -188,13 +200,15 @@ export default function UsersPage() {
                   {user.email}
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap">
-                  <span className={`px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${
-                    user.role === UserRole.SUPER_ADMIN 
-                      ? 'bg-red-100 text-red-800'
-                      : user.role === UserRole.ADMIN
-                      ? 'bg-blue-100 text-blue-800'
-                      : 'bg-gray-100 text-gray-800'
-                  }`}>
+                  <span
+                    className={`px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${
+                      user.role === UserRole.SUPER_ADMIN
+                        ? "bg-red-100 text-red-800"
+                        : user.role === UserRole.ADMIN
+                          ? "bg-blue-100 text-blue-800"
+                          : "bg-gray-100 text-gray-800"
+                    }`}
+                  >
                     {user.role}
                   </span>
                 </td>
@@ -207,5 +221,5 @@ export default function UsersPage() {
         </table>
       </div>
     </div>
-  )
+  );
 }

@@ -3,7 +3,8 @@ import nodemailer from "nodemailer";
 
 export async function POST(req: Request) {
   try {
-    const { name, email, phone, country, visaType, travelDate, message } = await req.json();
+    const { name, email, phone, country, visaType, travelDate, message } =
+      await req.json();
 
     const transporter = nodemailer.createTransporter({
       host: "mail.privateemail.com",
@@ -27,8 +28,8 @@ export async function POST(req: Request) {
           <div style="background: #f8fffe; padding: 16px; border-radius: 8px; margin-bottom: 20px; border-left: 4px solid #008c95;">
             <h3 style="color: #008c95; margin: 0 0 8px 0; font-size: 18px;">Visa Details</h3>
             <p style="margin: 4px 0; color: #333;"><strong>Country:</strong> ${country}</p>
-            <p style="margin: 4px 0; color: #333;"><strong>Visa Type:</strong> ${visaType || 'Not specified'}</p>
-            <p style="margin: 4px 0; color: #333;"><strong>Travel Date:</strong> ${travelDate || 'Not specified'}</p>
+            <p style="margin: 4px 0; color: #333;"><strong>Visa Type:</strong> ${visaType || "Not specified"}</p>
+            <p style="margin: 4px 0; color: #333;"><strong>Travel Date:</strong> ${travelDate || "Not specified"}</p>
           </div>
 
           <!-- Customer Information -->
@@ -43,11 +44,11 @@ export async function POST(req: Request) {
             </tr>
             <tr>
               <td style="padding: 8px 0; font-weight: bold; color: #333;">Phone:</td>
-              <td style="padding: 8px 0; color: #555;">${phone || 'Not provided'}</td>
+              <td style="padding: 8px 0; color: #555;">${phone || "Not provided"}</td>
             </tr>
             <tr>
               <td style="padding: 8px 0; font-weight: bold; color: #333; vertical-align: top;">Message:</td>
-              <td style="padding: 8px 0; color: #555;">${message ? message.replace(/\n/g, "<br>") : 'No additional message'}</td>
+              <td style="padding: 8px 0; color: #555;">${message ? message.replace(/\n/g, "<br>") : "No additional message"}</td>
             </tr>
           </table>
           
@@ -60,6 +61,9 @@ export async function POST(req: Request) {
     return new Response(JSON.stringify({ success: true }), { status: 200 });
   } catch (err) {
     console.error("Visa inquiry email error:", err);
-    return new Response(JSON.stringify({ error: "Failed to send visa inquiry" }), { status: 500 });
+    return new Response(
+      JSON.stringify({ error: "Failed to send visa inquiry" }),
+      { status: 500 },
+    );
   }
 }

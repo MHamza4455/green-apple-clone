@@ -21,7 +21,7 @@ export const AdminHeader: React.FC = () => {
   const [showProfileMenu, setShowProfileMenu] = useState(false);
   const pathname = usePathname();
   const { data: session } = useSession();
-  
+
   useEffect(() => {
     if (setShowMobileMenu) setShowMobileMenu(false);
   }, [pathname]);
@@ -78,7 +78,7 @@ export const AdminHeader: React.FC = () => {
                     <li className="flex h-14 items-center justify-center border-b">
                       <button
                         onClick={() => {
-                          signOut({ callbackUrl: '/' });
+                          signOut({ callbackUrl: "/" });
                         }}
                         className="hover:text-orange-500 transition-colors duration-200"
                       >
@@ -92,7 +92,7 @@ export const AdminHeader: React.FC = () => {
           </div>
         </div>
       </nav>
-      
+
       <AnimatePresence>
         {showMobileMenu && (
           <motion.header

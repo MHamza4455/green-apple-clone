@@ -1,19 +1,19 @@
-import { NextRequest, NextResponse } from 'next/server'
-import { getServerSession } from 'next-auth'
-import { authOptions } from '@/lib/auth'
-import { prisma } from '@/lib/prisma'
-import { UserRole } from '@prisma/client'
+import { NextRequest, NextResponse } from "next/server";
+import { getServerSession } from "next-auth";
+import { authOptions } from "@/lib/auth";
+import { prisma } from "@/lib/prisma";
+import { UserRole } from "@prisma/client";
 
 export async function GET(request: NextRequest) {
   try {
-    const session = await getServerSession(authOptions)
-    
+    const session = await getServerSession(authOptions);
+
     // Check if user is authenticated and is a super admin
     if (!session?.user || session.user.role !== UserRole.SUPER_ADMIN) {
       return NextResponse.json(
-        { error: 'Unauthorized. Only super admins can view users.' },
-        { status: 401 }
-      )
+        { error: "Unauthorized. Only super admins can view users." },
+        { status: 401 },
+      );
     }
 
     const users = await prisma.user.findMany({
@@ -23,19 +23,19 @@ export async function GET(request: NextRequest) {
         email: true,
         role: true,
         createdAt: true,
-        updatedAt: true
+        updatedAt: true,
       },
       orderBy: {
-        createdAt: 'desc'
-      }
-    })
+        createdAt: "desc",
+      },
+    });
 
-    return NextResponse.json({ users })
+    return NextResponse.json({ users });
   } catch (error) {
-    console.error('Error fetching users:', error)
+    console.error("Error fetching users:", error);
     return NextResponse.json(
-      { error: 'Internal server error' },
-      { status: 500 }
-    )
+      { error: "Internal server error" },
+      { status: 500 },
+    );
   }
 }

@@ -1,9 +1,9 @@
-import { NextRequest, NextResponse } from 'next/server';
-import { prisma } from '@/lib/prisma';
+import { NextRequest, NextResponse } from "next/server";
+import { prisma } from "@/lib/prisma";
 
 export async function GET(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: { id: string } },
 ) {
   try {
     const contactMessage = await prisma.contactMessage.findUnique({
@@ -12,24 +12,24 @@ export async function GET(
 
     if (!contactMessage) {
       return NextResponse.json(
-        { error: 'Contact message not found' },
-        { status: 404 }
+        { error: "Contact message not found" },
+        { status: 404 },
       );
     }
 
     return NextResponse.json(contactMessage);
   } catch (error) {
-    console.error('Error fetching contact message:', error);
+    console.error("Error fetching contact message:", error);
     return NextResponse.json(
-      { error: 'Failed to fetch contact message' },
-      { status: 500 }
+      { error: "Failed to fetch contact message" },
+      { status: 500 },
     );
   }
 }
 
 export async function PUT(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: { id: string } },
 ) {
   try {
     const body = await request.json();
@@ -42,8 +42,8 @@ export async function PUT(
 
     if (!existingMessage) {
       return NextResponse.json(
-        { error: 'Contact message not found' },
-        { status: 404 }
+        { error: "Contact message not found" },
+        { status: 404 },
       );
     }
 
@@ -53,7 +53,8 @@ export async function PUT(
     if (fullName !== undefined) updateData.fullName = fullName;
     if (email !== undefined) updateData.email = email;
     if (phone !== undefined) updateData.phone = phone;
-    if (serviceInterest !== undefined) updateData.serviceInterest = serviceInterest;
+    if (serviceInterest !== undefined)
+      updateData.serviceInterest = serviceInterest;
     if (message !== undefined) updateData.message = message;
 
     const updatedMessage = await prisma.contactMessage.update({
@@ -63,17 +64,17 @@ export async function PUT(
 
     return NextResponse.json(updatedMessage);
   } catch (error) {
-    console.error('Error updating contact message:', error);
+    console.error("Error updating contact message:", error);
     return NextResponse.json(
-      { error: 'Failed to update contact message' },
-      { status: 500 }
+      { error: "Failed to update contact message" },
+      { status: 500 },
     );
   }
 }
 
 export async function DELETE(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: { id: string } },
 ) {
   try {
     // Check if contact message exists
@@ -83,8 +84,8 @@ export async function DELETE(
 
     if (!existingMessage) {
       return NextResponse.json(
-        { error: 'Contact message not found' },
-        { status: 404 }
+        { error: "Contact message not found" },
+        { status: 404 },
       );
     }
 
@@ -92,12 +93,14 @@ export async function DELETE(
       where: { id: params.id },
     });
 
-    return NextResponse.json({ message: 'Contact message deleted successfully' });
+    return NextResponse.json({
+      message: "Contact message deleted successfully",
+    });
   } catch (error) {
-    console.error('Error deleting contact message:', error);
+    console.error("Error deleting contact message:", error);
     return NextResponse.json(
-      { error: 'Failed to delete contact message' },
-      { status: 500 }
+      { error: "Failed to delete contact message" },
+      { status: 500 },
     );
   }
 }

@@ -1,11 +1,11 @@
-'use client';
+"use client";
 
-import { useState } from 'react';
+import { useState } from "react";
 
 interface InquiryFormProps {
   isOpen: boolean;
   onClose: () => void;
-  inquiryType: 'visa' | 'tour';
+  inquiryType: "visa" | "tour";
   // Visa specific props
   country?: string;
   // Tour specific props
@@ -14,84 +14,90 @@ interface InquiryFormProps {
   tourPrice?: string;
 }
 
-export default function InquiryForm({ 
-  isOpen, 
-  onClose, 
-  inquiryType, 
-  country, 
-  tourTitle, 
-  tourDuration, 
-  tourPrice 
+export default function InquiryForm({
+  isOpen,
+  onClose,
+  inquiryType,
+  country,
+  tourTitle,
+  tourDuration,
+  tourPrice,
 }: InquiryFormProps) {
   const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    phone: '',
-    travelDate: '',
-    message: '',
+    name: "",
+    email: "",
+    phone: "",
+    travelDate: "",
+    message: "",
     // Visa specific fields
-    visaType: '',
+    visaType: "",
     // Tour specific fields
-    travelers: '1'
+    travelers: "1",
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
+  const [submitStatus, setSubmitStatus] = useState<
+    "idle" | "success" | "error"
+  >("idle");
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+  const handleInputChange = (
+    e: React.ChangeEvent<
+      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
+    >,
+  ) => {
     const { name, value } = e.target;
-    setFormData(prev => ({
+    setFormData((prev) => ({
       ...prev,
-      [name]: value
+      [name]: value,
     }));
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
-    setSubmitStatus('idle');
+    setSubmitStatus("idle");
 
     try {
       const inquiryData = {
         ...formData,
         inquiryType,
         // Add type-specific data
-        ...(inquiryType === 'visa' && { country }),
-        ...(inquiryType === 'tour' && { 
-          tourTitle, 
-          tourDuration, 
-          tourPrice 
-        })
+        ...(inquiryType === "visa" && { country }),
+        ...(inquiryType === "tour" && {
+          tourTitle,
+          tourDuration,
+          tourPrice,
+        }),
       };
 
-      const response = await fetch('/api/inquiry', {
-        method: 'POST',
+      const response = await fetch("/api/inquiry", {
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         body: JSON.stringify(inquiryData),
       });
 
       if (response.ok) {
-        setSubmitStatus('success');
+        setSubmitStatus("success");
         setFormData({
-          name: '',
-          email: '',
-          phone: '',
-          travelDate: '',
-          message: '',
-          visaType: '',
-          travelers: '1'
+          name: "",
+          email: "",
+          phone: "",
+          travelDate: "",
+          message: "",
+          visaType: "",
+          travelers: "1",
         });
         setTimeout(() => {
           onClose();
-          setSubmitStatus('idle');
+          setSubmitStatus("idle");
         }, 2000);
       } else {
-        setSubmitStatus('error');
+        setSubmitStatus("error");
       }
     } catch (error) {
-      console.error('Error submitting inquiry:', error);
-      setSubmitStatus('error');
+      console.error("Error submitting inquiry:", error);
+      setSubmitStatus("error");
     } finally {
       setIsSubmitting(false);
     }
@@ -104,8 +110,10 @@ export default function InquiryForm({
       <div className="bg-white rounded-lg max-w-md w-full max-h-[90vh] overflow-y-auto">
         <div className="p-6">
           <div className="flex justify-between items-center mb-4">
-            <h2 className="text-xl font-bold" style={{ color: '#FF4E00' }}>
-              {inquiryType === 'visa' ? `Visa Inquiry - ${country}` : `Tour Inquiry - ${tourTitle}`}
+            <h2 className="text-xl font-bold" style={{ color: "#FF4E00" }}>
+              {inquiryType === "visa"
+                ? `Visa Inquiry - ${country}`
+                : `Tour Inquiry - ${tourTitle}`}
             </h2>
             <button
               onClick={onClose}
@@ -115,21 +123,26 @@ export default function InquiryForm({
             </button>
           </div>
 
-          {submitStatus === 'success' && (
+          {submitStatus === "success" && (
             <div className="mb-4 p-4 bg-green-100 border border-green-400 text-green-700 rounded">
-              Thank you! Your {inquiryType} inquiry has been submitted successfully. We will get back to you soon.
+              Thank you! Your {inquiryType} inquiry has been submitted
+              successfully. We will get back to you soon.
             </div>
           )}
 
-          {submitStatus === 'error' && (
+          {submitStatus === "error" && (
             <div className="mb-4 p-4 bg-red-100 border border-red-400 text-red-700 rounded">
-              Sorry, there was an error submitting your inquiry. Please try again.
+              Sorry, there was an error submitting your inquiry. Please try
+              again.
             </div>
           )}
 
           <form onSubmit={handleSubmit} className="space-y-4">
             <div>
-              <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-1">
+              <label
+                htmlFor="name"
+                className="block text-sm font-medium text-gray-700 mb-1"
+              >
                 Full Name *
               </label>
               <input
@@ -144,7 +157,10 @@ export default function InquiryForm({
             </div>
 
             <div>
-              <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
+              <label
+                htmlFor="email"
+                className="block text-sm font-medium text-gray-700 mb-1"
+              >
                 Email Address *
               </label>
               <input
@@ -159,7 +175,10 @@ export default function InquiryForm({
             </div>
 
             <div>
-              <label htmlFor="phone" className="block text-sm font-medium text-gray-700 mb-1">
+              <label
+                htmlFor="phone"
+                className="block text-sm font-medium text-gray-700 mb-1"
+              >
                 Phone Number
               </label>
               <input
@@ -173,9 +192,12 @@ export default function InquiryForm({
             </div>
 
             {/* Visa specific fields */}
-            {inquiryType === 'visa' && (
+            {inquiryType === "visa" && (
               <div>
-                <label htmlFor="visaType" className="block text-sm font-medium text-gray-700 mb-1">
+                <label
+                  htmlFor="visaType"
+                  className="block text-sm font-medium text-gray-700 mb-1"
+                >
                   Visa Type
                 </label>
                 <select
@@ -197,9 +219,12 @@ export default function InquiryForm({
             )}
 
             {/* Tour specific fields */}
-            {inquiryType === 'tour' && (
+            {inquiryType === "tour" && (
               <div>
-                <label htmlFor="travelers" className="block text-sm font-medium text-gray-700 mb-1">
+                <label
+                  htmlFor="travelers"
+                  className="block text-sm font-medium text-gray-700 mb-1"
+                >
                   Number of Travelers
                 </label>
                 <select
@@ -211,7 +236,7 @@ export default function InquiryForm({
                 >
                   {[...Array(10)].map((_, i) => (
                     <option key={i + 1} value={i + 1}>
-                      {i + 1} Traveler{i > 0 ? 's' : ''}
+                      {i + 1} Traveler{i > 0 ? "s" : ""}
                     </option>
                   ))}
                 </select>
@@ -219,7 +244,10 @@ export default function InquiryForm({
             )}
 
             <div>
-              <label htmlFor="travelDate" className="block text-sm font-medium text-gray-700 mb-1">
+              <label
+                htmlFor="travelDate"
+                className="block text-sm font-medium text-gray-700 mb-1"
+              >
                 Intended Travel Date
               </label>
               <input
@@ -233,7 +261,10 @@ export default function InquiryForm({
             </div>
 
             <div>
-              <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-1">
+              <label
+                htmlFor="message"
+                className="block text-sm font-medium text-gray-700 mb-1"
+              >
                 Additional Message
               </label>
               <textarea
@@ -243,7 +274,11 @@ export default function InquiryForm({
                 onChange={handleInputChange}
                 rows={3}
                 className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[rgba(0,140,149,1)] focus:border-transparent"
-                placeholder={inquiryType === 'visa' ? "Tell us more about your visa requirements..." : "Tell us about your travel preferences, special requirements, or any questions you have..."}
+                placeholder={
+                  inquiryType === "visa"
+                    ? "Tell us more about your visa requirements..."
+                    : "Tell us about your travel preferences, special requirements, or any questions you have..."
+                }
               />
             </div>
 
@@ -259,9 +294,11 @@ export default function InquiryForm({
                 type="submit"
                 disabled={isSubmitting}
                 className="flex-1 px-4 py-2 text-white rounded-md transition-colors disabled:opacity-50"
-                style={{ backgroundColor: '#FF4E00' }}
+                style={{ backgroundColor: "#FF4E00" }}
               >
-                {isSubmitting ? 'Submitting...' : `Submit ${inquiryType === 'visa' ? 'Visa' : 'Tour'} Inquiry`}
+                {isSubmitting
+                  ? "Submitting..."
+                  : `Submit ${inquiryType === "visa" ? "Visa" : "Tour"} Inquiry`}
               </button>
             </div>
           </form>

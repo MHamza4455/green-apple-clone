@@ -1,7 +1,7 @@
-'use client';
+"use client";
 
-import { useState, useEffect } from 'react';
-import Image from 'next/image';
+import { useState, useEffect } from "react";
+import Image from "next/image";
 
 interface Slide {
   id: number;
@@ -23,8 +23,8 @@ export default function ImageSlider({
   autoAdvance = true,
   interval = 5000,
   showDots = true,
-  dotsColor = '#008c95',
-  className = ''
+  dotsColor = "#008c95",
+  className = "",
 }: ImageSliderProps) {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [progress, setProgress] = useState(0);
@@ -32,10 +32,10 @@ export default function ImageSlider({
   // Auto-advance slides with progress tracking
   useEffect(() => {
     if (!autoAdvance) return;
-    
+
     const startTime = Date.now();
     const endTime = startTime + interval;
-    
+
     const progressTimer = setInterval(() => {
       const now = Date.now();
       const elapsed = now - startTime;
@@ -67,7 +67,7 @@ export default function ImageSlider({
           <div
             key={slide.id}
             className={`absolute inset-0 transition-opacity duration-1000 ${
-              index === currentSlide ? 'opacity-100' : 'opacity-0'
+              index === currentSlide ? "opacity-100" : "opacity-0"
             }`}
           >
             <Image
@@ -94,16 +94,16 @@ export default function ImageSlider({
               aria-label={`Go to slide ${index + 1}`}
               aria-current={index === currentSlide}
               className={`relative rounded-full cursor-pointer transition-all duration-300 overflow-hidden ${
-                index === currentSlide ? 'w-8 h-2' : 'w-2 h-2'
+                index === currentSlide ? "w-8 h-2" : "w-2 h-2"
               }`}
               style={{ backgroundColor: dotsColor }}
             >
               {index === currentSlide && (
                 <div
                   className="absolute top-0 left-0 h-full bg-white transition-all duration-75 ease-linear"
-                  style={{ 
+                  style={{
                     width: `${progress}%`,
-                    backgroundColor: 'rgba(255, 255, 255, 0.8)'
+                    backgroundColor: "rgba(255, 255, 255, 0.8)",
                   }}
                 />
               )}

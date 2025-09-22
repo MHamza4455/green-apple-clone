@@ -1,10 +1,10 @@
-'use client';
+"use client";
 
-import { useState, useEffect } from 'react';
-import { useRouter, useParams } from 'next/navigation';
-import { FiPlus, FiTrash2, FiArrowLeft } from 'react-icons/fi';
-import { VisaService, VisaServiceFormData } from '@/types/visaService';
-import { useVisaServices } from '@/hooks/useVisaServices';
+import { useState, useEffect } from "react";
+import { useRouter, useParams } from "next/navigation";
+import { FiPlus, FiTrash2, FiArrowLeft } from "react-icons/fi";
+import { VisaService, VisaServiceFormData } from "@/types/visaService";
+import { useVisaServices } from "@/hooks/useVisaServices";
 
 export default function EditVisaServicePage() {
   const router = useRouter();
@@ -13,18 +13,18 @@ export default function EditVisaServicePage() {
   const [visaService, setVisaService] = useState<VisaService | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [formData, setFormData] = useState<VisaServiceFormData>({
-    name: '',
-    code: '',
-    price: '',
-    description: '',
-    documentsRequired: [''],
-    documentsProvided: [''],
-    status: 'active'
+    name: "",
+    code: "",
+    price: "",
+    description: "",
+    documentsRequired: [""],
+    documentsProvided: [""],
+    status: "active",
   });
 
   useEffect(() => {
     const id = params.id as string;
-    const service = visaServices.find(s => s.id === id);
+    const service = visaServices.find((s) => s.id === id);
     if (service) {
       setVisaService(service);
       setFormData({
@@ -32,44 +32,60 @@ export default function EditVisaServicePage() {
         code: service.code,
         price: service.price,
         description: service.description,
-        documentsRequired: service.documentsRequired.length > 0 ? service.documentsRequired : [''],
-        documentsProvided: service.documentsProvided.length > 0 ? service.documentsProvided : [''],
-        status: service.status
+        documentsRequired:
+          service.documentsRequired.length > 0
+            ? service.documentsRequired
+            : [""],
+        documentsProvided:
+          service.documentsProvided.length > 0
+            ? service.documentsProvided
+            : [""],
+        status: service.status,
       });
     }
   }, [params.id, visaServices]);
 
-  const handleInputChange = (field: keyof VisaServiceFormData, value: string) => {
-    setFormData(prev => ({
+  const handleInputChange = (
+    field: keyof VisaServiceFormData,
+    value: string,
+  ) => {
+    setFormData((prev) => ({
       ...prev,
-      [field]: value
+      [field]: value,
     }));
   };
 
-  const handleArrayChange = (field: 'documentsRequired' | 'documentsProvided', index: number, value: string) => {
-    setFormData(prev => ({
+  const handleArrayChange = (
+    field: "documentsRequired" | "documentsProvided",
+    index: number,
+    value: string,
+  ) => {
+    setFormData((prev) => ({
       ...prev,
-      [field]: prev[field].map((item, i) => i === index ? value : item)
+      [field]: prev[field].map((item, i) => (i === index ? value : item)),
     }));
   };
 
-  const addArrayItem = (field: 'documentsRequired' | 'documentsProvided') => {
-    setFormData(prev => ({
+  const addArrayItem = (field: "documentsRequired" | "documentsProvided") => {
+    setFormData((prev) => ({
       ...prev,
-      [field]: [...prev[field], '']
+      [field]: [...prev[field], ""],
     }));
   };
 
-  const removeArrayItem = (field: 'documentsRequired' | 'documentsProvided', index: number) => {
-    setFormData(prev => ({
+  const removeArrayItem = (
+    field: "documentsRequired" | "documentsProvided",
+    index: number,
+  ) => {
+    setFormData((prev) => ({
       ...prev,
-      [field]: prev[field].filter((_, i) => i !== index)
+      [field]: prev[field].filter((_, i) => i !== index),
     }));
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
+
     if (!visaService) return;
 
     setIsSubmitting(true);
@@ -81,15 +97,19 @@ export default function EditVisaServicePage() {
         code: formData.code,
         price: formData.price,
         description: formData.description,
-        documentsRequired: formData.documentsRequired.filter(item => item.trim() !== ''),
-        documentsProvided: formData.documentsProvided.filter(item => item.trim() !== ''),
-        status: formData.status
+        documentsRequired: formData.documentsRequired.filter(
+          (item) => item.trim() !== "",
+        ),
+        documentsProvided: formData.documentsProvided.filter(
+          (item) => item.trim() !== "",
+        ),
+        status: formData.status,
       };
 
       await updateVisaService(visaService.id, updatedService);
       router.push(`/admin/visa-services/${visaService.id}`);
     } catch (error) {
-      alert('Failed to update visa service. Please try again.');
+      alert("Failed to update visa service. Please try again.");
     } finally {
       setIsSubmitting(false);
     }
@@ -109,10 +129,14 @@ export default function EditVisaServicePage() {
     return (
       <div className="p-6">
         <div className="text-center py-12">
-          <h1 className="text-2xl font-bold text-gray-900 mb-4">Service Not Found</h1>
-          <p className="text-gray-600 mb-6">The visa service you're trying to edit doesn't exist.</p>
+          <h1 className="text-2xl font-bold text-gray-900 mb-4">
+            Service Not Found
+          </h1>
+          <p className="text-gray-600 mb-6">
+            The visa service you're trying to edit doesn't exist.
+          </p>
           <button
-            onClick={() => router.push('/admin/visa-services')}
+            onClick={() => router.push("/admin/visa-services")}
             className="px-6 py-2 bg-orange-500 text-white rounded-lg hover:bg-orange-600 transition-colors duration-200"
           >
             Back to Services
@@ -135,7 +159,9 @@ export default function EditVisaServicePage() {
             Back
           </button>
         </div>
-        <h1 className="text-3xl font-bold text-gray-900 mb-2">Edit Visa Service</h1>
+        <h1 className="text-3xl font-bold text-gray-900 mb-2">
+          Edit Visa Service
+        </h1>
         <p className="text-gray-600">Update the visa service information</p>
       </div>
 
@@ -152,7 +178,7 @@ export default function EditVisaServicePage() {
                 type="text"
                 required
                 value={formData.name}
-                onChange={(e) => handleInputChange('name', e.target.value)}
+                onChange={(e) => handleInputChange("name", e.target.value)}
                 className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent"
                 placeholder="e.g., United States"
               />
@@ -166,7 +192,7 @@ export default function EditVisaServicePage() {
                 type="text"
                 required
                 value={formData.code}
-                onChange={(e) => handleInputChange('code', e.target.value)}
+                onChange={(e) => handleInputChange("code", e.target.value)}
                 className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent"
                 placeholder="e.g., us"
               />
@@ -182,7 +208,7 @@ export default function EditVisaServicePage() {
                 type="text"
                 required
                 value={formData.price}
-                onChange={(e) => handleInputChange('price', e.target.value)}
+                onChange={(e) => handleInputChange("price", e.target.value)}
                 className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent"
                 placeholder="e.g., 1500 AED"
               />
@@ -194,7 +220,12 @@ export default function EditVisaServicePage() {
               </label>
               <select
                 value={formData.status}
-                onChange={(e) => handleInputChange('status', e.target.value as 'active' | 'inactive')}
+                onChange={(e) =>
+                  handleInputChange(
+                    "status",
+                    e.target.value as "active" | "inactive",
+                  )
+                }
                 className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent"
               >
                 <option value="active">Active</option>
@@ -211,7 +242,7 @@ export default function EditVisaServicePage() {
               required
               rows={3}
               value={formData.description}
-              onChange={(e) => handleInputChange('description', e.target.value)}
+              onChange={(e) => handleInputChange("description", e.target.value)}
               className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent"
               placeholder="e.g., USA Visit Visa – 1500 AED"
             />
@@ -228,14 +259,22 @@ export default function EditVisaServicePage() {
                   <input
                     type="text"
                     value={item}
-                    onChange={(e) => handleArrayChange('documentsRequired', index, e.target.value)}
+                    onChange={(e) =>
+                      handleArrayChange(
+                        "documentsRequired",
+                        index,
+                        e.target.value,
+                      )
+                    }
                     className="flex-1 px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent"
                     placeholder="e.g., Passport copy"
                   />
                   {formData.documentsRequired.length > 1 && (
                     <button
                       type="button"
-                      onClick={() => removeArrayItem('documentsRequired', index)}
+                      onClick={() =>
+                        removeArrayItem("documentsRequired", index)
+                      }
                       className="px-3 py-2 text-red-600 hover:bg-red-50 rounded-lg transition-colors duration-200"
                     >
                       <FiTrash2 className="w-4 h-4" />
@@ -245,7 +284,7 @@ export default function EditVisaServicePage() {
               ))}
               <button
                 type="button"
-                onClick={() => addArrayItem('documentsRequired')}
+                onClick={() => addArrayItem("documentsRequired")}
                 className="flex items-center gap-2 px-3 py-2 text-orange-600 hover:bg-orange-50 rounded-lg transition-colors duration-200"
               >
                 <FiPlus className="w-4 h-4" />
@@ -265,14 +304,22 @@ export default function EditVisaServicePage() {
                   <input
                     type="text"
                     value={item}
-                    onChange={(e) => handleArrayChange('documentsProvided', index, e.target.value)}
+                    onChange={(e) =>
+                      handleArrayChange(
+                        "documentsProvided",
+                        index,
+                        e.target.value,
+                      )
+                    }
                     className="flex-1 px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent"
                     placeholder="e.g., Cover Letter"
                   />
                   {formData.documentsProvided.length > 1 && (
                     <button
                       type="button"
-                      onClick={() => removeArrayItem('documentsProvided', index)}
+                      onClick={() =>
+                        removeArrayItem("documentsProvided", index)
+                      }
                       className="px-3 py-2 text-red-600 hover:bg-red-50 rounded-lg transition-colors duration-200"
                     >
                       <FiTrash2 className="w-4 h-4" />
@@ -282,7 +329,7 @@ export default function EditVisaServicePage() {
               ))}
               <button
                 type="button"
-                onClick={() => addArrayItem('documentsProvided')}
+                onClick={() => addArrayItem("documentsProvided")}
                 className="flex items-center gap-2 px-3 py-2 text-orange-600 hover:bg-orange-50 rounded-lg transition-colors duration-200"
               >
                 <FiPlus className="w-4 h-4" />
@@ -305,7 +352,7 @@ export default function EditVisaServicePage() {
               disabled={isSubmitting}
               className="px-6 py-2 bg-orange-500 text-white rounded-lg hover:bg-orange-600 transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
             >
-              {isSubmitting ? 'Updating...' : 'Update Service'}
+              {isSubmitting ? "Updating..." : "Update Service"}
             </button>
           </div>
         </form>

@@ -61,60 +61,60 @@ model VerificationToken {
 }
 
 model VisaService {
-  id                  String   @id @default(cuid())
-  name                String
-  code                String   @unique
-  price               String
-  description         String
-  documentsRequired   String[]
-  documentsProvided   String[]
-  status              String   @default("active")
-  createdAt           DateTime @default(now())
-  updatedAt           DateTime @updatedAt
-}
-
-model ContactMessage {
   id                String   @id @default(cuid())
-  fullName          String
-  email             String
-  phone             String?
-  serviceInterest   String?
-  message           String
-  status            String   @default("unread")
+  name              String
+  code              String   @unique
+  price             String
+  description       String
+  documentsRequired String[]
+  documentsProvided String[]
+  status            String   @default("active")
   createdAt         DateTime @default(now())
   updatedAt         DateTime @updatedAt
 }
 
+model ContactMessage {
+  id              String   @id @default(cuid())
+  fullName        String
+  email           String
+  phone           String?
+  serviceInterest String?
+  message         String
+  status          String   @default("unread")
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+}
+
 model TourPackage {
-  id                  String   @id @default(cuid())
-  title               String
-  description         String
-  duration            String
-  price               String
-  image               String
-  imageAlt            String
-  category            String   @default("all")
-  status              String   @default("active")
-  featured            Boolean  @default(false)
-  includedItems       String[]
-  highlights          String[]
-  itinerary           String[]
-  createdAt           DateTime @default(now())
-  updatedAt           DateTime @updatedAt
+  id            String   @id @default(cuid())
+  title         String
+  description   String
+  duration      String
+  price         String
+  image         String
+  imageAlt      String
+  category      String   @default("all")
+  status        String   @default("active")
+  featured      Boolean  @default(false)
+  includedItems String[]
+  highlights    String[]
+  itinerary     String[]
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
 }
 
 model Inquiry {
-  id          String      @id @default(cuid())
-  type        InquiryType
-  name        String
-  email       String
-  phone       String?
-  message     String?
-  travelDate  DateTime?
-  status      InquiryStatus @default(NEW)
-  metadata    Json        // Store type-specific data (country, visaType, tourTitle, etc.)
-  createdAt   DateTime    @default(now())
-  updatedAt   DateTime    @updatedAt
+  id         String        @id @default(cuid())
+  type       InquiryType
+  name       String
+  email      String
+  phone      String?
+  message    String?
+  travelDate DateTime?
+  status     InquiryStatus @default(NEW)
+  metadata   Json // Store type-specific data (country, visaType, tourTitle, etc.)
+  createdAt  DateTime      @default(now())
+  updatedAt  DateTime      @updatedAt
 }
 
 enum InquiryType {

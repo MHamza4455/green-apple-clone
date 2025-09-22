@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 interface ActionButton {
   href: string;
@@ -17,10 +17,10 @@ interface ActionButtonsProps {
   buttonClassName?: string;
 }
 
-export default function ActionButtons({ 
-  buttons, 
-  className = '', 
-  buttonClassName = '' 
+export default function ActionButtons({
+  buttons,
+  className = "",
+  buttonClassName = "",
 }: ActionButtonsProps) {
   // Split buttons into two rows (first 3, then remaining)
   const firstRow = buttons.slice(0, 3);
@@ -34,15 +34,15 @@ export default function ActionButtons({
           <a
             key={index}
             href={button.href}
-            target={button.target || '_self'}
-            rel={button.rel || ''}
+            target={button.target || "_self"}
+            rel={button.rel || ""}
             aria-label={button.ariaLabel}
             title={button.title}
-            className={`inline-flex items-center px-4 py-3 sm:py-2 hover:opacity-90 font-semibold text-xs tracking-widest shadow-sm focus:outline-none disabled:opacity-25 transition ${button.className || ''} ${buttonClassName}`}
+            className={`inline-flex items-center px-4 py-3 sm:py-2 hover:opacity-90 font-semibold text-xs tracking-widest shadow-sm focus:outline-none disabled:opacity-25 transition ${button.className || ""} ${buttonClassName}`}
             style={{
-              backgroundColor: '#FF4E00',
-              color: 'white',
-              border: 'none'
+              backgroundColor: "#FF4E00",
+              color: "white",
+              border: "none",
             }}
           >
             {button.icon}
@@ -60,16 +60,16 @@ export default function ActionButtons({
             <a
               key={index + 3}
               href={button.href}
-              target={button.target || '_self'}
-              rel={button.rel || ''}
+              target={button.target || "_self"}
+              rel={button.rel || ""}
               aria-label={button.ariaLabel}
               title={button.title}
-              className={`inline-flex items-center px-4 py-3 sm:py-2 hover:opacity-90 font-semibold text-xs tracking-widest shadow-sm focus:outline-none disabled:opacity-25 transition ${button.className || ''} ${buttonClassName}`}
-            style={{
-              backgroundColor: '#FF4E00',
-              color: 'white',
-              border: 'none'
-            }}
+              className={`inline-flex items-center px-4 py-3 sm:py-2 hover:opacity-90 font-semibold text-xs tracking-widest shadow-sm focus:outline-none disabled:opacity-25 transition ${button.className || ""} ${buttonClassName}`}
+              style={{
+                backgroundColor: "#FF4E00",
+                color: "white",
+                border: "none",
+              }}
             >
               {button.icon}
               <span className="h-6 text-xs text-[rgba(0,140,149,1)] items-center text-opacity-80 leading-3 text-left capitalize">

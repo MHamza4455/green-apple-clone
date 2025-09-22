@@ -12,7 +12,7 @@ import { FaUsers } from "react-icons/fa";
 
 const AdminSidebar: React.FC = () => {
   const { data: session } = useSession();
-  
+
   return (
     <>
       <aside

@@ -1,40 +1,40 @@
-import { NextRequest, NextResponse } from 'next/server';
-import { prisma } from '@/lib/prisma';
+import { NextRequest, NextResponse } from "next/server";
+import { prisma } from "@/lib/prisma";
 
 export async function GET(request: NextRequest) {
   try {
     const { searchParams } = new URL(request.url);
-    const status = searchParams.get('status');
-    const search = searchParams.get('search');
+    const status = searchParams.get("status");
+    const search = searchParams.get("search");
 
     let whereClause: any = {};
 
     // Filter by status if provided
-    if (status && status !== 'all') {
+    if (status && status !== "all") {
       whereClause.status = status;
     }
 
     // Search functionality
     if (search) {
       whereClause.OR = [
-        { fullName: { contains: search, mode: 'insensitive' } },
-        { email: { contains: search, mode: 'insensitive' } },
-        { message: { contains: search, mode: 'insensitive' } },
-        { serviceInterest: { contains: search, mode: 'insensitive' } },
+        { fullName: { contains: search, mode: "insensitive" } },
+        { email: { contains: search, mode: "insensitive" } },
+        { message: { contains: search, mode: "insensitive" } },
+        { serviceInterest: { contains: search, mode: "insensitive" } },
       ];
     }
 
     const contactMessages = await prisma.contactMessage.findMany({
       where: whereClause,
-      orderBy: { createdAt: 'desc' },
+      orderBy: { createdAt: "desc" },
     });
 
     return NextResponse.json(contactMessages);
   } catch (error) {
-    console.error('Error fetching contact messages:', error);
+    console.error("Error fetching contact messages:", error);
     return NextResponse.json(
-      { error: 'Failed to fetch contact messages' },
-      { status: 500 }
+      { error: "Failed to fetch contact messages" },
+      { status: 500 },
     );
   }
 }
@@ -47,8 +47,8 @@ export async function POST(request: NextRequest) {
     // Validate required fields
     if (!fullName || !email || !message) {
       return NextResponse.json(
-        { error: 'Missing required fields' },
-        { status: 400 }
+        { error: "Missing required fields" },
+        { status: 400 },
       );
     }
 
@@ -59,16 +59,16 @@ export async function POST(request: NextRequest) {
         phone: phone || null,
         serviceInterest: serviceInterest || null,
         message,
-        status: 'unread',
+        status: "unread",
       },
     });
 
     return NextResponse.json(contactMessage, { status: 201 });
   } catch (error) {
-    console.error('Error creating contact message:', error);
+    console.error("Error creating contact message:", error);
     return NextResponse.json(
-      { error: 'Failed to create contact message' },
-      { status: 500 }
+      { error: "Failed to create contact message" },
+      { status: 500 },
     );
   }
 }

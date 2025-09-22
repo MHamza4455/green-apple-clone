@@ -1,36 +1,45 @@
-'use client';
+"use client";
 
-import { useState } from 'react';
-import { useRouter } from 'next/navigation';
-import { FiEdit, FiTrash2, FiPlus, FiSearch } from 'react-icons/fi';
-import { MdVisibility } from 'react-icons/md';
-import { VisaService, VisaServiceStatusFilter } from '@/types/visaService';
-import { useVisaServices } from '@/hooks/useVisaServices';
+import { useState } from "react";
+import { useRouter } from "next/navigation";
+import { FiEdit, FiTrash2, FiPlus, FiSearch } from "react-icons/fi";
+import { MdVisibility } from "react-icons/md";
+import { VisaService, VisaServiceStatusFilter } from "@/types/visaService";
+import { useVisaServices } from "@/hooks/useVisaServices";
 
 export default function AdminVisaServices() {
   const router = useRouter();
-  const { visaServices, deleteVisaService, toggleVisaServiceStatus, loading, error } = useVisaServices();
-  const [searchTerm, setSearchTerm] = useState('');
-  const [filterStatus, setFilterStatus] = useState<VisaServiceStatusFilter>('all');
+  const {
+    visaServices,
+    deleteVisaService,
+    toggleVisaServiceStatus,
+    loading,
+    error,
+  } = useVisaServices();
+  const [searchTerm, setSearchTerm] = useState("");
+  const [filterStatus, setFilterStatus] =
+    useState<VisaServiceStatusFilter>("all");
 
   // Filter services based on search and filters
-  const filteredServices = visaServices.filter(service => {
-    const matchesSearch = service.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                         service.description.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                         service.code.toLowerCase().includes(searchTerm.toLowerCase());
-    const matchesStatus = filterStatus === 'all' || service.status === filterStatus;
-    
+  const filteredServices = visaServices.filter((service) => {
+    const matchesSearch =
+      service.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      service.description.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      service.code.toLowerCase().includes(searchTerm.toLowerCase());
+    const matchesStatus =
+      filterStatus === "all" || service.status === filterStatus;
+
     return matchesSearch && matchesStatus;
   });
 
   // Action handlers
   const handleDelete = async (id: string) => {
-    if (confirm('Are you sure you want to delete this visa service?')) {
+    if (confirm("Are you sure you want to delete this visa service?")) {
       try {
         await deleteVisaService(id);
       } catch (err) {
-        console.error('Delete error:', err);
-        alert('Failed to delete visa service. Please try again.');
+        console.error("Delete error:", err);
+        alert("Failed to delete visa service. Please try again.");
       }
     }
   };
@@ -39,8 +48,8 @@ export default function AdminVisaServices() {
     try {
       await toggleVisaServiceStatus(id);
     } catch (err) {
-      console.error('Status toggle error:', err);
-      alert('Failed to update visa service status. Please try again.');
+      console.error("Status toggle error:", err);
+      alert("Failed to update visa service status. Please try again.");
     }
   };
 
@@ -53,21 +62,27 @@ export default function AdminVisaServices() {
   };
 
   const handleCreateService = () => {
-    router.push('/admin/visa-services/create');
+    router.push("/admin/visa-services/create");
   };
 
   return (
     <div className="p-6">
       {/* Header */}
       <div className="mb-8">
-        <h1 className="text-3xl font-bold text-gray-900 mb-2">Visa Services Management</h1>
-        <p className="text-gray-600">Manage your visa services and applications</p>
+        <h1 className="text-3xl font-bold text-gray-900 mb-2">
+          Visa Services Management
+        </h1>
+        <p className="text-gray-600">
+          Manage your visa services and applications
+        </p>
       </div>
 
       {/* Stats Cards */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
         <div className="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
-          <h3 className="text-lg font-semibold text-gray-700 mb-2">Total Services</h3>
+          <h3 className="text-lg font-semibold text-gray-700 mb-2">
+            Total Services
+          </h3>
           {loading ? (
             <div className="animate-pulse">
               <div className="h-8 bg-gray-200 rounded w-16"></div>
@@ -75,25 +90,15 @@ export default function AdminVisaServices() {
           ) : error ? (
             <p className="text-3xl font-bold text-gray-400">-</p>
           ) : (
-            <p className="text-3xl font-bold" style={{ color: '#FF4E00' }}>{visaServices.length}</p>
-          )}
-        </div>
-        <div className="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
-          <h3 className="text-lg font-semibold text-gray-700 mb-2">Active Services</h3>
-          {loading ? (
-            <div className="animate-pulse">
-              <div className="h-8 bg-gray-200 rounded w-16"></div>
-            </div>
-          ) : error ? (
-            <p className="text-3xl font-bold text-gray-400">-</p>
-          ) : (
-            <p className="text-3xl font-bold" style={{ color: '#FF4E00' }}>
-              {visaServices.filter(service => service.status === 'active').length}
+            <p className="text-3xl font-bold" style={{ color: "#FF4E00" }}>
+              {visaServices.length}
             </p>
           )}
         </div>
         <div className="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
-          <h3 className="text-lg font-semibold text-gray-700 mb-2">Inactive Services</h3>
+          <h3 className="text-lg font-semibold text-gray-700 mb-2">
+            Active Services
+          </h3>
           {loading ? (
             <div className="animate-pulse">
               <div className="h-8 bg-gray-200 rounded w-16"></div>
@@ -101,8 +106,30 @@ export default function AdminVisaServices() {
           ) : error ? (
             <p className="text-3xl font-bold text-gray-400">-</p>
           ) : (
-            <p className="text-3xl font-bold" style={{ color: '#FF4E00' }}>
-              {visaServices.filter(service => service.status === 'inactive').length}
+            <p className="text-3xl font-bold" style={{ color: "#FF4E00" }}>
+              {
+                visaServices.filter((service) => service.status === "active")
+                  .length
+              }
+            </p>
+          )}
+        </div>
+        <div className="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
+          <h3 className="text-lg font-semibold text-gray-700 mb-2">
+            Inactive Services
+          </h3>
+          {loading ? (
+            <div className="animate-pulse">
+              <div className="h-8 bg-gray-200 rounded w-16"></div>
+            </div>
+          ) : error ? (
+            <p className="text-3xl font-bold text-gray-400">-</p>
+          ) : (
+            <p className="text-3xl font-bold" style={{ color: "#FF4E00" }}>
+              {
+                visaServices.filter((service) => service.status === "inactive")
+                  .length
+              }
             </p>
           )}
         </div>
@@ -127,7 +154,9 @@ export default function AdminVisaServices() {
           <div className="flex gap-4">
             <select
               value={filterStatus}
-              onChange={(e) => setFilterStatus(e.target.value as VisaServiceStatusFilter)}
+              onChange={(e) =>
+                setFilterStatus(e.target.value as VisaServiceStatusFilter)
+              }
               className="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent"
             >
               <option value="all">All Status</option>
@@ -210,7 +239,9 @@ export default function AdminVisaServices() {
                 <tr>
                   <td colSpan={6} className="px-6 py-12 text-center">
                     <div className="bg-red-50 border border-red-200 rounded-lg p-4 mx-auto max-w-md">
-                      <div className="text-red-800 font-medium">Failed to load visa services</div>
+                      <div className="text-red-800 font-medium">
+                        Failed to load visa services
+                      </div>
                       <div className="text-red-600 text-sm mt-1">{error}</div>
                       <button
                         onClick={() => window.location.reload()}
@@ -225,14 +256,15 @@ export default function AdminVisaServices() {
                 // No data state
                 <tr>
                   <td colSpan={6} className="px-6 py-12 text-center">
-                    <div className="text-gray-500 text-lg">No visa services found</div>
-                    <div className="text-gray-400 text-sm mt-2">
-                      {searchTerm || filterStatus !== 'all' 
-                        ? 'Try adjusting your search or filter criteria'
-                        : 'Create your first visa service to get started'
-                      }
+                    <div className="text-gray-500 text-lg">
+                      No visa services found
                     </div>
-                    {!searchTerm && filterStatus === 'all' && (
+                    <div className="text-gray-400 text-sm mt-2">
+                      {searchTerm || filterStatus !== "all"
+                        ? "Try adjusting your search or filter criteria"
+                        : "Create your first visa service to get started"}
+                    </div>
+                    {!searchTerm && filterStatus === "all" && (
                       <button
                         onClick={handleCreateService}
                         className="mt-4 px-4 py-2 bg-orange-500 text-white rounded-lg hover:bg-orange-600 transition-colors duration-200"
@@ -245,7 +277,10 @@ export default function AdminVisaServices() {
               ) : (
                 // Data rows
                 filteredServices.map((service) => (
-                  <tr key={service.id} className="hover:bg-gray-50 transition-colors duration-200">
+                  <tr
+                    key={service.id}
+                    className="hover:bg-gray-50 transition-colors duration-200"
+                  >
                     <td className="px-6 py-4 whitespace-nowrap">
                       <div>
                         <div className="text-sm font-medium text-gray-900">
@@ -268,12 +303,12 @@ export default function AdminVisaServices() {
                       <button
                         onClick={() => handleStatusToggle(service.id)}
                         className={`inline-flex px-2 py-1 text-xs font-semibold rounded-full cursor-pointer transition-colors duration-200 ${
-                          service.status === 'active'
-                            ? 'bg-green-100 text-green-800 hover:bg-green-200'
-                            : 'bg-red-100 text-red-800 hover:bg-red-200'
+                          service.status === "active"
+                            ? "bg-green-100 text-green-800 hover:bg-green-200"
+                            : "bg-red-100 text-red-800 hover:bg-red-200"
                         }`}
                       >
-                        {service.status === 'active' ? 'Active' : 'Inactive'}
+                        {service.status === "active" ? "Active" : "Inactive"}
                       </button>
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
@@ -340,4 +375,3 @@ export default function AdminVisaServices() {
     </div>
   );
 }
-  

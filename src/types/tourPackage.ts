@@ -31,7 +31,7 @@ export interface TourPackageFormData {
   itinerary: string[];
 }
 
-export type TourPackageStatus = 'active' | 'inactive';
-export type TourPackageCategory = 'all' | 'featured' | 'umrah' | 'holiday';
-export type TourPackageFilter = 'all' | 'featured' | 'not-featured';
-export type TourPackageStatusFilter = 'all' | TourPackageStatus;
+export type TourPackageStatus = "active" | "inactive";
+export type TourPackageCategory = "all" | "featured" | "umrah" | "holiday";
+export type TourPackageFilter = "all" | "featured" | "not-featured";
+export type TourPackageStatusFilter = "all" | TourPackageStatus;

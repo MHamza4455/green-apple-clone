@@ -1,11 +1,11 @@
-'use client';
+"use client";
 
-import { useState, useEffect } from 'react';
-import { useRouter, useParams } from 'next/navigation';
-import { FiEdit, FiArrowLeft } from 'react-icons/fi';
-import Image from 'next/image';
-import { TourPackage } from '@/types/tourPackage';
-import { useTourPackages } from '@/hooks/useTourPackages';
+import { useState, useEffect } from "react";
+import { useRouter, useParams } from "next/navigation";
+import { FiEdit, FiArrowLeft } from "react-icons/fi";
+import Image from "next/image";
+import { TourPackage } from "@/types/tourPackage";
+import { useTourPackages } from "@/hooks/useTourPackages";
 
 export default function TourPackageDetailsPage() {
   const router = useRouter();
@@ -15,7 +15,7 @@ export default function TourPackageDetailsPage() {
 
   useEffect(() => {
     const id = params.id as string;
-    const pkg = tourPackages.find(p => p.id === id);
+    const pkg = tourPackages.find((p) => p.id === id);
     setTourPackage(pkg || null);
   }, [params.id, tourPackages]);
 
@@ -23,10 +23,14 @@ export default function TourPackageDetailsPage() {
     return (
       <div className="p-6">
         <div className="text-center py-12">
-          <h1 className="text-2xl font-bold text-gray-900 mb-4">Package Not Found</h1>
-          <p className="text-gray-600 mb-6">The tour package you're looking for doesn't exist.</p>
+          <h1 className="text-2xl font-bold text-gray-900 mb-4">
+            Package Not Found
+          </h1>
+          <p className="text-gray-600 mb-6">
+            The tour package you're looking for doesn't exist.
+          </p>
           <button
-            onClick={() => router.push('/admin/tour-packages')}
+            onClick={() => router.push("/admin/tour-packages")}
             className="px-6 py-2 bg-orange-500 text-white rounded-lg hover:bg-orange-600 transition-colors duration-200"
           >
             Back to Packages
@@ -49,15 +53,21 @@ export default function TourPackageDetailsPage() {
             Back
           </button>
           <button
-            onClick={() => router.push(`/admin/tour-packages/${tourPackage.id}/edit`)}
+            onClick={() =>
+              router.push(`/admin/tour-packages/${tourPackage.id}/edit`)
+            }
             className="flex items-center gap-2 px-4 py-2 bg-orange-500 text-white rounded-lg hover:bg-orange-600 transition-colors duration-200"
           >
             <FiEdit className="w-4 h-4" />
             Edit Package
           </button>
         </div>
-        <h1 className="text-3xl font-bold text-gray-900 mb-2">Tour Package Details</h1>
-        <p className="text-gray-600">View and manage tour package information</p>
+        <h1 className="text-3xl font-bold text-gray-900 mb-2">
+          Tour Package Details
+        </h1>
+        <p className="text-gray-600">
+          View and manage tour package information
+        </p>
       </div>
 
       {/* Content */}
@@ -77,49 +87,67 @@ export default function TourPackageDetailsPage() {
 
           {/* Package Information */}
           <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
-            <h2 className="text-2xl font-bold text-gray-900 mb-4">{tourPackage.title}</h2>
+            <h2 className="text-2xl font-bold text-gray-900 mb-4">
+              {tourPackage.title}
+            </h2>
             <p className="text-gray-600 mb-6">{tourPackage.description}</p>
-            
+
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div>
-                <h3 className="text-lg font-semibold text-gray-900 mb-3">Package Details</h3>
+                <h3 className="text-lg font-semibold text-gray-900 mb-3">
+                  Package Details
+                </h3>
                 <div className="space-y-2">
                   <div className="flex justify-between">
                     <span className="font-medium text-gray-700">Duration:</span>
-                    <span className="text-gray-600">{tourPackage.duration}</span>
+                    <span className="text-gray-600">
+                      {tourPackage.duration}
+                    </span>
                   </div>
                   <div className="flex justify-between">
                     <span className="font-medium text-gray-700">Price:</span>
-                    <span className="text-orange-600 font-semibold">{tourPackage.price}</span>
+                    <span className="text-orange-600 font-semibold">
+                      {tourPackage.price}
+                    </span>
                   </div>
                   <div className="flex justify-between">
                     <span className="font-medium text-gray-700">Category:</span>
-                    <span className={`px-2 py-1 text-xs font-semibold rounded-full ${
-                      tourPackage.category === 'featured' 
-                        ? 'bg-orange-100 text-orange-800' 
-                        : 'bg-gray-100 text-gray-800'
-                    }`}>
-                      {tourPackage.category === 'featured' ? 'Featured Tour' : 'All Tours'}
+                    <span
+                      className={`px-2 py-1 text-xs font-semibold rounded-full ${
+                        tourPackage.category === "featured"
+                          ? "bg-orange-100 text-orange-800"
+                          : "bg-gray-100 text-gray-800"
+                      }`}
+                    >
+                      {tourPackage.category === "featured"
+                        ? "Featured Tour"
+                        : "All Tours"}
                     </span>
                   </div>
                   <div className="flex justify-between">
                     <span className="font-medium text-gray-700">Status:</span>
-                    <span className={`px-2 py-1 text-xs font-semibold rounded-full ${
-                      tourPackage.status === 'active'
-                        ? 'bg-green-100 text-green-800'
-                        : 'bg-red-100 text-red-800'
-                    }`}>
-                      {tourPackage.status === 'active' ? 'Active' : 'Inactive'}
+                    <span
+                      className={`px-2 py-1 text-xs font-semibold rounded-full ${
+                        tourPackage.status === "active"
+                          ? "bg-green-100 text-green-800"
+                          : "bg-red-100 text-red-800"
+                      }`}
+                    >
+                      {tourPackage.status === "active" ? "Active" : "Inactive"}
                     </span>
                   </div>
                 </div>
               </div>
 
               <div>
-                <h3 className="text-lg font-semibold text-gray-900 mb-3">Package Info</h3>
+                <h3 className="text-lg font-semibold text-gray-900 mb-3">
+                  Package Info
+                </h3>
                 <div className="space-y-2">
                   <div className="flex justify-between">
-                    <span className="font-medium text-gray-700">Package ID:</span>
+                    <span className="font-medium text-gray-700">
+                      Package ID:
+                    </span>
                     <span className="text-gray-600">#{tourPackage.id}</span>
                   </div>
                   <div className="flex justify-between">
@@ -138,7 +166,9 @@ export default function TourPackageDetailsPage() {
         <div className="space-y-6">
           {/* Included Items */}
           <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
-            <h3 className="text-lg font-semibold text-gray-900 mb-4">What's Included</h3>
+            <h3 className="text-lg font-semibold text-gray-900 mb-4">
+              What's Included
+            </h3>
             <div className="space-y-2">
               {tourPackage.includedItems.map((item, index) => (
                 <div key={index} className="flex items-center gap-2">
@@ -151,7 +181,9 @@ export default function TourPackageDetailsPage() {
 
           {/* Highlights */}
           <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
-            <h3 className="text-lg font-semibold text-gray-900 mb-4">Highlights</h3>
+            <h3 className="text-lg font-semibold text-gray-900 mb-4">
+              Highlights
+            </h3>
             <div className="space-y-2">
               {tourPackage.highlights.map((item, index) => (
                 <div key={index} className="flex items-center gap-2">
@@ -164,7 +196,9 @@ export default function TourPackageDetailsPage() {
 
           {/* Itinerary */}
           <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
-            <h3 className="text-lg font-semibold text-gray-900 mb-4">Itinerary</h3>
+            <h3 className="text-lg font-semibold text-gray-900 mb-4">
+              Itinerary
+            </h3>
             <div className="space-y-2">
               {tourPackage.itinerary.map((item, index) => (
                 <div key={index} className="flex items-center gap-2">

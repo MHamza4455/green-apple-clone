@@ -1,5 +1,5 @@
-import { NextRequest, NextResponse } from 'next/server';
-import { prisma } from '@/lib/prisma';
+import { NextRequest, NextResponse } from "next/server";
+import { prisma } from "@/lib/prisma";
 // @ts-expect-error - nodemailer is not typed
 import nodemailer from "nodemailer";
 
@@ -20,14 +20,14 @@ export async function POST(req: NextRequest) {
       tourTitle,
       tourDuration,
       tourPrice,
-      travelers
+      travelers,
     } = body;
 
     // Validate required fields
     if (!name || !email || !inquiryType) {
       return NextResponse.json(
-        { error: 'Name, email, and inquiry type are required' },
-        { status: 400 }
+        { error: "Name, email, and inquiry type are required" },
+        { status: 400 },
       );
     }
 
@@ -39,22 +39,22 @@ export async function POST(req: NextRequest) {
         phone: phone || null,
         message: message || null,
         travelDate: travelDate || null,
-        type: inquiryType.toUpperCase() as 'VISA' | 'TOUR',
+        type: inquiryType.toUpperCase() as "VISA" | "TOUR",
         // Store type-specific data as JSON
         metadata: {
-          ...(inquiryType === 'visa' && {
+          ...(inquiryType === "visa" && {
             country,
-            visaType
+            visaType,
           }),
-          ...(inquiryType === 'tour' && {
+          ...(inquiryType === "tour" && {
             tourTitle,
             tourDuration,
             tourPrice,
-            travelers: travelers ? parseInt(travelers) : 1
-          })
+            travelers: travelers ? parseInt(travelers) : 1,
+          }),
         },
-        status: 'NEW'
-      }
+        status: "NEW",
+      },
     });
 
     // Send email notification using existing email system
@@ -69,7 +69,7 @@ export async function POST(req: NextRequest) {
         },
       });
 
-      if (inquiryType === 'visa') {
+      if (inquiryType === "visa") {
         // Send visa inquiry email
         await transporter.sendMail({
           from: `"Radiant Way Travel Website" <info@radiantwaytravel.com>`,
@@ -83,8 +83,8 @@ export async function POST(req: NextRequest) {
               <div style="background: #f8fffe; padding: 16px; border-radius: 8px; margin-bottom: 20px; border-left: 4px solid #008c95;">
                 <h3 style="color: #008c95; margin: 0 0 8px 0; font-size: 18px;">Visa Details</h3>
                 <p style="margin: 4px 0; color: #333;"><strong>Country:</strong> ${country}</p>
-                <p style="margin: 4px 0; color: #333;"><strong>Visa Type:</strong> ${visaType || 'Not specified'}</p>
-                <p style="margin: 4px 0; color: #333;"><strong>Travel Date:</strong> ${travelDate || 'Not specified'}</p>
+                <p style="margin: 4px 0; color: #333;"><strong>Visa Type:</strong> ${visaType || "Not specified"}</p>
+                <p style="margin: 4px 0; color: #333;"><strong>Travel Date:</strong> ${travelDate || "Not specified"}</p>
               </div>
 
               <!-- Customer Information -->
@@ -99,11 +99,11 @@ export async function POST(req: NextRequest) {
                 </tr>
                 <tr>
                   <td style="padding: 8px 0; font-weight: bold; color: #333;">Phone:</td>
-                  <td style="padding: 8px 0; color: #555;">${phone || 'Not provided'}</td>
+                  <td style="padding: 8px 0; color: #555;">${phone || "Not provided"}</td>
                 </tr>
                 <tr>
                   <td style="padding: 8px 0; font-weight: bold; color: #333; vertical-align: top;">Message:</td>
-                  <td style="padding: 8px 0; color: #555;">${message ? message.replace(/\n/g, "<br>") : 'No additional message'}</td>
+                  <td style="padding: 8px 0; color: #555;">${message ? message.replace(/\n/g, "<br>") : "No additional message"}</td>
                 </tr>
               </table>
               
@@ -142,11 +142,11 @@ export async function POST(req: NextRequest) {
                 </tr>
                 <tr>
                   <td style="padding: 8px 0; font-weight: bold; color: #333;">Phone:</td>
-                  <td style="padding: 8px 0; color: #555;">${phone || 'Not provided'}</td>
+                  <td style="padding: 8px 0; color: #555;">${phone || "Not provided"}</td>
                 </tr>
                 <tr>
                   <td style="padding: 8px 0; font-weight: bold; color: #333;">Travel Date:</td>
-                  <td style="padding: 8px 0; color: #555;">${travelDate || 'Not specified'}</td>
+                  <td style="padding: 8px 0; color: #555;">${travelDate || "Not specified"}</td>
                 </tr>
                 <tr>
                   <td style="padding: 8px 0; font-weight: bold; color: #333;">Number of Travelers:</td>
@@ -154,7 +154,7 @@ export async function POST(req: NextRequest) {
                 </tr>
                 <tr>
                   <td style="padding: 8px 0; font-weight: bold; color: #333; vertical-align: top;">Message:</td>
-                  <td style="padding: 8px 0; color: #555;">${message ? message.replace(/\n/g, "<br>") : 'No additional message'}</td>
+                  <td style="padding: 8px 0; color: #555;">${message ? message.replace(/\n/g, "<br>") : "No additional message"}</td>
                 </tr>
               </table>
               
@@ -165,25 +165,24 @@ export async function POST(req: NextRequest) {
         });
       }
 
-      console.log('Email sent successfully for', inquiryType, 'inquiry');
+      console.log("Email sent successfully for", inquiryType, "inquiry");
     } catch (emailError) {
-      console.error('Error sending email:', emailError);
+      console.error("Error sending email:", emailError);
       // Don't fail the inquiry if email fails
     }
 
     return NextResponse.json(
-      { 
-        message: 'Inquiry submitted successfully',
-        inquiryId: inquiry.id 
+      {
+        message: "Inquiry submitted successfully",
+        inquiryId: inquiry.id,
       },
-      { status: 201 }
+      { status: 201 },
     );
-
   } catch (error) {
-    console.error('Error creating inquiry:', error);
+    console.error("Error creating inquiry:", error);
     return NextResponse.json(
-      { error: 'Internal server error' },
-      { status: 500 }
+      { error: "Internal server error" },
+      { status: 500 },
     );
   }
 }
@@ -191,8 +190,8 @@ export async function POST(req: NextRequest) {
 export async function GET(req: NextRequest) {
   try {
     const { searchParams } = new URL(req.url);
-    const type = searchParams.get('type');
-    const status = searchParams.get('status');
+    const type = searchParams.get("type");
+    const status = searchParams.get("status");
 
     const where: any = {};
     if (type) where.type = type;
@@ -200,15 +199,15 @@ export async function GET(req: NextRequest) {
 
     const inquiries = await prisma.inquiry.findMany({
       where,
-      orderBy: { createdAt: 'desc' }
+      orderBy: { createdAt: "desc" },
     });
 
     return NextResponse.json(inquiries);
   } catch (error) {
-    console.error('Error fetching inquiries:', error);
+    console.error("Error fetching inquiries:", error);
     return NextResponse.json(
-      { error: 'Internal server error' },
-      { status: 500 }
+      { error: "Internal server error" },
+      { status: 500 },
     );
   }
 }

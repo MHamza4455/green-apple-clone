@@ -1,9 +1,9 @@
-import { NextRequest, NextResponse } from 'next/server';
-import { prisma } from '@/lib/prisma';
+import { NextRequest, NextResponse } from "next/server";
+import { prisma } from "@/lib/prisma";
 
 export async function GET(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: { id: string } },
 ) {
   try {
     const tourPackage = await prisma.tourPackage.findUnique({
@@ -12,40 +12,40 @@ export async function GET(
 
     if (!tourPackage) {
       return NextResponse.json(
-        { error: 'Tour package not found' },
-        { status: 404 }
+        { error: "Tour package not found" },
+        { status: 404 },
       );
     }
 
     return NextResponse.json(tourPackage);
   } catch (error) {
-    console.error('Error fetching tour package:', error);
+    console.error("Error fetching tour package:", error);
     return NextResponse.json(
-      { error: 'Failed to fetch tour package' },
-      { status: 500 }
+      { error: "Failed to fetch tour package" },
+      { status: 500 },
     );
   }
 }
 
 export async function PUT(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: { id: string } },
 ) {
   try {
     const body = await request.json();
-    const { 
-      title, 
-      description, 
-      duration, 
-      price, 
-      image, 
-      imageAlt, 
-      category, 
-      status, 
+    const {
+      title,
+      description,
+      duration,
+      price,
+      image,
+      imageAlt,
+      category,
+      status,
       featured,
       includedItems,
       highlights,
-      itinerary
+      itinerary,
     } = body;
 
     // Check if tour package exists
@@ -55,8 +55,8 @@ export async function PUT(
 
     if (!existingPackage) {
       return NextResponse.json(
-        { error: 'Tour package not found' },
-        { status: 404 }
+        { error: "Tour package not found" },
+        { status: 404 },
       );
     }
 
@@ -82,17 +82,17 @@ export async function PUT(
 
     return NextResponse.json(updatedPackage);
   } catch (error) {
-    console.error('Error updating tour package:', error);
+    console.error("Error updating tour package:", error);
     return NextResponse.json(
-      { error: 'Failed to update tour package' },
-      { status: 500 }
+      { error: "Failed to update tour package" },
+      { status: 500 },
     );
   }
 }
 
 export async function DELETE(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: { id: string } },
 ) {
   try {
     // Check if tour package exists
@@ -102,8 +102,8 @@ export async function DELETE(
 
     if (!existingPackage) {
       return NextResponse.json(
-        { error: 'Tour package not found' },
-        { status: 404 }
+        { error: "Tour package not found" },
+        { status: 404 },
       );
     }
 
@@ -111,13 +111,12 @@ export async function DELETE(
       where: { id: params.id },
     });
 
-    return NextResponse.json({ message: 'Tour package deleted successfully' });
+    return NextResponse.json({ message: "Tour package deleted successfully" });
   } catch (error) {
-    console.error('Error deleting tour package:', error);
+    console.error("Error deleting tour package:", error);
     return NextResponse.json(
-      { error: 'Failed to delete tour package' },
-      { status: 500 }
+      { error: "Failed to delete tour package" },
+      { status: 500 },
     );
   }
 }
-

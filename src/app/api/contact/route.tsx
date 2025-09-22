@@ -1,15 +1,24 @@
 // @ts-expect-error - nodemailer is not typed
 import nodemailer from "nodemailer";
-import { prisma } from '@/lib/prisma';
-import { ContactMessageFormData } from '@/types/contactMessage';
+import { prisma } from "@/lib/prisma";
+import { ContactMessageFormData } from "@/types/contactMessage";
 
 export async function POST(req: Request) {
   try {
-    const { fullName, email, phone, serviceInterest, message }: ContactMessageFormData = await req.json();
+    const {
+      fullName,
+      email,
+      phone,
+      serviceInterest,
+      message,
+    }: ContactMessageFormData = await req.json();
 
     // Validate required fields
     if (!fullName || !email || !message) {
-      return new Response(JSON.stringify({ error: "Missing required fields" }), { status: 400 });
+      return new Response(
+        JSON.stringify({ error: "Missing required fields" }),
+        { status: 400 },
+      );
     }
 
     // Store in database first
@@ -22,12 +31,15 @@ export async function POST(req: Request) {
           phone: phone || null,
           serviceInterest: serviceInterest || null,
           message,
-          status: 'unread'
-        }
+          status: "unread",
+        },
       });
     } catch (dbError) {
       console.error("Database error:", dbError);
-      return new Response(JSON.stringify({ error: "Failed to save message to database" }), { status: 500 });
+      return new Response(
+        JSON.stringify({ error: "Failed to save message to database" }),
+        { status: 500 },
+      );
     }
 
     // Send email notification
@@ -63,11 +75,11 @@ export async function POST(req: Request) {
               </tr>
               <tr>
                 <td style="padding: 8px 0; font-weight: bold; color: #333;">Phone:</td>
-                <td style="padding: 8px 0; color: #555;">${phone || 'Not provided'}</td>
+                <td style="padding: 8px 0; color: #555;">${phone || "Not provided"}</td>
               </tr>
               <tr>
                 <td style="padding: 8px 0; font-weight: bold; color: #333;">Service Interest:</td>
-                <td style="padding: 8px 0; color: #555;">${serviceInterest || 'Not specified'}</td>
+                <td style="padding: 8px 0; color: #555;">${serviceInterest || "Not specified"}</td>
               </tr>
               <tr>
                 <td style="padding: 8px 0; font-weight: bold; color: #333; vertical-align: top;">Message:</td>
@@ -88,13 +100,19 @@ export async function POST(req: Request) {
       // The message is already saved in the database
     }
 
-    return new Response(JSON.stringify({ 
-      success: true, 
-      messageId: contactMessage.id,
-      message: "Message sent successfully" 
-    }), { status: 200 });
+    return new Response(
+      JSON.stringify({
+        success: true,
+        messageId: contactMessage.id,
+        message: "Message sent successfully",
+      }),
+      { status: 200 },
+    );
   } catch (err) {
     console.error("Contact form error:", err);
-    return new Response(JSON.stringify({ error: "Failed to process contact form" }), { status: 500 });
+    return new Response(
+      JSON.stringify({ error: "Failed to process contact form" }),
+      { status: 500 },
+    );
   }
 }

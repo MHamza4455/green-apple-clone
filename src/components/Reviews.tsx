@@ -1,62 +1,63 @@
-
-'use client';
-import { useState } from 'react';
+"use client";
+import { useState } from "react";
 
 const DUMMY_REVIEWS = [
   {
-    name: 'Ali R.',
-    avatar: 'https://randomuser.me/api/portraits/men/12.jpg',
-    date: 'Aug 25, 2025',
+    name: "Ali R.",
+    avatar: "https://randomuser.me/api/portraits/men/12.jpg",
+    date: "Aug 25, 2025",
     rating: 5,
-    body: 'My Armenia trip was seamless. Hotels, transfers, and sightseeing were perfectly organised. Highly recommend Radiant Way Travel!',
-    service: 'Tour Packages'
+    body: "My Armenia trip was seamless. Hotels, transfers, and sightseeing were perfectly organised. Highly recommend Radiant Way Travel!",
+    service: "Tour Packages",
   },
   {
-    name: 'Fatima S.',
-    avatar: 'https://randomuser.me/api/portraits/women/2.jpg',
-    date: 'Aug 22, 2025',
+    name: "Fatima S.",
+    avatar: "https://randomuser.me/api/portraits/women/2.jpg",
+    date: "Aug 22, 2025",
     rating: 5,
-    body: 'Booking the Turkey package was effortless. Everything from flights to hotel transfers was handled professionally. Istanbul sightseeing was amazing!',
-    service: 'Tour Packages'
+    body: "Booking the Turkey package was effortless. Everything from flights to hotel transfers was handled professionally. Istanbul sightseeing was amazing!",
+    service: "Tour Packages",
   },
   {
-    name: 'Omar K.',
-    avatar: 'https://randomuser.me/api/portraits/men/14.jpg',
-    date: 'Aug 18, 2025',
+    name: "Omar K.",
+    avatar: "https://randomuser.me/api/portraits/men/14.jpg",
+    date: "Aug 18, 2025",
     rating: 5,
-    body: 'The Russia package exceeded my expectations. Day trips to Moscow were well organised, and the hotel stay was very comfortable. Truly stress-free travel!',
-    service: 'Tour Packages'
+    body: "The Russia package exceeded my expectations. Day trips to Moscow were well organised, and the hotel stay was very comfortable. Truly stress-free travel!",
+    service: "Tour Packages",
   },
   {
-    name: 'Sana L.',
-    avatar: 'https://randomuser.me/api/portraits/women/6.jpg',
-    date: 'Aug 15, 2025',
+    name: "Sana L.",
+    avatar: "https://randomuser.me/api/portraits/women/6.jpg",
+    date: "Aug 15, 2025",
     rating: 5,
-    body: 'Our Egypt tour was unforgettable. From the pyramids to the museums, every detail was taken care of. Radiant Way Travel made it so easy for us!',
-    service: 'Tour Packages'
+    body: "Our Egypt tour was unforgettable. From the pyramids to the museums, every detail was taken care of. Radiant Way Travel made it so easy for us!",
+    service: "Tour Packages",
   },
   {
-    name: 'Hassan M.',
-    avatar: 'https://randomuser.me/api/portraits/men/13.jpg',
-    date: 'Aug 10, 2025',
+    name: "Hassan M.",
+    avatar: "https://randomuser.me/api/portraits/men/13.jpg",
+    date: "Aug 10, 2025",
     rating: 5,
-    body: 'The Maldives package was magical. Transfers, hotel, and excursions were perfectly planned. I will definitely book my next holiday with Radiant Way Travel.',
-    service: 'Tour Packages'
-  }
+    body: "The Maldives package was magical. Transfers, hotel, and excursions were perfectly planned. I will definitely book my next holiday with Radiant Way Travel.",
+    service: "Tour Packages",
+  },
 ];
-
 
 function StarRating({ rating }: { rating: number }) {
   return (
-    <div className="flex items-center gap-1" aria-label={`Rating ${rating} out of 5`}>
+    <div
+      className="flex items-center gap-1"
+      aria-label={`Rating ${rating} out of 5`}
+    >
       {[...Array(5)].map((_, i) => (
         <svg
           key={i}
-          className={`h-5 w-5 ${i < rating ? '' : 'opacity-40'}`}
+          className={`h-5 w-5 ${i < rating ? "" : "opacity-40"}`}
           viewBox="0 0 20 20"
           fill="currentColor"
           aria-hidden="true"
-          style={{ color: i < rating ? '#FF4E00' : '#FF4E00' }}
+          style={{ color: i < rating ? "#FF4E00" : "#FF4E00" }}
         >
           <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
         </svg>
@@ -67,102 +68,152 @@ function StarRating({ rating }: { rating: number }) {
 
 export default function Reviews() {
   const [visibleCount, setVisibleCount] = useState(3);
-  const [activeFilter, setActiveFilter] = useState<'all' | 'visa' | 'tours' | 'umrah'>('all');
+  const [activeFilter, setActiveFilter] = useState<
+    "all" | "visa" | "tours" | "umrah"
+  >("all");
   const [showGoogleButton, setShowGoogleButton] = useState(false);
   const reviewsToShow = DUMMY_REVIEWS.slice(0, visibleCount);
 
   const serviceFilters = [
-    { id: 'all', name: 'All Reviews', count: DUMMY_REVIEWS.length },
-    { id: 'visa', name: 'Visa Services', count: DUMMY_REVIEWS.filter(r => r.service === 'Visa Services').length },
-    { id: 'tours', name: 'Tour Packages', count: DUMMY_REVIEWS.filter(r => r.service === 'Tour Packages').length },
-    { id: 'umrah', name: 'Umrah Services', count: DUMMY_REVIEWS.filter(r => r.service === 'Umrah Services').length },
+    { id: "all", name: "All Reviews", count: DUMMY_REVIEWS.length },
+    {
+      id: "visa",
+      name: "Visa Services",
+      count: DUMMY_REVIEWS.filter((r) => r.service === "Visa Services").length,
+    },
+    {
+      id: "tours",
+      name: "Tour Packages",
+      count: DUMMY_REVIEWS.filter((r) => r.service === "Tour Packages").length,
+    },
+    {
+      id: "umrah",
+      name: "Umrah Services",
+      count: DUMMY_REVIEWS.filter((r) => r.service === "Umrah Services").length,
+    },
   ];
 
-  const reviewsToDisplay = showGoogleButton ? DUMMY_REVIEWS.slice(0, 6) : reviewsToShow;
-  
-  const filteredReviews = activeFilter === 'all' 
-    ? reviewsToDisplay
-    : reviewsToDisplay.filter(review => {
-        if (activeFilter === 'visa') return review.service === 'Visa Services';
-        if (activeFilter === 'tours') return review.service === 'Tour Packages';
-        if (activeFilter === 'umrah') return review.service === 'Umrah Services';
-        return true;
-      });
+  const reviewsToDisplay = showGoogleButton
+    ? DUMMY_REVIEWS.slice(0, 6)
+    : reviewsToShow;
+
+  const filteredReviews =
+    activeFilter === "all"
+      ? reviewsToDisplay
+      : reviewsToDisplay.filter((review) => {
+          if (activeFilter === "visa")
+            return review.service === "Visa Services";
+          if (activeFilter === "tours")
+            return review.service === "Tour Packages";
+          if (activeFilter === "umrah")
+            return review.service === "Umrah Services";
+          return true;
+        });
 
   return (
-    <section id="reviews" className="relative py-16 px-4" style={{ backgroundColor: 'rgba(0, 140, 149, 0.05)' }}>
+    <section
+      id="reviews"
+      className="relative py-16 px-4"
+      style={{ backgroundColor: "rgba(0, 140, 149, 0.05)" }}
+    >
       <div className="max-w-6xl mx-auto">
         {/* Header */}
         <header className="text-center mb-12">
-          <h2 className="text-4xl md:text-5xl font-bold mb-4" style={{ color: '#FF4E00' }}>
+          <h2
+            className="text-4xl md:text-5xl font-bold mb-4"
+            style={{ color: "#FF4E00" }}
+          >
             What our travelers say
           </h2>
-          
-          <p className="text-xl max-w-3xl mx-auto mb-6" style={{ color: 'black', opacity: 0.8 }}>
+
+          <p
+            className="text-xl max-w-3xl mx-auto mb-6"
+            style={{ color: "black", opacity: 0.8 }}
+          >
             <span className="font-semibold">5.0/5</span>
-            <span className="mx-2" style={{ opacity: 0.5 }}>•</span>
+            <span className="mx-2" style={{ opacity: 0.5 }}>
+              •
+            </span>
             <span>
               <span className="font-semibold">640+</span> happy customers
             </span>
           </p>
 
-         <a
-          href="https://g.page/r/CSVOuDsOGf38EAI/review?kd"
-          rel="nofollow"
-          target="_blank"
-          className="inline-flex items-center gap-2 py-3 px-8 font-semibold rounded-full hover:opacity-90 transition-all duration-200 shadow-lg hover:shadow-xl"
-          style={{ backgroundColor: '#FF4E00', color: 'white' }}
-        >
-          {/* Pencil/Edit Icon */}
-          <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
-            <path d="M17.414 2.586a2 2 0 00-2.828 0l-9.192 9.192a2 2 0 00-.497.879l-1.414 5.657a1 1 0 001.213 1.213l5.657-1.414a2 2 0 00.879-.497l9.192-9.192a2 2 0 000-2.828l-3.02-3.02zm-2.828 1.414l3.02 3.02-9.192 9.192-3.02-3.02 9.192-9.192z"/>
-          </svg>
-          Leave a Review
-        </a>
+          <a
+            href="https://g.page/r/CSVOuDsOGf38EAI/review?kd"
+            rel="nofollow"
+            target="_blank"
+            className="inline-flex items-center gap-2 py-3 px-8 font-semibold rounded-full hover:opacity-90 transition-all duration-200 shadow-lg hover:shadow-xl"
+            style={{ backgroundColor: "#FF4E00", color: "white" }}
+          >
+            {/* Pencil/Edit Icon */}
+            <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+              <path d="M17.414 2.586a2 2 0 00-2.828 0l-9.192 9.192a2 2 0 00-.497.879l-1.414 5.657a1 1 0 001.213 1.213l5.657-1.414a2 2 0 00.879-.497l9.192-9.192a2 2 0 000-2.828l-3.02-3.02zm-2.828 1.414l3.02 3.02-9.192 9.192-3.02-3.02 9.192-9.192z" />
+            </svg>
+            Leave a Review
+          </a>
         </header>
 
         {/* Reviews Cards */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
           {filteredReviews.map((review, idx) => (
-                         <div
-               key={idx}
-               className="p-8 transition-all duration-300 hover:scale-105 bg-white border-2 border-gray-200 rounded-lg shadow-lg"
-             >
-               <article className="h-full flex flex-col text-center" itemScope itemType="https://schema.org/Review">
-                 {/* Quotation Mark */}
-                 <div className="mb-6 flex justify-center">
-                   <svg className="w-10 h-10 opacity-80" fill="currentColor" viewBox="0 0 24 24" style={{ color: '#FF4E00' }}>
-                     <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/>
-                   </svg>
-                 </div>
+            <div
+              key={idx}
+              className="p-8 transition-all duration-300 hover:scale-105 bg-white border-2 border-gray-200 rounded-lg shadow-lg"
+            >
+              <article
+                className="h-full flex flex-col text-center"
+                itemScope
+                itemType="https://schema.org/Review"
+              >
+                {/* Quotation Mark */}
+                <div className="mb-6 flex justify-center">
+                  <svg
+                    className="w-10 h-10 opacity-80"
+                    fill="currentColor"
+                    viewBox="0 0 24 24"
+                    style={{ color: "#FF4E00" }}
+                  >
+                    <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z" />
+                  </svg>
+                </div>
 
-                 {/* Review Text */}
-                 <div className="flex-1 mb-8">
-                   <p className="text-base leading-relaxed text-center" style={{ color: 'black' }}>
-                     {review.body}
-                   </p>
-                 </div>
+                {/* Review Text */}
+                <div className="flex-1 mb-8">
+                  <p
+                    className="text-base leading-relaxed text-center"
+                    style={{ color: "black" }}
+                  >
+                    {review.body}
+                  </p>
+                </div>
 
-                 {/* Customer Name */}
-                 <div className="mb-4">
-                   <p className="text-lg font-semibold text-center" style={{ color: 'black' }}>
-                     {review.name}
-                   </p>
-                 </div>
+                {/* Customer Name */}
+                <div className="mb-4">
+                  <p
+                    className="text-lg font-semibold text-center"
+                    style={{ color: "black" }}
+                  >
+                    {review.name}
+                  </p>
+                </div>
 
-                 {/* Star Rating */}
-                 <div className="mb-3 flex justify-center">
-                   <StarRating rating={review.rating} />
-                 </div>
+                {/* Star Rating */}
+                <div className="mb-3 flex justify-center">
+                  <StarRating rating={review.rating} />
+                </div>
 
-                 {/* Service Badge */}
-                 <div className="mt-auto flex justify-center">
-                   <span className="inline-flex items-center px-3 py-1 text-sm font-medium" style={{ color: 'black', backgroundColor: '#f0f0f0' }}>
-                     {review.service}
-                   </span>
-                 </div>
-               </article>
-             </div>
+                {/* Service Badge */}
+                <div className="mt-auto flex justify-center">
+                  <span
+                    className="inline-flex items-center px-3 py-1 text-sm font-medium"
+                    style={{ color: "black", backgroundColor: "#f0f0f0" }}
+                  >
+                    {review.service}
+                  </span>
+                </div>
+              </article>
+            </div>
           ))}
         </div>
 
@@ -170,15 +221,15 @@ export default function Reviews() {
         {visibleCount < 6 && !showGoogleButton && (
           <div className="text-center" aria-live="polite">
             <button
-                             onClick={() => {
-                 const newCount = visibleCount + 3;
-                 setVisibleCount(newCount);
-                 if (newCount >= 6) {
-                   setShowGoogleButton(true);
-                 }
-               }}
+              onClick={() => {
+                const newCount = visibleCount + 3;
+                setVisibleCount(newCount);
+                if (newCount >= 6) {
+                  setShowGoogleButton(true);
+                }
+              }}
               className="py-3 px-10 font-semibold rounded-full hover:opacity-90 transition-all duration-200 shadow-lg hover:shadow-xl"
-              style={{ backgroundColor: '#FF4E00', color: 'white' }}
+              style={{ backgroundColor: "#FF4E00", color: "white" }}
             >
               Show More Reviews
             </button>
@@ -193,7 +244,7 @@ export default function Reviews() {
               target="_blank"
               rel="noopener noreferrer"
               className="inline-block py-3 px-10 font-semibold rounded-full hover:opacity-90 transition-all duration-200 shadow-lg hover:shadow-xl"
-              style={{ backgroundColor: '#FF4E00', color: 'white' }}
+              style={{ backgroundColor: "#FF4E00", color: "white" }}
             >
               More Reviews
             </a>

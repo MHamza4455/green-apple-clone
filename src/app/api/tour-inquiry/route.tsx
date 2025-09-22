@@ -3,7 +3,17 @@ import nodemailer from "nodemailer";
 
 export async function POST(req: Request) {
   try {
-    const { name, email, phone, message, travelDate, travelers, tourTitle, tourDuration, tourPrice } = await req.json();
+    const {
+      name,
+      email,
+      phone,
+      message,
+      travelDate,
+      travelers,
+      tourTitle,
+      tourDuration,
+      tourPrice,
+    } = await req.json();
 
     const transporter = nodemailer.createTransport({
       host: "mail.privateemail.com",
@@ -43,11 +53,11 @@ export async function POST(req: Request) {
             </tr>
             <tr>
               <td style="padding: 8px 0; font-weight: bold; color: #333;">Phone:</td>
-              <td style="padding: 8px 0; color: #555;">${phone || 'Not provided'}</td>
+              <td style="padding: 8px 0; color: #555;">${phone || "Not provided"}</td>
             </tr>
             <tr>
               <td style="padding: 8px 0; font-weight: bold; color: #333;">Travel Date:</td>
-              <td style="padding: 8px 0; color: #555;">${travelDate || 'Not specified'}</td>
+              <td style="padding: 8px 0; color: #555;">${travelDate || "Not specified"}</td>
             </tr>
             <tr>
               <td style="padding: 8px 0; font-weight: bold; color: #333;">Number of Travelers:</td>
@@ -55,7 +65,7 @@ export async function POST(req: Request) {
             </tr>
             <tr>
               <td style="padding: 8px 0; font-weight: bold; color: #333; vertical-align: top;">Message:</td>
-              <td style="padding: 8px 0; color: #555;">${message ? message.replace(/\n/g, "<br>") : 'No additional message'}</td>
+              <td style="padding: 8px 0; color: #555;">${message ? message.replace(/\n/g, "<br>") : "No additional message"}</td>
             </tr>
           </table>
           
@@ -68,6 +78,9 @@ export async function POST(req: Request) {
     return new Response(JSON.stringify({ success: true }), { status: 200 });
   } catch (err) {
     console.error("Tour inquiry email error:", err);
-    return new Response(JSON.stringify({ error: "Failed to send tour inquiry" }), { status: 500 });
+    return new Response(
+      JSON.stringify({ error: "Failed to send tour inquiry" }),
+      { status: 500 },
+    );
   }
 }

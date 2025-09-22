@@ -1,35 +1,50 @@
-'use client';
+"use client";
 
-import { useState } from 'react';
-import { useRouter } from 'next/navigation';
-import { FiEdit, FiTrash2, FiPlus, FiSearch } from 'react-icons/fi';
-import { MdVisibility } from 'react-icons/md';
-import Image from 'next/image';
-import { TourPackage, TourPackageFilter, TourPackageStatusFilter } from '@/types/tourPackage';
-import { useTourPackages } from '@/hooks/useTourPackages';
+import { useState } from "react";
+import { useRouter } from "next/navigation";
+import { FiEdit, FiTrash2, FiPlus, FiSearch } from "react-icons/fi";
+import { MdVisibility } from "react-icons/md";
+import Image from "next/image";
+import {
+  TourPackage,
+  TourPackageFilter,
+  TourPackageStatusFilter,
+} from "@/types/tourPackage";
+import { useTourPackages } from "@/hooks/useTourPackages";
 
 export default function AdminTourPackages() {
   const router = useRouter();
-  const { tourPackages, loading, error, deleteTourPackage, toggleTourPackageStatus, refetch } = useTourPackages();
-  const [searchTerm, setSearchTerm] = useState('');
-  const [filterCategory, setFilterCategory] = useState<TourPackageFilter>('all');
-  const [filterStatus, setFilterStatus] = useState<TourPackageStatusFilter>('all');
+  const {
+    tourPackages,
+    loading,
+    error,
+    deleteTourPackage,
+    toggleTourPackageStatus,
+    refetch,
+  } = useTourPackages();
+  const [searchTerm, setSearchTerm] = useState("");
+  const [filterCategory, setFilterCategory] =
+    useState<TourPackageFilter>("all");
+  const [filterStatus, setFilterStatus] =
+    useState<TourPackageStatusFilter>("all");
 
   // Filter packages based on search and filters
-  const filteredPackages = tourPackages.filter(pkg => {
-    const matchesSearch = pkg.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                         pkg.description.toLowerCase().includes(searchTerm.toLowerCase());
-    const matchesCategory = filterCategory === 'all' || 
-                           (filterCategory === 'featured' && pkg.featured) ||
-                           (filterCategory === 'not-featured' && !pkg.featured);
-    const matchesStatus = filterStatus === 'all' || pkg.status === filterStatus;
-    
+  const filteredPackages = tourPackages.filter((pkg) => {
+    const matchesSearch =
+      pkg.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      pkg.description.toLowerCase().includes(searchTerm.toLowerCase());
+    const matchesCategory =
+      filterCategory === "all" ||
+      (filterCategory === "featured" && pkg.featured) ||
+      (filterCategory === "not-featured" && !pkg.featured);
+    const matchesStatus = filterStatus === "all" || pkg.status === filterStatus;
+
     return matchesSearch && matchesCategory && matchesStatus;
   });
 
   // Action handlers
   const handleDelete = (id: string) => {
-    if (confirm('Are you sure you want to delete this tour package?')) {
+    if (confirm("Are you sure you want to delete this tour package?")) {
       deleteTourPackage(id);
     }
   };
@@ -47,21 +62,27 @@ export default function AdminTourPackages() {
   };
 
   const handleCreatePackage = () => {
-    router.push('/admin/tour-packages/create');
+    router.push("/admin/tour-packages/create");
   };
 
-    return (
-      <div className="p-6">
+  return (
+    <div className="p-6">
       {/* Header */}
-        <div className="mb-8">
-        <h1 className="text-3xl font-bold text-gray-900 mb-2">Tour Packages Management</h1>
-        <p className="text-gray-600">Manage your tour packages and Umrah packages</p>
+      <div className="mb-8">
+        <h1 className="text-3xl font-bold text-gray-900 mb-2">
+          Tour Packages Management
+        </h1>
+        <p className="text-gray-600">
+          Manage your tour packages and Umrah packages
+        </p>
       </div>
 
       {/* Stats Cards */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
         <div className="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
-          <h3 className="text-lg font-semibold text-gray-700 mb-2">Total Packages</h3>
+          <h3 className="text-lg font-semibold text-gray-700 mb-2">
+            Total Packages
+          </h3>
           {loading ? (
             <div className="animate-pulse">
               <div className="h-8 bg-gray-200 rounded w-16"></div>
@@ -69,25 +90,15 @@ export default function AdminTourPackages() {
           ) : error ? (
             <p className="text-3xl font-bold text-gray-400">-</p>
           ) : (
-            <p className="text-3xl font-bold" style={{ color: '#FF4E00' }}>{tourPackages.length}</p>
-          )}
-        </div>
-        <div className="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
-          <h3 className="text-lg font-semibold text-gray-700 mb-2">Featured Tours</h3>
-          {loading ? (
-            <div className="animate-pulse">
-              <div className="h-8 bg-gray-200 rounded w-16"></div>
-            </div>
-          ) : error ? (
-            <p className="text-3xl font-bold text-gray-400">-</p>
-          ) : (
-            <p className="text-3xl font-bold" style={{ color: '#FF4E00' }}>
-              {tourPackages.filter(pkg => pkg.featured).length}
+            <p className="text-3xl font-bold" style={{ color: "#FF4E00" }}>
+              {tourPackages.length}
             </p>
           )}
         </div>
         <div className="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
-          <h3 className="text-lg font-semibold text-gray-700 mb-2">Active Packages</h3>
+          <h3 className="text-lg font-semibold text-gray-700 mb-2">
+            Featured Tours
+          </h3>
           {loading ? (
             <div className="animate-pulse">
               <div className="h-8 bg-gray-200 rounded w-16"></div>
@@ -95,8 +106,24 @@ export default function AdminTourPackages() {
           ) : error ? (
             <p className="text-3xl font-bold text-gray-400">-</p>
           ) : (
-            <p className="text-3xl font-bold" style={{ color: '#FF4E00' }}>
-              {tourPackages.filter(pkg => pkg.status === 'active').length}
+            <p className="text-3xl font-bold" style={{ color: "#FF4E00" }}>
+              {tourPackages.filter((pkg) => pkg.featured).length}
+            </p>
+          )}
+        </div>
+        <div className="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
+          <h3 className="text-lg font-semibold text-gray-700 mb-2">
+            Active Packages
+          </h3>
+          {loading ? (
+            <div className="animate-pulse">
+              <div className="h-8 bg-gray-200 rounded w-16"></div>
+            </div>
+          ) : error ? (
+            <p className="text-3xl font-bold text-gray-400">-</p>
+          ) : (
+            <p className="text-3xl font-bold" style={{ color: "#FF4E00" }}>
+              {tourPackages.filter((pkg) => pkg.status === "active").length}
             </p>
           )}
         </div>
@@ -121,7 +148,11 @@ export default function AdminTourPackages() {
           <div className="flex gap-4">
             <select
               value={filterCategory}
-              onChange={(e) => setFilterCategory(e.target.value as 'all' | 'featured' | 'not-featured')}
+              onChange={(e) =>
+                setFilterCategory(
+                  e.target.value as "all" | "featured" | "not-featured",
+                )
+              }
               className="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent"
             >
               <option value="all">All Categories</option>
@@ -131,7 +162,9 @@ export default function AdminTourPackages() {
 
             <select
               value={filterStatus}
-              onChange={(e) => setFilterStatus(e.target.value as 'all' | 'active' | 'inactive')}
+              onChange={(e) =>
+                setFilterStatus(e.target.value as "all" | "active" | "inactive")
+              }
               className="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent"
             >
               <option value="all">All Status</option>
@@ -223,7 +256,9 @@ export default function AdminTourPackages() {
                 <tr>
                   <td colSpan={7} className="px-6 py-12 text-center">
                     <div className="bg-red-50 border border-red-200 rounded-lg p-4 mx-auto max-w-md">
-                      <div className="text-red-800 font-medium">Failed to load tour packages</div>
+                      <div className="text-red-800 font-medium">
+                        Failed to load tour packages
+                      </div>
                       <div className="text-red-600 text-sm mt-1">{error}</div>
                       <button
                         onClick={refetch}
@@ -238,27 +273,35 @@ export default function AdminTourPackages() {
                 // No data state
                 <tr>
                   <td colSpan={7} className="px-6 py-12 text-center">
-                    <div className="text-gray-500 text-lg">No tour packages found</div>
-                    <div className="text-gray-400 text-sm mt-2">
-                      {searchTerm || filterCategory !== 'all' || filterStatus !== 'all'
-                        ? 'Try adjusting your search or filter criteria'
-                        : 'Create your first tour package to get started'
-                      }
+                    <div className="text-gray-500 text-lg">
+                      No tour packages found
                     </div>
-                    {!searchTerm && filterCategory === 'all' && filterStatus === 'all' && (
-                      <button
-                        onClick={handleCreatePackage}
-                        className="mt-4 px-4 py-2 bg-orange-500 text-white rounded-lg hover:bg-orange-600 transition-colors duration-200"
-                      >
-                        Create First Package
-                      </button>
-                    )}
+                    <div className="text-gray-400 text-sm mt-2">
+                      {searchTerm ||
+                      filterCategory !== "all" ||
+                      filterStatus !== "all"
+                        ? "Try adjusting your search or filter criteria"
+                        : "Create your first tour package to get started"}
+                    </div>
+                    {!searchTerm &&
+                      filterCategory === "all" &&
+                      filterStatus === "all" && (
+                        <button
+                          onClick={handleCreatePackage}
+                          className="mt-4 px-4 py-2 bg-orange-500 text-white rounded-lg hover:bg-orange-600 transition-colors duration-200"
+                        >
+                          Create First Package
+                        </button>
+                      )}
                   </td>
                 </tr>
               ) : (
                 // Data rows
                 filteredPackages.map((pkg) => (
-                  <tr key={pkg.id} className="hover:bg-gray-50 transition-colors duration-200">
+                  <tr
+                    key={pkg.id}
+                    className="hover:bg-gray-50 transition-colors duration-200"
+                  >
                     <td className="px-6 py-4 whitespace-nowrap">
                       <div className="flex items-center">
                         <div className="flex-shrink-0 h-12 w-12">
@@ -281,12 +324,14 @@ export default function AdminTourPackages() {
                       </div>
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap">
-                      <span className={`inline-flex px-2 py-1 text-xs font-semibold rounded-full ${
-                        pkg.featured 
-                          ? 'bg-orange-100 text-orange-800' 
-                          : 'bg-gray-100 text-gray-800'
-                      }`}>
-                        {pkg.featured ? 'Featured Tour' : 'Regular Tour'}
+                      <span
+                        className={`inline-flex px-2 py-1 text-xs font-semibold rounded-full ${
+                          pkg.featured
+                            ? "bg-orange-100 text-orange-800"
+                            : "bg-gray-100 text-gray-800"
+                        }`}
+                      >
+                        {pkg.featured ? "Featured Tour" : "Regular Tour"}
                       </span>
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
@@ -299,12 +344,12 @@ export default function AdminTourPackages() {
                       <button
                         onClick={() => handleStatusToggle(pkg.id)}
                         className={`inline-flex px-2 py-1 text-xs font-semibold rounded-full cursor-pointer transition-colors duration-200 ${
-                          pkg.status === 'active'
-                            ? 'bg-green-100 text-green-800 hover:bg-green-200'
-                            : 'bg-red-100 text-red-800 hover:bg-red-200'
+                          pkg.status === "active"
+                            ? "bg-green-100 text-green-800 hover:bg-green-200"
+                            : "bg-red-100 text-red-800 hover:bg-red-200"
                         }`}
                       >
-                        {pkg.status === 'active' ? 'Active' : 'Inactive'}
+                        {pkg.status === "active" ? "Active" : "Inactive"}
                       </button>
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
@@ -360,8 +405,6 @@ export default function AdminTourPackages() {
           </button>
         </div>
       </div>
-
-      </div>
-    );
-  }
-  
+    </div>
+  );
+}

@@ -18,5 +18,5 @@ export interface ContactMessageFormData {
   message: string;
 }
 
-export type ContactMessageStatus = 'unread' | 'read' | 'replied' | 'archived';
-export type ContactMessageStatusFilter = 'all' | ContactMessageStatus;
+export type ContactMessageStatus = "unread" | "read" | "replied" | "archived";
+export type ContactMessageStatusFilter = "all" | ContactMessageStatus;

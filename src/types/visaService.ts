@@ -21,4 +21,4 @@ export interface VisaServiceFormData {
   status: string;
 }
 
-export type VisaServiceStatusFilter = 'all' | 'active' | 'inactive';
+export type VisaServiceStatusFilter = "all" | "active" | "inactive";

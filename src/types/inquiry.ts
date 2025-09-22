@@ -1,4 +1,4 @@
-export type InquiryType = 'VISA' | 'TOUR';
+export type InquiryType = "VISA" | "TOUR";
 
 export interface BaseInquiry {
   id: string;
@@ -8,14 +8,14 @@ export interface BaseInquiry {
   phone?: string;
   message?: string;
   travelDate?: string;
-  status: 'NEW' | 'IN_PROGRESS' | 'COMPLETED' | 'CANCELLED';
+  status: "NEW" | "IN_PROGRESS" | "COMPLETED" | "CANCELLED";
   metadata: any; // JSON field containing type-specific data
   createdAt: string;
   updatedAt: string;
 }
 
 export interface VisaInquiry extends BaseInquiry {
-  type: 'VISA';
+  type: "VISA";
   metadata: {
     country: string;
     visaType?: string;
@@ -23,7 +23,7 @@ export interface VisaInquiry extends BaseInquiry {
 }
 
 export interface TourInquiry extends BaseInquiry {
-  type: 'TOUR';
+  type: "TOUR";
   metadata: {
     tourTitle: string;
     tourDuration?: string;
@@ -51,5 +51,5 @@ export interface InquiryFormData {
   travelDate?: string;
 }
 
-export type InquiryStatus = 'NEW' | 'IN_PROGRESS' | 'COMPLETED' | 'CANCELLED';
-export type InquiryStatusFilter = 'all' | InquiryStatus;
+export type InquiryStatus = "NEW" | "IN_PROGRESS" | "COMPLETED" | "CANCELLED";
+export type InquiryStatusFilter = "all" | InquiryStatus;

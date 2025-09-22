@@ -48,11 +48,13 @@ NEXTAUTH_SECRET="your-secret-key-here-change-this-in-production"
 ## How to Use
 
 ### 1. Login
+
 - Navigate to `/auth/login`
 - Use the super admin credentials to log in
 - You'll be redirected to the admin dashboard
 
 ### 2. Create New Users (Super Admin Only)
+
 - Login as super admin
 - Navigate to `/admin/users`
 - Click "Create New User"
@@ -60,6 +62,7 @@ NEXTAUTH_SECRET="your-secret-key-here-change-this-in-production"
 - Only super admins can create new users
 
 ### 3. Access Control
+
 - Admin routes (`/admin/*`) are protected
 - Only authenticated users with ADMIN or SUPER_ADMIN roles can access
 - Regular users are redirected to the home page
@@ -68,10 +71,12 @@ NEXTAUTH_SECRET="your-secret-key-here-change-this-in-production"
 ## API Endpoints
 
 ### Authentication
+
 - `POST /api/auth/signin` - User login
 - `POST /api/auth/signout` - User logout
 
 ### User Management (Super Admin Only)
+
 - `GET /api/admin/users` - Get all users
 - `POST /api/admin/create-user` - Create new user
 
@@ -114,16 +119,19 @@ src/
 ## Troubleshooting
 
 ### Database Connection Issues
+
 - Ensure your DATABASE_URL is correct
 - Run `npx prisma db push` to sync schema
 - Run `npx prisma generate` to generate client
 
 ### Authentication Issues
+
 - Check NEXTAUTH_SECRET is set
 - Verify NEXTAUTH_URL matches your domain
 - Clear browser cookies and try again
 
 ### Permission Issues
+
 - Ensure user has correct role assigned
 - Check middleware configuration
 - Verify session is properly established

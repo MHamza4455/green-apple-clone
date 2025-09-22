@@ -1,8 +1,8 @@
-'use client';
+"use client";
 
-import { useState, useRef } from 'react';
-import { FiUpload, FiX, FiImage } from 'react-icons/fi';
-import Image from 'next/image';
+import { useState, useRef } from "react";
+import { FiUpload, FiX, FiImage } from "react-icons/fi";
+import Image from "next/image";
 
 interface ImageUploadProps {
   value: string;
@@ -12,7 +12,13 @@ interface ImageUploadProps {
   className?: string;
 }
 
-export default function ImageUpload({ value, onChange, alt, onAltChange, className = '' }: ImageUploadProps) {
+export default function ImageUpload({
+  value,
+  onChange,
+  alt,
+  onAltChange,
+  className = "",
+}: ImageUploadProps) {
   const [isUploading, setIsUploading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
@@ -23,28 +29,28 @@ export default function ImageUpload({ value, onChange, alt, onAltChange, classNa
 
     try {
       const formData = new FormData();
-      formData.append('file', file);
+      formData.append("file", file);
 
-      const response = await fetch('/api/upload', {
-        method: 'POST',
+      const response = await fetch("/api/upload", {
+        method: "POST",
         body: formData,
       });
 
       if (!response.ok) {
         const errorData = await response.json();
-        throw new Error(errorData.error || 'Upload failed');
+        throw new Error(errorData.error || "Upload failed");
       }
 
       const data = await response.json();
       onChange(data.url);
-      
+
       // Auto-generate alt text from filename if not provided
       if (!alt) {
-        const fileName = file.name.split('.')[0];
-        onAltChange(fileName.replace(/[-_]/g, ' '));
+        const fileName = file.name.split(".")[0];
+        onAltChange(fileName.replace(/[-_]/g, " "));
       }
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'Upload failed');
+      setError(err instanceof Error ? err.message : "Upload failed");
     } finally {
       setIsUploading(false);
     }
@@ -70,8 +76,8 @@ export default function ImageUpload({ value, onChange, alt, onAltChange, classNa
   };
 
   const removeImage = () => {
-    onChange('');
-    onAltChange('');
+    onChange("");
+    onAltChange("");
   };
 
   return (
@@ -82,11 +88,12 @@ export default function ImageUpload({ value, onChange, alt, onAltChange, classNa
         onDragOver={handleDragOver}
         className={`
           relative border-2 border-dashed rounded-lg p-6 text-center transition-colors duration-200
-          ${value 
-            ? 'border-gray-300' 
-            : 'border-gray-400 hover:border-orange-500 hover:bg-orange-50'
+          ${
+            value
+              ? "border-gray-300"
+              : "border-gray-400 hover:border-orange-500 hover:bg-orange-50"
           }
-          ${isUploading ? 'pointer-events-none opacity-50' : 'cursor-pointer'}
+          ${isUploading ? "pointer-events-none opacity-50" : "cursor-pointer"}
         `}
         onClick={() => !value && fileInputRef.current?.click()}
       >
@@ -104,7 +111,7 @@ export default function ImageUpload({ value, onChange, alt, onAltChange, classNa
             <div className="relative inline-block">
               <Image
                 src={value}
-                alt={alt || 'Uploaded image'}
+                alt={alt || "Uploaded image"}
                 width={200}
                 height={150}
                 className="rounded-lg object-cover"
@@ -139,7 +146,7 @@ export default function ImageUpload({ value, onChange, alt, onAltChange, classNa
             </div>
             <div>
               <p className="text-lg font-medium text-gray-900">
-                {isUploading ? 'Uploading...' : 'Upload an image'}
+                {isUploading ? "Uploading..." : "Upload an image"}
               </p>
               <p className="text-sm text-gray-500 mt-1">
                 Drag and drop or click to browse

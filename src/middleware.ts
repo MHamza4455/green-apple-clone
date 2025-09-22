@@ -1,45 +1,45 @@
-import { withAuth } from 'next-auth/middleware'
-import { NextResponse } from 'next/server'
-import { UserRole } from '@prisma/client'
+import { withAuth } from "next-auth/middleware";
+import { NextResponse } from "next/server";
+import { UserRole } from "@prisma/client";
 
 export default withAuth(
   function middleware(req) {
-    const token = req.nextauth.token
-    const isAdminRoute = req.nextUrl.pathname.startsWith('/admin')
-    
+    const token = req.nextauth.token;
+    const isAdminRoute = req.nextUrl.pathname.startsWith("/admin");
+
     // If accessing admin routes, check if user is authenticated and has admin role
     if (isAdminRoute) {
       if (!token) {
-        return NextResponse.redirect(new URL('/auth/login', req.url))
+        return NextResponse.redirect(new URL("/auth/login", req.url));
       }
-      
-      if (token.role !== UserRole.ADMIN && token.role !== UserRole.SUPER_ADMIN) {
-        return NextResponse.redirect(new URL('/', req.url))
+
+      if (
+        token.role !== UserRole.ADMIN &&
+        token.role !== UserRole.SUPER_ADMIN
+      ) {
+        return NextResponse.redirect(new URL("/", req.url));
       }
     }
-    
-    return NextResponse.next()
+
+    return NextResponse.next();
   },
   {
     callbacks: {
       authorized: ({ token, req }) => {
-        const isAdminRoute = req.nextUrl.pathname.startsWith('/admin')
-        
+        const isAdminRoute = req.nextUrl.pathname.startsWith("/admin");
+
         // For admin routes, we'll handle authorization in the middleware function above
         if (isAdminRoute) {
-          return true
+          return true;
         }
-        
+
         // For other routes, allow access
-        return true
+        return true;
       },
     },
-  }
-)
+  },
+);
 
 export const config = {
-  matcher: [
-    '/admin/:path*',
-    '/auth/login'
-  ]
-}
+  matcher: ["/admin/:path*", "/auth/login"],
+};
