@@ -3,11 +3,12 @@ import { prisma } from "@/lib/prisma";
 
 export async function GET(
   request: NextRequest,
-  { params }: { params: { id: string } },
+  { params }: { params: Promise<{ id: string }> },
 ) {
   try {
+    const { id } = await params;
     const contactMessage = await prisma.contactMessage.findUnique({
-      where: { id: params.id },
+      where: { id },
     });
 
     if (!contactMessage) {
@@ -29,15 +30,16 @@ export async function GET(
 
 export async function PUT(
   request: NextRequest,
-  { params }: { params: { id: string } },
+  { params }: { params: Promise<{ id: string }> },
 ) {
   try {
+    const { id } = await params;
     const body = await request.json();
     const { status, fullName, email, phone, serviceInterest, message } = body;
 
     // Check if contact message exists
     const existingMessage = await prisma.contactMessage.findUnique({
-      where: { id: params.id },
+      where: { id },
     });
 
     if (!existingMessage) {
@@ -58,7 +60,7 @@ export async function PUT(
     if (message !== undefined) updateData.message = message;
 
     const updatedMessage = await prisma.contactMessage.update({
-      where: { id: params.id },
+      where: { id },
       data: updateData,
     });
 
@@ -74,12 +76,13 @@ export async function PUT(
 
 export async function DELETE(
   request: NextRequest,
-  { params }: { params: { id: string } },
+  { params }: { params: Promise<{ id: string }> },
 ) {
   try {
+    const { id } = await params;
     // Check if contact message exists
     const existingMessage = await prisma.contactMessage.findUnique({
-      where: { id: params.id },
+      where: { id },
     });
 
     if (!existingMessage) {
@@ -90,7 +93,7 @@ export async function DELETE(
     }
 
     await prisma.contactMessage.delete({
-      where: { id: params.id },
+      where: { id },
     });
 
     return NextResponse.json({

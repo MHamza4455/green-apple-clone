@@ -4,9 +4,10 @@ import { prisma } from "@/lib/prisma";
 // GET single visa service
 export async function GET(
   request: NextRequest,
-  { params }: { params: { id: string } },
+  { params }: { params: Promise<{ id: string }> },
 ) {
   try {
+    const { id } = await params;
     // Check if visaService model exists in Prisma client
     if (!prisma.visaService) {
       console.error(
@@ -22,7 +23,7 @@ export async function GET(
     }
 
     const visaService = await prisma.visaService.findUnique({
-      where: { id: params.id },
+      where: { id },
     });
 
     if (!visaService) {
@@ -45,9 +46,10 @@ export async function GET(
 // PUT update visa service
 export async function PUT(
   request: NextRequest,
-  { params }: { params: { id: string } },
+  { params }: { params: Promise<{ id: string }> },
 ) {
   try {
+    const { id } = await params;
     // Check if visaService model exists in Prisma client
     if (!prisma.visaService) {
       console.error(
@@ -75,7 +77,7 @@ export async function PUT(
 
     // Check if service exists
     const existingService = await prisma.visaService.findUnique({
-      where: { id: params.id },
+      where: { id },
     });
 
     if (!existingService) {
@@ -100,7 +102,7 @@ export async function PUT(
     }
 
     const updatedService = await prisma.visaService.update({
-      where: { id: params.id },
+      where: { id },
       data: {
         ...(name && { name }),
         ...(code && { code }),
@@ -125,9 +127,10 @@ export async function PUT(
 // DELETE visa service
 export async function DELETE(
   request: NextRequest,
-  { params }: { params: { id: string } },
+  { params }: { params: Promise<{ id: string }> },
 ) {
   try {
+    const { id } = await params;
     // Check if visaService model exists in Prisma client
     if (!prisma.visaService) {
       console.error(
@@ -143,7 +146,7 @@ export async function DELETE(
     }
 
     const existingService = await prisma.visaService.findUnique({
-      where: { id: params.id },
+      where: { id },
     });
 
     if (!existingService) {
@@ -154,7 +157,7 @@ export async function DELETE(
     }
 
     await prisma.visaService.delete({
-      where: { id: params.id },
+      where: { id },
     });
 
     return NextResponse.json({ message: "Visa service deleted successfully" });

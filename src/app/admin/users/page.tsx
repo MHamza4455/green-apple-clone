@@ -24,7 +24,7 @@ export default function UsersPage() {
     name: "",
     email: "",
     password: "",
-    role: UserRole.USER,
+    role: UserRole.USER as UserRole,
   });
   const [submitting, setSubmitting] = useState(false);
 

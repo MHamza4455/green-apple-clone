@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 import nodemailer from "nodemailer";
+import type SMTPTransport from "nodemailer/lib/smtp-transport";
 
 export async function POST(req: NextRequest) {
   try {
@@ -60,13 +61,13 @@ export async function POST(req: NextRequest) {
     try {
       const transporter = nodemailer.createTransport({
         host: "mail.privateemail.com",
-        port: process.env.SMTP_PORT,
+        port: Number(process.env.SMTP_PORT),
         secure: true,
         auth: {
-          user: process.env.SMTP_HOST,
-          pass: process.env.EMAIL_PASS,
+          user: process.env.SMTP_USER,
+          pass: process.env.SMTP_PASS,
         },
-      });
+      } as SMTPTransport.Options);
 
       if (inquiryType === "visa") {
         // Send visa inquiry email

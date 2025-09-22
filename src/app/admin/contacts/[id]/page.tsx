@@ -234,7 +234,7 @@ export default function ContactMessageDetailsPage() {
                 <span className="text-sm font-medium text-gray-500">
                   Full Name
                 </span>
-                <p className="text-gray-900">{contactMessage.name}</p>
+                <p className="text-gray-900">{contactMessage.fullName}</p>
               </div>
               <div>
                 <span className="text-sm font-medium text-gray-500">

@@ -3,11 +3,12 @@ import { prisma } from "@/lib/prisma";
 
 export async function GET(
   request: NextRequest,
-  { params }: { params: { id: string } },
+  { params }: { params: Promise<{ id: string }> },
 ) {
   try {
+    const { id } = await params;
     const tourPackage = await prisma.tourPackage.findUnique({
-      where: { id: params.id },
+      where: { id },
     });
 
     if (!tourPackage) {
@@ -29,9 +30,10 @@ export async function GET(
 
 export async function PUT(
   request: NextRequest,
-  { params }: { params: { id: string } },
+  { params }: { params: Promise<{ id: string }> },
 ) {
   try {
+    const { id } = await params;
     const body = await request.json();
     const {
       title,
@@ -50,7 +52,7 @@ export async function PUT(
 
     // Check if tour package exists
     const existingPackage = await prisma.tourPackage.findUnique({
-      where: { id: params.id },
+      where: { id },
     });
 
     if (!existingPackage) {
@@ -76,7 +78,7 @@ export async function PUT(
     if (itinerary !== undefined) updateData.itinerary = itinerary;
 
     const updatedPackage = await prisma.tourPackage.update({
-      where: { id: params.id },
+      where: { id },
       data: updateData,
     });
 
@@ -92,12 +94,13 @@ export async function PUT(
 
 export async function DELETE(
   request: NextRequest,
-  { params }: { params: { id: string } },
+  { params }: { params: Promise<{ id: string }> },
 ) {
   try {
+    const { id } = await params;
     // Check if tour package exists
     const existingPackage = await prisma.tourPackage.findUnique({
-      where: { id: params.id },
+      where: { id },
     });
 
     if (!existingPackage) {
@@ -108,7 +111,7 @@ export async function DELETE(
     }
 
     await prisma.tourPackage.delete({
-      where: { id: params.id },
+      where: { id },
     });
 
     return NextResponse.json({ message: "Tour package deleted successfully" });

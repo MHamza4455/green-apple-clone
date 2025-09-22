@@ -1,4 +1,4 @@
-// @ts-expect-error - nodemailer is not typed
+import type SMTPTransport from "nodemailer/lib/smtp-transport";
 import nodemailer from "nodemailer";
 
 export async function POST(req: Request) {
@@ -6,15 +6,15 @@ export async function POST(req: Request) {
     const { name, email, phone, country, visaType, travelDate, message } =
       await req.json();
 
-    const transporter = nodemailer.createTransporter({
-      host: "mail.privateemail.com",
-      port: process.env.SMTP_PORT,
-      secure: true,
-      auth: {
-        user: process.env.SMTP_HOST,
-        pass: process.env.EMAIL_PASS,
-      },
-    });
+      const transporter = nodemailer.createTransport({
+        host: "mail.privateemail.com",
+        port: Number(process.env.SMTP_PORT),
+        secure: true,
+        auth: {
+          user: process.env.SMTP_USER,
+          pass: process.env.SMTP_PASS,
+        },
+      } as SMTPTransport.Options);
 
     await transporter.sendMail({
       from: `"Radiant Way Travel Website" <info@radiantwaytravel.com>`,

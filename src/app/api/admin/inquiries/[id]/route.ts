@@ -3,11 +3,12 @@ import { prisma } from "@/lib/prisma";
 
 export async function GET(
   req: NextRequest,
-  { params }: { params: { id: string } },
+  { params }: { params: Promise<{ id: string }> },
 ) {
   try {
+    const { id } = await params;
     const inquiry = await prisma.inquiry.findUnique({
-      where: { id: params.id },
+      where: { id },
     });
 
     if (!inquiry) {
@@ -26,14 +27,15 @@ export async function GET(
 
 export async function PUT(
   req: NextRequest,
-  { params }: { params: { id: string } },
+  { params }: { params: Promise<{ id: string }> },
 ) {
   try {
+    const { id } = await params;
     const body = await req.json();
     const { status, ...updateData } = body;
 
     const inquiry = await prisma.inquiry.update({
-      where: { id: params.id },
+      where: { id },
       data: {
         ...updateData,
         status: status || undefined,
@@ -53,11 +55,12 @@ export async function PUT(
 
 export async function DELETE(
   req: NextRequest,
-  { params }: { params: { id: string } },
+  { params }: { params: Promise<{ id: string }> },
 ) {
   try {
+    const { id } = await params;
     await prisma.inquiry.delete({
-      where: { id: params.id },
+      where: { id },
     });
 
     return NextResponse.json({ message: "Inquiry deleted successfully" });

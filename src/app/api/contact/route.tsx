@@ -1,4 +1,3 @@
-// @ts-expect-error - nodemailer is not typed
 import nodemailer from "nodemailer";
 import { prisma } from "@/lib/prisma";
 import { ContactMessageFormData } from "@/types/contactMessage";
@@ -46,7 +45,7 @@ export async function POST(req: Request) {
     try {
       const transporter = nodemailer.createTransport({
         host: "mail.privateemail.com",
-        port: process.env.SMTP_PORT,
+        port: parseInt(process.env.SMTP_PORT || "465"),
         secure: true,
         auth: {
           user: process.env.SMTP_HOST,
