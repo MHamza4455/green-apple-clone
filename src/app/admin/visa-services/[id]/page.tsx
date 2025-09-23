@@ -55,11 +55,11 @@ export default function VisaServiceDetailsPage() {
       <div className="mb-8">
         <div className="flex items-center justify-between mb-4">
           <button
-            onClick={() => router.back()}
+            onClick={() => router.push("/admin/visa-services")}
             className="flex items-center gap-2 px-3 py-2 text-gray-600 hover:text-gray-900 hover:bg-gray-100 rounded-lg transition-colors duration-200"
           >
             <FiArrowLeft className="w-4 h-4" />
-            Back
+            Back to Services
           </button>
           <button
             onClick={() =>
