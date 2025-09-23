@@ -48,8 +48,8 @@ export async function POST(req: Request) {
         port: parseInt(process.env.SMTP_PORT || "465"),
         secure: true,
         auth: {
-          user: process.env.SMTP_HOST,
-          pass: process.env.EMAIL_PASS,
+          user: process.env.SMTP_USER,
+          pass: process.env.SMTP_PASS,
         },
       });
 
