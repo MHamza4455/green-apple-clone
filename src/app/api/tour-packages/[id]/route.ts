@@ -46,8 +46,7 @@ export async function PUT(
       status,
       featured,
       includedItems,
-      highlights,
-      itinerary,
+      notIncluded,
     } = body;
 
     // Check if tour package exists
@@ -74,8 +73,7 @@ export async function PUT(
     if (status !== undefined) updateData.status = status;
     if (featured !== undefined) updateData.featured = featured;
     if (includedItems !== undefined) updateData.includedItems = includedItems;
-    if (highlights !== undefined) updateData.highlights = highlights;
-    if (itinerary !== undefined) updateData.itinerary = itinerary;
+    if (notIncluded !== undefined) updateData.notIncluded = notIncluded;
 
     const updatedPackage = await prisma.tourPackage.update({
       where: { id },

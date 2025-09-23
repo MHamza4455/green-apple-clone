@@ -179,30 +179,15 @@ export default function TourPackageDetailsPage() {
             </div>
           </div>
 
-          {/* Highlights */}
+          {/* Not Included Items */}
           <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
             <h3 className="text-lg font-semibold text-gray-900 mb-4">
-              Highlights
+              Not Included
             </h3>
             <div className="space-y-2">
-              {tourPackage.highlights.map((item, index) => (
+              {tourPackage.notIncluded.map((item, index) => (
                 <div key={index} className="flex items-center gap-2">
-                  <div className="w-2 h-2 bg-orange-500 rounded-full"></div>
-                  <span className="text-gray-700">{item}</span>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          {/* Itinerary */}
-          <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
-            <h3 className="text-lg font-semibold text-gray-900 mb-4">
-              Itinerary
-            </h3>
-            <div className="space-y-2">
-              {tourPackage.itinerary.map((item, index) => (
-                <div key={index} className="flex items-center gap-2">
-                  <div className="w-2 h-2 bg-blue-500 rounded-full"></div>
+                  <div className="w-2 h-2 bg-red-500 rounded-full"></div>
                   <span className="text-gray-700">{item}</span>
                 </div>
               ))}

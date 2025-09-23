@@ -2,7 +2,6 @@
 
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
-import { X } from "lucide-react";
 import InquiryForm from "./InquiryForm";
 
 interface TourCardProps {
@@ -14,8 +13,7 @@ interface TourCardProps {
   image: string;
   imageAlt: string;
   includedItems?: string[];
-  highlights?: string[];
-  itinerary?: string[];
+  notIncluded?: string[];
 }
 
 export default function TourCard({
@@ -27,8 +25,7 @@ export default function TourCard({
   image,
   imageAlt,
   includedItems = [],
-  highlights = [],
-  itinerary = [],
+  notIncluded = [],
 }: TourCardProps) {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -134,6 +131,9 @@ export default function TourCard({
         tourTitle={title}
         tourDuration={duration}
         tourPrice={price}
+        tourDescription={description}
+        includedItems={includedItems}
+        notIncluded={notIncluded}
       />
     </>
   );

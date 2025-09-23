@@ -12,6 +12,9 @@ interface InquiryFormProps {
   tourTitle?: string;
   tourDuration?: string;
   tourPrice?: string;
+  tourDescription?: string;
+  includedItems?: string[];
+  notIncluded?: string[];
 }
 
 export default function InquiryForm({
@@ -22,6 +25,9 @@ export default function InquiryForm({
   tourTitle,
   tourDuration,
   tourPrice,
+  tourDescription,
+  includedItems,
+  notIncluded,
 }: InquiryFormProps) {
   const [formData, setFormData] = useState({
     name: "",
@@ -107,7 +113,7 @@ export default function InquiryForm({
 
   return (
     <div className="fixed inset-0 bg-opacity-10 backdrop-blur-sm flex items-center justify-center z-50 p-4">
-      <div className="bg-white rounded-lg max-w-md w-full max-h-[90vh] overflow-y-auto">
+      <div className="bg-white rounded-lg max-w-lg w-full max-h-[90vh] overflow-y-auto">
         <div className="p-6">
           <div className="flex justify-between items-center mb-4">
             <h2 className="text-xl font-bold" style={{ color: "#FF4E00" }}>
@@ -122,6 +128,42 @@ export default function InquiryForm({
               ×
             </button>
           </div>
+
+
+          {/* Tour Package Details - Only Included/Not Included */}
+          {inquiryType === "tour" && tourTitle && (includedItems?.length > 0 || notIncluded?.length > 0) && (
+            <div className="mb-6 p-4 bg-gray-50 rounded-lg border">
+              {/* Included Items */}
+              {includedItems && includedItems.length > 0 && (
+                <div className="mb-4">
+                  <span className="text-sm font-medium text-gray-600">What's Included:</span>
+                  <ul className="mt-2 space-y-1">
+                    {includedItems.map((item, index) => (
+                      <li key={index} className="flex items-center gap-2 text-sm text-gray-900">
+                        <div className="w-2 h-2 bg-green-500 rounded-full flex-shrink-0"></div>
+                        {item}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )}
+
+              {/* Not Included Items */}
+              {notIncluded && notIncluded.length > 0 && (
+                <div>
+                  <span className="text-sm font-medium text-gray-600">Not Included:</span>
+                  <ul className="mt-2 space-y-1">
+                    {notIncluded.map((item, index) => (
+                      <li key={index} className="flex items-center gap-2 text-sm text-gray-900">
+                        <div className="w-2 h-2 bg-red-500 rounded-full flex-shrink-0"></div>
+                        {item}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )}
+            </div>
+          )}
 
           {submitStatus === "success" && (
             <div className="mb-4 p-4 bg-green-100 border border-green-400 text-green-700 rounded">

@@ -10,8 +10,7 @@ export interface TourPackage {
   status: string;
   featured: boolean;
   includedItems: string[];
-  highlights: string[];
-  itinerary: string[];
+  notIncluded: string[];
   createdAt: string;
   updatedAt: string;
 }
@@ -27,8 +26,7 @@ export interface TourPackageFormData {
   status: string;
   featured: boolean;
   includedItems: string[];
-  highlights: string[];
-  itinerary: string[];
+  notIncluded: string[];
 }
 
 export type TourPackageStatus = "active" | "inactive";

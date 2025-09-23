@@ -66,8 +66,7 @@ export async function POST(request: NextRequest) {
       status,
       featured,
       includedItems,
-      highlights,
-      itinerary,
+      notIncluded,
     } = body;
 
     // Validate required fields
@@ -90,8 +89,7 @@ export async function POST(request: NextRequest) {
         status: status || "active",
         featured: featured || false,
         includedItems: includedItems || [],
-        highlights: highlights || [],
-        itinerary: itinerary || [],
+        notIncluded: notIncluded || [],
       },
     });
 

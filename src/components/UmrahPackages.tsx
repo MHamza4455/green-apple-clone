@@ -232,8 +232,7 @@ export default function UmrahPackages() {
                   image={umrahPackage.image}
                   imageAlt={umrahPackage.imageAlt}
                   includedItems={umrahPackage.includedItems}
-                  highlights={umrahPackage.highlights}
-                  itinerary={umrahPackage.itinerary}
+                  notIncluded={umrahPackage.notIncluded}
                 />
               ))
             )}

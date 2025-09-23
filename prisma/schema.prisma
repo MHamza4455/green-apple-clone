@@ -97,8 +97,7 @@ model TourPackage {
   status        String   @default("active")
   featured      Boolean  @default(false)
   includedItems Json
-  highlights    Json
-  itinerary     Json
+  notIncluded   Json
   createdAt     DateTime @default(now())
   updatedAt     DateTime @updatedAt
 }

@@ -234,8 +234,7 @@ export default function FeaturedTours() {
                   image={tour.image}
                   imageAlt={tour.imageAlt}
                   includedItems={tour.includedItems}
-                  highlights={tour.highlights}
-                  itinerary={tour.itinerary}
+                  notIncluded={tour.notIncluded}
                 />
               ))
             )}

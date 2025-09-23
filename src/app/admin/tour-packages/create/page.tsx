@@ -22,8 +22,7 @@ export default function CreateTourPackagePage() {
     status: "active",
     featured: false,
     includedItems: [""],
-    highlights: [""],
-    itinerary: [""],
+    notIncluded: [""],
   });
 
   const handleInputChange = (
@@ -37,7 +36,7 @@ export default function CreateTourPackagePage() {
   };
 
   const handleArrayChange = (
-    field: "includedItems" | "highlights" | "itinerary",
+    field: "includedItems" | "notIncluded",
     index: number,
     value: string,
   ) => {
@@ -48,7 +47,7 @@ export default function CreateTourPackagePage() {
   };
 
   const addArrayItem = (
-    field: "includedItems" | "highlights" | "itinerary",
+    field: "includedItems" | "notIncluded",
   ) => {
     setFormData((prev) => ({
       ...prev,
@@ -57,7 +56,7 @@ export default function CreateTourPackagePage() {
   };
 
   const removeArrayItem = (
-    field: "includedItems" | "highlights" | "itinerary",
+    field: "includedItems" | "notIncluded",
     index: number,
   ) => {
     setFormData((prev) => ({
@@ -83,8 +82,7 @@ export default function CreateTourPackagePage() {
       includedItems: formData.includedItems.filter(
         (item) => item.trim() !== "",
       ),
-      highlights: formData.highlights.filter((item) => item.trim() !== ""),
-      itinerary: formData.itinerary.filter((item) => item.trim() !== ""),
+      notIncluded: formData.notIncluded.filter((item) => item.trim() !== ""),
     };
 
     try {
@@ -282,27 +280,27 @@ export default function CreateTourPackagePage() {
             </div>
           </div>
 
-          {/* Highlights */}
+          {/* Not Included Items */}
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-2">
-              Highlights
+              Not Included
             </label>
             <div className="space-y-2">
-              {formData.highlights.map((item, index) => (
+              {formData.notIncluded.map((item, index) => (
                 <div key={index} className="flex gap-2">
                   <input
                     type="text"
                     value={item}
                     onChange={(e) =>
-                      handleArrayChange("highlights", index, e.target.value)
+                      handleArrayChange("notIncluded", index, e.target.value)
                     }
                     className="flex-1 px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent"
-                    placeholder="e.g., Visit the Holy Kaaba, Perform Tawaf and Sa'i"
+                    placeholder="e.g., Personal expenses, Travel insurance, Visa fees"
                   />
-                  {formData.highlights.length > 1 && (
+                  {formData.notIncluded.length > 1 && (
                     <button
                       type="button"
-                      onClick={() => removeArrayItem("highlights", index)}
+                      onClick={() => removeArrayItem("notIncluded", index)}
                       className="px-3 py-2 text-red-600 hover:bg-red-50 rounded-lg transition-colors duration-200"
                     >
                       <FiTrash2 className="w-4 h-4" />
@@ -312,50 +310,11 @@ export default function CreateTourPackagePage() {
               ))}
               <button
                 type="button"
-                onClick={() => addArrayItem("highlights")}
+                onClick={() => addArrayItem("notIncluded")}
                 className="flex items-center gap-2 px-3 py-2 text-orange-600 hover:bg-orange-50 rounded-lg transition-colors duration-200"
               >
                 <FiPlus className="w-4 h-4" />
-                Add Highlight
-              </button>
-            </div>
-          </div>
-
-          {/* Itinerary */}
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">
-              Itinerary
-            </label>
-            <div className="space-y-2">
-              {formData.itinerary.map((item, index) => (
-                <div key={index} className="flex gap-2">
-                  <input
-                    type="text"
-                    value={item}
-                    onChange={(e) =>
-                      handleArrayChange("itinerary", index, e.target.value)
-                    }
-                    className="flex-1 px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent"
-                    placeholder="e.g., Day 1: Arrival and check-in"
-                  />
-                  {formData.itinerary.length > 1 && (
-                    <button
-                      type="button"
-                      onClick={() => removeArrayItem("itinerary", index)}
-                      className="px-3 py-2 text-red-600 hover:bg-red-50 rounded-lg transition-colors duration-200"
-                    >
-                      <FiTrash2 className="w-4 h-4" />
-                    </button>
-                  )}
-                </div>
-              ))}
-              <button
-                type="button"
-                onClick={() => addArrayItem("itinerary")}
-                className="flex items-center gap-2 px-3 py-2 text-orange-600 hover:bg-orange-50 rounded-lg transition-colors duration-200"
-              >
-                <FiPlus className="w-4 h-4" />
-                Add Itinerary Item
+                Add Not Included Item
               </button>
             </div>
           </div>
