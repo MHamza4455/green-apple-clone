@@ -10,6 +10,7 @@ import ImageUpload from "@/components/ImageUpload";
 export default function CreateTourPackagePage() {
   const router = useRouter();
   const { addTourPackage } = useTourPackages();
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const [formData, setFormData] = useState<TourPackageFormData>({
     title: "",
@@ -68,6 +69,10 @@ export default function CreateTourPackagePage() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
+    if (isSubmitting) return;
+
+    setIsSubmitting(true);
+
     // Filter out empty strings from arrays
     const newPackage = {
       title: formData.title,
@@ -90,6 +95,8 @@ export default function CreateTourPackagePage() {
       router.push("/admin/tour-packages");
     } catch (error) {
       console.error("Error creating tour package:", error);
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -99,11 +106,11 @@ export default function CreateTourPackagePage() {
       <div className="mb-8">
         <div className="flex items-center gap-4 mb-4">
           <button
-            onClick={() => router.back()}
+            onClick={() => router.push("/admin/tour-packages")}
             className="flex items-center gap-2 px-3 py-2 text-gray-600 hover:text-gray-900 hover:bg-gray-100 rounded-lg transition-colors duration-200"
           >
             <FiArrowLeft className="w-4 h-4" />
-            Back
+            Back to Packages
           </button>
         </div>
         <h1 className="text-3xl font-bold text-gray-900 mb-2">
@@ -323,16 +330,24 @@ export default function CreateTourPackagePage() {
           <div className="flex justify-end gap-4 pt-6 border-t border-gray-200">
             <button
               type="button"
-              onClick={() => router.back()}
+              onClick={() => router.push("/admin/tour-packages")}
               className="px-6 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors duration-200"
             >
               Cancel
             </button>
             <button
               type="submit"
-              className="px-6 py-2 bg-orange-500 text-white rounded-lg hover:bg-orange-600 transition-colors duration-200"
+              disabled={isSubmitting}
+              className="px-6 py-2 bg-orange-500 text-white rounded-lg hover:bg-orange-600 transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2"
             >
-              Create Package
+              {isSubmitting ? (
+                <>
+                  <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white"></div>
+                  Creating...
+                </>
+              ) : (
+                "Create Package"
+              )}
             </button>
           </div>
         </form>

@@ -10,7 +10,7 @@ import { useTourPackages } from "@/hooks/useTourPackages";
 export default function TourPackageDetailsPage() {
   const router = useRouter();
   const params = useParams();
-  const { tourPackages } = useTourPackages();
+  const { tourPackages, loading } = useTourPackages();
   const [tourPackage, setTourPackage] = useState<TourPackage | null>(null);
 
   useEffect(() => {
@@ -19,6 +19,24 @@ export default function TourPackageDetailsPage() {
     setTourPackage(pkg || null);
   }, [params.id, tourPackages]);
 
+  // Show loading state while data is being fetched
+  if (loading) {
+    return (
+      <div className="p-6">
+        <div className="text-center py-12">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-orange-500 mx-auto mb-4"></div>
+          <h1 className="text-2xl font-bold text-gray-900 mb-4">
+            Loading Package...
+          </h1>
+          <p className="text-gray-600">
+            Please wait while we load the tour package details.
+          </p>
+        </div>
+      </div>
+    );
+  }
+
+  // Show not found only after loading is complete
   if (!tourPackage) {
     return (
       <div className="p-6">
@@ -46,11 +64,11 @@ export default function TourPackageDetailsPage() {
       <div className="mb-8">
         <div className="flex items-center justify-between mb-4">
           <button
-            onClick={() => router.back()}
+            onClick={() => router.push("/admin/tour-packages")}
             className="flex items-center gap-2 px-3 py-2 text-gray-600 hover:text-gray-900 hover:bg-gray-100 rounded-lg transition-colors duration-200"
           >
             <FiArrowLeft className="w-4 h-4" />
-            Back
+            Back to Packages
           </button>
           <button
             onClick={() =>
