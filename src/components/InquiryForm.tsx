@@ -12,7 +12,6 @@ interface InquiryFormProps {
   tourTitle?: string;
   tourDuration?: string;
   tourPrice?: string;
-  tourDescription?: string;
   includedItems?: string[];
   notIncluded?: string[];
 }
@@ -25,7 +24,6 @@ export default function InquiryForm({
   tourTitle,
   tourDuration,
   tourPrice,
-  tourDescription,
   includedItems,
   notIncluded,
 }: InquiryFormProps) {
@@ -131,12 +129,12 @@ export default function InquiryForm({
 
 
           {/* Tour Package Details - Only Included/Not Included */}
-          {inquiryType === "tour" && tourTitle && (includedItems?.length > 0 || notIncluded?.length > 0) && (
+          {inquiryType === "tour" && tourTitle && ((includedItems && includedItems.length > 0) || (notIncluded && notIncluded.length > 0)) && (
             <div className="mb-6 p-4 bg-gray-50 rounded-lg border">
               {/* Included Items */}
               {includedItems && includedItems.length > 0 && (
                 <div className="mb-4">
-                  <span className="text-sm font-medium text-gray-600">What's Included:</span>
+                  <span className="text-sm font-medium text-gray-600">What&apos;s Included:</span>
                   <ul className="mt-2 space-y-1">
                     {includedItems.map((item, index) => (
                       <li key={index} className="flex items-center gap-2 text-sm text-gray-900">

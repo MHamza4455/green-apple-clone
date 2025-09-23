@@ -131,7 +131,6 @@ export default function TourCard({
         tourTitle={title}
         tourDuration={duration}
         tourPrice={price}
-        tourDescription={description}
         includedItems={includedItems}
         notIncluded={notIncluded}
       />
