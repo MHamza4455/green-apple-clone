@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 import VisaDetailsPopup from "./VisaDetailsPopup";
 import InquiryForm from "./InquiryForm";
 import { VisaService } from "@/types/visaService";
@@ -12,13 +12,23 @@ export default function VisaServices() {
   const [visaServices, setVisaServices] = useState<VisaService[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [retryCount, setRetryCount] = useState(0);
+  const [isRetrying, setIsRetrying] = useState(false);
   const abortControllerRef = useRef<AbortController | null>(null);
+  const retryTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const maxRetries = 10; // Maximum number of retry attempts
+  const baseDelay = 1000; // Base delay in milliseconds (1 second)
 
-  // Fetch visa services from API with optimizations
-  useEffect(() => {
-    const fetchVisaServices = async () => {
-      try {
-        // Check localStorage cache first
+  // Calculate exponential backoff delay
+  const calculateDelay = useCallback((attempt: number) => {
+    return Math.min(baseDelay * Math.pow(2, attempt), 30000); // Max 30 seconds
+  }, [baseDelay]);
+
+  // Fetch visa services from API with automatic retry
+  const fetchVisaServices = useCallback(async (attempt: number = 0) => {
+    try {
+      // Check localStorage cache first (only on first attempt)
+      if (attempt === 0) {
         const cachedData = localStorage.getItem("visa-services-cache");
         const cacheTimestamp = localStorage.getItem(
           "visa-services-cache-timestamp",
@@ -36,67 +46,87 @@ export default function VisaServices() {
           if (cachedServices.length > 0) {
             setVisaServices(cachedServices);
             setLoading(false);
+            setError(null);
+            setRetryCount(0);
             return; // Exit early if we have fresh cached data
           }
         }
+      }
 
-        setLoading(true);
+      setLoading(true);
+      setIsRetrying(attempt > 0);
+      setRetryCount(attempt);
 
-        // Use AbortController for request cancellation with longer timeout
-        const controller = new AbortController();
-        abortControllerRef.current = controller;
+      // Use AbortController for request cancellation with longer timeout
+      const controller = new AbortController();
+      abortControllerRef.current = controller;
 
-        const timeoutId = setTimeout(() => {
-          controller.abort();
-        }, 10000); // 10 second timeout for better reliability
+      const timeoutId = setTimeout(() => {
+        controller.abort();
+      }, 15000); // 15 second timeout for better reliability
 
-        const response = await fetch("/api/visa-services", {
-          signal: controller.signal,
-          headers: {
-            "Cache-Control": "max-age=300", // 5 minutes cache
-          },
-        });
+      const response = await fetch("/api/visa-services", {
+        signal: controller.signal,
+        headers: {
+          "Cache-Control": "max-age=300", // 5 minutes cache
+        },
+      });
 
-        clearTimeout(timeoutId);
+      clearTimeout(timeoutId);
 
-        if (!response.ok) {
-          throw new Error("Failed to fetch visa services");
-        }
+      if (!response.ok) {
+        throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+      }
 
-        const data = await response.json();
-        // Filter only active services for public display
-        const activeServices = data.filter(
-          (service: VisaService) => service.status === "active",
-        );
+      const data = await response.json();
+      // Filter only active services for public display
+      const activeServices = data.filter(
+        (service: VisaService) => service.status === "active",
+      );
 
-        // Update with API data
-        setVisaServices(activeServices);
-        setError(null);
+      // Update with API data
+      setVisaServices(activeServices);
+      setError(null);
+      setRetryCount(0);
+      setIsRetrying(false);
 
-        // Cache the data
-        localStorage.setItem(
-          "visa-services-cache",
-          JSON.stringify(activeServices),
-        );
-        localStorage.setItem("visa-services-cache-timestamp", now.toString());
-      } catch (err) {
-        // Handle AbortError specifically (timeout or cancellation)
-        if (err instanceof Error && err.name === "AbortError") {
-          console.warn("Request was cancelled or timed out");
-          setError(
-            "Request timed out. Please check your connection and try again.",
-          );
-        } else {
-          console.error("Failed to fetch visa services:", err);
-          setError(
-            err instanceof Error ? err.message : "Failed to load visa services",
-          );
-        }
-      } finally {
+      // Cache the data
+      const now = Date.now();
+      localStorage.setItem(
+        "visa-services-cache",
+        JSON.stringify(activeServices),
+      );
+      localStorage.setItem("visa-services-cache-timestamp", now.toString());
+    } catch (err) {
+      console.error(`Attempt ${attempt + 1} failed to fetch visa services:`, err);
+      
+      // If we haven't reached max retries, schedule a retry
+      if (attempt < maxRetries) {
+        const delay = calculateDelay(attempt);
+        console.log(`Retrying in ${delay}ms (attempt ${attempt + 1}/${maxRetries})`);
+        
+        retryTimeoutRef.current = setTimeout(() => {
+          fetchVisaServices(attempt + 1);
+        }, delay);
+      } else {
+        // Max retries reached, show error but keep trying in background
+        setError("Unable to load visa services. Retrying in background...");
+        setIsRetrying(true);
+        
+        // Continue retrying in background with longer intervals
+        retryTimeoutRef.current = setTimeout(() => {
+          fetchVisaServices(0); // Reset attempt count for background retries
+        }, 60000); // 1 minute for background retries
+      }
+    } finally {
+      if (attempt === 0) {
         setLoading(false);
       }
-    };
+    }
+  }, [calculateDelay, maxRetries]);
 
+  // Initial fetch and cleanup
+  useEffect(() => {
     fetchVisaServices();
 
     // Cleanup function to cancel any pending requests
@@ -104,8 +134,11 @@ export default function VisaServices() {
       if (abortControllerRef.current) {
         abortControllerRef.current.abort();
       }
+      if (retryTimeoutRef.current) {
+        clearTimeout(retryTimeoutRef.current);
+      }
     };
-  }, []);
+  }, [fetchVisaServices]);
 
   const handleLearnMore = (countryName: string) => {
     setSelectedCountry(countryName);
@@ -145,39 +178,55 @@ export default function VisaServices() {
         </header>
 
         {loading ? (
-          // Loading skeleton
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6 mt-8">
-            {Array.from({ length: 6 }).map((_, index) => (
-              <div
-                key={index}
-                className="flex flex-col items-center group relative h-full animate-pulse"
-              >
-                <div className="relative mb-4 flex items-center justify-center">
-                  <div className="w-16 h-12 bg-gray-200 rounded"></div>
-                </div>
-                <div className="h-4 bg-gray-200 rounded w-24 mb-3"></div>
-                <div className="h-6 bg-gray-200 rounded w-20 mb-3"></div>
-                <div className="flex flex-col gap-2 w-full px-2 mt-auto">
-                  <div className="h-8 bg-gray-200 rounded w-full"></div>
-                  <div className="h-8 bg-gray-200 rounded w-full"></div>
+          // Loading skeleton with retry info
+          <div className="mt-8">
+            {isRetrying && (
+              <div className="text-center mb-6">
+                <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 max-w-sm mx-auto">
+                  <div className="flex items-center justify-center space-x-2">
+                    <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-blue-600"></div>
+                    <span className="text-blue-600 text-sm font-medium">
+                      Retrying... (Attempt {retryCount + 1})
+                    </span>
+                  </div>
                 </div>
               </div>
-            ))}
+            )}
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6">
+              {Array.from({ length: 6 }).map((_, index) => (
+                <div
+                  key={index}
+                  className="flex flex-col items-center group relative h-full animate-pulse"
+                >
+                  <div className="relative mb-4 flex items-center justify-center">
+                    <div className="w-16 h-12 bg-gray-200 rounded"></div>
+                  </div>
+                  <div className="h-4 bg-gray-200 rounded w-24 mb-3"></div>
+                  <div className="h-6 bg-gray-200 rounded w-20 mb-3"></div>
+                  <div className="flex flex-col gap-2 w-full px-2 mt-auto">
+                    <div className="h-8 bg-gray-200 rounded w-full"></div>
+                    <div className="h-8 bg-gray-200 rounded w-full"></div>
+                  </div>
+                </div>
+              ))}
+            </div>
           </div>
         ) : error ? (
-          // Error state
+          // Error state with retry indicator
           <div className="text-center py-12">
-            <div className="bg-red-50 border border-red-200 rounded-lg p-6 max-w-md mx-auto">
-              <div className="text-red-800 font-medium mb-2">
-                Failed to load visa services
+            <div className="bg-orange-50 border border-orange-200 rounded-lg p-6 max-w-md mx-auto">
+              <div className="text-orange-800 font-medium mb-2">
+                {isRetrying ? "Retrying..." : "Loading visa services..."}
               </div>
-              <div className="text-red-600 text-sm mb-4">{error}</div>
-              <button
-                onClick={() => window.location.reload()}
-                className="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors duration-200"
-              >
-                Try Again
-              </button>
+              <div className="text-orange-600 text-sm mb-4">{error}</div>
+              {isRetrying && (
+                <div className="flex items-center justify-center space-x-2">
+                  <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-orange-600"></div>
+                  <span className="text-orange-600 text-sm">
+                    Attempt {retryCount + 1} of {maxRetries}
+                  </span>
+                </div>
+              )}
             </div>
           </div>
         ) : visaServices.length === 0 ? (
