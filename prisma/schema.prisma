@@ -88,7 +88,7 @@ model ContactMessage {
 model TourPackage {
   id            String   @id @default(cuid())
   title         String
-  description   String
+  description   String   @db.LongText // Changed to LongText to handle long descriptions
   duration      String
   price         String
   image         String   @db.LongText // Changed to LongText to store base64 image data
