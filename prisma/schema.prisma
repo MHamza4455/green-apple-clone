@@ -65,7 +65,7 @@ model VisaService {
   name              String
   code              String   @unique
   price             String
-  description       String
+  description       String   @db.LongText
   documentsRequired Json
   documentsProvided Json
   status            String   @default("active")
@@ -79,7 +79,7 @@ model ContactMessage {
   email           String
   phone           String?
   serviceInterest String?
-  message         String
+  message         String   @db.LongText
   status          String   @default("unread")
   createdAt       DateTime @default(now())
   updatedAt       DateTime @updatedAt
@@ -108,7 +108,7 @@ model Inquiry {
   name       String
   email      String
   phone      String?
-  message    String?
+  message    String?       @db.LongText
   travelDate DateTime?
   status     InquiryStatus @default(NEW)
   metadata   Json // Store type-specific data (country, visaType, tourTitle, etc.)
