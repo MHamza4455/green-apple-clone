@@ -224,14 +224,13 @@ export default function Footer() {
                 </a>
               </p>
               <p className="text-sm font-light" style={{ color: "black" }}>
-                Address: Office 408, Nasser Lootah Building, Consulate Area –
-                Dubai, UAE
+                Address: Office No: 17, 28th Floor, Aspin Commercial Tower, Sheikh Zayed Road
               </p>
             </address>
           </section>
 
           {/* Branch Office Contact */}
-          <section aria-labelledby="branch-office">
+          {/* <section aria-labelledby="branch-office">
             <h4
               id="branch-office"
               className="font-medium"
@@ -261,7 +260,7 @@ export default function Footer() {
                 UAE
               </p>
             </address>
-          </section>
+          </section> */}
         </aside>
 
         {/* Support */}
