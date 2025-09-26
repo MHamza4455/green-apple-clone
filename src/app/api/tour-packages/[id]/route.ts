@@ -1,0 +1,123 @@
+import { NextRequest, NextResponse } from "next/server";
+import { prisma } from "@/lib/prisma";
+
+export async function GET(
+  request: NextRequest,
+  { params }: { params: Promise<{ id: string }> },
+) {
+  try {
+    const { id } = await params;
+    const tourPackage = await prisma.tourPackage.findUnique({
+      where: { id },
+    });
+
+    if (!tourPackage) {
+      return NextResponse.json(
+        { error: "Tour package not found" },
+        { status: 404 },
+      );
+    }
+
+    return NextResponse.json(tourPackage);
+  } catch (error) {
+    console.error("Error fetching tour package:", error);
+    return NextResponse.json(
+      { error: "Failed to fetch tour package" },
+      { status: 500 },
+    );
+  }
+}
+
+export async function PUT(
+  request: NextRequest,
+  { params }: { params: Promise<{ id: string }> },
+) {
+  try {
+    const { id } = await params;
+    const body = await request.json();
+    const {
+      title,
+      description,
+      duration,
+      price,
+      image,
+      imageAlt,
+      category,
+      status,
+      featured,
+      includedItems,
+      notIncluded,
+    } = body;
+
+    // Check if tour package exists
+    const existingPackage = await prisma.tourPackage.findUnique({
+      where: { id },
+    });
+
+    if (!existingPackage) {
+      return NextResponse.json(
+        { error: "Tour package not found" },
+        { status: 404 },
+      );
+    }
+
+    // Update the tour package
+    const updateData: Record<string, unknown> = {};
+    if (title !== undefined) updateData.title = title;
+    if (description !== undefined) updateData.description = description;
+    if (duration !== undefined) updateData.duration = duration;
+    if (price !== undefined) updateData.price = price;
+    if (image !== undefined) updateData.image = image;
+    if (imageAlt !== undefined) updateData.imageAlt = imageAlt;
+    if (category !== undefined) updateData.category = category;
+    if (status !== undefined) updateData.status = status;
+    if (featured !== undefined) updateData.featured = featured;
+    if (includedItems !== undefined) updateData.includedItems = includedItems;
+    if (notIncluded !== undefined) updateData.notIncluded = notIncluded;
+
+    const updatedPackage = await prisma.tourPackage.update({
+      where: { id },
+      data: updateData,
+    });
+
+    return NextResponse.json(updatedPackage);
+  } catch (error) {
+    console.error("Error updating tour package:", error);
+    return NextResponse.json(
+      { error: "Failed to update tour package" },
+      { status: 500 },
+    );
+  }
+}
+
+export async function DELETE(
+  request: NextRequest,
+  { params }: { params: Promise<{ id: string }> },
+) {
+  try {
+    const { id } = await params;
+    // Check if tour package exists
+    const existingPackage = await prisma.tourPackage.findUnique({
+      where: { id },
+    });
+
+    if (!existingPackage) {
+      return NextResponse.json(
+        { error: "Tour package not found" },
+        { status: 404 },
+      );
+    }
+
+    await prisma.tourPackage.delete({
+      where: { id },
+    });
+
+    return NextResponse.json({ message: "Tour package deleted successfully" });
+  } catch (error) {
+    console.error("Error deleting tour package:", error);
+    return NextResponse.json(
+      { error: "Failed to delete tour package" },
+      { status: 500 },
+    );
+  }
+}

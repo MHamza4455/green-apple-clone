@@ -1,62 +1,65 @@
-'use client';
+"use client";
 
-import { useState, useEffect, useRef } from 'react';
-import Image from 'next/image';
+import { useState, useEffect, useRef } from "react";
+import Image from "next/image";
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const headerRef = useRef<HTMLElement>(null);
 
   const navLinks = [
-    { name: 'Home', href: '#top' },
-    { name: 'Visa Services', href: '#visa-services' },
-    { name: 'Featured Tours', href: '#featured-tours' },
-    { name: 'Tour Packages', href: '#umrah-packages' },
-    { name: 'Contact', href: '#contact' },
+    { name: "Home", href: "#top" },
+    { name: "Visa Services", href: "#visa-services" },
+    { name: "Featured Tours", href: "#featured-tours" },
+    { name: "Tour Packages", href: "#umrah-packages" },
+    { name: "Contact", href: "#contact" },
   ];
 
   // Handle Book Now button click
   const handleBookNow = () => {
-    scrollToSection('#contact');
+    scrollToSection("#contact");
   };
 
   // Close mobile menu when clicking outside
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
-      if (headerRef.current && !headerRef.current.contains(event.target as Node)) {
+      if (
+        headerRef.current &&
+        !headerRef.current.contains(event.target as Node)
+      ) {
         setIsMenuOpen(false);
       }
     };
 
     // Prevent body scroll when mobile menu is open
     if (isMenuOpen) {
-      document.body.style.overflow = 'hidden';
+      document.body.style.overflow = "hidden";
     } else {
-      document.body.style.overflow = 'unset';
+      document.body.style.overflow = "unset";
     }
 
-    document.addEventListener('mousedown', handleClickOutside);
+    document.addEventListener("mousedown", handleClickOutside);
     return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
+      document.removeEventListener("mousedown", handleClickOutside);
       // Restore body scroll when component unmounts
-      document.body.style.overflow = 'unset';
+      document.body.style.overflow = "unset";
     };
   }, [isMenuOpen]);
 
   // Smooth scroll to section
   const scrollToSection = (sectionId: string) => {
-    if (sectionId === '#top') {
+    if (sectionId === "#top") {
       // Scroll to top of page
       window.scrollTo({
         top: 0,
-        behavior: 'smooth'
+        behavior: "smooth",
       });
     } else {
       const element = document.querySelector(sectionId);
       if (element) {
-        element.scrollIntoView({ 
-          behavior: 'smooth',
-          block: 'start'
+        element.scrollIntoView({
+          behavior: "smooth",
+          block: "start",
         });
       }
     }
@@ -69,8 +72,12 @@ export default function Header() {
   };
 
   return (
-    <header ref={headerRef} className="shadow-lg left-0 right-0 container fixed top-0 w-full z-50 mx-auto rounded-b-md" style={{ backgroundColor: 'white' }}>
-              <div className="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8 container">
+    <header
+      ref={headerRef}
+      className="shadow-lg left-0 right-0 container fixed top-0 w-full z-50 mx-auto rounded-b-md"
+      style={{ backgroundColor: "white" }}
+    >
+      <div className="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8 container">
         <div className="relative flex items-center justify-between h-20">
           {/* Mobile menu button */}
           <div className="absolute inset-y-0 right-0 flex items-center lg:hidden">
@@ -84,7 +91,7 @@ export default function Header() {
               <span className="sr-only">Open main menu</span>
               <svg
                 className="block h-6 w-6 fill-current"
-                style={{ color: '#FF4E00' }}
+                style={{ color: "#FF4E00" }}
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
                 viewBox="0 0 24 24"
@@ -115,8 +122,8 @@ export default function Header() {
           {/* Logo */}
           <div className="flex-1 flex items-center lg:items-stretch justify-start ml-5">
             <div className="flex flex-shrink-0 items-center">
-              <button 
-                onClick={() => scrollToSection('#hero')}
+              <button
+                onClick={() => scrollToSection("#hero")}
                 className="transform scale-150 cursor-pointer"
               >
                 {/* Mobile Logo */}
@@ -149,7 +156,7 @@ export default function Header() {
                   key={link.name}
                   onClick={() => scrollToSection(link.href)}
                   className="inline-flex items-center px-1 pt-1 text-sm leading-5 capitalize hover:underline transition-colors duration-200"
-                  style={{ color: 'black', textDecorationColor: '#FF4E00' }}
+                  style={{ color: "black", textDecorationColor: "#FF4E00" }}
                 >
                   {link.name}
                 </button>
@@ -158,12 +165,12 @@ export default function Header() {
               <button
                 onClick={handleBookNow}
                 className="hover:opacity-90 transition-all duration-200 transform hover:scale-105 font-medium"
-                style={{ 
-                  backgroundColor: '#FF4E00',
-                  color: 'white',
-                  padding: '10px 20px',
-                  borderRadius: '6px',
-                  fontSize: '14px'
+                style={{
+                  backgroundColor: "#FF4E00",
+                  color: "white",
+                  padding: "10px 20px",
+                  borderRadius: "6px",
+                  fontSize: "14px",
                 }}
               >
                 Book Now
@@ -177,20 +184,23 @@ export default function Header() {
       {isMenuOpen && (
         <>
           {/* Overlay - positioned below header */}
-          <div 
+          <div
             className="lg:hidden fixed top-20 left-0 right-0 bottom-0 z-40"
-            style={{ backgroundColor: 'rgba(0, 0, 0, 0.3)' }}
+            style={{ backgroundColor: "rgba(0, 0, 0, 0.3)" }}
             onClick={() => setIsMenuOpen(false)}
           />
           {/* Mobile Menu */}
           <div className="lg:hidden relative z-50">
-            <div className="px-2 pt-2 pb-3 space-y-1 border-t border-gray-200 shadow-lg rounded-b-md" style={{ backgroundColor: 'white' }}>
+            <div
+              className="px-2 pt-2 pb-3 space-y-1 border-t border-gray-200 shadow-lg rounded-b-md"
+              style={{ backgroundColor: "white" }}
+            >
               {navLinks.map((link) => (
                 <button
                   key={link.name}
                   onClick={() => handleMobileMenuClick(link.href)}
                   className="block w-full text-left px-3 py-3 text-base font-medium hover:underline rounded-md transition-colors duration-200"
-                  style={{ color: 'black', textDecorationColor: '#FF4E00' }}
+                  style={{ color: "black", textDecorationColor: "#FF4E00" }}
                 >
                   {link.name}
                 </button>
@@ -198,14 +208,14 @@ export default function Header() {
               {/* Mobile Book Now Button - Header style */}
               <div className="px-3 py-2">
                 <button
-                  onClick={() => handleMobileMenuClick('#contact')}
+                  onClick={() => handleMobileMenuClick("#contact")}
                   className="w-full hover:opacity-90 transition-all duration-200 transform hover:scale-105 font-medium"
-                  style={{ 
-                    backgroundColor: '#FF4E00',
-                    color: 'white',
-                    padding: '12px 20px',
-                    borderRadius: '6px',
-                    fontSize: '16px'
+                  style={{
+                    backgroundColor: "#FF4E00",
+                    color: "white",
+                    padding: "12px 20px",
+                    borderRadius: "6px",
+                    fontSize: "16px",
                   }}
                 >
                   Book Now

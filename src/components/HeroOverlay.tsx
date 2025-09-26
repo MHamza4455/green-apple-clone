@@ -1,6 +1,6 @@
-'use client';
+"use client";
 
-import ActionButtons from './ActionButtons';
+import ActionButtons from "./ActionButtons";
 
 interface HeroOverlayProps {
   companyName: string;
@@ -27,11 +27,13 @@ export default function HeroOverlay({
   heading,
   subtitle,
   actionButtons,
-  className = '',
-  pt = 'pt-12 md:pt-16'
+  className = "",
+  pt = "pt-12 md:pt-16",
 }: HeroOverlayProps) {
   return (
-    <div className={`absolute z-10 inset-0 flex items-center text-white ${pt} container mx-auto ${className}`}>
+    <div
+      className={`absolute z-10 inset-0 flex items-center text-white ${pt} container mx-auto ${className}`}
+    >
       <div className="space-y-4 text-left px-4 max-w-7xl container mx-auto">
         {/* Company Name with Icon */}
         <p className="text-md sm:text-lg font-light flex space-x-2 items-end justify-start text-white">
@@ -40,20 +42,18 @@ export default function HeroOverlay({
         </p>
 
         {/* Main Heading */}
-        <h2 
+        <h2
           className="text-2xl uppercase sm:text-3xl md:text-4xl max-w-2xl font-extrabold"
-          style={{ color: '#FF4E00' }}
+          style={{ color: "#FF4E00" }}
         >
           {heading}
         </h2>
 
         {/* Subtitle */}
-        <p className="text-xs sm:text-lg font-light text-white">
-          {subtitle}
-        </p>
+        <p className="text-xs sm:text-lg font-light text-white">{subtitle}</p>
 
         {/* Action Buttons */}
-        <ActionButtons 
+        <ActionButtons
           buttons={actionButtons}
           className="flex flex-col space-y-2"
         />
