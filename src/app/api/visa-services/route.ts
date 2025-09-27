@@ -20,9 +20,28 @@ export async function GET() {
 
     const visaServices = await prisma.visaService.findMany({
       orderBy: { createdAt: "desc" },
+      // Only select necessary fields for better performance
+      select: {
+        id: true,
+        name: true,
+        code: true,
+        price: true,
+        description: true,
+        documentsRequired: true,
+        documentsProvided: true,
+        status: true,
+        createdAt: true,
+        updatedAt: true,
+      },
     });
 
-    return NextResponse.json(visaServices);
+    const response = NextResponse.json(visaServices);
+    
+    // Add caching headers for better performance
+    response.headers.set('Cache-Control', 'public, max-age=300, stale-while-revalidate=60');
+    response.headers.set('ETag', `"visa-services-${Date.now()}"`);
+    
+    return response;
   } catch (error) {
     console.error("Error fetching visa services:", error);
     return NextResponse.json(

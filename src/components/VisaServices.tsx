@@ -62,8 +62,10 @@ export default function VisaServices() {
       abortControllerRef.current = controller;
 
       const timeoutId = setTimeout(() => {
-        controller.abort();
-      }, 15000); // 15 second timeout for better reliability
+        if (!controller.signal.aborted) {
+          controller.abort();
+        }
+      }, 30000); // 30 second timeout for better reliability
 
       const response = await fetch("/api/visa-services", {
         signal: controller.signal,
@@ -99,6 +101,28 @@ export default function VisaServices() {
       localStorage.setItem("visa-services-cache-timestamp", now.toString());
     } catch (err) {
       console.error(`Attempt ${attempt + 1} failed to fetch visa services:`, err);
+      
+      // Handle AbortError specifically
+      if (err instanceof Error && err.name === 'AbortError') {
+        console.log(`Request was aborted (attempt ${attempt + 1})`);
+        // Don't retry immediately for abort errors, wait a bit longer
+        if (attempt < maxRetries) {
+          const delay = Math.max(calculateDelay(attempt), 5000); // At least 5 seconds for abort errors
+          console.log(`Retrying after abort in ${delay}ms (attempt ${attempt + 1}/${maxRetries})`);
+          
+          retryTimeoutRef.current = setTimeout(() => {
+            fetchVisaServices(attempt + 1);
+          }, delay);
+        } else {
+          setError("Request timeout. Retrying in background...");
+          setIsRetrying(true);
+          
+          retryTimeoutRef.current = setTimeout(() => {
+            fetchVisaServices(0);
+          }, 60000);
+        }
+        return;
+      }
       
       // If we haven't reached max retries, schedule a retry
       if (attempt < maxRetries) {
@@ -251,7 +275,7 @@ export default function VisaServices() {
                   <div className="absolute inset-0 bg-gradient-to-br from-primary/20 to-accent/20 rounded-2xl blur-xl group-hover:blur-2xl transition-all duration-500 opacity-0 group-hover:opacity-100"></div>
                   <div className="relative flex items-center justify-center transition-all duration-300 group-hover:scale-110">
                     <span
-                      className={`fi fi-${service.code} text-5xl`}
+                      className={`fi fi-${service.code.toLowerCase()} text-5xl`}
                       title={`${service.name} flag`}
                     ></span>
                   </div>

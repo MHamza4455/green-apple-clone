@@ -88,9 +88,12 @@ export async function PUT(
     }
 
     // Check if code already exists (excluding current service)
-    if (code && code !== existingService.code) {
-      const codeExists = await prisma.visaService.findUnique({
-        where: { code },
+    if (code) {
+      const codeExists = await prisma.visaService.findFirst({
+        where: { 
+          code,
+          id: { not: id } // Exclude the current service from the check
+        },
       });
 
       if (codeExists) {
