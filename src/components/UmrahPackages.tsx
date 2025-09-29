@@ -220,8 +220,8 @@ export default function UmrahPackages() {
                 </div>
               </div>
             ) : (
-              // Tour packages
-              tourPackages.map((umrahPackage) => (
+              // Tour packages - displayed in reverse order to avoid duplication with featured packages
+              tourPackages.slice().reverse().map((umrahPackage) => (
                 <TourCard
                   key={umrahPackage.id}
                   id={umrahPackage.id}
