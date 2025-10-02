@@ -18,7 +18,7 @@ export default function Footer() {
           {/* Social Media Links */}
           <div className="flex items-center justify-start space-x-4">
             <a
-              href="https://www.instagram.com/greenappledxb/"
+              href="https://www.instagram.com/radiantwaytravel?igsh=MW90NXQyaGl0bWZwdg=="
               target="_blank"
               rel="noopener noreferrer"
               className="hover:scale-110 transition-transform duration-300"
@@ -58,7 +58,7 @@ export default function Footer() {
             </a>
 
             <a
-              href="https://wa.me/97143705995"
+              href="https://wa.me/971547861293"
               target="_blank"
               rel="noopener noreferrer"
               className="hover:scale-110 transition-transform duration-300"
@@ -87,7 +87,7 @@ export default function Footer() {
             </a>
 
             <a
-              href="https://facebook.com/greenappledxb"
+              href="https://www.facebook.com/share/19qorzUXsM/"
               target="_blank"
               rel="noopener noreferrer"
               className="hover:scale-110 transition-transform duration-300"
@@ -275,7 +275,7 @@ export default function Footer() {
           <ul className="space-y-1 text-sm font-light">
             <li>
               <a
-                href="tel:+97143705995"
+                href="tel:+971547861293"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="hover:opacity-75 transition-opacity duration-300"
@@ -292,7 +292,7 @@ export default function Footer() {
             </li>
             <li>
               <a
-                href="https://wa.me/97143705995"
+                href="https://wa.me/971547861293"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="hover:opacity-75 transition-opacity duration-300"

@@ -140,7 +140,7 @@ export default function Reviews() {
           </p>
 
           <a
-            href="https://g.page/r/CSVOuDsOGf38EAI/review?kd"
+            href="https://share.google/6Yg4AJOHDoq0k574Q"
             rel="nofollow"
             target="_blank"
             className="inline-flex items-center gap-2 py-3 px-8 font-semibold rounded-full hover:opacity-90 transition-all duration-200 shadow-lg hover:shadow-xl"
@@ -240,7 +240,7 @@ export default function Reviews() {
         {showGoogleButton && (
           <div className="text-center" aria-live="polite">
             <a
-              href="https://g.page/r/CSVOuDsOGf38EAI"
+              href="https://share.google/6Yg4AJOHDoq0k574Q"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-block py-3 px-10 font-semibold rounded-full hover:opacity-90 transition-all duration-200 shadow-lg hover:shadow-xl"

@@ -61,7 +61,7 @@ export default function Hero() {
       className: "rounded-tl-md",
     },
     {
-      href: "tel:+97143705995",
+      href: "tel:+971547861293",
       icon: (
         <svg
           viewBox="0 0 256 256"
@@ -96,7 +96,7 @@ export default function Hero() {
       ),
       text: "Call",
       ariaLabel: "Call our main office",
-      title: "Call +97143705995",
+      title: "Call +971547861293",
       rel: "noopener noreferrer",
     },
     {
