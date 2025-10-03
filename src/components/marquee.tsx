@@ -8,7 +8,7 @@ export default function Marquee() {
           <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
         </svg>
       ),
-      text: "ATOL Protected",
+      text: "24/7 Support",
     },
     {
       icon: (
@@ -46,7 +46,7 @@ export default function Marquee() {
 
   return (
     <div className="relative w-full overflow-hidden bg-[#FF4E00] marquee-pause marquee-32">
-      <div className="marquee-loop flex items-center whitespace-nowrap gap-12 py-5 font-semibold w-max">
+      <div className="marquee-loop flex items-center whitespace-nowrap gap-12 py-4 font-semibold w-max">
         {[...items, ...items].map((item, idx) => (
           <div
             key={`${item.text}-${idx}`}
