@@ -269,14 +269,17 @@ export default function VisaServices() {
             {visaServices.map((service) => (
               <div
                 key={service.id}
-                className="flex flex-col items-center group relative h-full"
+                className="hover:bg-teal-50 p-3 hover:shadow-lg hover:shadow-orange-500/50 rounded-lg flex flex-col items-center group relative h-full"
               >
-                <div className="relative mb-4 flex items-center justify-center">
+                <div className=" relative mb-4 flex items-center justify-center">
                   <div className="absolute inset-0 bg-gradient-to-br from-primary/20 to-accent/20 rounded-2xl blur-xl group-hover:blur-2xl transition-all duration-500 opacity-0 group-hover:opacity-100"></div>
                   <div className="relative flex items-center justify-center transition-all duration-300 group-hover:scale-110">
                     <span
-                      className={`fi fi-${service.code.toLowerCase()} text-5xl`}
+                      className={`fi fi-${service.code.toLowerCase()} text-5xl shadow-lg drop-shadow-md group-hover:shadow-xl group-hover:drop-shadow-lg transition-all duration-300`}
                       title={`${service.name} flag`}
+                      style={{
+                        filter: 'drop-shadow(0 4px 6px rgba(0, 0, 0, 0.1)) drop-shadow(0 2px 4px rgba(0, 0, 0, 0.06))',
+                      }}
                     ></span>
                   </div>
                   <div className="absolute -top-2 -right-2 w-4 h-4 bg-accent rounded-full opacity-0 group-hover:opacity-100 transition-all duration-300 transform scale-0 group-hover:scale-100"></div>
