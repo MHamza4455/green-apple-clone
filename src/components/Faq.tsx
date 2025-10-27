@@ -67,8 +67,8 @@ export default function Faq() {
             Frequently Asked Questions.
           </h2>
           <p className="text-lg max-w-2xl mx-auto" style={{ color: "black" }}>
-            Can&apos;t find an answer? Call us at (855) 692-5326 or email
-            contact@myclean.com!
+            Can&apos;t find an answer? Call us at +971 54 786 1293 or email
+            info@radiantwaytravel.com!
           </p>
         </header>
 
